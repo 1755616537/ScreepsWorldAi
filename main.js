@@ -13,7 +13,7 @@ module.exports.loop = function () {
  
     //找出所有的采集者
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-    console.log('Harvesters: ' + harvesters.length);
+    console.log('采集者: ' + harvesters.length);
     //当数量小于2的时候，开始生产采集者
     if(harvesters.length < 2) {
         var newName = 'Harvester' + Game.time;
