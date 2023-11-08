@@ -11,7 +11,8 @@ module.exports.loop = function () {
             console.log('Clearing non-existing creep memory:', name);
         }
     }
-
+	
+	// _是lodash
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
@@ -21,7 +22,7 @@ module.exports.loop = function () {
 
 
     // harvester少于2的时候生产harvester
-    if(harvesters.length < 2) { 
+    if(harvesters.length < 4) { 
         var newName = 'Harvester' + Game.time;
         console.log('Spawning new harvester: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
@@ -29,7 +30,7 @@ module.exports.loop = function () {
     }
 
     // harvester等于2的时候生产 upgrader
-    if(harvesters.length == 2 && upgraders.length < 2) { 
+    if(harvesters.length >= 2 && upgraders.length < 2) { 
         var newName = 'Upgrader' + Game.time;
         console.log('Spawning new upgrader: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
