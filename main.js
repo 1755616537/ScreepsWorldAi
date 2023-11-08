@@ -1,7 +1,15 @@
-module.exports.loop = function() {
-	console.log(Game.cpu)
-	var target = Game.spawns.Spawn1;
-	for (var i in Game.creeps) {
-		Game.creeps[i].moveTo(target);
-	}
+var roleHarvester = require('role.harvester');
+var roleUpgrader = require('role.upgrader');
+
+module.exports.loop = function () {
+
+    for(var name in Game.creeps) {
+        var creep = Game.creeps[name];
+        if(creep.memory.role == 'harvester') {
+            roleHarvester.run(creep);
+        }
+        if(creep.memory.role == 'upgrader') {
+            roleUpgrader.run(creep);
+        }
+    }
 }
