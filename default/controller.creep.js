@@ -17,16 +17,16 @@ global.controller.creep = {
 		var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
 		var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
 		//console.log('Harvesters: ' + harvesters.length);
-		var controller_level = Game.spawns['Spawn1'].room.controller.level; // 查看控制器等级
-		//console.log('controller:' + Game.spawns['Spawn1'].room.controller.level)
+		var controller_level = factory.spawns.get(1).room.controller.level; // 查看控制器等级
+		//console.log('controller:' + factory.spawns.get(1).room.controller.level)
 
 
 		if (factory.spawns.get(1).spawning) { // 孵化过程可视化
-			var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
-			Game.spawns['Spawn1'].room.visual.text(
+			var spawningCreep = Game.creeps[factory.spawns.get(1).spawning.name];
+			factory.spawns.get(1).room.visual.text(
 				'🛠️' + spawningCreep.memory.role,
-				Game.spawns['Spawn1'].pos.x + 1,
-				Game.spawns['Spawn1'].pos.y, {
+				factory.spawns.get(1).pos.x + 1,
+				factory.spawns.get(1).pos.y, {
 					align: 'left',
 					opacity: 0.8
 				});
@@ -35,7 +35,7 @@ global.controller.creep = {
 			if (harvesters.length < 2) {
 				var newName = 'Harvester' + Game.time;
 				console.log('Spawning new harvester: ' + newName);
-				Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE], newName, {
+				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], newName, {
 					memory: {
 						role: 'harvester'
 					}
@@ -46,7 +46,7 @@ global.controller.creep = {
 			if (harvesters.length >= 2 && upgraders.length < 2) {
 				var newName = 'Upgrader' + Game.time;
 				console.log('Spawning new upgrader: ' + newName);
-				Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE], newName, {
+				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], newName, {
 					memory: {
 						role: 'upgrader'
 					}
@@ -57,7 +57,7 @@ global.controller.creep = {
 			if (controller_level >= 2 && builders.length < 2) {
 				var nameBuilder = 'Builder' + Game.time;
 				console.log('Spawing new builder:' + nameBuilder);
-				Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE], nameBuilder, {
+				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], nameBuilder, {
 					memory: {
 						role: 'builder'
 					}
