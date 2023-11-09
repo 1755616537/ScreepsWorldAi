@@ -24,8 +24,9 @@ var pro = {
 				}
 			}
 		} else { // 非building状态的时候， 到source旁边并采集
-			if (creep.harvest(factory.spawns.get(1)) == ERR_NOT_IN_RANGE) {
-				creep.moveTo(factory.spawns.get(1), {
+			var sources = creep.room.find(FIND_SOURCES);
+			if (creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+				creep.moveTo(sources[0], {
 					visualizePathStyle: {
 						stroke: '#ffaa00'
 					}

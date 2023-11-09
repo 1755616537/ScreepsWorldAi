@@ -1,5 +1,5 @@
 global.controller.creep = {
-	run() {
+	run: () => {
 		// creep自杀 释放内存 + 保证至少2个
 
 		// 遍历所有 creep 并执行上文中拓展的 work 方法
