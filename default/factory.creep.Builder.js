@@ -26,8 +26,11 @@ var pro = {
                 creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
             }
 	    }
+	},
+	length:()=>{
+		return _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
 	}
 };
 
-global.roleBuilder = pro;
+global.factory.creep.Builder = pro;
 

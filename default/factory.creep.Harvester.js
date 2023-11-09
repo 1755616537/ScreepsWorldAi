@@ -33,4 +33,4 @@ var pro = {
 	}
 };
 
-global.roleHarvester = pro;
+global.factory.creep.roleHarvester = pro;

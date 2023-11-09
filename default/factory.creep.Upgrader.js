@@ -33,7 +33,7 @@ let pro = {
 	}
 };
 
-global.roleUpgrader = pro;
+global.factory.creep.roleUpgrader = pro;
 
 
 

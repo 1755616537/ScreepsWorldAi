@@ -15,7 +15,7 @@ global.controller.creep = {
 		// _是lodash工具
 		var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
 		var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
-		var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
+		var builders = factory.creep.Builder.length();
 		//console.log('Harvesters: ' + harvesters.length);
 		var controller_level = factory.spawns.get(1).room.controller.level; // 查看控制器等级
 		//console.log('controller:' + factory.spawns.get(1).room.controller.level)
@@ -68,13 +68,13 @@ global.controller.creep = {
 		for (var name in Game.creeps) {
 			var creep = Game.creeps[name];
 			if (creep.memory.role == 'harvester') {
-				roleHarvester.run(creep);
+				factory.creep.roleHarvester.run(creep);
 			}
 			if (creep.memory.role == 'upgrader') {
-				roleUpgrader.run(creep);
+				factory.creep.roleUpgrader.run(creep);
 			}
 			if (creep.memory.role == 'builder') {
-				roleBuilder.run(creep);
+				factory.creep.Builder.run(creep);
 			}
 		}
 	}

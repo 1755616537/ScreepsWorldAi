@@ -1,4 +1,4 @@
-global.creepApi = {
+global.factory.creep = {
     /**
      * 新增 creep 配置项
      * @param configName 配置项名称
