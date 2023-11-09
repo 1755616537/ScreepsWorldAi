@@ -1,9 +1,9 @@
-// -------------------------------
-// 全局数据
+// -------------------------------初始化
+global.factory={};
+global.controller={}
+// -------------------------------全局数据
 require('pathData');
-// -------------------------------
-// factory
-global.factory={}
+// -------------------------------factory
 require('factory.spawn')
 // 挂载 creep 管理模块
 require('factory.creep')
@@ -13,9 +13,7 @@ require('factory.creep')
 require('factory.creep.Harvester')
 require('factory.creep.Upgrader')
 require('factory.creep.Builder')
-// -------------------------------
-// controller
-global.controller={}
+// -------------------------------controller
 require('controller.creep')
 // -------------------------------
 
