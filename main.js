@@ -8,8 +8,6 @@ console.log("Script Reload In Time "+Game.time+" , bucket "+Game.cpu.bucket);
 // creep自杀 释放内存 + 保证至少2个
 
 module.exports.loop = function() {
-	
-	console.log(configMain.BaseName)
 
 	for (var name in Memory.creeps) { // 释放内存
 		if (!Game.creeps[name]) {
