@@ -2,9 +2,9 @@
 // 全局数据
 require('pathData');
 // -------------------------------
-require('role.harvester');
-require('role.upgrader');
-require('role.builder');
+// require('role.harvester');
+// require('role.upgrader');
+// require('role.builder');
 // factory
 require('factory.creep.Harvester')
 require('factory.creep.Upgrader')
