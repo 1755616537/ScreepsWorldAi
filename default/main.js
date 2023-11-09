@@ -9,14 +9,15 @@ console.log("Script Reload In Time "+Game.time+" , bucket "+Game.cpu.bucket);
 // creep自杀 释放内存 + 保证至少2个
 
 module.exports.loop = function() {
-
+	// controller.creep.run();
+	
 	for (var name in Memory.creeps) { // 释放内存
 		if (!Game.creeps[name]) {
 			delete Memory.creeps[name];
 			console.log('Clearing non-existing creep memory:', name);
 		}
 	}
-
+	
 	// _是lodash工具
 	var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
 	var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
@@ -24,8 +25,8 @@ module.exports.loop = function() {
 	//console.log('Harvesters: ' + harvesters.length);
 	var controller_level = Game.spawns['Spawn1'].room.controller.level; // 查看控制器等级
 	//console.log('controller:' + Game.spawns['Spawn1'].room.controller.level)
-
-
+	
+	
 	if (Game.spawns['Spawn1'].spawning) { // 孵化过程可视化
 		var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
 		Game.spawns['Spawn1'].room.visual.text(
@@ -46,7 +47,7 @@ module.exports.loop = function() {
 				}
 			}); // 指定relo属性
 		}
-
+	
 		// harvester等于2的时候生产 upgrader
 		if (harvesters.length >= 2 && upgraders.length < 2) {
 			var newName = 'Upgrader' + Game.time;
@@ -57,7 +58,7 @@ module.exports.loop = function() {
 				}
 			}); // 指定relo属性
 		}
-
+	
 		// 生产builder
 		if (controller_level >= 2 && builders.length < 2) {
 			var nameBuilder = 'Builder' + Game.time;
@@ -69,7 +70,7 @@ module.exports.loop = function() {
 			});
 		}
 	}
-
+	
 	for (var name in Game.creeps) {
 		var creep = Game.creeps[name];
 		if (creep.memory.role == 'harvester') {
