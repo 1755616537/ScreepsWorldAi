@@ -21,7 +21,7 @@ global.controller.creep = {
 		//console.log('controller:' + Game.spawns['Spawn1'].room.controller.level)
 
 
-		if (Game.spawns['Spawn1'].spawning) { // 孵化过程可视化
+		if (factory.spawns.get(1).spawning) { // 孵化过程可视化
 			var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
 			Game.spawns['Spawn1'].room.visual.text(
 				'🛠️' + spawningCreep.memory.role,
