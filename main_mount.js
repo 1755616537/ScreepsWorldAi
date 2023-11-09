@@ -1,6 +1,6 @@
 global.MIN_CPU = false
 
-require('config/pathData');
+// require('config/pathData');
 
 require('role.harvester');
 require('role.upgrader');
