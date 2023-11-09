@@ -1,7 +1,7 @@
 // 代码中文解释
 /// <reference types="@screepscn/types" />
 
-// 其他接口入口
+// 拓展总入口
 require("main_mount");
 
 console.log("Script Reload In Time "+Game.time+" , bucket "+Game.cpu.bucket);
@@ -17,7 +17,7 @@ module.exports.loop = function() {
 		}
 	}
 
-	// _是lodash
+	// _是lodash工具
 	var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
 	var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
 	var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
