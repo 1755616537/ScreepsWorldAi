@@ -1,5 +1,6 @@
 global.controller.creep = {
 	run() {
+		// creep自杀 释放内存 + 保证至少2个
 
 		// 遍历所有 creep 并执行上文中拓展的 work 方法
 		// Object.values(Game.creeps).forEach(creep => creep.work())

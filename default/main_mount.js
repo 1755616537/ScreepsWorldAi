@@ -3,6 +3,7 @@
 require('pathData');
 // -------------------------------
 // factory
+global.factory={}
 // 挂载 creep 管理模块
 require('factory.creep')
 // 挂载 creep 拓展
@@ -13,6 +14,7 @@ require('factory.creep.Upgrader')
 require('factory.creep.Builder')
 // -------------------------------
 // controller
+global.controller={}
 require('controller.creep')
 // -------------------------------
 
