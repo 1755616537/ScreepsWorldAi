@@ -1,11 +1,11 @@
 // 代码中文解释
 /// <reference types="@screepscn/types" />
 
+require("main_mount");
+
+console.log("Script Reload In Time "+Game.time+" , bucket "+Game.cpu.bucket);
+
 // creep自杀 释放内存 + 保证至少2个
-var roleHarvester = require('role.harvester');
-var roleUpgrader = require('role.upgrader');
-var roleBuilder = require('role.builder');
-const configMain=require('./config/main.json');
 
 module.exports.loop = function() {
 	
