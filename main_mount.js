@@ -1,4 +1,4 @@
-// require('config/pathData');
+require('@/src/config/pathData.js');
 
 require('role.harvester');
 require('role.upgrader');
