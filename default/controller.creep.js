@@ -8,7 +8,7 @@ global.controller.creep = {
 		for (var name in Memory.creeps) { // 释放内存
 			if (!Game.creeps[name]) {
 				delete Memory.creeps[name];
-				console.log('Clearing non-existing creep memory:', name);
+				console.log('清楚不存在的creep内存:', name);
 			}
 		}
 
@@ -34,7 +34,7 @@ global.controller.creep = {
 			// harvester少于2的时候生产harvester
 			if (harvesters.length < 2) {
 				var newName = 'Harvester' + Game.time;
-				console.log('Spawning new harvester: ' + newName);
+				console.log('生成新的 harvester: ' + newName);
 				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], newName, {
 					memory: {
 						role: 'harvester'
@@ -45,7 +45,7 @@ global.controller.creep = {
 			// harvester等于2的时候生产 upgrader
 			if (harvesters.length >= 2 && upgraders.length < 2) {
 				var newName = 'Upgrader' + Game.time;
-				console.log('Spawning new upgrader: ' + newName);
+				console.log('生成新的 upgrader: ' + newName);
 				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], newName, {
 					memory: {
 						role: 'upgrader'
@@ -56,7 +56,7 @@ global.controller.creep = {
 			// 生产builder
 			if (controller_level >= 2 && builders.length < 2) {
 				var nameBuilder = 'Builder' + Game.time;
-				console.log('Spawing new builder:' + nameBuilder);
+				console.log('生成新的 builder:' + nameBuilder);
 				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], nameBuilder, {
 					memory: {
 						role: 'builder'

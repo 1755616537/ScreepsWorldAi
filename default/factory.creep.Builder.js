@@ -5,11 +5,11 @@ var pro = {
 
 	    if(creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) { // building && 背包为空
             creep.memory.building = false;  // 变为 非building状态
-            creep.say('🔄 harvest');
+            creep.say('🔄 收获');
 	    }
 	    if(!creep.memory.building && creep.store.getFreeCapacity() == 0) { // 非building状态 && 背包满(空余为0)
 	        creep.memory.building = true;  // 变为 building状态
-	        creep.say('🚧 build');
+	        creep.say('🚧 建造');
 	    }
 
 	    if(creep.memory.building) {  // building状态的时候
