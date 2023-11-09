@@ -3,7 +3,7 @@ var pro = {
 	/** @param {Creep} creep **/
 	run: function(creep) {
 		if (creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) { // building && 背包为空
-			creep.memory.building = false;  // 变为 非building状态
+			creep.memory.building = false; // 变为 非building状态
 			creep.say('🔄 收获');
 		}
 		if (!creep.memory.building && creep.store.getFreeCapacity() == 0) { // 非building状态 && 背包满(空余为0)
@@ -23,24 +23,24 @@ var pro = {
 				}
 			}
 		} else { // 非building状态的时候， 到source旁边并采集
-		// 
-			// var sources = creep.room.find(FIND_SOURCES);
-			// if (creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
-			// 	creep.moveTo(sources[1], {
-			// 		visualizePathStyle: {
-			// 			stroke: '#ffaa00'
-			// 		}
-			// 	});
-			// }
 			
-			var structures = creep.room.find(FIND_STRUCTURES);
-			if (creep.withdraw(Structure,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-				creep.moveTo(structures[0], {
+			var sources = creep.room.find(FIND_SOURCES);
+			if (creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
+				creep.moveTo(sources[1], {
 					visualizePathStyle: {
 						stroke: '#ffaa00'
 					}
 				});
 			}
+
+			// var structures = creep.room.find(FIND_STRUCTURES);
+			// if (creep.withdraw(Structure, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+			// 	creep.moveTo(structures[0], {
+			// 		visualizePathStyle: {
+			// 			stroke: '#ffaa00'
+			// 		}
+			// 	});
+			// }
 		}
 	},
 	length: () => {
