@@ -1,18 +1,23 @@
-// require('./src/config/pathData.js');
-
+// -------------------------------
+// 全局数据
+require('pathData');
+// -------------------------------
 require('role.harvester');
 require('role.upgrader');
 require('role.builder');
-
-
 // factory
-
+require('factory.creep.Harvester')
+require('factory.creep.Upgrader')
+require('factory.creep.Builder')
 // 挂载 creep 管理模块
-// require('creepApi.js')
+require('factory.creep')
 // 挂载 creep 拓展
-// require('mount.creep.js')
-
-
+require('factory.creep.mount')
+// -------------------------------
 // controller
+require('controller.creep')
+// -------------------------------
+
+
 
 
