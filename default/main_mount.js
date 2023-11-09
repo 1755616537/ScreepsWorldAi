@@ -4,6 +4,7 @@ require('pathData');
 // -------------------------------
 // factory
 global.factory={}
+require('factory.spawn')
 // 挂载 creep 管理模块
 require('factory.creep')
 // 挂载 creep 拓展
