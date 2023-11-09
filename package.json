@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@screepscn/types": "^1.0.0",
     "@types/lodash": "^3.10.1",
     "@types/screeps": "^3.3.6"
   }
