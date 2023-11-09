@@ -1,6 +1,7 @@
 // 代码中文解释
 /// <reference types="@screepscn/types" />
 
+// 其他接口入口
 require("main_mount");
 
 console.log("Script Reload In Time "+Game.time+" , bucket "+Game.cpu.bucket);
@@ -36,7 +37,7 @@ module.exports.loop = function() {
 			});
 	} else {
 		// harvester少于2的时候生产harvester
-		if (harvesters.length < 4) {
+		if (harvesters.length < 2) {
 			var newName = 'Harvester' + Game.time;
 			console.log('Spawning new harvester: ' + newName);
 			Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE], newName, {
