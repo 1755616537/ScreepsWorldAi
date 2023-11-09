@@ -33,7 +33,7 @@ var pro = {
 			// 	});
 			// }
 			
-			var structures = creep.room.find(FIND_STRUCTUREs);
+			var structures = creep.room.find(FIND_STRUCTURES);
 			if (creep.withdraw(Structure,RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 				creep.moveTo(structures[0], {
 					visualizePathStyle: {
