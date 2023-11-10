@@ -8,7 +8,7 @@ require("main_mount")();
 module.exports.loop = function() {
 	// 任务调度启动
 	// controller.task.run();
-	clog('挂载拓展')
+	
 	controller.creep.run();
 }
 

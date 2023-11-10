@@ -15,9 +15,8 @@ Array.prototype.minBy= function(func){return this.reduce((ori, another)=>func(or
 Array.prototype.log= function(){console.log(JSON.stringify(this));return this};
 Array.prototype.randomGet= function(){return this[Math.floor(this.length*Math.random())]};
 
-// clog=function(...e){if(pathData.clog)console.log(...e)};
-// log=function(...e){if(pathData.clog)console.log(JSON.stringify(e))};
-clog=function(...e){console.log(...e)};
+clog=function(...e){if(pathData.clog)console.log(...e)};
+log=function(...e){if(pathData.clog)console.log(JSON.stringify(e))};
 
 let base36 = Math.pow(36,10)
 randomId = ()=>_.padLeft(Math.ceil(Math.random()*base36).toString(36).toLocaleUpperCase(),10,"0")
