@@ -21,14 +21,13 @@ require('controller.task')
 require('controller.creep')
 // -------------------------------
 module.exports=function(){
-	clog('开始-挂载拓展')
+	clog('挂载拓展')
 	console.log("脚本重新加载 Time " + Game.time + " , bucket " + Game.cpu.bucket);
 	
 	(function(){
 		`<script src="https://screeps-cn.gitee.io/screeps-chinese-pack-release/main.js" async defer></script>` 
-		// console.log(`<script src="https://screeps-cn.gitee.io/screeps-chinese-pack-release/main.js" async defer></script>` );
+		console.log(`<script src="https://screeps-cn.gitee.io/screeps-chinese-pack-release/main.js" async defer></script>` );
 	}())
-	clog('结束-挂载拓展')
 }
 
 
