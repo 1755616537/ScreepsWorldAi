@@ -10,7 +10,7 @@
 
 
 // 拓展总入口
-require("main_mount");
+require("main_mount")();
 
 module.exports.loop = function() {
 	controller.task.run();
