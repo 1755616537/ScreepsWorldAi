@@ -5,18 +5,14 @@ global.controller={}
 require('pathData');
 // -------------------------------工具
 require("utils");
-// -------------------------------factory
+// -------------------------------工厂模块
 require('factory.task')
 require('factory.spawn')
-// 挂载 creep 管理模块
 require('factory.creep')
-// 挂载 creep 拓展
-// require('factory.creep.mount')
-
 require('factory.creep.Harvester')
 require('factory.creep.Upgrader')
 require('factory.creep.Builder')
-// -------------------------------controller
+// -------------------------------控制器
 require('controller.task')
 require('controller.creep')
 // -------------------------------默认执行的初始化程序
