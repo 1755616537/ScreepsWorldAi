@@ -13,6 +13,7 @@ var pro = {
 
 		if (creep.memory.building) { // building状态的时候
 			var targets = creep.room.find(FIND_CONSTRUCTION_SITES); // 寻找建筑位
+			console.log(targets);
 			if (targets.length) { // targets.length > 0  || 建筑位 > 0
 				if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(targets[0], {
@@ -26,7 +27,7 @@ var pro = {
 				const targets = creep.room.find(FIND_STRUCTURES, {
 				    filter: object => object.hits < object.hitsMax
 				});
-				
+				clog('asdasd');
 				targets.sort((a,b) => a.hits - b.hits);
 				
 				if(targets.length > 0) {
