@@ -3,6 +3,8 @@ global.factory={};
 global.controller={}
 // -------------------------------全局数据
 require('pathData');
+// -------------------------------工具
+require("utils");
 // -------------------------------factory
 require('factory.spawn')
 // 挂载 creep 管理模块
