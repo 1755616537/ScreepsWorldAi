@@ -19,10 +19,10 @@ require('factory.creep.Builder')
 // -------------------------------controller
 require('controller.task')
 require('controller.creep')
-// -------------------------------
+// -------------------------------默认执行的初始化程序
 module.exports=function(){
 	clog('挂载拓展')
-	console.log("脚本重新加载 Time " + Game.time + " , bucket " + Game.cpu.bucket);
+	clog("脚本加载 Time " + Game.time + " , bucket " + Game.cpu.bucket);
 	
 	(function(){
 		`<script src="https://screeps-cn.gitee.io/screeps-chinese-pack-release/main.js" async defer></script>` 

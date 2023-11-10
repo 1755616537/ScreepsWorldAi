@@ -21,18 +21,18 @@ var pro = {
 						}
 					}); // 绘制路径
 				}
-			}else{
+			} else {
 				// 修复受损建筑
-				const targets = creep.room.find(FIND_STRUCTURES, {
-				    filter: object => object.hits < object.hitsMax
+				let targets = creep.room.find(FIND_STRUCTURES, {
+					filter: object => object.hits < object.hitsMax
 				});
-				
-				targets.sort((a,b) => a.hits - b.hits);
-				
-				if(targets.length > 0) {
-				    if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
-				        creep.moveTo(targets[0]);
-				    }
+
+				targets.sort((a, b) => a.hits - b.hits);
+
+				if (targets.length > 0) {
+					if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
+						creep.moveTo(targets[0]);
+					}
 				}
 			}
 		} else { // 非building状态的时候， 到source旁边并采集
@@ -47,7 +47,7 @@ var pro = {
 					}
 				});
 			}
-			
+
 			// 从建筑里面取能量
 			// if (creep.withdraw(Structure, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 			// 寻找全部建筑
@@ -61,7 +61,7 @@ var pro = {
 			// }
 		}
 	},
-	length: () => {
+	builderALL: () => {
 		return _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
 	}
 };

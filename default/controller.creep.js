@@ -1,3 +1,4 @@
+
 global.controller.creep = {
 	run: () => {
 		// creep自杀 释放内存 + 保证至少2个
@@ -5,7 +6,7 @@ global.controller.creep = {
 		// 遍历所有 creep 并执行上文中拓展的 work 方法
 		// Object.values(Game.creeps).forEach(creep => creep.work())
 
-		for (var name in Memory.creeps) { // 释放内存
+		for (let name in Memory.creeps) { // 释放内存
 			if (!Game.creeps[name]) {
 				delete Memory.creeps[name];
 				console.log('清楚不存在的creep内存:', name);
@@ -15,7 +16,7 @@ global.controller.creep = {
 		// _是lodash工具
 		var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
 		var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
-		var builders = factory.creep.Builder.length();
+		var builders = factory.creep.Builder.builderALL();
 		//console.log('Harvesters: ' + harvesters.length);
 		var controller_level = factory.spawns.get(1).room.controller.level; // 查看控制器等级
 		//console.log('controller:' + factory.spawns.get(1).room.controller.level)
