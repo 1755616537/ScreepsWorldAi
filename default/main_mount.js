@@ -22,8 +22,8 @@ module.exports=function(){
 	
 	// 客户端汉化显示
 	(function(){
-		colg('客户端汉化显示加载')
 		console.log(`<script src="https://screeps-cn.gitee.io/screeps-chinese-pack-release/main.js" async defer></script>` );
+		clog('客户端汉化显示加载')
 	}())
 }
 
