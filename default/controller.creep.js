@@ -13,7 +13,7 @@ global.controller.creep = {
 			}
 		}
 
-		// _是lodash工具
+		// _是lodash工具 
 		var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
 		var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
 		var builders = factory.creep.Builder.builderALL();
