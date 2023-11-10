@@ -4,7 +4,7 @@ global.controller={}
 // -------------------------------全局数据
 require('pathData');
 // -------------------------------工具
-require("utils");
+// require("utils");
 // -------------------------------factory
 require('factory.task')
 require('factory.spawn')
