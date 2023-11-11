@@ -104,7 +104,44 @@ global.factory.creep = {
 	get(configName) {
 		if (!Memory.creepConfigs) return undefined
 		return Memory.creepConfigs[configName]
-	}
+	},
+	CleanMemory:()=>{
+		// 清理内存
+		
+		for (let name in Memory.creeps) { // 释放内存
+			if (!Game.creeps[name]) {
+				// 采集者
+				if (Memory.creeps[name].role == globalData.harvest) {
+					// 从矿区记录删除
+					let harvestSourceID;
+					let on = false;
+					// 如果没有合法记录会不存在harvestSourceID,报错需要捕获
+					try {
+						harvestSourceID = Memory.creeps[name].harvestSourceID;
+						on = true;
+					} catch (e) {
+						//TODO handle the exception
+					}
+					// 是否合法记录了
+					if (on && harvestSourceID) {
+						let memorySource = Memory.source.list;
+						let memorySourceList = memorySource[harvestSourceID].list;
+						for (let i = 0; i < memorySourceList.length; i++) {
+							if (memorySourceList[i] == name) {
+								memorySource[harvestSourceID].list.splice(i, 1);
+								Memory.source.list = memorySource;
+								break
+							}
+						}
+					}
+		
+				}
+		
+				delete Memory.creeps[name];
+				console.log('清楚不存在的creep内存:', name);
+			}
+		}
+	} 
 }
 
 // creep 自检查
