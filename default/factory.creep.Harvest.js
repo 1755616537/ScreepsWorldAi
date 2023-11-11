@@ -36,7 +36,8 @@ var pro = {
 									look.forEach(function(lookObject) {
 										console.log(lookObject.type)
 										// 建筑
-										if (lookObject.type != LOOK_CONSTRUCTION_SITES) {
+										if (lookObject.type != LOOK_TERRAIN && lookObject.terrain !=
+											'swamp') {
 											on = true;
 										}
 									});
