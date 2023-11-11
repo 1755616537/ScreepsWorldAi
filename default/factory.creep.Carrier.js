@@ -20,7 +20,7 @@ var pro = {
 						}
 					});
 				}
-			} 
+			}
 		} else {
 			var targets = creep.room.find(FIND_STRUCTURES, { //找出需要补充能量的建筑
 				filter: (structure) => {

@@ -12,7 +12,7 @@ global.controller.creep = {
 			}
 		}
 
-		var harvesters = factory.creep.Harvester.ALL();
+		var harvests = factory.creep.harvest.ALL();
 		var upgraders = factory.creep.Upgrader.ALL();
 		var builders = factory.creep.Builder.ALL();
 		var carriers = factory.creep.Carrier.ALL();
@@ -32,12 +32,12 @@ global.controller.creep = {
 				});
 		} else {
 			// harvester少于2的时候生产harvester
-			if (harvesters.length < 2) {
-				var newName = pathData.harvester + Game.time;
+			if (harvests.length < 2) {
+				var newName = pathData.harvest + Game.time;
 				console.log('生成新的 采集者: ' + newName);
 				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], newName, {
 					memory: {
-						role: pathData.harvester
+						role: pathData.harvest
 					}
 				}); // 指定relo属性
 			}
@@ -54,7 +54,7 @@ global.controller.creep = {
 			}
 
 			// harvester等于2的时候生产 upgrader
-			if (harvesters.length >= 2 && upgraders.length < 2) {
+			if (harvests.length >= 2 && upgraders.length < 2) {
 				var newName = pathData.upgrader + Game.time;
 				console.log('生成新的 升级者: ' + newName);
 				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], newName, {
@@ -80,8 +80,8 @@ global.controller.creep = {
 
 		for (var name in Game.creeps) {
 			var creep = Game.creeps[name];
-			if (creep.memory.role == pathData.harvester) {
-				factory.creep.Harvester.run(creep);
+			if (creep.memory.role == pathData.harvest) {
+				factory.creep.Harvest.run(creep);
 			}
 			if (creep.memory.role == pathData.upgrader) {
 				factory.creep.Upgrader.run(creep);

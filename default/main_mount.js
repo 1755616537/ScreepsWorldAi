@@ -9,7 +9,7 @@ require("utils");
 require('factory.task')
 require('factory.spawn')
 require('factory.creep')
-require('factory.creep.Harvester')
+require('factory.creep.Harvest')
 require('factory.creep.Upgrader')
 require('factory.creep.Builder')
 require('factory.creep.Carrier')
