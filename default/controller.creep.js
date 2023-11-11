@@ -61,7 +61,7 @@ global.controller.creep = {
 			if (harvests.length < 2) {
 				var newName = globalData.harvest + Game.time;
 				console.log('生成新的 采集者: ' + newName);
-				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], newName, {
+				factory.spawns.get(1).spawnCreep([WORK, WORK, WORK, WORK, WORK, WORK, CARRY, MOVE], newName, {
 					memory: {
 						role: globalData.harvest
 					}
@@ -72,33 +72,38 @@ global.controller.creep = {
 			if (carriers.length < 2) {
 				var nameBuilder = globalData.carrier + Game.time;
 				console.log('生成新的 运输者:' + nameBuilder);
-				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], nameBuilder, {
-					memory: {
-						role: globalData.carrier
-					}
-				});
+				factory.spawns.get(1).spawnCreep([WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE],
+					nameBuilder, {
+						memory: {
+							role: globalData.carrier
+						}
+					});
 			}
 
 			// harvester等于2的时候生产 upgrader
 			if (harvests.length >= 2 && upgraders.length < 2) {
 				var newName = globalData.upgrader + Game.time;
 				console.log('生成新的 升级者: ' + newName);
-				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], newName, {
-					memory: {
-						role: globalData.upgrader
-					}
-				}); // 指定relo属性
+				factory.spawns.get(1).spawnCreep([WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY,
+					MOVE], newName, {
+						memory: {
+							role: globalData.upgrader
+						}
+					}); // 指定relo属性
 			}
 
 			// 生产builder
 			if (controller_level >= 2 && builders.length < 2) {
 				var nameBuilder = globalData.builder + Game.time;
 				console.log('生成新的 建造者:' + nameBuilder);
-				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], nameBuilder, {
-					memory: {
-						role: globalData.builder
-					}
-				});
+				factory.spawns.get(1).spawnCreep([WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY,
+						MOVE
+					],
+					nameBuilder, {
+						memory: {
+							role: globalData.builder
+						}
+					});
 			}
 
 
