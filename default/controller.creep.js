@@ -25,7 +25,7 @@ global.controller.creep = {
 						let memorySourceList = memorySource[harvestSourceID].list;
 						for (let i = 0; i < memorySourceList.length; i++) {
 							if (memorySourceList[i] == name) {
-								Memory.source[harvestSourceID].list.splice(i, 1);
+								memorySourceList.splice(i, 1);
 								break
 							}
 						}
