@@ -62,11 +62,11 @@ var pro = {
 					}
 				}
 
-				// 找出已经分配的矿区
+				// 找出已经分配的矿区消息
 				for (let i = 0; i < sources.length; i++) {
 					if (sources[i].id == creep.memory.harvestSourceID) {
 						// 检查是否在矿区记录中
-						let memorySourceList = memorySource[sources[i].id];
+						let memorySourceList = memorySource[sources[i].id].list;
 						let on = false;
 						for (let i2 = 0; i2 < memorySourceList.length; i2++) {
 							if (memorySourceList[i2] == creep.id) {
