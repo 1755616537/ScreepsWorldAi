@@ -132,7 +132,7 @@ function priorityPower(creep, event) {
 function idleCreep() {
 	let creepList = _.filter(Game.creeps, (creep) => creep.memory.TaskState == '0');
 	if (creepList.length < 1) {
-		global.Throw.Error('没有空闲creep');
+		Throw.Error('没有空闲creep');
 	}
 	return creepList;
 }

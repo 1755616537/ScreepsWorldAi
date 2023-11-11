@@ -5,6 +5,7 @@ global.controller={}
 require('globalData');
 // -------------------------------工具
 require("utils");
+require("Throw");
 // -------------------------------工厂模块
 require('factory.task')
 require('factory.spawn')
