@@ -11,7 +11,7 @@ module.exports.loop = function() {
 	
 	controller.creep.run();
 	
-	clog('使用的 CPU 时间总量 ',Game.cpu.getUsed())
+	clog('本次tips使用 CPU 时间总量 ',Game.cpu.getUsed())
 }
 
 // 缓存的种类
