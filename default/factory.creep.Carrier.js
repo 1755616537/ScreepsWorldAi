@@ -9,7 +9,7 @@ var pro = {
 			let targets = creep.room.find(FIND_STRUCTURES, {
 				filter: (structure) => {
 					return (structure.structureType == STRUCTURE_CONTAINER) &&
-						structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+						structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
 				}
 			});
 			if (targets.length > 0) {
