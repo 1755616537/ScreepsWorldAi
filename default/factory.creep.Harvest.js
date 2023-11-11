@@ -8,7 +8,7 @@ var pro = {
 			let source = sources.length > 0 ? sources[0] : {};
 
 			// 自动分配矿区
-			if (globalData.AutomaticAssign) {
+			if (globalData.AutomaticAssignHarvest) {
 				// 没有分配到的Source
 
 				// 根据9*9计算矿区地形分配数量 只计算一次缓存后固定
@@ -68,6 +68,10 @@ var pro = {
 						// 允许采集总数
 						total: total
 					};
+					// 根据最大支持数量动态更新采集者数量
+					if (globalData.creepConfigs.harvest.AutomaticAssignNum) {
+						globalData.creepConfigs.harvest.number = total;
+					}
 				}
 
 				let memorySource = Memory.source.list;

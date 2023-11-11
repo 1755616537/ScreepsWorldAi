@@ -20,7 +20,7 @@ global.globalData = {
 	// 防御者ID
 	defender: 'defender',
 	// 自动分配矿区
-	AutomaticAssign: true,
+	AutomaticAssignHarvest: true,
 	// 主房间名称
 	roomName1: 'W12N4',
 	// 角色配置
@@ -29,6 +29,8 @@ global.globalData = {
 		'harvest': {
 			bodys: [WORK, WORK, CARRY, MOVE],
 			number: 2,
+			// 自动分配数量（开启 AutomaticAssignHarvest可以根据最大支持数量动态更新采集者数量）
+			AutomaticAssignNum:true
 		},
 		// 升级者
 		'upgrader': {
