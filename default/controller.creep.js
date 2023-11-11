@@ -11,7 +11,7 @@ global.controller.creep = {
 				if (Memory.creeps[name].role == globalData.harvest) {
 					// 从矿区记录删除
 					let memorySource = Memory.source;
-					let memorySourceList = memorySource[creep.memory.harvestSourceID].list;
+					let memorySourceList = memorySource[Memory.creeps[name].harvestSourceID].list;
 					for (let i = 0; i < memorySourceList.length; i++) {
 						if (memorySourceList[i2] == name) {
 							Memory.task.performList.splice(i2, 1);
