@@ -7,7 +7,7 @@ global.pathData = {
 	'SpawnName2': 'Spawn2',
 	// 基地3名称
 	'SpawnName3': 'Spawn3',
-	// 采矿者ID
+	// 采集者ID
 	'havester':'havester',
 	// 升级者ID
 	'upgrader':'upgrader',
