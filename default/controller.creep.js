@@ -1,7 +1,6 @@
 global.controller.creep = {
 	run: () => {
-		// creep自杀 释放内存 + 保证至少2个
-
+		
 		// 遍历所有 creep 并执行上文中拓展的 work 方法
 		// Object.values(Game.creeps).forEach(creep => creep.work())
 
@@ -12,11 +11,9 @@ global.controller.creep = {
 		const upgraders = factory.creep.Upgrader.ALL();
 		const builders = factory.creep.Builder.ALL();
 		const carriers = factory.creep.Carrier.ALL();
-		//console.log('Harvesters: ' + harvesters.length);
+		
 		// 查看控制器等级
 		const controller_level = factory.spawns.get(1).room.controller.level;
-		//console.log('controller:' + factory.spawns.get(1).room.controller.level)
-
 
 		// 母巢 (spawn) 是否正在孵化一个新的 creep
 		if (factory.spawns.get(1).spawning) {
