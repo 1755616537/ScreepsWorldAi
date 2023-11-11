@@ -68,8 +68,8 @@ var pro = {
 						// 检查是否在矿区记录中
 						let memorySourceList = memorySource[sources[i].id];
 						let on = false;
-						for (let i = 0; i < memorySourceList.length; i++) {
-							if (memorySourceList[i] == sources[i].id) {
+						for (let i2 = 0; i2 < memorySourceList.length; i2++) {
+							if (memorySourceList[i2] == sources[i2].id) {
 								on = true;
 								break
 							}
