@@ -11,11 +11,11 @@ var pro = {
 				// 没有分配到的Source
 				if (!creep.memory.harvestSourceID) {
 					// 根据9*9计算矿区地形分配数量 只计算一次缓存后固定
-					try {
-						if (!Memory.source) {}
-					} catch (e) {
-						Memory.source = {};
-					}
+					// try {
+					// 	if (!Memory.source) {}
+					// } catch (e) {
+					// 	Memory.source = {};
+					// }
 					if (!Memory.source) {
 						let memorySource = {};
 						const terrain = new Room.Terrain(globalData.roomName1);
