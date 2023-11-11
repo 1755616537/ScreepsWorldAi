@@ -30,22 +30,23 @@ var pro = {
 							x = x_ini;
 							for (let i3 = 0; i3 < 3; i3++) {
 								if (terrain.get(x, y) != TERRAIN_MASK_WALL) {
+									let on = true;
 									// console.log(x, y)
 									let target = new RoomPosition(x, y, globalData.roomName1)
 									const found = creep.room.lookForAt(LOOK_STRUCTURES, target);
-									if (found.length) {
-										console.log('found', found)
+									if (found.length && found[1] == '(constructedWall)') {
+										// console.log('found', found)
+										on = false;
 									}
-									const look = creep.room.lookAt(target);
-									let on = false;
-									look.forEach(function(lookObject) {
-										// 人造墙壁
-										if (lookObject.type != LOOK_STRUCTURES && lookObject[
-												LOOK_STRUCTURES][1] != '(constructedWall)') {
-											console.log(x, y)
-											on = true;
-										}
-									});
+									// const look = creep.room.lookAt(target);
+									// look.forEach(function(lookObject) {
+									// 	// 人造墙壁
+									// 	if (lookObject.type != LOOK_STRUCTURES && lookObject[
+									// 			LOOK_STRUCTURES][1] != '(constructedWall)') {
+									// 		console.log(x, y)
+									// 		on = true;
+									// 	}
+									// });
 									if (on) num++;
 								}
 								x++;
