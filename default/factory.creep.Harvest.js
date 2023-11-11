@@ -24,16 +24,16 @@ var pro = {
 			});
 			if (targets.length > 0) {
 				// _.find(targets, (val) => creep.pos.getRangeTo(val)<=3)
-				let target = () => {
+				let target = function(targets) {
 					for (let val in targets) {
 						const range = creep.pos.getRangeTo(val);
 						if (range <= 3) return val;
 					}
 					return targets[0];
-				}
+				}(targets);
 
-				if (creep.transfer(target(), RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-					creep.moveTo(target(), {
+				if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(target, {
 						visualizePathStyle: {
 							stroke: '#ffffff'
 						}
