@@ -142,6 +142,29 @@ var pro = {
 						}
 					});
 				}
+			}else{
+				// CONTAINER满了或者没有建
+				var targets = creep.room.find(FIND_STRUCTURES, {
+					filter: (structure) => {
+						// 返回该存储的剩余可用容量大于0的CONTAINER
+						return (
+								structure.structureType == STRUCTURE_EXTENSION ||
+								structure.structureType == STRUCTURE_SPAWN ||
+								structure.structureType == STRUCTURE_TOWER) &&
+							structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+					}
+				});
+				if (targets.length > 0) {
+					// 将资源从该 creep 转移至其他对象
+					if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+						// 向目标移动
+						creep.moveTo(targets[0], {
+							visualizePathStyle: {
+								stroke: '#ffffff'
+							}
+						});
+					}
+				}
 			}
 		}
 	},
