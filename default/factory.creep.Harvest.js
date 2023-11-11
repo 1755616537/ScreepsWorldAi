@@ -32,7 +32,7 @@ var pro = {
 								if (terrain.get(x, y) != TERRAIN_MASK_WALL) {
 									const look = creep.room.lookAt(new RoomPosition(x, y, globalData
 										.roomName1));
-									let on = flse;
+									let on = false;
 									look.forEach(function(lookObject) {
 										// 建筑
 										if (lookObject.type != LOOK_CONSTRUCTION_SITES) {
