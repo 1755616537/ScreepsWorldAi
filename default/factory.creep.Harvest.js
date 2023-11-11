@@ -23,9 +23,11 @@ var pro = {
 				}
 			});
 			if (targets.length > 0) {
+				// _.find(targets, (val) => creep.pos.getRangeTo(val)<=3)
 				let target = () => {
 					for (let val in targets) {
 						const range = creep.pos.getRangeTo(val);
+						col(val)
 						if (range <= 3) return val;
 					}
 					return targets[0];
