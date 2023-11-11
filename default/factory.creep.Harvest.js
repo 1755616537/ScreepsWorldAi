@@ -56,7 +56,7 @@ var pro = {
 							memorySource[val].list.push(creep.name);
 							// 把矿区ID记录到creep
 							creep.memory.harvestSourceID = val;
-							Memory.source = memorySource;
+							// Memory.source = memorySource;
 							break;
 						}
 					}
