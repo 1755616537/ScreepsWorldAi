@@ -24,9 +24,9 @@ var pro = {
 						let num = 0;
 						let x_ini = x = val.pos.x - 1;
 						let y = val.pos.y - 1;
-						for (let i = 0; i < 3; i++) {
+						for (let i2 = 0; i2 < 3; i2++) {
 							x = x_ini;
-							for (let i2 = 0; i2 < 3; i2++) {
+							for (let i3 = 0; i3 < 3; i3++) {
 								if (terrain.get(x, y) != TERRAIN_MASK_WALL) {
 									num++;
 								}
