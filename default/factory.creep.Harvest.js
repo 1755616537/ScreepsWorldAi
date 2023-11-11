@@ -22,8 +22,7 @@ var pro = {
 						for (let i = 0; i < sources.length; i++) {
 							let val = sources[i];
 							let num = 0;
-							let x_ini = val.pos.x - 1;
-							let x = x_ini;
+							let x_ini = x = val.pos.x - 1;
 							let y = val.pos.y - 1;
 							for (let i = 0; i < 3; i++) {
 								x = x_ini;
@@ -35,7 +34,7 @@ var pro = {
 								}
 								y++;
 							}
-							
+
 							memorySource[val.id] = {
 								// 允许采集记录列表
 								list: [],
@@ -59,7 +58,7 @@ var pro = {
 						}
 					}
 				}
-				
+
 				// 找出已经分配的矿区
 				for (let i = 0; i < sources.length; i++) {
 					if (sources[i].id == creep.memory.harvestSourceID) {
