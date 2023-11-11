@@ -7,6 +7,19 @@ global.controller.creep = {
 
 		for (let name in Memory.creeps) { // 释放内存
 			if (!Game.creeps[name]) {
+				// 采集者
+				if (Memory.creeps[name].role == globalData.harvest) {
+					// 从矿区记录删除
+					let memorySource = Memory.source;
+					let memorySourceList = memorySource[creep.memory.harvestSourceID].list;
+					for (let i = 0; i < memorySourceList.length; i++) {
+						if (memorySourceList[i2] == name) {
+							Memory.task.performList.splice(i2, 1);
+							break
+						}
+					}
+				}
+
 				delete Memory.creeps[name];
 				console.log('清楚不存在的creep内存:', name);
 			}
@@ -41,7 +54,7 @@ global.controller.creep = {
 					}
 				}); // 指定relo属性
 			}
-			
+
 			// 生产Carrier
 			if (carriers.length < 2) {
 				var nameBuilder = globalData.carrier + Game.time;
