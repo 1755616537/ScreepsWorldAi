@@ -30,14 +30,17 @@ var pro = {
 							x = x_ini;
 							for (let i3 = 0; i3 < 3; i3++) {
 								if (terrain.get(x, y) != TERRAIN_MASK_WALL) {
+									console.log(x, y)
 									const look = creep.room.lookAt(new RoomPosition(x, y, globalData
 										.roomName1));
 									let on = false;
 									look.forEach(function(lookObject) {
-										console.log(lookObject.type)
+										console.log('lookObject.type ', lookObject.type)
+										for (let val in lookObject) {
+											console.log(val, lookObject[val])
+										}
 										// 建筑
-										if (lookObject.type != LOOK_TERRAIN && lookObject.terrain !=
-											'swamp') {
+										if (lookObject.type != LOOK_TERRAIN) {
 											on = true;
 										}
 									});
