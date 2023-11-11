@@ -67,7 +67,7 @@ var pro = {
 					}
 				}
 				if (source.id != creep.memory.harvestSourceID) {
-					Throw.Error('creep ', creep.memory.role, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
+					Throw.Error('creep ', creep.id, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
 				}
 			}
 
