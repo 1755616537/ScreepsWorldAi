@@ -69,7 +69,7 @@ var pro = {
 						let memorySourceList = memorySource[sources[i].id];
 						let on = false;
 						for (let i2 = 0; i2 < memorySourceList.length; i2++) {
-							if (memorySourceList[i2] == sources[i2].id) {
+							if (memorySourceList[i2] == creep.id) {
 								on = true;
 								break
 							}
