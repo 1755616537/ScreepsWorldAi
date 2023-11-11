@@ -9,7 +9,7 @@ var pro = {
 			// 自动分配矿区
 			if (globalData.AutomaticAssign) {
 				// 没有分配到的Source
-				
+
 				// 根据9*9计算矿区地形分配数量 只计算一次缓存后固定
 				// try {
 				// 	if (!Memory.source) {}
@@ -34,7 +34,7 @@ var pro = {
 							}
 							y++;
 						}
-				
+
 						memorySource[val.id] = {
 							// 允许采集记录列表
 							list: [],
@@ -44,10 +44,11 @@ var pro = {
 					}
 					Memory.source = memorySource;
 				}
-				
+
+				let memorySource = Memory.source;
+
 				if (!creep.memory.harvestSourceID) {
 					// 找出没有被分配完的矿区
-					let memorySource = Memory.source;
 					for (let val in memorySource) {
 						// 找到空闲矿区
 						if (memorySource[val].list.length < memorySource[val].harvestNum) {
@@ -63,7 +64,17 @@ var pro = {
 				// 找出已经分配的矿区
 				for (let i = 0; i < sources.length; i++) {
 					if (sources[i].id == creep.memory.harvestSourceID) {
-						source = sources[i];
+						// 检查是否在矿区记录中
+						let memorySourceList = memorySource[sources[i].id];
+						let on = false;
+						for (let i = 0; i < memorySourceList.length; i++) {
+							if (memorySourceList[i] == sources[i].id) {
+								on = true;
+								break
+							}
+						}
+						// 合法记录在矿区
+						if (on) source = sources[i];
 						break
 					}
 				}
