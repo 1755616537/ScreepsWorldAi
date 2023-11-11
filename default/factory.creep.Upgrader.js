@@ -21,13 +21,23 @@ let pro = {
 				});
 			}
 		} else { // 采集状态 + 可视化
-			var sources = creep.room.find(FIND_SOURCES);
-			if (creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
-				creep.moveTo(sources[1], {
-					visualizePathStyle: {
-						stroke: '#ffaa00'
-					}
-				});
+			let targets = creep.room.find(FIND_STRUCTURES, {
+				filter: (structure) => {
+					// 找出有储存能量的container搬运
+					return (structure.structureType == STRUCTURE_CONTAINER) &&
+						structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+				}
+			});
+			if (targets.length > 0) {
+				// 从建筑(structure)中拿取资源
+				if (creep.withdraw(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+					// 向目标移动
+					creep.moveTo(targets[0], {
+						visualizePathStyle: {
+							stroke: '#ffaa00'
+						}
+					});
+				}
 			}
 		}
 	},
