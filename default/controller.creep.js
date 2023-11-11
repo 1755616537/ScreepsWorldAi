@@ -28,7 +28,7 @@ global.controller.creep = {
 					opacity: 0.8
 				});
 		} else {
-			// harvester少于2的时候生产harvester
+			// 生产 harvester
 			if (harvests.length < 2) {
 				let newName = globalData.harvest + Game.time;
 				console.log('生成新的 采集者: ' + newName);
@@ -39,8 +39,8 @@ global.controller.creep = {
 				});
 			}
 
-			// 生产Carrier
-			if (carriers.length < 2) {
+			// 生产 carrier
+			if (harvests.length >= 2 &&carriers.length < 2) {
 				let newName = globalData.carrier + Game.time;
 				console.log('生成新的 运输者:' + newName);
 				factory.spawns.get(1).spawnCreep([WORK, CARRY, CARRY, MOVE], newName, {
@@ -50,7 +50,7 @@ global.controller.creep = {
 				});
 			}
 
-			// harvester等于2的时候生产 upgrader
+			// 生产 upgrader
 			if (harvests.length >= 2 && upgraders.length < 2) {
 				let newName = globalData.upgrader + Game.time;
 				console.log('生成新的 升级者: ' + newName);
@@ -61,7 +61,7 @@ global.controller.creep = {
 				});
 			}
 
-			// 生产builder
+			// 生产 builder
 			if (controller_level >= 2 && builders.length < 2) {
 				let newName = globalData.builder + Game.time;
 				console.log('生成新的 建造者:' + newName);
