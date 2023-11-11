@@ -62,7 +62,7 @@ global.controller.creep = {
 			if (harvests.length < 2) {
 				let newName = globalData.harvest + Game.time;
 				console.log('生成新的 采集者: ' + newName);
-				factory.spawns.get(1).spawnCreep([WORK, WORK, WORK, CARRY, MOVE], newName, {
+				factory.spawns.get(1).spawnCreep([WORK, WORK, CARRY, MOVE], newName, {
 					memory: {
 						role: globalData.harvest
 					}
@@ -73,7 +73,7 @@ global.controller.creep = {
 			if (carriers.length < 2) {
 				let newName = globalData.carrier + Game.time;
 				console.log('生成新的 运输者:' + newName);
-				factory.spawns.get(1).spawnCreep([WORK, CARRY, CARRY, CARRY, MOVE], newName, {
+				factory.spawns.get(1).spawnCreep([WORK, CARRY, CARRY, MOVE], newName, {
 					memory: {
 						role: globalData.carrier
 					}
@@ -84,7 +84,7 @@ global.controller.creep = {
 			if (harvests.length >= 2 && upgraders.length < 2) {
 				let newName = globalData.upgrader + Game.time;
 				console.log('生成新的 升级者: ' + newName);
-				factory.spawns.get(1).spawnCreep([WORK, WORK, WORK, CARRY, MOVE], newName, {
+				factory.spawns.get(1).spawnCreep([WORK, WORK, CARRY, MOVE], newName, {
 					memory: {
 						role: globalData.upgrader
 					}
@@ -95,7 +95,7 @@ global.controller.creep = {
 			if (controller_level >= 2 && builders.length < 2) {
 				let newName = globalData.builder + Game.time;
 				console.log('生成新的 建造者:' + newName);
-				factory.spawns.get(1).spawnCreep([WORK, WORK, WORK, CARRY, MOVE], newName, {
+				factory.spawns.get(1).spawnCreep([WORK, WORK, CARRY, MOVE], newName, {
 					memory: {
 						role: globalData.builder
 					}
