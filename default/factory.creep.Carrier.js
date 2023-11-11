@@ -7,6 +7,8 @@ var pro = {
 		if (creep.store.getFreeCapacity() > 0) { // 背包未满
 			// 所有掉落的资源
 			let targets = creep.room.find(FIND_DROPPED_RESOURCES);
+			// const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+			// if(target)
 			if (targets.length > 0) {
 				// 捡起一个物品 (如捡起一些能量)
 				if (creep.pickup(targets[0]) == ERR_NOT_IN_RANGE) {
