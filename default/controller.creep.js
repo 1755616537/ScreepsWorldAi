@@ -21,11 +21,12 @@ global.controller.creep = {
 					}
 					// 是否合法记录了
 					if (on && harvestSourceID) {
-						let memorySource = Memory.source;
+						let memorySource = Memory.source.list;
 						let memorySourceList = memorySource[harvestSourceID].list;
 						for (let i = 0; i < memorySourceList.length; i++) {
 							if (memorySourceList[i] == name) {
 								memorySource[harvestSourceID].list.splice(i, 1);
+								Memory.source.list = memorySource;
 								break
 							}
 						}
@@ -85,11 +86,12 @@ global.controller.creep = {
 				var newName = globalData.upgrader + Game.time;
 				console.log('生成新的 升级者: ' + newName);
 				factory.spawns.get(1).spawnCreep([WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY,
-					MOVE], newName, {
-						memory: {
-							role: globalData.upgrader
-						}
-					}); // 指定relo属性
+					MOVE
+				], newName, {
+					memory: {
+						role: globalData.upgrader
+					}
+				}); // 指定relo属性
 			}
 
 			// 生产builder

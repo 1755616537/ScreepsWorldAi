@@ -13,13 +13,14 @@ var pro = {
 
 				// 根据9*9计算矿区地形分配数量 只计算一次缓存后固定
 				// try {
-				// 	if (!Memory.source) {}
+				// 	if (!Memory.source.list) {}
 				// } catch (e) {
-				// 	Memory.source = {};
+				// 	Memory.source.list = {};
 				// }
 				if (!Memory.source) {
 					let memorySource = {};
 					const terrain = new Room.Terrain(globalData.roomName1);
+					let total = 0;
 					for (let i = 0; i < sources.length; i++) {
 						let val = sources[i];
 						let num = 0;
@@ -36,6 +37,7 @@ var pro = {
 							y++;
 						}
 
+						total += num;
 						memorySource[val.id] = {
 							// 允许采集记录列表
 							list: [],
@@ -43,10 +45,14 @@ var pro = {
 							harvestNum: num
 						};
 					}
-					Memory.source = memorySource;
+					Memory.source = {
+						list: memorySource,
+						// 允许采集总数
+						total: total
+					};
 				}
 
-				let memorySource = Memory.source;
+				let memorySource = Memory.source.list;
 
 				if (!creep.memory.harvestSourceID) {
 					// 找出没有被分配完的矿区
@@ -57,7 +63,8 @@ var pro = {
 							memorySource[val].list.push(creep.name);
 							// 把矿区ID记录到creep
 							creep.memory.harvestSourceID = val;
-							// Memory.source = memorySource;
+							
+							Memory.source.list = memorySource;
 							break;
 						}
 					}
