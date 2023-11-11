@@ -15,14 +15,12 @@ global.controller.creep = {
 					// 如果没有合法记录会不存在harvestSourceID,报错需要捕获
 					try {
 						harvestSourceID = Memory.creeps[name].harvestSourceID;
-						console.log('1',harvestSourceID)
 						on = true;
 					} catch (e) {
 						//TODO handle the exception
 					}
 					// 是否合法记录了
-					if (on) {
-						console.log('2',harvestSourceID)
+					if (on && harvestSourceID) {
 						let memorySource = Memory.source;
 						let memorySourceList = memorySource[harvestSourceID].list;
 						for (let i = 0; i < memorySourceList.length; i++) {
