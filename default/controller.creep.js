@@ -23,6 +23,7 @@ global.controller.creep = {
 					if (on) {
 						console.log(harvestSourceID)
 						let memorySource = Memory.source;
+						console.log(memorySource)
 						let memorySourceList = memorySource[harvestSourceID].list;
 						for (let i = 0; i < memorySourceList.length; i++) {
 							if (memorySourceList[i] == name) {
