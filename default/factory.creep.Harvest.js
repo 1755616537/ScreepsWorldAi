@@ -35,9 +35,11 @@ var pro = {
 								}
 								y++;
 							}
-							// 允许采集数量
+							
 							memorySource[val.id] = {
+								// 允许采集记录列表
 								list: [],
+								// 允许采集数量
 								harvestNum: num
 							};
 						}
@@ -65,7 +67,7 @@ var pro = {
 					}
 				}
 				if (source.id != creep.memory.harvestSourceID) {
-					throw new Error('creep ', creep.memory.role, ' 找不到分配的矿ID ', harvestSourceID);
+					throw new Error('creep ', creep.memory.role, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
 				}
 			}
 
