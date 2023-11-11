@@ -30,7 +30,16 @@ var pro = {
 							x = x_ini;
 							for (let i3 = 0; i3 < 3; i3++) {
 								if (terrain.get(x, y) != TERRAIN_MASK_WALL) {
-									num++;
+									const look = creep.room.lookAt(new RoomPosition(x, y, globalData
+										.roomName1));
+									let on = flse;
+									look.forEach(function(lookObject) {
+										// 建筑
+										if (lookObject.type != LOOK_CONSTRUCTION_SITES) {
+											on = true;
+										}
+									});
+									if (on) num++;
 								}
 								x++;
 							}
@@ -63,7 +72,7 @@ var pro = {
 							memorySource[val].list.push(creep.name);
 							// 把矿区ID记录到creep
 							creep.memory.harvestSourceID = val;
-							
+
 							Memory.source.list = memorySource;
 							break;
 						}
@@ -142,7 +151,7 @@ var pro = {
 						}
 					});
 				}
-			}else{
+			} else {
 				// CONTAINER满了或者没有建
 				var targets = creep.room.find(FIND_STRUCTURES, {
 					filter: (structure) => {
