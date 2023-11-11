@@ -1,4 +1,3 @@
-
 global.controller.creep = {
 	run: () => {
 		// creep自杀 释放内存 + 保证至少2个
@@ -34,48 +33,64 @@ global.controller.creep = {
 		} else {
 			// harvester少于2的时候生产harvester
 			if (harvesters.length < 2) {
-				var newName = 'Harvester' + Game.time;
-				console.log('生成新的 harvester: ' + newName);
+				var newName = pathData.harvester + Game.time;
+				console.log('生成新的 采集者: ' + newName);
 				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], newName, {
 					memory: {
-						role: 'harvester'
+						role: pathData.harvester
 					}
 				}); // 指定relo属性
+			}
+			
+			// 生产Carrier
+			if (carriers.length < 2) {
+				var nameBuilder = pathData.carrier + Game.time;
+				console.log('生成新的 运输者:' + nameBuilder);
+				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], nameBuilder, {
+					memory: {
+						role: pathData.carrier
+					}
+				});
 			}
 
 			// harvester等于2的时候生产 upgrader
 			if (harvesters.length >= 2 && upgraders.length < 2) {
-				var newName = 'Upgrader' + Game.time;
-				console.log('生成新的 upgrader: ' + newName);
+				var newName = pathData.upgrader + Game.time;
+				console.log('生成新的 升级者: ' + newName);
 				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], newName, {
 					memory: {
-						role: 'upgrader'
+						role: pathData.upgrader
 					}
 				}); // 指定relo属性
 			}
 
 			// 生产builder
 			if (controller_level >= 2 && builders.length < 2) {
-				var nameBuilder = 'Builder' + Game.time;
-				console.log('生成新的 builder:' + nameBuilder);
+				var nameBuilder = pathData.builder + Game.time;
+				console.log('生成新的 建造者:' + nameBuilder);
 				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], nameBuilder, {
 					memory: {
-						role: 'builder'
+						role: pathData.builder
 					}
 				});
 			}
+
+
 		}
 
 		for (var name in Game.creeps) {
 			var creep = Game.creeps[name];
-			if (creep.memory.role == 'harvester') {
-				factory.creep.roleHarvester.run(creep);
+			if (creep.memory.role == pathData.harvester) {
+				factory.creep.Harvester.run(creep);
 			}
-			if (creep.memory.role == 'upgrader') {
-				factory.creep.roleUpgrader.run(creep);
+			if (creep.memory.role == pathData.upgrader) {
+				factory.creep.Upgrader.run(creep);
 			}
-			if (creep.memory.role == 'builder') {
+			if (creep.memory.role == pathData.builder) {
 				factory.creep.Builder.run(creep);
+			}
+			if (creep.memory.role == pathData.carrier) {
+				factory.creep.Carrier.run(creep);
 			}
 		}
 	}
