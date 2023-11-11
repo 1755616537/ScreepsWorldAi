@@ -50,7 +50,7 @@ var pro = {
 					let memorySource = Memory.source;
 					for (let val in memorySource) {
 						// 找到空闲矿区
-						if (memorySource[val].list.length < memorySource[val].num) {
+						if (memorySource[val].list.length < memorySource[val].harvestNum) {
 							// 把creep ID记录到矿区
 							memorySource[val].list.push(creep.id);
 							// 把矿区ID记录到creep
