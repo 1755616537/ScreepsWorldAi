@@ -12,7 +12,7 @@ var pro = {
 				});
 			}
 		} else {
-			var targets = creep.room.find(FIND_STRUCTURES, { //找出需要补充能量的建筑
+			var targets = creep.room.find(FIND_STRUCTURES, {
 				filter: (structure) => {
 					return (
 							// structure.structureType == STRUCTURE_EXTENSION ||
@@ -25,10 +25,16 @@ var pro = {
 			if (targets.length > 0) {
 				// _.find(targets, (val) => creep.pos.getRangeTo(val)<=3)
 				let target = function(targets) {
+					colg('targets',targets)
 					for (let val in targets) {
 						const range = creep.pos.getRangeTo(val);
+						colg(val,range)
+						// 脚下的CONTAINER
+						if (range <= 1) return val;
+						// 扩大成周边范围
 						if (range <= 3) return val;
 					}
+					// 周边找不到CONTAINER,默认第一个
 					return targets[0];
 				}(targets);
 
