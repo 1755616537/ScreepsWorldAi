@@ -56,6 +56,7 @@ var pro = {
 							memorySource[val].list.push(creep.id);
 							// 把矿区ID记录到creep
 							creep.memory.harvestSourceID = val;
+							Memory.source = memorySource;
 							break;
 						}
 					}
@@ -73,8 +74,13 @@ var pro = {
 								break
 							}
 						}
-						// 合法记录在矿区
-						if (on) source = sources[i];
+						if (on) {
+							// 合法记录在矿区
+							source = sources[i];
+						} else {
+							// 不合法,移除
+							creep.memory.harvestSourceID = null;
+						}
 						break
 					}
 				}
