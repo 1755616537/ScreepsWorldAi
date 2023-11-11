@@ -25,10 +25,11 @@ var pro = {
 			if (targets.length > 0) {
 				// _.find(targets, (val) => creep.pos.getRangeTo(val)<=3)
 				let target = function(targets) {
-					clog('targets',targets)
-					for (let val in targets) {
+					clog('targets', targets)
+					for (let i = 0; i < targets.length; i++) {
+						let val = targets[i];
 						const range = creep.pos.getRangeTo(val);
-						clog(val,range)
+						clog(val, range)
 						// 脚下的CONTAINER
 						if (range <= 1) return val;
 						// 扩大成周边范围
