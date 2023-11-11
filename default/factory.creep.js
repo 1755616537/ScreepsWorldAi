@@ -17,7 +17,7 @@ const creepConfigs = {
 	'harvest': {
 		role: globalData.havester,
 		bodys: [WORK, CARRY, MOVE],
-		number: 1
+		number: 1,
 	},
 	'upgrader': {
 		role: globalData.upgrader,
