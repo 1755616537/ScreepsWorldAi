@@ -23,8 +23,15 @@ var pro = {
 				}
 			});
 			if (targets.length > 0) { // 需要维护的建筑数目 > 0
-				if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-					creep.moveTo(targets[0], {
+				let target = () => {
+					for (let val in targets) {
+						const range = creep.pos.getRangeTo(val);
+						if (range <= 3) return val;
+					}
+				}
+
+				if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(target, {
 						visualizePathStyle: {
 							stroke: '#ffffff'
 						}
