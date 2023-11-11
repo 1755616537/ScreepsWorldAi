@@ -1,9 +1,3 @@
-// havester 	采矿者 	开采能量 	carry 是否到达上限 	存入指定的结构
-// upgrader 	升级者 	取出能量 	carry 是否到达上限 	升级房间控制器
-// builder 	建造者 	取出能量 	carry 是否到达上限 	建造结构
-// carrier 	运输者 	取出能量 	carry 是否到达上限 	存入指定的结构
-// repairer 	维修者 	取出能量 	carry 是否到达上限 	修复受损的结构
-// defender 	防御者 	驻守指定区域 	房间内是否有入侵者 	攻击入侵者
 
 var pro = {
 
@@ -30,7 +24,10 @@ var pro = {
                 }
             }
         }
+	},
+	ALL: () => {
+		return _.filter(Game.creeps, (creep) => creep.memory.role == pathData.harvester);
 	}
 };
 
-global.factory.creep.roleHarvester = pro;
+global.factory.creep.Harvester = pro;
