@@ -19,7 +19,8 @@ var pro = {
 					if (!Memory.source) {
 						let memorySource = {};
 						const terrain = new Room.Terrain(globalData.roomName1);
-						for (let val in sources) {
+						for (let i = 0; i < sources.length; i++) {
+							let val = sources[i];
 							let num = 0;
 							let x_ini = val.pos.x - 1;
 							let x = x_ini;
