@@ -30,11 +30,12 @@ var pro = {
 							x = x_ini;
 							for (let i3 = 0; i3 < 3; i3++) {
 								if (terrain.get(x, y) != TERRAIN_MASK_WALL) {
-									let on = true;
 									// console.log(x, y)
+									let on = true;
 									let target = new RoomPosition(x, y, globalData.roomName1)
+									// 人造墙壁
 									const found = creep.room.lookForAt(LOOK_STRUCTURES, target);
-									console.log(found, ' found[1] +', found[1], "+")
+									// console.log(found, ' found[1] +', found[1], "+")
 									if (found.length && found[0].structureType == STRUCTURE_WALL) {
 										on = false;
 									}
