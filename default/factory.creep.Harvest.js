@@ -27,12 +27,13 @@ var pro = {
 				let target = () => {
 					for (let val in targets) {
 						const range = creep.pos.getRangeTo(val);
-						col(val)
+						clog(val)
 						if (range <= 3) return val;
 					}
 					return targets[0];
 				}
-				col(target)
+				clog(target)
+				clog(target())
 
 				if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(target, {
