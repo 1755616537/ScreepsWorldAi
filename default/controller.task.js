@@ -22,28 +22,28 @@ global.controller.task = {
 
 		for (let val in performList) {
 			switch (val.type) {
-				case pathData.havester:
+				case globalData.havester:
 					// 采集
 					break;
-				case pathData.upgrader:
+				case globalData.upgrader:
 					// 升级
 					break;
-				case pathData.builder:
+				case globalData.builder:
 					// 建造
 					break;
-				case pathData.carrier:
+				case globalData.carrier:
 					// 运输
 					break;
-				case pathData.repairer:
+				case globalData.repairer:
 					// 维修
 					break;
-				case pathData.defender:
+				case globalData.defender:
 					// 防御
 					break;
-				case pathData.attack:
+				case globalData.attack:
 					// 攻击
 					break;
-				case pathData.treat:
+				case globalData.treat:
 					// 治疗
 					break;
 				default:
@@ -62,28 +62,28 @@ global.controller.task = {
 		}
 
 		switch (task.type) {
-			case pathData.havester:
+			case globalData.havester:
 				// 采集
 				break;
-			case pathData.upgrader:
+			case globalData.upgrader:
 				// 升级
 				break;
-			case pathData.builder:
+			case globalData.builder:
 				// 建造
 				break;
-			case pathData.carrier:
+			case globalData.carrier:
 				// 运输
 				break;
-			case pathData.repairer:
+			case globalData.repairer:
 				// 维修
 				break;
-			case pathData.defender:
+			case globalData.defender:
 				// 防御
 				break;
-			case pathData.attack:
+			case globalData.attack:
 				// 攻击
 				break;
-			case pathData.treat:
+			case globalData.treat:
 				// 治疗
 				break;
 			default:
@@ -99,28 +99,28 @@ global.controller.task = {
 // 优先权限 判定 （空闲，计算距离，小兵类型，小兵属性）
 function priorityPower(creep, event) {
 	switch (event) {
-		case pathData.havester:
+		case globalData.havester:
 			// 采集
 			break;
-		case pathData.upgrader:
+		case globalData.upgrader:
 			// 升级
 			break;
-		case pathData.builder:
+		case globalData.builder:
 			// 建造
 			break;
-		case pathData.carrier:
+		case globalData.carrier:
 			// 运输
 			break;
-		case pathData.repairer:
+		case globalData.repairer:
 			// 维修
 			break;
-		case pathData.defender:
+		case globalData.defender:
 			// 防御
 			break;
-		case pathData.attack:
+		case globalData.attack:
 			// 攻击
 			break;
-		case pathData.treat:
+		case globalData.treat:
 			// 治疗
 			break;
 		default:
