@@ -22,5 +22,38 @@ global.globalData = {
 	// 自动分配矿区
 	AutomaticAssign: true,
 	// 主房间名称
-	roomName1:'W12N4'
+	roomName1: 'W12N4',
+	// 角色配置
+	creepConfigs: {
+		// 采集者
+		'harvest': {
+			bodys: [WORK, WORK, CARRY, MOVE],
+			number: 2,
+		},
+		// 升级者
+		'upgrader': {
+			bodys: [WORK, WORK, CARRY, MOVE],
+			number: 2
+		},
+		// 建造者
+		'builder': {
+			bodys: [WORK, WORK, CARRY, MOVE],
+			number: 2
+		},
+		// 运输者
+		'carrier': {
+			bodys: [WORK, CARRY, CARRY, MOVE],
+			number: 2
+		},
+		// 维修者
+		'repairer': {
+			bodys: [WORK, WORK, CARRY, MOVE],
+			number: 2
+		},
+		// 防御者
+		'defender': {
+			bodys: [WORK, WORK, CARRY, MOVE],
+			number: 2
+		}
+	}
 }

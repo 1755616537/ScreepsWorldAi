@@ -13,7 +13,8 @@ global.controller.creep = {
 		const builders = factory.creep.Builder.ALL();
 		const carriers = factory.creep.Carrier.ALL();
 		//console.log('Harvesters: ' + harvesters.length);
-		const controller_level = factory.spawns.get(1).room.controller.level; // 查看控制器等级
+		// 查看控制器等级
+		const controller_level = factory.spawns.get(1).room.controller.level;
 		//console.log('controller:' + factory.spawns.get(1).room.controller.level)
 
 
@@ -29,56 +30,26 @@ global.controller.creep = {
 					opacity: 0.8
 				});
 		} else {
-			// 生产 harvester
-			if (harvests.length < 2) {
-				let newName = globalData.harvest + Game.time;
-				let returnData = factory.spawns.get(1).spawnCreep([WORK, WORK, CARRY, MOVE], newName, {
-					memory: {
-						role: globalData.harvest
-					}
-				});
-				if (returnData == OK) {
-					console.log('生成新的 采集者: ' + newName);
-				}
+			// 生产 采集
+			if (harvests.length < globalData.creepConfigs.harvest.number) {
+				factory.creep.addHarvest();
 			}
 
-			// 生产 carrier
-			if (harvests.length >= 2 && carriers.length < 2) {
-				let newName = globalData.carrier + Game.time;
-				let returnData = factory.spawns.get(1).spawnCreep([WORK, CARRY, CARRY, MOVE], newName, {
-					memory: {
-						role: globalData.carrier
-					}
-				});
-				if (returnData == OK) {
-					console.log('生成新的 运输者:' + newName);
-				}
+			// 生产 运输 前提最少采集2个
+			if (harvests.length >= globalData.creepConfigs.harvest.number && carriers.length < globalData
+				.creepConfigs.carrier.number) {
+				factory.creep.addCarrier();
 			}
 
-			// 生产 upgrader
-			if (harvests.length >= 2 && upgraders.length < 2) {
-				let newName = globalData.upgrader + Game.time;
-				let returnData = factory.spawns.get(1).spawnCreep([WORK, WORK, CARRY, MOVE], newName, {
-					memory: {
-						role: globalData.upgrader
-					}
-				});
-				if (returnData == OK) {
-					console.log('生成新的 升级者: ' + newName);
-				}
+			// 生产 升级 前提最少采集2个
+			if (harvests.length >= globalData.creepConfigs.harvest.number && upgraders.length < globalData
+				.creepConfigs.upgrader.number) {
+				factory.creep.addUpgrader();
 			}
 
-			// 生产 builder
-			if (controller_level >= 2 && builders.length < 2) {
-				let newName = globalData.builder + Game.time;
-				let returnData = factory.spawns.get(1).spawnCreep([WORK, WORK, CARRY, MOVE], newName, {
-					memory: {
-						role: globalData.builder
-					}
-				});
-				if (returnData == OK) {
-					console.log('生成新的 建造者:' + newName);
-				}
+			// 生产 建造 前提控制器2等级
+			if (controller_level >= 2 && builders.length < globalData.creepConfigs.builder.number) {
+				factory.creep.addBuilder();
 			}
 		}
 
