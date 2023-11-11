@@ -10,8 +10,12 @@ var pro = {
 			if (globalData.AutomaticAssign) {
 				// 没有分配到的Source
 				if (!creep.memory.harvestSourceID) {
-					let sources = creep.room.find(FIND_SOURCES);
 					// 根据9*9计算矿区地形分配数量 只计算一次缓存后固定
+					try {
+						if (!Game.memory.source) {}
+					} catch (e) {
+						Game.memory.source = {};
+					}
 					if (!Game.memory.source) {
 						let memorySource = {};
 						const terrain = new Room.Terrain(globalData.roomName1);
