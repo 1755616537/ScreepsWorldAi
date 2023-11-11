@@ -21,7 +21,8 @@ var pro = {
 						const terrain = new Room.Terrain(globalData.roomName1);
 						for (let val in sources) {
 							let num = 0;
-							let x_ini = x = val.pos.x - 1;
+							let x_ini = val.pos.x - 1;
+							let x = x_ini;
 							let y = val.pos.y - 1;
 							for (let i = 0; i < 3; i++) {
 								x = x_ini;
