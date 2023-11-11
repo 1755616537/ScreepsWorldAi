@@ -10,14 +10,27 @@ global.controller.creep = {
 				// 采集者
 				if (Memory.creeps[name].role == globalData.harvest) {
 					// 从矿区记录删除
-					let memorySource = Memory.source;
-					let memorySourceList = memorySource[Memory.creeps[name].harvestSourceID].list;
-					for (let i = 0; i < memorySourceList.length; i++) {
-						if (memorySourceList[i2] == name) {
-							Memory.task.performList.splice(i2, 1);
-							break
+					let harvestSourceID;
+					let on = false;
+					// 如果没有合法记录会不存在harvestSourceID,报错需要捕获
+					try {
+						harvestSourceID = Memory.creeps[name].harvestSourceID;
+						on = true;
+					} catch (e) {
+						//TODO handle the exception
+					}
+					// 是否合法记录了
+					if (on) {
+						let memorySource = Memory.source;
+						let memorySourceList = memorySource[harvestSourceID].list;
+						for (let i = 0; i < memorySourceList.length; i++) {
+							if (memorySourceList[i2] == name) {
+								Memory.task.performList.splice(i2, 1);
+								break
+							}
 						}
 					}
+
 				}
 
 				delete Memory.creeps[name];
