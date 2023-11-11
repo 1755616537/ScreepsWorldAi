@@ -52,14 +52,15 @@ var pro = {
 						// 找到空闲矿区
 						if (memorySource[val].list.length < memorySource[val].num) {
 							// 把creep ID记录到矿区
-							memorySource[val].list.push(creep.memory.role);
+							memorySource[val].list.push(creep.id);
 							// 把矿区ID记录到creep
 							creep.memory.harvestSourceID = val;
 							break;
 						}
 					}
 				}
-
+				
+				// 找出已经分配的矿区
 				for (let i = 0; i < sources.length; i++) {
 					if (sources[i].id == creep.memory.harvestSourceID) {
 						source = sources[i];
@@ -67,7 +68,7 @@ var pro = {
 					}
 				}
 				if (source.id != creep.memory.harvestSourceID) {
-					Throw.Error('creep ', creep.id, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
+					Throw.Error('creep ', creep.name, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
 				}
 			}
 
