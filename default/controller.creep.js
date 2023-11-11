@@ -21,6 +21,7 @@ global.controller.creep = {
 					}
 					// 是否合法记录了
 					if (on) {
+						console.log(harvestSourceID)
 						let memorySource = Memory.source;
 						let memorySourceList = memorySource[harvestSourceID].list;
 						for (let i = 0; i < memorySourceList.length; i++) {
