@@ -4,6 +4,7 @@ var pro = {
 	run: function(creep) {
 		if (creep.store.getFreeCapacity() > 0) { // 背包未满 采矿
 			let sources = creep.room.find(FIND_SOURCES);
+			// 默认去采集第一个source
 			let source = sources.length > 0 ? sources[0] : {};
 
 			// 自动分配矿区
