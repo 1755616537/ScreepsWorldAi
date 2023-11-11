@@ -22,12 +22,13 @@ var pro = {
 						structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
 				}
 			});
-			if (targets.length > 0) { // 需要维护的建筑数目 > 0
+			if (targets.length > 0) {
 				let target = () => {
 					for (let val in targets) {
 						const range = creep.pos.getRangeTo(val);
 						if (range <= 3) return val;
 					}
+					return targets[0];
 				}
 
 				if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
