@@ -1,6 +1,6 @@
 global.globalData = {
 	// 总输出
-	clog: true,
+	clog: false,
 	// 基地1名称
 	SpawnName1: 'Spawn1',
 	// 基地2名称
