@@ -24,7 +24,7 @@ global.controller.creep = {
 		if (factory.spawns.get(1).spawning) { // 孵化过程可视化
 			var spawningCreep = Game.creeps[factory.spawns.get(1).spawning.name];
 			factory.spawns.get(1).room.visual.text(
-				'🛠️' + spawningCreep.memory.role,
+				'孵化🛠️' + spawningCreep.memory.role,
 				factory.spawns.get(1).pos.x + 1,
 				factory.spawns.get(1).pos.y, {
 					align: 'left',
@@ -33,44 +33,44 @@ global.controller.creep = {
 		} else {
 			// harvester少于2的时候生产harvester
 			if (harvests.length < 2) {
-				var newName = pathData.harvest + Game.time;
+				var newName = globalData.harvest + Game.time;
 				console.log('生成新的 采集者: ' + newName);
 				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], newName, {
 					memory: {
-						role: pathData.harvest
+						role: globalData.harvest
 					}
 				}); // 指定relo属性
 			}
 			
 			// 生产Carrier
 			if (carriers.length < 2) {
-				var nameBuilder = pathData.carrier + Game.time;
+				var nameBuilder = globalData.carrier + Game.time;
 				console.log('生成新的 运输者:' + nameBuilder);
 				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], nameBuilder, {
 					memory: {
-						role: pathData.carrier
+						role: globalData.carrier
 					}
 				});
 			}
 
 			// harvester等于2的时候生产 upgrader
 			if (harvests.length >= 2 && upgraders.length < 2) {
-				var newName = pathData.upgrader + Game.time;
+				var newName = globalData.upgrader + Game.time;
 				console.log('生成新的 升级者: ' + newName);
 				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], newName, {
 					memory: {
-						role: pathData.upgrader
+						role: globalData.upgrader
 					}
 				}); // 指定relo属性
 			}
 
 			// 生产builder
 			if (controller_level >= 2 && builders.length < 2) {
-				var nameBuilder = pathData.builder + Game.time;
+				var nameBuilder = globalData.builder + Game.time;
 				console.log('生成新的 建造者:' + nameBuilder);
 				factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE], nameBuilder, {
 					memory: {
-						role: pathData.builder
+						role: globalData.builder
 					}
 				});
 			}
@@ -80,16 +80,16 @@ global.controller.creep = {
 
 		for (var name in Game.creeps) {
 			var creep = Game.creeps[name];
-			if (creep.memory.role == pathData.harvest) {
+			if (creep.memory.role == globalData.harvest) {
 				factory.creep.Harvest.run(creep);
 			}
-			if (creep.memory.role == pathData.upgrader) {
+			if (creep.memory.role == globalData.upgrader) {
 				factory.creep.Upgrader.run(creep);
 			}
-			if (creep.memory.role == pathData.builder) {
+			if (creep.memory.role == globalData.builder) {
 				factory.creep.Builder.run(creep);
 			}
-			if (creep.memory.role == pathData.carrier) {
+			if (creep.memory.role == globalData.carrier) {
 				factory.creep.Carrier.run(creep);
 			}
 		}

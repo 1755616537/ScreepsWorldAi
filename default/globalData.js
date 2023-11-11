@@ -1,4 +1,4 @@
-global.pathData = {
+global.globalData = {
 	// 总输出
 	'clog':true,
 	// 基地1名称

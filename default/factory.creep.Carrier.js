@@ -42,7 +42,7 @@ var pro = {
 		}
 	},
 	ALL: () => {
-		return _.filter(Game.creeps, (creep) => creep.memory.role == pathData.carrier);
+		return _.filter(Game.creeps, (creep) => creep.memory.role == globalData.carrier);
 	}
 };
 

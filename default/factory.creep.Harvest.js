@@ -34,7 +34,7 @@ var pro = {
 		}
 	},
 	ALL: () => {
-		return _.filter(Game.creeps, (creep) => creep.memory.role == pathData.harvest);
+		return _.filter(Game.creeps, (creep) => creep.memory.role == globalData.harvest);
 	}
 };
 

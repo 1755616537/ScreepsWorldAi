@@ -62,7 +62,7 @@ var pro = {
 		}
 	},
 	ALL: () => {
-		return _.filter(Game.creeps, (creep) => creep.memory.role == pathData.builder);
+		return _.filter(Game.creeps, (creep) => creep.memory.role == globalData.builder);
 	}
 };
 

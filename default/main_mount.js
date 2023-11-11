@@ -2,7 +2,7 @@
 global.factory={};
 global.controller={}
 // -------------------------------全局数据
-require('pathData');
+require('globalData');
 // -------------------------------工具
 require("utils");
 // -------------------------------工厂模块

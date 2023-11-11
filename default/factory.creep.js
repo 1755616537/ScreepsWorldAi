@@ -14,33 +14,33 @@
 
 // 角色配置
 const creepConfigs = {
-	'havester': {
-		role: pathData.havester,
+	'harvest': {
+		role: globalData.havester,
 		bodys: [WORK, CARRY, MOVE],
 		number: 1
 	},
 	'upgrader': {
-		role: pathData.upgrader,
+		role: globalData.upgrader,
 		bodys: [WORK, CARRY, MOVE],
 		number: 1
 	},
 	'builder': {
-		role: pathData.builder,
+		role: globalData.builder,
 		bodys: [WORK, CARRY, MOVE],
 		number: 1
 	},
 	'carrier': {
-		role: pathData.carrier,
+		role: globalData.carrier,
 		bodys: [WORK, CARRY, MOVE],
 		number: 1
 	},
 	'repairer': {
-		role: pathData.repairer,
+		role: globalData.repairer,
 		bodys: [WORK, CARRY, MOVE],
 		number: 1
 	},
 	'defender': {
-		role: pathData.defender,
+		role: globalData.defender,
 		bodys: [WORK, CARRY, MOVE],
 		number: 1
 	}

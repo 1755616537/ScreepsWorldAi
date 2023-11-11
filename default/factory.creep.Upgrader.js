@@ -32,7 +32,7 @@ let pro = {
 		}
 	},
 	ALL: () => {
-		return _.filter(Game.creeps, (creep) => creep.memory.role == pathData.upgrader);
+		return _.filter(Game.creeps, (creep) => creep.memory.role == globalData.upgrader);
 	}
 };
 
