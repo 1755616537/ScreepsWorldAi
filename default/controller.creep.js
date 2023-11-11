@@ -62,7 +62,7 @@ global.controller.creep = {
 			if (harvests.length < 2) {
 				let newName = globalData.harvest + Game.time;
 				console.log('生成新的 采集者: ' + newName);
-				factory.spawns.get(1).spawnCreep([WORK, WORK, WORK, WORK, WORK, WORK, CARRY, MOVE], newName, {
+				factory.spawns.get(1).spawnCreep([WORK, WORK, WORK, CARRY, MOVE], newName, {
 					memory: {
 						role: globalData.harvest
 					}
