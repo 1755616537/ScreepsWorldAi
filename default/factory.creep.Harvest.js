@@ -34,9 +34,9 @@ var pro = {
 									// console.log(x, y)
 									let target = new RoomPosition(x, y, globalData.roomName1)
 									const found = creep.room.lookForAt(LOOK_STRUCTURES, target);
+									console.log('found[1]',found[1])
 									if (found.length && found[1] == '(constructedWall)') {
 										// console.log('found', found)
-										console.log('found[1]',found[1])
 										on = false;
 									}
 									// const look = creep.room.lookAt(target);
