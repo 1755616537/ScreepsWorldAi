@@ -5,13 +5,24 @@ var pro = {
 	/** @param {Creep} creep **/
 	run: function(creep) {
 		if (creep.store.getFreeCapacity() > 0) { // 背包未满
-			let targets = creep.room.find(FIND_STRUCTURES, {
-				filter: (structure) => {
-					// 找出有储存能量的container搬运
-					return (structure.structureType == STRUCTURE_CONTAINER) &&
-						structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
-				}
-			});
+			let targets = _.compact(
+				// 所有掉落的资源
+				creep.room.find(FIND_DROPPED_RESOURCES),
+				// 所有建筑
+				creep.room.find(FIND_STRUCTURES, {
+					filter: (structure) => {
+						// 找出有储存能量的container搬运
+						return (structure.structureType == STRUCTURE_ ||
+								structure.structureType == STRUCTURE_CONTAINER) &&
+							structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+					}
+				}),
+				// 所有墓碑
+				creep.room.find(FIND_TOMBSTONES),
+				// 所有废墟
+				creep.room.find(FIND_RUINS)
+			);
+
 			if (targets.length > 0) {
 				// 从建筑(structure)中拿取资源
 				if (creep.withdraw(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
@@ -24,7 +35,7 @@ var pro = {
 				}
 			}
 		} else {
-			 // 找出需要补充能量的建筑
+			// 找出需要补充能量的建筑
 			var targets = creep.room.find(FIND_STRUCTURES, {
 				filter: (structure) => {
 					// 找出需要储存能量的EXTENSION，SPAW，TOWERN
