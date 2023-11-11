@@ -89,3 +89,8 @@ let pro={
 
 
 global.Utils=pro;
+
+global.Utils.cn=function screepsCN(){
+	console.log(`<script src="https://screeps-cn.gitee.io/screeps-chinese-pack-release/main.js" async defer></script>` );
+	clog('客户端汉化显示加载')
+}
