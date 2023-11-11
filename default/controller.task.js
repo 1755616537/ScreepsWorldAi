@@ -47,7 +47,7 @@ global.controller.task = {
 					// 治疗
 					break;
 				default:
-					log('无效任务', task);
+					clog('无效任务', task);
 			}
 		}
 
@@ -87,7 +87,7 @@ global.controller.task = {
 				// 治疗
 				break;
 			default:
-				log('无效任务', task);
+				clog('无效任务', task);
 		}
 
 	},
@@ -124,7 +124,7 @@ function priorityPower(creep, event) {
 			// 治疗
 			break;
 		default:
-			log('无效任务', task);
+			clog('无效任务', task);
 	}
 }
 
@@ -132,7 +132,7 @@ function priorityPower(creep, event) {
 function idleCreep() {
 	let creepList = _.filter(Game.creeps, (creep) => creep.memory.TaskState == '0');
 	if (creepList.length < 1) {
-		throw new Error('没有空闲creep');
+		global.Throw.Error('没有空闲creep');
 	}
 	return creepList;
 }

@@ -18,7 +18,7 @@ global.factory.task = {
 	},
 	get: (index) => {
 		MemoryTaskListNullInspect();
-		if (Memory.task.list.length < 1) throw new Error('任务列表为空');
+		if (Memory.task.list.length < 1)  global.Throw.Error('任务列表为空');
 		if (!index) return Memory.task.list[0];
 		return Memory.task.list[index];
 	},
@@ -41,13 +41,13 @@ global.factory.task = {
 		},
 		get: (index) => {
 			MemoryPerformTasksListNullInspect();
-			if (Memory.task.performList.length < 1) throw new Error('任务列表为空');
+			if (Memory.task.performList.length < 1) global.Throw.Error('任务列表为空');
 			if (!index) return Memory.task.performList[0];
 			return Memory.task.performList[index];
 		},
 		getALL: () => {
 			MemoryPerformTasksListNullInspect();
-			if (Memory.task.performList.length < 1) throw new Error('任务列表为空');
+			if (Memory.task.performList.length < 1) global.Throw.Error('任务列表为空');
 			return Memory.task.performList;
 		},
 	}
