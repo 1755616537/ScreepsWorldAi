@@ -15,9 +15,10 @@ var pro = {
 			var targets = creep.room.find(FIND_STRUCTURES, { //找出需要补充能量的建筑
 				filter: (structure) => {
 					return (
-							structure.structureType == STRUCTURE_EXTENSION ||
-							structure.structureType == STRUCTURE_SPAWN ||
-							structure.structureType == STRUCTURE_TOWER) &&
+							// structure.structureType == STRUCTURE_EXTENSION ||
+							// structure.structureType == STRUCTURE_SPAWN ||
+							// structure.structureType == STRUCTURE_TOWER ||
+							structure.structureType == STRUCTURE_CONTAINER) &&
 						structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
 				}
 			});
