@@ -36,8 +36,10 @@ var pro = {
 								y++;
 							}
 							// 允许采集数量
-							memorySource[val.id].harvestNum = num;
-							memorySource[val.id].list = [];
+							memorySource[val.id] = {
+								list: [],
+								harvestNum: num
+							};
 						}
 						Memory.source = memorySource;
 					}
