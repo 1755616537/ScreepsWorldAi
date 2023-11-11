@@ -9,42 +9,43 @@ var pro = {
 			// 自动分配矿区
 			if (globalData.AutomaticAssign) {
 				// 没有分配到的Source
-				if (!creep.memory.harvestSourceID) {
-					// 根据9*9计算矿区地形分配数量 只计算一次缓存后固定
-					// try {
-					// 	if (!Memory.source) {}
-					// } catch (e) {
-					// 	Memory.source = {};
-					// }
-					if (!Memory.source) {
-						let memorySource = {};
-						const terrain = new Room.Terrain(globalData.roomName1);
-						for (let i = 0; i < sources.length; i++) {
-							let val = sources[i];
-							let num = 0;
-							let x_ini = x = val.pos.x - 1;
-							let y = val.pos.y - 1;
-							for (let i = 0; i < 3; i++) {
-								x = x_ini;
-								for (let i2 = 0; i2 < 3; i2++) {
-									if (terrain.get(x, y) != TERRAIN_MASK_WALL) {
-										num++;
-									}
-									x++;
+				
+				// 根据9*9计算矿区地形分配数量 只计算一次缓存后固定
+				// try {
+				// 	if (!Memory.source) {}
+				// } catch (e) {
+				// 	Memory.source = {};
+				// }
+				if (!Memory.source) {
+					let memorySource = {};
+					const terrain = new Room.Terrain(globalData.roomName1);
+					for (let i = 0; i < sources.length; i++) {
+						let val = sources[i];
+						let num = 0;
+						let x_ini = x = val.pos.x - 1;
+						let y = val.pos.y - 1;
+						for (let i = 0; i < 3; i++) {
+							x = x_ini;
+							for (let i2 = 0; i2 < 3; i2++) {
+								if (terrain.get(x, y) != TERRAIN_MASK_WALL) {
+									num++;
 								}
-								y++;
+								x++;
 							}
-
-							memorySource[val.id] = {
-								// 允许采集记录列表
-								list: [],
-								// 允许采集数量
-								harvestNum: num
-							};
+							y++;
 						}
-						Memory.source = memorySource;
+				
+						memorySource[val.id] = {
+							// 允许采集记录列表
+							list: [],
+							// 允许采集数量
+							harvestNum: num
+						};
 					}
-
+					Memory.source = memorySource;
+				}
+				
+				if (!creep.memory.harvestSourceID) {
 					// 找出没有被分配完的矿区
 					let memorySource = Memory.source;
 					for (let val in memorySource) {
