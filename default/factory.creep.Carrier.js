@@ -7,20 +7,19 @@ var pro = {
 		if (creep.store.getFreeCapacity() > 0) { // 背包未满
 			let targets = _.compact(
 				// 所有掉落的资源
-				creep.room.find(FIND_DROPPED_RESOURCES),
+				// creep.room.find(FIND_DROPPED_RESOURCES),
 				// 所有建筑
 				creep.room.find(FIND_STRUCTURES, {
 					filter: (structure) => {
 						// 找出有储存能量的container搬运
-						return (structure.structureType == STRUCTURE_ ||
-								structure.structureType == STRUCTURE_CONTAINER) &&
+						return (structure.structureType == STRUCTURE_CONTAINER) &&
 							structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
 					}
 				}),
 				// 所有墓碑
 				creep.room.find(FIND_TOMBSTONES),
 				// 所有废墟
-				creep.room.find(FIND_RUINS)
+				// creep.room.find(FIND_RUINS)
 			);
 
 			if (targets.length > 0) {
