@@ -19,6 +19,8 @@ global.globalData = {
 	repairer: 'repairer',
 	// 防御者ID
 	defender: 'defender',
-	// 1个采集者对应一个矿自动分配
-	AutomaticAssign1v1: true,
+	// 自动分配矿区
+	AutomaticAssign: true,
+	// 主房间名称
+	roomName1:'W12N4'
 }
