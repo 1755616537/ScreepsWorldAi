@@ -34,6 +34,7 @@ var pro = {
 										.roomName1));
 									let on = false;
 									look.forEach(function(lookObject) {
+										console.log(lookObject.type)
 										// 建筑
 										if (lookObject.type != LOOK_CONSTRUCTION_SITES) {
 											on = true;
