@@ -10,6 +10,8 @@ module.exports.loop = function() {
 	// controller.task.run();
 	
 	controller.creep.run();
+	
+	clog('使用的 CPU 时间总量 ',Game.cpu.getUsed())
 }
 
 // 缓存的种类
