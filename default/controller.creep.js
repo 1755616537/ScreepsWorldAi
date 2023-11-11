@@ -12,7 +12,7 @@ global.controller.creep = {
 			}
 		}
 
-		var harvests = factory.creep.harvest.ALL();
+		var harvests = factory.creep.Harvest.ALL();
 		var upgraders = factory.creep.Upgrader.ALL();
 		var builders = factory.creep.Builder.ALL();
 		var carriers = factory.creep.Carrier.ALL();
