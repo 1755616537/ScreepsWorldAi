@@ -36,29 +36,24 @@ var pro = {
 				}
 			}
 		} else { // 非building状态的时候， 到source旁边并采集
-			// 能量源对象集
-			var sources = creep.room.find(FIND_SOURCES);
-			// 采集能量
-			if (creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
-				// 移动到能量源旁边
-				creep.moveTo(sources[1], {
-					visualizePathStyle: {
-						stroke: '#ffaa00'
-					}
-				});
+			let targets = creep.room.find(FIND_STRUCTURES, {
+				filter: (structure) => {
+					// 找出有储存能量的container搬运
+					return (structure.structureType == STRUCTURE_CONTAINER) &&
+						structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+				}
+			});
+			if (targets.length > 0) {
+				// 从建筑(structure)中拿取资源
+				if (creep.withdraw(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+					// 向目标移动
+					creep.moveTo(targets[0], {
+						visualizePathStyle: {
+							stroke: '#ffaa00'
+						}
+					});
+				}
 			}
-
-			// 从建筑里面取能量
-			// if (creep.withdraw(Structure, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-			// 寻找全部建筑
-			// var structures = creep.room.find(FIND_STRUCTURES);
-			// 移动到建筑旁边
-			// 	creep.moveTo(structures[0], {
-			// 		visualizePathStyle: {
-			// 			stroke: '#ffaa00'
-			// 		}
-			// 	});
-			// }
 		}
 	},
 	ALL: () => {
