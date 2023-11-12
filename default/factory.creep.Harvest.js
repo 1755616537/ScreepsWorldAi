@@ -53,10 +53,23 @@ var pro = {
 
 										// 自动建造对应数量的CONTAINER
 										if (globalData.AutomaticAssignHarvestCONTAINER) {
-											// 指定位置创建一个新的 ConstructionSite
-											let returnData = Game.rooms[globalData.roomName1]
-												.createConstructionSite(x, y, STRUCTURE_CONTAINER);
-											if (returnData != OK) clog('自动建造对应数量的CONTAINER ', returnData);
+											let on = true;
+											// 已经存在有建筑了跳过
+											if (found.length) {
+												on = false;
+
+												// 已经存在CONTAINER就跳过
+												// if (found[0].structureType != STRUCTURE_CONTAINER) {
+												// 	on = false;
+												// }
+											}
+											if (on) {
+												// 指定位置创建一个新的 ConstructionSite
+												let returnData = Game.rooms[globalData.roomName1]
+													.createConstructionSite(x, y, STRUCTURE_CONTAINER);
+												if (returnData != OK) clog(x, y, '自动建造对应数量的CONTAINER ',
+													returnData);
+											}
 										}
 									};
 								}
