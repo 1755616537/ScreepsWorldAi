@@ -56,6 +56,7 @@ var pro = {
 											let on = true;
 											// 已经存在有建筑了跳过
 											if (found.length) {
+												console.log(found)
 												// on = false;
 
 												// 已经存在CONTAINER就跳过
