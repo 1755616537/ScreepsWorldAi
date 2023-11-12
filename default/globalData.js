@@ -64,7 +64,7 @@ global.globalData = {
 				list: [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE],
 				totalEnergyRequired: 300
 			},
-			number: 2
+			number: 1
 		},
 		// 建造者
 		'builder': {
