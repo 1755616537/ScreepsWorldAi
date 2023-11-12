@@ -108,8 +108,16 @@ var pro = {
 
 				if (!creep.memory.harvestSourceID) {
 					// 找出没有被分配完的矿区
+					let memorySourceListNull = null;
 					for (let val in memorySource) {
-						// 找到空闲矿区
+						if (memorySource[val].list.length < 1) {
+							memorySourceListNull = val;
+							break;
+						}
+					}
+					for (let val in memorySource) {
+						// 找到空闲矿区，优先分配给没有分配数量的矿区
+						if (memorySourceListNull && val != memorySourceListNull) continue;
 						if (memorySource[val].list.length < memorySource[val].harvestNum) {
 							// 把creep ID记录到矿区
 							memorySource[val].list.push(creep.name);
