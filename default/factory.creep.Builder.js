@@ -43,7 +43,7 @@ var pro = {
 			const harvests = factory.creep.Harvest.ALL();
 			if (harvests.length < 2) {
 				// 采集死完后,自己去采集
-				let targets = creep.room.find(FIND_SOURCES);
+				let targets = creep.room.findClosestByPath(FIND_SOURCES);
 				if (creep.harvest(targets[0]) == ERR_NOT_IN_RANGE) {
 					// 向目标移动
 					creep.moveTo(targets[0], {
@@ -53,7 +53,7 @@ var pro = {
 					});
 				}
 			} else {
-				let targets = creep.room.find(FIND_STRUCTURES, {
+				let targets = creep.room.findClosestByPath(FIND_STRUCTURES, {
 					filter: (structure) => {
 						// 找出有储存能量的container搬运
 						return (structure.structureType == STRUCTURE_CONTAINER ||
