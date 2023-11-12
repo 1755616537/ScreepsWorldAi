@@ -33,7 +33,7 @@ global.globalData = {
 			bodys: {
 				list: [WORK, WORK, CARRY, MOVE],
 				// 总能量数量（达到该植才允许生产,可以设比生产所需高点达到预留能量的效果,避免能量直接用完）
-				totalEnergyRequired: 100
+				totalEnergyRequired: 300
 			},
 			// 缩减版
 			bodysMinus: {
@@ -43,7 +43,7 @@ global.globalData = {
 			// 加强版
 			bodysPlus: {
 				list: [WORK, WORK, WORK, CARRY, MOVE],
-				totalEnergyRequired: 100
+				totalEnergyRequired: 300
 			},
 			// 总上限数量
 			number: 2,
@@ -54,15 +54,15 @@ global.globalData = {
 		'upgrader': {
 			bodys: {
 				list: [WORK, WORK, CARRY, MOVE],
-				totalEnergyRequired: 100
+				totalEnergyRequired: 300
 			},
 			bodysMinus: {
 				list: [WORK, CARRY, MOVE],
-				totalEnergyRequired: 100
+				totalEnergyRequired: 300
 			},
 			bodysPlus: {
 				list: [WORK, WORK, WORK, CARRY, MOVE],
-				totalEnergyRequired: 100
+				totalEnergyRequired: 300
 			},
 			number: 2
 		},
@@ -70,15 +70,15 @@ global.globalData = {
 		'builder': {
 			bodys: {
 				list: [WORK, WORK, CARRY, MOVE],
-				totalEnergyRequired: 100
+				totalEnergyRequired: 300
 			},
 			bodysMinus: {
 				list: [WORK, CARRY, MOVE],
-				totalEnergyRequired: 100
+				totalEnergyRequired: 300
 			},
 			bodysPlus: {
 				list: [WORK, WORK, WORK, CARRY, MOVE],
-				totalEnergyRequired: 100
+				totalEnergyRequired: 300
 			},
 			number: 2
 		},
@@ -86,15 +86,15 @@ global.globalData = {
 		'carrier': {
 			bodys: {
 				list: [WORK, CARRY, CARRY, MOVE],
-				totalEnergyRequired: 100
+				totalEnergyRequired: 300
 			},
 			bodysMinus: {
 				list: [WORK, CARRY, MOVE],
-				totalEnergyRequired: 100
+				totalEnergyRequired: 300
 			},
 			bodysPlus: {
 				list: [WORK, CARRY, CARRY, CARRY, MOVE],
-				totalEnergyRequired: 100
+				totalEnergyRequired: 300
 			},
 			number: 2
 		},
@@ -102,15 +102,15 @@ global.globalData = {
 		'repairer': {
 			bodys: {
 				list: [WORK, WORK, CARRY, MOVE],
-				totalEnergyRequired: 100
+				totalEnergyRequired: 300
 			},
 			bodysMinus: {
 				list: [WORK, CARRY, MOVE],
-				totalEnergyRequired: 100
+				totalEnergyRequired: 300
 			},
 			bodysPlus: {
 				list: [WORK, WORK, WORK, CARRY, MOVE],
-				totalEnergyRequired: 100
+				totalEnergyRequired: 300
 			},
 			number: 1
 		},
@@ -118,15 +118,15 @@ global.globalData = {
 		'defender': {
 			bodys: {
 				list: [WORK, WORK, CARRY, MOVE],
-				totalEnergyRequired: 100
+				totalEnergyRequired: 300
 			},
 			bodysMinus: {
 				list: [WORK, CARRY, MOVE],
-				totalEnergyRequired: 100
+				totalEnergyRequired: 300
 			},
 			bodysPlus: {
 				list: [WORK, WORK, WORK, CARRY, MOVE],
-				totalEnergyRequired: 100
+				totalEnergyRequired: 300
 			},
 			number: 1
 		}
