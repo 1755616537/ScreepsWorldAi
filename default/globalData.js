@@ -32,31 +32,31 @@ global.globalData = {
 			bodys: [WORK, WORK, CARRY, MOVE],
 			number: 2,
 			// 自动分配数量（开启 AutomaticAssignHarvest可以根据最大支持数量动态更新采集者数量）
-			AutomaticAssignNum:true
+			AutomaticAssignNum: true
 		},
 		// 升级者
 		'upgrader': {
-			bodys: [WORK, WORK, CARRY, MOVE],
+			bodys: [WORK, CARRY, MOVE],
 			number: 2
 		},
 		// 建造者
 		'builder': {
-			bodys: [WORK, WORK, CARRY, MOVE],
+			bodys: [WORK, CARRY, MOVE],
 			number: 2
 		},
 		// 运输者
 		'carrier': {
-			bodys: [WORK, CARRY, CARRY, MOVE],
+			bodys: [WORK, CARRY, MOVE],
 			number: 2
 		},
 		// 维修者
 		'repairer': {
-			bodys: [WORK, WORK, CARRY, MOVE],
+			bodys: [WORK, CARRY, MOVE],
 			number: 1
 		},
 		// 防御者
 		'defender': {
-			bodys: [WORK, WORK, CARRY, MOVE],
+			bodys: [WORK, CARRY, MOVE],
 			number: 1
 		}
 	}
