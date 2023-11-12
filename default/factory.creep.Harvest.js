@@ -54,7 +54,7 @@ var pro = {
 										// 自动建造对应数量的CONTAINER
 										if(globalData.AutomaticAssignHarvestCONTAINER){
 											// 指定位置创建一个新的 ConstructionSite
-											Game.rooms.sim.createConstructionSite(targetPos, STRUCTURE_CONTAINER);
+											Game.rooms[globalData.roomName1].createConstructionSite(STRUCTURE_CONTAINER);
 										}
 									};
 								}
