@@ -22,6 +22,4 @@ module.exports.loop = function() {
 
 // 待完成程序:
 // .统一任务调度机制
-// .缓存find方法查找的内容（避免反复查询浪费CPU），在执行withdraw，transfer等改变地图上的对象的方法时才更新缓存
-// .寻路优化加缓存，避免撞车效果
 
