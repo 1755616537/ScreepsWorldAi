@@ -46,10 +46,12 @@ var pro = {
 						});
 					}
 				} else {
+					// 找不到可取资源的地方,先去存资源
 					transfer();
 				}
 			}
 		} else {
+			// 背包满了,先去存资源
 			transfer();
 		}
 	},
@@ -59,6 +61,7 @@ var pro = {
 };
 
 global.factory.creep.Carrier = pro;
+
 
 function transfer() {
 	// 找出需要补充能量的建筑
