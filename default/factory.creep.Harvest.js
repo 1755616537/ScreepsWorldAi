@@ -200,7 +200,7 @@ var pro = {
 			}
 			if (!target) {
 				// CONTAINER满了或者没有建
-				let targets = creep.room.find(FIND_STRUCTURES, {
+				target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
 					filter: (structure) => {
 						// 返回该存储的剩余可用容量大于0的CONTAINER
 						return (
@@ -210,9 +210,6 @@ var pro = {
 							structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
 					}
 				});
-				if (targets.length > 0) {
-					target = targets[0];
-				}
 			}
 			if (target) {
 				// 将资源从该 creep 转移至其他对象
