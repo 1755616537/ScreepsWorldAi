@@ -79,13 +79,24 @@ global.factory.creep = {
 		}
 	},
 	addHarvest: (harvests) => {
+		let bodys;
 		let newName = globalData.harvest + Game.time;
-		let bodys = globalData.creepConfigs.harvest.bodys.list;
 		// 当总creep数量小于1时,使用缩减版进行快速发展
-		if ( /*Object.keys(Game.creeps).length < 1 ||*/ (harvests && harvests.length < 1)) bodys = globalData
-			.creepConfigs
-			.harvest
-			.bodysMinus.list;
+		if ( /*Object.keys(Game.creeps).length < 1 ||*/ (harvests && harvests.length < 1)) {
+			if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.harvest.bodysMinus
+				.totalEnergyRequired) {
+				bodys = globalData.creepConfigs.harvest.bodysMinus.list;
+			} else {
+				return 'Minus 房间总能量数量未达到限制，无法生产';
+			}
+
+		}
+		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.harvest.bodys
+			.totalEnergyRequired) {
+			bodys = globalData.creepConfigs.harvest.bodys.list;
+		} else {
+			return '房间总能量数量未达到限制，无法生产';
+		}
 		let returnData = factory.spawns.get(1).spawnCreep(bodys,
 			newName, {
 				memory: {
@@ -98,7 +109,14 @@ global.factory.creep = {
 		return returnData
 	},
 	addCarrier: (carriers) => {
+		let bodys;
 		let newName = globalData.carrier + Game.time;
+		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.carrier.bodys
+			.totalEnergyRequired) {
+			bodys = globalData.creepConfigs.carrier.bodys.list;
+		} else {
+			return '房间总能量数量未达到限制，无法生产';
+		}
 		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.carrier.bodys.list,
 			newName, {
 				memory: {
@@ -111,7 +129,14 @@ global.factory.creep = {
 		return returnData
 	},
 	addUpgrader: (upgraders) => {
+		let bodys;
 		let newName = globalData.upgrader + Game.time;
+		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.upgrader.bodys
+			.totalEnergyRequired) {
+			bodys = globalData.creepConfigs.upgrader.bodys.list;
+		} else {
+			return '房间总能量数量未达到限制，无法生产';
+		}
 		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.upgrader.bodys.list,
 			newName, {
 				memory: {
@@ -124,7 +149,14 @@ global.factory.creep = {
 		return returnData
 	},
 	addBuilder: (builders) => {
+		let bodys;
 		let newName = globalData.builder + Game.time;
+		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.builder.bodys
+			.totalEnergyRequired) {
+			bodys = globalData.creepConfigs.builder.bodys.list;
+		} else {
+			return '房间总能量数量未达到限制，无法生产';
+		}
 		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.builder.bodys.list,
 			newName, {
 				memory: {
@@ -137,7 +169,14 @@ global.factory.creep = {
 		return returnData
 	},
 	addRepairer: (repairers) => {
+		let bodys;
 		let newName = globalData.repairer + Game.time;
+		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.repairer.bodys
+			.totalEnergyRequired) {
+			bodys = globalData.creepConfigs.repairer.bodys.list;
+		} else {
+			return '房间总能量数量未达到限制，无法生产';
+		}
 		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.repairer.bodys.list,
 			newName, {
 				memory: {
