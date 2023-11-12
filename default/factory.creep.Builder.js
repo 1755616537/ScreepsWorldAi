@@ -56,7 +56,7 @@ var pro = {
 				}
 				
 			} else {
-				let targets = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+				let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
 					filter: (structure) => {
 						// 找出有储存能量的container搬运
 						return (structure.structureType == STRUCTURE_CONTAINER ||
@@ -67,11 +67,11 @@ var pro = {
 					}
 				});
 				
-				if (targets.length > 0) {
+				if (target) {
 					// 从建筑(structure)中拿取资源
-					if (creep.withdraw(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+					if (creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 						// 向目标移动
-						creep.moveTo(targets[0], {
+						creep.moveTo(target, {
 							visualizePathStyle: {
 								stroke: '#ffaa00'
 							}
