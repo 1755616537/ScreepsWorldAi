@@ -64,10 +64,10 @@ global.controller.creep = {
 					}
 				} else {
 					// 默认顺序生产
-					addUpgrader(upgraders);
-					addBuilder(builders, controller_level);
 					addCarrier(carriers);
+					addBuilder(builders, controller_level);
 					addRepairer(repairers);
+					addUpgrader(upgraders);
 				}
 			}
 		}
