@@ -78,9 +78,12 @@ global.factory.creep = {
 			}
 		}
 	},
-	addHarvest: () => {
+	addHarvest: (harvests) => {
 		let newName = globalData.harvest + Game.time;
-		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.harvest.bodys,
+		let bodys = globalData.creepConfigs.harvest.bodys;
+		// 当总creep数量小于1时,使用缩减版进行快速发展
+		if (Object.keys(Game.creeps).length < 1) bodys = globalData.creepConfigs.harvest.bodysMinus;
+		let returnData = factory.spawns.get(1).spawnCreep(bodys,
 			newName, {
 				memory: {
 					role: globalData.harvest
@@ -91,7 +94,7 @@ global.factory.creep = {
 		}
 		return returnData
 	},
-	addCarrier: () => {
+	addCarrier: (carriers) => {
 		let newName = globalData.carrier + Game.time;
 		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.carrier.bodys,
 			newName, {
@@ -104,7 +107,7 @@ global.factory.creep = {
 		}
 		return returnData
 	},
-	addUpgrader: () => {
+	addUpgrader: (upgraders) => {
 		let newName = globalData.upgrader + Game.time;
 		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.upgrader.bodys,
 			newName, {
@@ -117,7 +120,7 @@ global.factory.creep = {
 		}
 		return returnData
 	},
-	addBuilder: () => {
+	addBuilder: (builders) => {
 		let newName = globalData.builder + Game.time;
 		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.builder.bodys,
 			newName, {
@@ -130,7 +133,7 @@ global.factory.creep = {
 		}
 		return returnData
 	},
-	addRepairer: () => {
+	addRepairer: (repairers) => {
 		let newName = globalData.repairer + Game.time;
 		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.repairer.bodys,
 			newName, {
