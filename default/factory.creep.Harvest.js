@@ -170,9 +170,10 @@ var pro = {
 						structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
 				}
 			});
+			let target = null;
 			if (targets.length > 0) {
 				// _.find(targets, (val) => creep.pos.getRangeTo(val)<=3)
-				let target = function(targets) {
+				target = function(targets) {
 					for (let i = 0; i < targets.length; i++) {
 						let val = targets[i];
 						// 获取到指定位置的线性范围。
@@ -182,19 +183,11 @@ var pro = {
 						// 扩大成周边范围
 						if (range <= 3) return val;
 					}
-					// 周边找不到CONTAINER,默认第一个
-					return targets[0];
+					// 周边找不到CONTAINER,默认第一个，如果范围大于20就不前往
+					return creep.pos.getRangeTo(targets[0]) < 20 ? targets[0] : null;
 				}(targets);
-				// 将资源从该 creep 转移至其他对象
-				if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-					// 向目标移动
-					creep.moveTo(target, {
-						visualizePathStyle: {
-							stroke: '#ffffff'
-						}
-					});
-				}
-			} else {
+			}
+			if (!target) {
 				// CONTAINER满了或者没有建
 				var targets = creep.room.find(FIND_STRUCTURES, {
 					filter: (structure) => {
@@ -207,15 +200,18 @@ var pro = {
 					}
 				});
 				if (targets.length > 0) {
-					// 将资源从该 creep 转移至其他对象
-					if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-						// 向目标移动
-						creep.moveTo(targets[0], {
-							visualizePathStyle: {
-								stroke: '#ffffff'
-							}
-						});
-					}
+					target = targets[0];
+				}
+			}
+			if (target) {
+				// 将资源从该 creep 转移至其他对象
+				if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+					// 向目标移动
+					creep.moveTo(target, {
+						visualizePathStyle: {
+							stroke: '#ffffff'
+						}
+					});
 				}
 			}
 		}
