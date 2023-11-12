@@ -174,17 +174,20 @@ var pro = {
 			if (targets.length > 0) {
 				// _.find(targets, (val) => creep.pos.getRangeTo(val)<=3)
 				target = function(targets) {
+					let val0range;
 					for (let i = 0; i < targets.length; i++) {
 						let val = targets[i];
 						// 获取到指定位置的线性范围。
 						const range = creep.pos.getRangeTo(val);
+						// 先记录一下,避免后续重复消耗CPU
+						if (i == 0) val0range = range;
 						// 脚下的CONTAINER
 						if (range <= 1) return val;
 						// 扩大成周边范围
 						if (range <= 3) return val;
 					}
 					// 周边找不到CONTAINER,默认第一个，如果范围大于20就不前往
-					return creep.pos.getRangeTo(targets[0]) < 20 ? targets[0] : null;
+					return val0range < 20 ? targets[0] : null;
 				}(targets);
 			}
 			if (!target) {
