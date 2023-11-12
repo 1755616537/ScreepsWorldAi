@@ -47,12 +47,12 @@ var pro = {
 					}
 				} else {
 					// 找不到可取资源的地方,先去存资源
-					transfer();
+					transfer(creep);
 				}
 			}
 		} else {
 			// 背包满了,先去存资源
-			transfer();
+			transfer(creep);
 		}
 	},
 	ALL: () => {
@@ -63,7 +63,7 @@ var pro = {
 global.factory.creep.Carrier = pro;
 
 
-function transfer() {
+function transfer(creep) {
 	// 找出需要补充能量的建筑
 	var targets = creep.room.find(FIND_STRUCTURES, {
 		filter: (structure) => {
