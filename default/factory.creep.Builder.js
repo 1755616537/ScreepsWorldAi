@@ -12,8 +12,41 @@ var pro = {
 		}
 
 		if (creep.memory.building) { // building状态的时候
-			var targets = creep.room.find(FIND_CONSTRUCTION_SITES); // 寻找建筑位
-			if (targets.length) { // targets.length > 0  || 建筑位 > 0
+			// 寻找建筑位
+			// 路
+			let targets = creep.room.find(FIND_CONSTRUCTION_SITES, {
+				filter: (structure) => {
+					return structure.structureType == STRUCTURE_ROAD;
+				}
+			});
+			// 墙壁
+			if (targets.length < 1) {
+				targets = creep.room.find(FIND_CONSTRUCTION_SITES, {
+					filter: (structure) => {
+						return structure.structureType == STRUCTURE_WALL;
+					}
+				});
+			}
+			// 小型储存能量
+			if (targets.length < 1) {
+				targets = creep.room.find(FIND_CONSTRUCTION_SITES, {
+					filter: (structure) => {
+						return structure.structureType == STRUCTURE_EXTENSION;
+					}
+				});
+			}
+			// 中型储存能量
+			if (targets.length < 1) {
+				targets = creep.room.find(FIND_CONSTRUCTION_SITES, {
+					filter: (structure) => {
+						return structure.structureType == STRUCTURE_CONTAINER;
+					}
+				});
+			}
+			if (targets.length < 1) {
+				targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+			}
+			if (targets.length > 0) { // targets.length > 0  || 建筑位 > 0
 				if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(targets[0], {
 						visualizePathStyle: {
