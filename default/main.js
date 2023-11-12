@@ -22,4 +22,5 @@ module.exports.loop = function() {
 
 // 待完成程序:
 // .统一任务调度机制
+// .采集如果脚下有CONTAINER，挖完就放进CONTAINER（没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器了）
 

@@ -62,7 +62,6 @@ global.controller.creep = {
 							break;
 						default:
 					}
-
 				} else {
 					// 默认顺序生产
 					addUpgrader(upgraders);
