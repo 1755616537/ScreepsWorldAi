@@ -1,5 +1,11 @@
 global.controller.creep = {
 	run: () => {
+		const builds = factory.spawns.get(1).room.find(FIND_STRUCTURES, {
+			filter: {
+				structureType: STRUCTURE_CONTAINER
+			}
+		});
+		console.log('builds2',builds.length)
 
 		// 遍历所有 creep 并执行上文中拓展的 work 方法
 		// Object.values(Game.creeps).forEach(creep => creep.work())
