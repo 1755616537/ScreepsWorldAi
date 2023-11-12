@@ -29,34 +29,49 @@ global.globalData = {
 	creepConfigs: {
 		// 采集者
 		'harvest': {
+			// 普通版
 			bodys: [WORK, WORK, CARRY, MOVE],
+			// 缩减版
+			bodysMinus: [WORK, CARRY, MOVE],
+			// 加强版
+			bodysPlus: [WORK, WORK, WORK, CARRY, MOVE],
 			number: 2,
 			// 自动分配数量（开启 AutomaticAssignHarvest可以根据最大支持数量动态更新采集者数量）
 			AutomaticAssignNum: true
 		},
 		// 升级者
 		'upgrader': {
-			bodys: [WORK, CARRY, MOVE],
+			bodys: [WORK, WORK, CARRY, MOVE],
+			bodysMinus: [WORK, CARRY, MOVE],
+			bodysPlus: [WORK, WORK, WORK, CARRY, MOVE],
 			number: 2
 		},
 		// 建造者
 		'builder': {
-			bodys: [WORK, CARRY, MOVE],
+			bodys: [WORK, WORK, CARRY, MOVE],
+			bodysMinus: [WORK, CARRY, MOVE],
+			bodysPlus: [WORK, WORK, WORK, CARRY, MOVE],
 			number: 2
 		},
 		// 运输者
 		'carrier': {
-			bodys: [WORK, CARRY, MOVE],
+			bodys: [WORK, CARRY, CARRY, MOVE],
+			bodysMinus: [WORK, CARRY, MOVE],
+			bodysPlus: [WORK, CARRY, CARRY, CARRY, MOVE],
 			number: 2
 		},
 		// 维修者
 		'repairer': {
-			bodys: [WORK, CARRY, MOVE],
+			bodys: [WORK, WORK, CARRY, MOVE],
+			bodysMinus: [WORK, CARRY, MOVE],
+			bodysPlus: [WORK, WORK, WORK, CARRY, MOVE],
 			number: 1
 		},
 		// 防御者
 		'defender': {
-			bodys: [WORK, CARRY, MOVE],
+			bodys: [WORK, WORK, CARRY, MOVE],
+			bodysMinus: [WORK, CARRY, MOVE],
+			bodysPlus: [WORK, WORK, WORK, CARRY, MOVE],
 			number: 1
 		}
 	}
