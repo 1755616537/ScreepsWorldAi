@@ -35,6 +35,7 @@ global.globalData = {
 			bodysMinus: [WORK, CARRY, MOVE],
 			// 加强版
 			bodysPlus: [WORK, WORK, WORK, CARRY, MOVE],
+			// 总上限数量
 			number: 2,
 			// 自动分配数量（开启 AutomaticAssignHarvest可以根据最大支持数量动态更新采集者数量）
 			AutomaticAssignNum: true
