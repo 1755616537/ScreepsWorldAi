@@ -30,11 +30,21 @@ global.globalData = {
 		// 采集者
 		'harvest': {
 			// 普通版
-			bodys: [WORK, WORK, CARRY, MOVE],
+			bodys: {
+				list: [WORK, WORK, CARRY, MOVE],
+				// 总能量数量（达到该植才允许生产,可以设比生产所需高点达到预留能量的效果,避免能量直接用完）
+				totalEnergyRequired: 100
+			},
 			// 缩减版
-			bodysMinus: [WORK, CARRY, MOVE],
+			bodysMinus: {
+				list: [WORK, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
 			// 加强版
-			bodysPlus: [WORK, WORK, WORK, CARRY, MOVE],
+			bodysPlus: {
+				list: [WORK, WORK, WORK, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
 			// 总上限数量
 			number: 2,
 			// 自动分配数量（开启 AutomaticAssignHarvest可以根据最大支持数量动态更新采集者数量）
@@ -42,37 +52,82 @@ global.globalData = {
 		},
 		// 升级者
 		'upgrader': {
-			bodys: [WORK, WORK, CARRY, MOVE],
-			bodysMinus: [WORK, CARRY, MOVE],
-			bodysPlus: [WORK, WORK, WORK, CARRY, MOVE],
+			bodys: {
+				list: [WORK, WORK, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
+			bodysMinus: {
+				list: [WORK, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
+			bodysPlus: {
+				list: [WORK, WORK, WORK, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
 			number: 2
 		},
 		// 建造者
 		'builder': {
-			bodys: [WORK, WORK, CARRY, MOVE],
-			bodysMinus: [WORK, CARRY, MOVE],
-			bodysPlus: [WORK, WORK, WORK, CARRY, MOVE],
+			bodys: {
+				list: [WORK, WORK, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
+			bodysMinus: {
+				list: [WORK, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
+			bodysPlus: {
+				list: [WORK, WORK, WORK, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
 			number: 2
 		},
 		// 运输者
 		'carrier': {
-			bodys: [WORK, CARRY, CARRY, MOVE],
-			bodysMinus: [WORK, CARRY, MOVE],
-			bodysPlus: [WORK, CARRY, CARRY, CARRY, MOVE],
+			bodys: {
+				list: [WORK, CARRY, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
+			bodysMinus: {
+				list: [WORK, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
+			bodysPlus: {
+				list: [WORK, CARRY, CARRY, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
 			number: 2
 		},
 		// 维修者
 		'repairer': {
-			bodys: [WORK, WORK, CARRY, MOVE],
-			bodysMinus: [WORK, CARRY, MOVE],
-			bodysPlus: [WORK, WORK, WORK, CARRY, MOVE],
+			bodys: {
+				list: [WORK, WORK, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
+			bodysMinus: {
+				list: [WORK, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
+			bodysPlus: {
+				list: [WORK, WORK, WORK, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
 			number: 1
 		},
 		// 防御者
 		'defender': {
-			bodys: [WORK, WORK, CARRY, MOVE],
-			bodysMinus: [WORK, CARRY, MOVE],
-			bodysPlus: [WORK, WORK, WORK, CARRY, MOVE],
+			bodys: {
+				list: [WORK, WORK, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
+			bodysMinus: {
+				list: [WORK, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
+			bodysPlus: {
+				list: [WORK, WORK, WORK, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
 			number: 1
 		}
 	}

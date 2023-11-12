@@ -80,12 +80,12 @@ global.factory.creep = {
 	},
 	addHarvest: (harvests) => {
 		let newName = globalData.harvest + Game.time;
-		let bodys = globalData.creepConfigs.harvest.bodys;
+		let bodys = globalData.creepConfigs.harvest.bodys.list;
 		// 当总creep数量小于1时,使用缩减版进行快速发展
 		if ( /*Object.keys(Game.creeps).length < 1 ||*/ (harvests && harvests.length < 1)) bodys = globalData
 			.creepConfigs
 			.harvest
-			.bodysMinus;
+			.bodysMinus.list;
 		let returnData = factory.spawns.get(1).spawnCreep(bodys,
 			newName, {
 				memory: {
@@ -99,7 +99,7 @@ global.factory.creep = {
 	},
 	addCarrier: (carriers) => {
 		let newName = globalData.carrier + Game.time;
-		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.carrier.bodys,
+		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.carrier.bodys.list,
 			newName, {
 				memory: {
 					role: globalData.carrier
@@ -112,7 +112,7 @@ global.factory.creep = {
 	},
 	addUpgrader: (upgraders) => {
 		let newName = globalData.upgrader + Game.time;
-		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.upgrader.bodys,
+		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.upgrader.bodys.list,
 			newName, {
 				memory: {
 					role: globalData.upgrader
@@ -125,7 +125,7 @@ global.factory.creep = {
 	},
 	addBuilder: (builders) => {
 		let newName = globalData.builder + Game.time;
-		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.builder.bodys,
+		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.builder.bodys.list,
 			newName, {
 				memory: {
 					role: globalData.builder
@@ -138,7 +138,7 @@ global.factory.creep = {
 	},
 	addRepairer: (repairers) => {
 		let newName = globalData.repairer + Game.time;
-		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.repairer.bodys,
+		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.repairer.bodys.list,
 			newName, {
 				memory: {
 					role: globalData.repairer
