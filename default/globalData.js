@@ -21,6 +21,8 @@ global.globalData = {
 	defender: 'defender',
 	// 自动分配矿区
 	AutomaticAssignHarvest: true,
+	// 自动分配建设采集区的CONTAINER
+	AutomaticAssignHarvestCONTAINER: true,
 	// 主房间名称
 	roomName1: 'W12N4',
 	// 角色配置

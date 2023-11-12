@@ -32,14 +32,14 @@ var pro = {
 								if (terrain.get(x, y) != TERRAIN_MASK_WALL) {
 									// console.log(x, y)
 									let on = true;
-									let target = new RoomPosition(x, y, globalData.roomName1)
+									let targetPos = new RoomPosition(x, y, globalData.roomName1)
 									// 人造墙壁
-									const found = creep.room.lookForAt(LOOK_STRUCTURES, target);
+									const found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
 									// console.log(found, ' found[1] +', found[1], "+")
 									if (found.length && found[0].structureType == STRUCTURE_WALL) {
 										on = false;
 									}
-									// const look = creep.room.lookAt(target);
+									// const look = creep.room.lookAt(targetPos);
 									// look.forEach(function(lookObject) {
 									// 	// 人造墙壁
 									// 	if (lookObject.type != LOOK_STRUCTURES && lookObject[
@@ -48,7 +48,15 @@ var pro = {
 									// 		on = true;
 									// 	}
 									// });
-									if (on) num++;
+									if (on){
+										num++
+										
+										// 自动建造对应数量的CONTAINER
+										if(globalData.AutomaticAssignHarvestCONTAINER){
+											// 指定位置创建一个新的 ConstructionSite
+											Game.rooms.sim.createConstructionSite(targetPos, STRUCTURE_CONTAINER);
+										}
+									};
 								}
 								x++;
 							}

@@ -22,4 +22,5 @@ module.exports.loop = function() {
 
 // 任务:
 // 1.根据当前矿的数量平均分配采集者
+// 2.在根据9*9矿区自动分配时，自动建造对应数量的CONTAINER
 
