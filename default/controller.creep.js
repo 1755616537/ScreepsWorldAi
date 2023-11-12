@@ -13,7 +13,6 @@ global.controller.creep = {
 		const carriers = factory.creep.Carrier.ALL();
 		const repairers = factory.creep.Repairer.ALL();
 
-
 		// 查看控制器等级
 		const controller_level = factory.spawns.get(1).room.controller.level;
 
@@ -58,7 +57,7 @@ global.controller.creep = {
 			}
 
 			// 生产 维修 前提控制器2等级
-			if (controller_level >= 2 && repairers.length < globalData.creepConfigs.repairer.number) {
+			if (repairers.length < globalData.creepConfigs.repairer.number) {
 				factory.creep.addRepairer();
 			}
 		}
