@@ -167,59 +167,65 @@ var pro = {
 				});
 			}
 		} else {
-			var targets = creep.room.find(FIND_STRUCTURES, {
-				filter: (structure) => {
-					// 返回该存储的剩余可用容量大于0的CONTAINER
-					return (
-							// structure.structureType == STRUCTURE_EXTENSION ||
-							// structure.structureType == STRUCTURE_SPAWN ||
-							// structure.structureType == STRUCTURE_TOWER ||
-							structure.structureType == STRUCTURE_CONTAINER) &&
-						structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
-				}
-			});
-			let target = null;
-			if (targets.length > 0) {
-				// _.find(targets, (val) => creep.pos.getRangeTo(val)<=3)
-				target = function(targets) {
-					let val0range;
-					for (let i = 0; i < targets.length; i++) {
-						let val = targets[i];
-						// 获取到指定位置的线性范围。
-						const range = creep.pos.getRangeTo(val);
-						// 先记录一下,避免后续重复消耗CPU
-						if (i == 0) val0range = range;
-						// 脚下的CONTAINER
-						if (range <= 1) return val;
-						// 扩大成周边范围
-						if (range <= 3) return val;
-					}
-					// 周边找不到CONTAINER,默认第一个，如果范围大于就不前往
-					return val0range < 5 ? targets[0] : null;
-				}(targets);
-			}
-			if (!target) {
-				// CONTAINER满了或者没有建  查找到该位置路径最短的对象
-				target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+			// 没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器
+			// 脚下是否有CONTAINER，有就不移动
+			let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, globalData.roomName1)
+			const found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
+			if (found.length && found[0].structureType != STRUCTURE_CONTAINER) {
+				var targets = creep.room.find(FIND_STRUCTURES, {
 					filter: (structure) => {
 						// 返回该存储的剩余可用容量大于0的CONTAINER
 						return (
-								structure.structureType == STRUCTURE_EXTENSION ||
-								structure.structureType == STRUCTURE_SPAWN ||
-								structure.structureType == STRUCTURE_TOWER) &&
+								// structure.structureType == STRUCTURE_EXTENSION ||
+								// structure.structureType == STRUCTURE_SPAWN ||
+								// structure.structureType == STRUCTURE_TOWER ||
+								structure.structureType == STRUCTURE_CONTAINER) &&
 							structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
 					}
 				});
-			}
-			if (target) {
-				// 将资源从该 creep 转移至其他对象
-				if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-					// 向目标移动
-					creep.moveTo(target, {
-						visualizePathStyle: {
-							stroke: '#ffffff'
+				let target = null;
+				if (targets.length > 0) {
+					// _.find(targets, (val) => creep.pos.getRangeTo(val)<=3)
+					target = function(targets) {
+						let val0range;
+						for (let i = 0; i < targets.length; i++) {
+							let val = targets[i];
+							// 获取到指定位置的线性范围。
+							const range = creep.pos.getRangeTo(val);
+							// 先记录一下,避免后续重复消耗CPU
+							if (i == 0) val0range = range;
+							// 脚下的CONTAINER
+							if (range <= 1) return val;
+							// 扩大成周边范围
+							if (range <= 3) return val;
+						}
+						// 周边找不到CONTAINER,默认第一个，如果范围大于就不前往
+						return val0range < 5 ? targets[0] : null;
+					}(targets);
+				}
+				if (!target) {
+					// CONTAINER满了或者没有建  查找到该位置路径最短的对象
+					target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+						filter: (structure) => {
+							// 返回该存储的剩余可用容量大于0的CONTAINER
+							return (
+									structure.structureType == STRUCTURE_EXTENSION ||
+									structure.structureType == STRUCTURE_SPAWN ||
+									structure.structureType == STRUCTURE_TOWER) &&
+								structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
 						}
 					});
+				}
+				if (target) {
+					// 将资源从该 creep 转移至其他对象
+					if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+						// 向目标移动
+						creep.moveTo(target, {
+							visualizePathStyle: {
+								stroke: '#ffffff'
+							}
+						});
+					}
 				}
 			}
 		}
