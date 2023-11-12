@@ -14,10 +14,18 @@ var pro = {
 		}
 
 		if (creep.memory.building) { // building状态的时候
-			// 修复受损建筑
+			// 修复受损建筑 优先CONTAINER
 			let targets = creep.room.find(FIND_STRUCTURES, {
-				filter: object => object.hits < object.hitsMax
+				filter: (structure) => {
+					return (structure.structureType == STRUCTURE_CONTAINER) &&
+						structure.hits < structure.hitsMax;
+				}
 			});
+			if (targets.length > 0) {
+				targets = creep.room.find(FIND_STRUCTURES, {
+					filter: object => object.hits < object.hitsMax
+				});
+			}
 
 			targets.sort((a, b) => a.hits - b.hits);
 
