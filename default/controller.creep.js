@@ -41,10 +41,10 @@ global.controller.creep = {
 					priority = 'upgrader';
 				} else if (builders.length < 1) {
 					priority = 'builder';
-				} else if (carriers.length < 1) {
-					priority = 'carrier';
 				} else if (repairers.length < 1) {
 					priority = 'repairer';
+				} else if (carriers.length < 1) {
+					priority = 'carrier';
 				}
 				if (priority) {
 					switch (priority) {
