@@ -117,6 +117,7 @@ function addCarrier(carriers) {
 				return structure.structureType == STRUCTURE_CONTAINER;
 			}
 		});
+		console.log('builds',builds.length)
 		if (builds.length > 0) return factory.creep.addCarrier(carriers);
 	}
 }
