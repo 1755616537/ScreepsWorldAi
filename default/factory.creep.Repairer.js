@@ -43,13 +43,15 @@ var pro = {
 			if (harvests.length < 2) {
 				// 采集死完后,自己去采集
 				let target = creep.pos.findClosestByPath(FIND_SOURCES);
-				if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
-					// 向目标移动
-					creep.moveTo(target, {
-						visualizePathStyle: {
-							stroke: '#ffaa00'
-						}
-					});
+				if(target){
+					if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
+						// 向目标移动
+						creep.moveTo(target, {
+							visualizePathStyle: {
+								stroke: '#ffaa00'
+							}
+						});
+					}
 				}
 			} else {
 				let targets = creep.pos.findClosestByPath(FIND_STRUCTURES, {
