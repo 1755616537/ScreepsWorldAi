@@ -32,7 +32,7 @@ var pro = {
 					// 所有墓碑
 					creep.room.find(FIND_TOMBSTONES),
 					// 所有废墟
-					// creep.room.find(FIND_RUINS)
+					creep.room.find(FIND_RUINS)
 				);
 
 				if (targets.length > 0) {
