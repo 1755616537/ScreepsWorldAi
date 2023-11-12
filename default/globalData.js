@@ -40,7 +40,7 @@ global.globalData = {
 				list: [WORK, CARRY, MOVE],
 				totalEnergyRequired: 100
 			},
-			// 加强版
+			// 加强版（没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器）
 			bodysPlus: {
 				list: [WORK, WORK, WORK, CARRY, MOVE],
 				totalEnergyRequired: 300
@@ -58,7 +58,7 @@ global.globalData = {
 			},
 			bodysMinus: {
 				list: [WORK, CARRY, MOVE],
-				totalEnergyRequired: 300
+				totalEnergyRequired: 100
 			},
 			bodysPlus: {
 				list: [WORK, WORK, WORK, CARRY, MOVE],
@@ -74,7 +74,7 @@ global.globalData = {
 			},
 			bodysMinus: {
 				list: [WORK, CARRY, MOVE],
-				totalEnergyRequired: 300
+				totalEnergyRequired: 100
 			},
 			bodysPlus: {
 				list: [WORK, WORK, WORK, CARRY, MOVE],
@@ -90,7 +90,7 @@ global.globalData = {
 			},
 			bodysMinus: {
 				list: [WORK, CARRY, MOVE],
-				totalEnergyRequired: 300
+				totalEnergyRequired: 100
 			},
 			bodysPlus: {
 				list: [WORK, CARRY, CARRY, CARRY, MOVE],
@@ -106,7 +106,7 @@ global.globalData = {
 			},
 			bodysMinus: {
 				list: [WORK, CARRY, MOVE],
-				totalEnergyRequired: 300
+				totalEnergyRequired: 100
 			},
 			bodysPlus: {
 				list: [WORK, WORK, WORK, CARRY, MOVE],
@@ -122,7 +122,7 @@ global.globalData = {
 			},
 			bodysMinus: {
 				list: [WORK, CARRY, MOVE],
-				totalEnergyRequired: 300
+				totalEnergyRequired: 100
 			},
 			bodysPlus: {
 				list: [WORK, WORK, WORK, CARRY, MOVE],
