@@ -200,7 +200,7 @@ var pro = {
 			}
 			if (!target) {
 				// CONTAINER满了或者没有建
-				var targets = creep.room.find(FIND_STRUCTURES, {
+				let targets = creep.room.find(FIND_STRUCTURES, {
 					filter: (structure) => {
 						// 返回该存储的剩余可用容量大于0的CONTAINER
 						return (
