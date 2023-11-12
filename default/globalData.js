@@ -52,12 +52,12 @@ global.globalData = {
 		// 维修者
 		'repairer': {
 			bodys: [WORK, WORK, CARRY, MOVE],
-			number: 2
+			number: 1
 		},
 		// 防御者
 		'defender': {
 			bodys: [WORK, WORK, CARRY, MOVE],
-			number: 2
+			number: 1
 		}
 	}
 }
