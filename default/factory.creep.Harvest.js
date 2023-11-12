@@ -70,6 +70,12 @@ var pro = {
 													.createConstructionSite(x, y, STRUCTURE_CONTAINER);
 												if (returnData != OK) clog(x, y, '自动建造对应数量的CONTAINER ',
 													returnData);
+												// OK	0	这个操作已经成功纳入计划。
+												// ERR_NOT_OWNER	-1	该房间被敌对玩家占领（claim）或预定（reserve）。
+												// ERR_INVALID_TARGET	-7	T该建筑无法被放置在指定位置。
+												// ERR_FULL	-8	你已经放置了太多建筑工地。其上限为 100。
+												// ERR_INVALID_ARGS	-10	不正确的位置。
+												// ERR_RCL_NOT_ENOUGH	-14	房间控制器级别不足。
 											}
 										}
 									};
