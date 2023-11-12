@@ -41,7 +41,7 @@ var pro = {
 			}
 		} else { // 非building状态的时候， 到source旁边并采集
 			const harvests = factory.creep.Harvest.ALL();
-			if (harvests.length < 1) {
+			if (harvests.length < 2) {
 				// 采集死完后,自己去采集
 				let targets = creep.room.find(FIND_SOURCES);
 				if (creep.harvest(targets[0]) == ERR_NOT_IN_RANGE) {
