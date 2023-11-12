@@ -199,7 +199,7 @@ var pro = {
 				}(targets);
 			}
 			if (!target) {
-				// CONTAINER满了或者没有建
+				// CONTAINER满了或者没有建  查找到该位置路径最短的对象
 				target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
 					filter: (structure) => {
 						// 返回该存储的剩余可用容量大于0的CONTAINER
