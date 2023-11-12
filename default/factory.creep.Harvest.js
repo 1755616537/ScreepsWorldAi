@@ -55,8 +55,8 @@ var pro = {
 										if (globalData.AutomaticAssignHarvestCONTAINER) {
 											// 指定位置创建一个新的 ConstructionSite
 											let returnData = Game.rooms[globalData.roomName1]
-												.createConstructionSite(STRUCTURE_CONTAINER);
-											if (returnData != OK) clog('自动建造对应数量的CONTAINER ',returnData);
+												.createConstructionSite(x, y, STRUCTURE_CONTAINER);
+											if (returnData != OK) clog('自动建造对应数量的CONTAINER ', returnData);
 										}
 									};
 								}
