@@ -129,6 +129,19 @@ global.factory.creep = {
 			console.log('生成新的 建造者:' + newName);
 		}
 		return returnData
+	},
+	addRepairer: () => {
+		let newName = globalData.repairer + Game.time;
+		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.repairer.bodys,
+			newName, {
+				memory: {
+					role: globalData.repairer
+				}
+			});
+		if (returnData == OK) {
+			console.log('生成新的 维修者:' + newName);
+		}
+		return returnData
 	}
 }
 

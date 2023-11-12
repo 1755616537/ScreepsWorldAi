@@ -14,6 +14,7 @@ require('factory.creep.Harvest')
 require('factory.creep.Upgrader')
 require('factory.creep.Builder')
 require('factory.creep.Carrier')
+require('factory.creep.Repairer')
 // -------------------------------控制器
 require('controller.task')
 require('controller.creep')

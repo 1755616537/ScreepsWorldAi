@@ -54,6 +54,11 @@ global.controller.creep = {
 			if (controller_level >= 2 && builders.length < globalData.creepConfigs.builder.number) {
 				factory.creep.addBuilder();
 			}
+			
+			// 生产 维修 前提控制器2等级
+			if (controller_level >= 2 && repairers.length < globalData.creepConfigs.repairer.number) {
+				factory.creep.addRepairer();
+			}
 		}
 
 		// 事件管理
@@ -70,6 +75,9 @@ global.controller.creep = {
 			}
 			if (creep.memory.role == globalData.carrier) {
 				factory.creep.Carrier.run(creep);
+			}
+			if (creep.memory.role == globalData.repairer) {
+				factory.creep.Repairer.run(creep);
 			}
 		}
 	}
