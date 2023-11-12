@@ -113,8 +113,8 @@ function addCarrier(carriers) {
 	if (carriers.length < globalData.creepConfigs.carrier.number) {
 		// 拥有CONTAINER才生产
 		const builds = factory.spawns.get(1).room.find(FIND_MY_STRUCTURES, {
-			filter: (structure) => {
-				return structure.structureType == STRUCTURE_CONTAINER;
+			filter: {
+				structureType: STRUCTURE_CONTAINER
 			}
 		});
 		console.log('builds',builds.length)
