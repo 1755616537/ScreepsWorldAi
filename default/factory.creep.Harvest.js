@@ -4,10 +4,11 @@ var pro = {
 	run: function(creep) {
 		// 没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器
 		// 脚下是否有CONTAINER，有就不移动
-		let on = false; 
+		let on = false;
 		let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, globalData.roomName1)
 		let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
-		if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
+		if (found.length && found[0].structureType == STRUCTURE_CONTAINER && found[0].store.getFreeCapacity(
+				RESOURCE_ENERGY) > 0) {
 			on = true;
 		}
 
