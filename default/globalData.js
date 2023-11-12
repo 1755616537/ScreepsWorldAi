@@ -42,7 +42,7 @@ global.globalData = {
 			},
 			// 加强版（没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器）
 			bodysPlus: {
-				list: [WORK, WORK, WORK, CARRY, MOVE],
+				list: [WORK, WORK, WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE],
 				totalEnergyRequired: 300
 			},
 			// 总上限数量
@@ -61,7 +61,7 @@ global.globalData = {
 				totalEnergyRequired: 100
 			},
 			bodysPlus: {
-				list: [WORK, WORK, WORK, CARRY, MOVE],
+				list: [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE],
 				totalEnergyRequired: 300
 			},
 			number: 2
@@ -93,7 +93,7 @@ global.globalData = {
 				totalEnergyRequired: 100
 			},
 			bodysPlus: {
-				list: [WORK, CARRY, CARRY, CARRY, MOVE],
+				list: [WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE],
 				totalEnergyRequired: 300
 			},
 			number: 2
