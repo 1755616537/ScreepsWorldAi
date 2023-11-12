@@ -4,12 +4,11 @@ var pro = {
 	run: function(creep) {
 		// 没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器
 		// 脚下是否有CONTAINER，有就不移动
-		let on = false; {
-			let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, globalData.roomName1)
-			const found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
-			if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
-				on = true;
-			}
+		let on = false; 
+		let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, globalData.roomName1)
+		let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
+		if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
+			on = true;
 		}
 
 		if (creep.store.getFreeCapacity() > 0 || on) { // 背包未满 采矿
@@ -44,7 +43,7 @@ var pro = {
 									let on = true;
 									let targetPos = new RoomPosition(x, y, globalData.roomName1)
 									// 人造墙壁
-									const found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
+									let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
 									// console.log(found, ' found[1] +', found[1], "+")
 									if (found.length && found[0].structureType == STRUCTURE_WALL) {
 										on = false;
