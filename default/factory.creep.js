@@ -117,7 +117,7 @@ global.factory.creep = {
 		} else {
 			return '房间总能量数量未达到限制，无法生产';
 		}
-		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.carrier.bodys.list,
+		let returnData = factory.spawns.get(1).spawnCreep(bodys,
 			newName, {
 				memory: {
 					role: globalData.carrier
@@ -137,7 +137,7 @@ global.factory.creep = {
 		} else {
 			return '房间总能量数量未达到限制，无法生产';
 		}
-		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.upgrader.bodys.list,
+		let returnData = factory.spawns.get(1).spawnCreep(bodys,
 			newName, {
 				memory: {
 					role: globalData.upgrader
@@ -157,7 +157,7 @@ global.factory.creep = {
 		} else {
 			return '房间总能量数量未达到限制，无法生产';
 		}
-		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.builder.bodys.list,
+		let returnData = factory.spawns.get(1).spawnCreep(bodys,
 			newName, {
 				memory: {
 					role: globalData.builder
@@ -177,7 +177,7 @@ global.factory.creep = {
 		} else {
 			return '房间总能量数量未达到限制，无法生产';
 		}
-		let returnData = factory.spawns.get(1).spawnCreep(globalData.creepConfigs.repairer.bodys.list,
+		let returnData = factory.spawns.get(1).spawnCreep(bodys,
 			newName, {
 				memory: {
 					role: globalData.repairer
