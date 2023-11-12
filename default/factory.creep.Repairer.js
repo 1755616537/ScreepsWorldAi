@@ -43,7 +43,7 @@ var pro = {
 			if (harvests.length < 2) {
 				// 采集死完后,自己去采集
 				let target = creep.pos.findClosestByPath(FIND_SOURCES);
-				if(target){
+				if (target) {
 					if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
 						// 向目标移动
 						creep.moveTo(target, {
@@ -61,10 +61,12 @@ var pro = {
 								structure.structureType == STRUCTURE_EXTENSION ||
 								structure.structureType == STRUCTURE_SPAWN ||
 								structure.structureType == STRUCTURE_TOWER) &&
-							structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+							structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0 &&
+							(structure.structureType == STRUCTURE_SPAWN &&
+								structure.store.getUsedCapacity(RESOURCE_ENERGY) > 200);
 					}
 				});
-				
+
 				if (target) {
 					// 从建筑(structure)中拿取资源
 					if (creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
