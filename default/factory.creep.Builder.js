@@ -43,10 +43,10 @@ var pro = {
 			const harvests = factory.creep.Harvest.ALL();
 			if (harvests.length < 2) {
 				// 采集死完后,自己去采集
-				let targets = creep.pos.findClosestByPath(FIND_SOURCES);
-				if (creep.harvest(targets[0]) == ERR_NOT_IN_RANGE) {
+				let target = creep.pos.findClosestByPath(FIND_SOURCES);
+				if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
 					// 向目标移动
-					creep.moveTo(targets[0], {
+					creep.moveTo(target, {
 						visualizePathStyle: {
 							stroke: '#ffaa00'
 						}
