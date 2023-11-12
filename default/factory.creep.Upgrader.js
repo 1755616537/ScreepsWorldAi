@@ -42,7 +42,7 @@ let pro = {
 						return (structure.structureType == STRUCTURE_CONTAINER ||
 								structure.structureType == STRUCTURE_EXTENSION ||
 								(structure.structureType == STRUCTURE_SPAWN &&
-									structure.store.getUsedCapacity(RESOURCE_ENERGY) > 200) ||
+									structure.store.getUsedCapacity(RESOURCE_ENERGY) > 250) ||
 								structure.structureType == STRUCTURE_TOWER) &&
 							structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
 					}
