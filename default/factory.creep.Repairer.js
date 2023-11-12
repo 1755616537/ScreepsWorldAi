@@ -21,7 +21,7 @@ var pro = {
 						structure.hits < structure.hitsMax;
 				}
 			});
-			if (targets.length > 0) {
+			if (targets.length < 0) {
 				targets = creep.room.find(FIND_STRUCTURES, {
 					filter: object => object.hits < object.hitsMax
 				});
