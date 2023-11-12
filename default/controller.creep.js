@@ -44,7 +44,7 @@ global.controller.creep = {
 				} else if (repairers.length < 1) {
 					priority = 'repairer';
 				} else if (carriers.length < 1) {
-					priority = 'carrier';
+					// priority = 'carrier';
 				}
 				if (priority) {
 					switch (priority) {
