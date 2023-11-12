@@ -35,7 +35,17 @@ global.controller.creep = {
 
 			// 最少采集2个
 			if (harvests.length >= 2) {
-				// 生产 运输 
+				// 生产 升级
+				if (upgraders.length < globalData.creepConfigs.upgrader.number) {
+					factory.creep.addUpgrader(upgraders);
+				}
+
+				// 生产 建造 前提控制器2等级
+				if (controller_level >= 2 && builders.length < globalData.creepConfigs.builder.number) {
+					factory.creep.addBuilder(builders);
+				}
+				
+				// 生产 运输
 				if (carriers.length < globalData.creepConfigs.carrier.number) {
 					// 拥有CONTAINER才生产
 					const builds = factory.spawns.get(1).room.find(FIND_MY_STRUCTURES, {
@@ -46,17 +56,7 @@ global.controller.creep = {
 					if (builds.length > 0) factory.creep.addCarrier(carriers);
 				}
 
-				// 生产 升级
-				if (upgraders.length < globalData.creepConfigs.upgrader.number) {
-					factory.creep.addUpgrader(upgraders);
-				}
-
-				// 生产 建造 前提控制器2等级
-				if (controller_level >= 2 && builders.length < globalData.creepConfigs.builder.number) {
-					factory.creep.addBuilder(builders);
-				}
-
-				// 生产 维修 前提控制器2等级
+				// 生产 维修
 				if (repairers.length < globalData.creepConfigs.repairer.number) {
 					factory.creep.addRepairer(repairers);
 				}
