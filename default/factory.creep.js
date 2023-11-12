@@ -82,7 +82,8 @@ global.factory.creep = {
 		let newName = globalData.harvest + Game.time;
 		let bodys = globalData.creepConfigs.harvest.bodys;
 		// 当总creep数量小于1时,使用缩减版进行快速发展
-		if ( /*Object.keys(Game.creeps).length < 1 ||*/ harvests.length < 1) bodys = globalData.creepConfigs
+		if ( /*Object.keys(Game.creeps).length < 1 ||*/ (harvests && harvests.length < 1)) bodys = globalData
+			.creepConfigs
 			.harvest
 			.bodysMinus;
 		let returnData = factory.spawns.get(1).spawnCreep(bodys,
