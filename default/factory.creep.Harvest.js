@@ -194,8 +194,8 @@ var pro = {
 						// 扩大成周边范围
 						if (range <= 3) return val;
 					}
-					// 周边找不到CONTAINER,默认第一个，如果范围大于20就不前往
-					return val0range < 20 ? targets[0] : null;
+					// 周边找不到CONTAINER,默认第一个，如果范围大于就不前往
+					return val0range < 5 ? targets[0] : null;
 				}(targets);
 			}
 			if (!target) {
