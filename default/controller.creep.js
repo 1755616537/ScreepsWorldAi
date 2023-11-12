@@ -1,6 +1,6 @@
 global.controller.creep = {
 	run: () => {
-		
+
 		// 遍历所有 creep 并执行上文中拓展的 work 方法
 		// Object.values(Game.creeps).forEach(creep => creep.work())
 
@@ -11,7 +11,7 @@ global.controller.creep = {
 		const upgraders = factory.creep.Upgrader.ALL();
 		const builders = factory.creep.Builder.ALL();
 		const carriers = factory.creep.Carrier.ALL();
-		
+
 		// 查看控制器等级
 		const controller_level = factory.spawns.get(1).room.controller.level;
 
@@ -35,7 +35,13 @@ global.controller.creep = {
 			// 生产 运输 前提最少采集2个
 			if (harvests.length >= globalData.creepConfigs.harvest.number && carriers.length < globalData
 				.creepConfigs.carrier.number) {
-				factory.creep.addCarrier();
+				// 拥有CONTAINER才生产
+				const builds = factory.spawns.get(1).room.find(FIND_MY_STRUCTURES, {
+					filter: {
+						structureType: STRUCTURE_CONTAINER
+					}
+				});
+				if (builds.length > 0) factory.creep.addCarrier();
 			}
 
 			// 生产 升级 前提最少采集2个
