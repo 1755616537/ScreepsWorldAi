@@ -21,7 +21,25 @@ var pro = {
 						structure.hits < structure.hitsMax;
 				}
 			});
-			if (targets.length <= 0) {
+			// 路
+			if (targets.length < 1) {
+				targets = creep.room.find(FIND_STRUCTURES, {
+					filter: (structure) => {
+						return (structure.structureType == STRUCTURE_ROAD) &&
+							structure.hits < structure.hitsMax;
+					}
+				});
+			}
+			// 墙壁
+			if (targets.length < 1) {
+				targets = creep.room.find(FIND_STRUCTURES, {
+					filter: (structure) => {
+						return (structure.structureType == STRUCTURE_WALL) &&
+							structure.hits < structure.hitsMax;
+					}
+				});
+			}
+			if (targets.length < 1) {
 				targets = creep.room.find(FIND_STRUCTURES, {
 					filter: object => object.hits < object.hitsMax
 				});
