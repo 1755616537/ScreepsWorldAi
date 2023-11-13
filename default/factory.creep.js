@@ -46,7 +46,7 @@ global.factory.creep = {
 		if (type == 'Resource') globalData.Move.WorkResourceColor;
 		creep.moveTo(target, {
 			visualizePathStyle: {
-				fill: 'transparent',
+				fill: '',
 				stroke: stroke,
 				lineStyle: 'dashed',
 				strokeWidth: .15,
