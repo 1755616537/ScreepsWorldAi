@@ -68,7 +68,9 @@ global.globalData = {
 				totalEnergyRequired: 100
 			},
 			bodysPlus: {
-				list: [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE],
+				list: [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK,
+					CARRY, MOVE, MOVE, MOVE
+				],
 				totalEnergyRequired: 300
 			},
 			number: 3
@@ -100,7 +102,9 @@ global.globalData = {
 				totalEnergyRequired: 100
 			},
 			bodysPlus: {
-				list: [WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE],
+				list: [WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
+					CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE
+				],
 				totalEnergyRequired: 300
 			},
 			number: 3

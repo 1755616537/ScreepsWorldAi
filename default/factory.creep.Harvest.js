@@ -28,6 +28,11 @@ var pro = {
 				// 	Memory.source.list = {};
 				// }
 				if (!Memory.source) {
+
+					// 网上贡献的方法
+					// let zb=creep.room.find(FIND_SOURCES).pos;
+					// let dix=_.filter(creep.room.lookAtArea(LOOK_TERRAIN,zb.y-1,zb.x-1,zb.y+1,zb.x+1,1,(f)=>f.terrain=='plain' 8& creep.room.lookAt(f.pos)[0].structureType!-STRUCTURE_WALL).length)
+
 					let memorySource = {};
 					const terrain = new Room.Terrain(globalData.roomName1);
 					let total = 0;
