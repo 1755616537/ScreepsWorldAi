@@ -1,6 +1,13 @@
 global.globalData = {
 	// 总输出
 	clog: true,
+	// 移动
+	Move: {
+		// 工作颜色
+		WorkColor: '#ffaa00',
+		// 工作资源颜色
+		WorkResourceColor: '#ffff00',
+	},
 	// 基地1名称
 	SpawnName1: 'Spawn1',
 	// 基地2名称

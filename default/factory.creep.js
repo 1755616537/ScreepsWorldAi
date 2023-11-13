@@ -41,6 +41,19 @@
 
 
 global.factory.creep = {
+	moveTo: (creep, target, type = '') => {
+		let stroke = globalData.Move.WorkColor;
+		if (type == 'Resource') globalData.Move.WorkResourceColor;
+		creep.moveTo(target, {
+			visualizePathStyle: {
+				fill: 'transparent',
+				stroke: stroke,
+				lineStyle: 'dashed',
+				strokeWidth: .15,
+				opacity: .1
+			}
+		});
+	},
 	CleanMemory: () => {
 		// 清理内存
 

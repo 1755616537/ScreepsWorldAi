@@ -58,11 +58,7 @@ var pro = {
 
 			if (targets.length > 0) {
 				if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
-					creep.moveTo(targets[0], {
-						visualizePathStyle: {
-							stroke: '#ffff00'
-						}
-					});
+					factory.creep.moveTo(creep, targets[0]);
 				}
 			}
 		} else { // 非building状态的时候， 到source旁边并采集
@@ -73,11 +69,7 @@ var pro = {
 				if (target) {
 					if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
 						// 向目标移动
-						creep.moveTo(target, {
-							visualizePathStyle: {
-								stroke: '#ffaa00'
-							}
-						});
+						factory.creep.moveTo(creep, target, 'Resource');
 					}
 				}
 			} else {
@@ -97,11 +89,7 @@ var pro = {
 					// 从建筑(structure)中拿取资源
 					if (creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 						// 向目标移动
-						creep.moveTo(target, {
-							visualizePathStyle: {
-								stroke: '#ffaa00'
-							}
-						});
+						factory.creep.moveTo(creep, target, 'Resource');
 					}
 				}
 			}

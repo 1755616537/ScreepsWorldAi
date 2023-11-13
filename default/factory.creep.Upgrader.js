@@ -14,11 +14,7 @@ let pro = {
 
 		if (creep.memory.upgrading) { // 升级状态，找到控制器并升级 + 可视化
 			if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-				creep.moveTo(creep.room.controller, {
-					visualizePathStyle: {
-						stroke: '#ffff00'
-					}
-				});
+				factory.creep.moveTo(creep, creep.room.controller);
 			}
 		} else { // 采集状态 + 可视化
 			const harvests = factory.creep.Harvest.ALL();
@@ -28,11 +24,7 @@ let pro = {
 				if (target) {
 					if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
 						// 向目标移动
-						creep.moveTo(target, {
-							visualizePathStyle: {
-								stroke: '#ffaa00'
-							}
-						});
+						factory.creep.moveTo(creep, target, 'Resource');
 					}
 				}
 			} else {
@@ -52,11 +44,7 @@ let pro = {
 					// 从建筑(structure)中拿取资源
 					if (creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 						// 向目标移动
-						creep.moveTo(target, {
-							visualizePathStyle: {
-								stroke: '#ffaa00'
-							}
-						});
+						factory.creep.moveTo(creep, target, 'Resource');
 					}
 				}
 			}

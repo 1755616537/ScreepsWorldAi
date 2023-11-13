@@ -169,12 +169,7 @@ var pro = {
 
 			// 采集能量
 			if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-				// 向目标移动
-				creep.moveTo(source, {
-					visualizePathStyle: {
-						stroke: '#ffaa00'
-					}
-				});
+				factory.creep.moveTo(creep, target, 'Resource');
 			}
 		} else {
 			var targets = creep.room.find(FIND_STRUCTURES, {
@@ -224,12 +219,7 @@ var pro = {
 			if (target) {
 				// 将资源从该 creep 转移至其他对象
 				if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-					// 向目标移动
-					creep.moveTo(target, {
-						visualizePathStyle: {
-							stroke: '#ffffff'
-						}
-					});
+					factory.creep.moveTo(creep, target);
 				}
 			}
 		}

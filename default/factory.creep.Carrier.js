@@ -13,11 +13,7 @@ var pro = {
 				// 捡起一个物品 (如捡起一些能量)
 				if (creep.pickup(targets[0]) == ERR_NOT_IN_RANGE) {
 					// 向目标移动
-					creep.moveTo(targets[0], {
-						visualizePathStyle: {
-							stroke: '#ffaa00'
-						}
-					});
+					factory.creep.moveTo(creep, targets[0], 'Resource');
 				}
 			} else {
 				let targets = _.compact(
@@ -39,11 +35,7 @@ var pro = {
 					// 从建筑(structure)中拿取资源
 					if (creep.withdraw(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 						// 向目标移动
-						creep.moveTo(targets[0], {
-							visualizePathStyle: {
-								stroke: '#ffaa00'
-							}
-						});
+						factory.creep.moveTo(creep, targets[0], 'Resource');
 					}
 				} else {
 					// 找不到可取资源的地方,先去存资源
@@ -78,11 +70,7 @@ function transfer(creep) {
 		// 将资源从该 creep 转移至其他对象
 		if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 			// 向目标移动
-			creep.moveTo(targets[0], {
-				visualizePathStyle: {
-					stroke: '#ffff00'
-				}
-			});
+			factory.creep.moveTo(creep, targets[0]);
 		}
 	}
 }
