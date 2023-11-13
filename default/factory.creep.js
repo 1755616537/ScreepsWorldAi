@@ -42,21 +42,38 @@
 
 global.factory.creep = {
 	moveTo: (creep, target, type = '') => {
-		let stroke = globalData.Move.WorkColor;
-		if (type == 'Resource') stroke = globalData.Move.WorkResourceColor;
+		let visualizePathStyle = {};
+		switch (type) {
+			case 'Resource':
+				visualizePathStyle = {
+					// 填充颜色
+					fill: '',
+					// 线条颜色
+					stroke: globalData.Move.WorkResourceColor,
+					// undefined (实线)，dashed (虚线) 或者 dotted (点线) 
+					lineStyle: 'dashed',
+					// 线条宽度
+					strokeWidth: .15,
+					// 透明度
+					opacity: .1
+				}
+				break;
+			default:
+				visualizePathStyle = {
+					// 填充颜色
+					fill: '',
+					// 线条颜色
+					stroke: globalData.Move.WorkColor,
+					// undefined (实线)，dashed (虚线) 或者 dotted (点线) 
+					lineStyle: 'dashed',
+					// 线条宽度
+					strokeWidth: .15,
+					// 透明度
+					opacity: .1
+				}
+		}
 		creep.moveTo(target, {
-			visualizePathStyle: {
-				// 填充颜色
-				fill: '',
-				// 线条颜色
-				stroke: stroke,
-				// undefined (实线)，dashed (虚线) 或者 dotted (点线) 
-				lineStyle: 'dashed',
-				// 线条宽度
-				strokeWidth: .15,
-				// 透明度
-				opacity: .1
-			}
+			visualizePathStyle: visualizePathStyle
 		});
 	},
 	CleanMemory: () => {
