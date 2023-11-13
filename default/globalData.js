@@ -64,7 +64,7 @@ global.globalData = {
 				list: [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE],
 				totalEnergyRequired: 300
 			},
-			number: 1
+			number: 3
 		},
 		// 建造者
 		'builder': {
@@ -96,7 +96,7 @@ global.globalData = {
 				list: [WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE],
 				totalEnergyRequired: 300
 			},
-			number: 2
+			number: 3
 		},
 		// 维修者
 		'repairer': {
