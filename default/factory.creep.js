@@ -43,13 +43,18 @@
 global.factory.creep = {
 	moveTo: (creep, target, type = '') => {
 		let stroke = globalData.Move.WorkColor;
-		if (type == 'Resource') globalData.Move.WorkResourceColor;
+		if (type == 'Resource') stroke = globalData.Move.WorkResourceColor;
 		creep.moveTo(target, {
 			visualizePathStyle: {
+				// 填充颜色
 				fill: '',
+				// 线条颜色
 				stroke: stroke,
+				// undefined (实线)，dashed (虚线) 或者 dotted (点线) 
 				lineStyle: 'dashed',
+				// 线条宽度
 				strokeWidth: .15,
+				// 透明度
 				opacity: .1
 			}
 		});
