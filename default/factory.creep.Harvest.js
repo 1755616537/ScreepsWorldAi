@@ -174,7 +174,7 @@ var pro = {
 
 			// 采集能量
 			if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-				factory.creep.moveTo(creep, target, 'Resource');
+				factory.creep.moveTo(creep, source, 'Resource');
 			}
 		} else {
 			var targets = creep.room.find(FIND_STRUCTURES, {
