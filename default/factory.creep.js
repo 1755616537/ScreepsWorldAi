@@ -53,9 +53,9 @@ global.factory.creep = {
 					// undefined (实线)，dashed (虚线) 或者 dotted (点线) 
 					lineStyle: 'dashed',
 					// 线条宽度
-					strokeWidth: .15,
+					strokeWidth: .1,
 					// 透明度
-					opacity: .1
+					opacity: .5
 				}
 				break;
 			default:
@@ -67,9 +67,9 @@ global.factory.creep = {
 					// undefined (实线)，dashed (虚线) 或者 dotted (点线) 
 					lineStyle: 'dashed',
 					// 线条宽度
-					strokeWidth: .15,
+					strokeWidth: .1,
 					// 透明度
-					opacity: .1
+					opacity: .5
 				}
 		}
 		creep.moveTo(target, {
