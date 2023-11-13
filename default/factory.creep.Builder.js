@@ -50,7 +50,7 @@ var pro = {
 				if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(targets[0], {
 						visualizePathStyle: {
-							stroke: '#ffffff'
+							stroke: '#ffff00'
 						}
 					}); // 绘制路径
 				}
@@ -66,7 +66,7 @@ var pro = {
 					if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
 						creep.moveTo(targets[0], {
 							visualizePathStyle: {
-								stroke: '#ffffff'
+								stroke: '#ffff00'
 							}
 						});
 					}

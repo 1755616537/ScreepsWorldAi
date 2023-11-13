@@ -80,7 +80,7 @@ function transfer(creep) {
 			// 向目标移动
 			creep.moveTo(targets[0], {
 				visualizePathStyle: {
-					stroke: '#ffffff'
+					stroke: '#ffff00'
 				}
 			});
 		}

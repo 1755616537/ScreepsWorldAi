@@ -60,7 +60,7 @@ var pro = {
 				if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(targets[0], {
 						visualizePathStyle: {
-							stroke: '#ffffff'
+							stroke: '#ffff00'
 						}
 					});
 				}
