@@ -21,6 +21,15 @@ var pro = {
 						structure.hits < structure.hitsMax;
 				}
 			});
+			// 可通行墙壁
+			if (targets.length < 1) {
+				targets = creep.room.find(FIND_STRUCTURES, {
+					filter: (structure) => {
+						return (structure.structureType == STRUCTURE_RAMPART) &&
+							structure.hits < structure.hitsMax;
+					}
+				});
+			}
 			// 路
 			if (targets.length < 1) {
 				targets = creep.room.find(FIND_STRUCTURES, {
