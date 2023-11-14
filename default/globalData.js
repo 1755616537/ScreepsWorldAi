@@ -107,7 +107,7 @@ global.globalData = {
 				],
 				totalEnergyRequired: 300
 			},
-			number: 3
+			number: 4
 		},
 		// 维修者
 		'repairer': {
