@@ -3,7 +3,7 @@ global.controller.Tower = {
 		var tower = Game.getObjectById('65533272618670f5499be7a9');
 		if (tower) {
 			// 维修
-			let targets = creep.room.find(FIND_STRUCTURES, {
+			let targets = tower.room.find(FIND_STRUCTURES, {
 				filter: (structure) => {
 					return (structure.structureType == STRUCTURE_CONTAINER) &&
 						structure.hits < structure.hitsMax;
@@ -11,7 +11,7 @@ global.controller.Tower = {
 			});
 			// 可通行墙壁
 			if (targets.length < 1) {
-				targets = creep.room.find(FIND_STRUCTURES, {
+				targets = tower.room.find(FIND_STRUCTURES, {
 					filter: (structure) => {
 						return (structure.structureType == STRUCTURE_RAMPART) &&
 							structure.hits < structure.hitsMax;
@@ -20,7 +20,7 @@ global.controller.Tower = {
 			}
 			// 路
 			if (targets.length < 1) {
-				targets = creep.room.find(FIND_STRUCTURES, {
+				targets = tower.room.find(FIND_STRUCTURES, {
 					filter: (structure) => {
 						return (structure.structureType == STRUCTURE_ROAD) &&
 							structure.hits < structure.hitsMax;
@@ -29,7 +29,7 @@ global.controller.Tower = {
 			}
 			// 墙壁
 			if (targets.length < 1) {
-				targets = creep.room.find(FIND_STRUCTURES, {
+				targets = tower.room.find(FIND_STRUCTURES, {
 					filter: (structure) => {
 						return (structure.structureType == STRUCTURE_WALL) &&
 							structure.hits < structure.hitsMax;
@@ -37,7 +37,7 @@ global.controller.Tower = {
 				});
 			}
 			if (targets.length < 1) {
-				targets = creep.room.find(FIND_STRUCTURES, {
+				targets = tower.room.find(FIND_STRUCTURES, {
 					filter: (structure) => structure.hits < structure.hitsMax
 				});
 			}
