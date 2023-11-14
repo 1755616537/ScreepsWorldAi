@@ -8,9 +8,24 @@ require("main_mount")();
 module.exports.loop = function() {
 	// 任务调度启动
 	// controller.task.run();
-	
+
 	controller.creep.run();
-	
+
+	var tower = Game.getObjectById('65533272618670f5499be7a9');
+	if (tower) {
+		var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
+			filter: (structure) => structure.hits < structure.hitsMax
+		});
+		if (closestDamagedStructure) {
+			tower.repair(closestDamagedStructure);
+		}
+
+		var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+		if (closestHostile) {
+			tower.attack(closestHostile);
+		}
+	}
+
 	// clog('本次tips使用 CPU 时间总量 ',Game.cpu.getUsed())
 }
 
@@ -28,4 +43,5 @@ module.exports.loop = function() {
 // .把小兵ID放到memory里面，不在使用小兵名称作为唯一ID值判断，改为小兵ID
 // .自动铺路，矿，控制器。方案1：两点最近距离.方案2：走得次数多的地方铺路
 // .受到攻击掉血开启安全模式
-// .自动布局EXTENSION建筑 控制器等级3布局TOWER
+// .createConstructionSite自动布局EXTENSION建筑 控制器等级3布局TOWER
+// W25N6房间
