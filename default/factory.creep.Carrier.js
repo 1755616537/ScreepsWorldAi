@@ -71,7 +71,7 @@ var pro = {
 							}
 						}
 					}
-					
+
 					// 找出已经分配的矿区消息
 					let targets = creep.room.find(FIND_STRUCTURES, {
 						filter: (structure) => {
@@ -104,7 +104,7 @@ var pro = {
 							}
 						}
 					}
-					if (source.id != creep.memory.carrierSourceID) {
+					if (source && source.id != creep.memory.carrierSourceID) {
 						// Throw.Error('creep ', creep.id, ' 找不到分配的矿CONTAINERID ', creep.memory.carrierSourceID);
 					}
 				} else {
