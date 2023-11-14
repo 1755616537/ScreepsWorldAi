@@ -68,42 +68,41 @@ var pro = {
 									memorySource[val].spaceXYList = spaceXYList;
 									break;
 								}
-
 							}
 						}
-
-						// 找出已经分配的矿区消息
-						let targets = creep.room.find(FIND_STRUCTURES, {
-							filter: (structure) => {
-								return structure.structureType == STRUCTURE_CONTAINER;
-							}
-						});
-						for (let i = 0; i < targets.length; i++) {
-							if (targets[i].id == creep.memory.carrierSourceID) {
-								// 检查是否在矿区CONTAINER记录中
-								let on = false;
-								for (let val in memorySource) {
-									let spaceXYList = memorySource[val].spaceXYList;
-									for (let i2 = 0; i2 < spaceXYList.list.length; i2++) {
-										if (spaceXYList.list[i2] == creep.id) {
-											on = true;
-											break
-										}
+					}
+					
+					// 找出已经分配的矿区消息
+					let targets = creep.room.find(FIND_STRUCTURES, {
+						filter: (structure) => {
+							return structure.structureType == STRUCTURE_CONTAINER;
+						}
+					});
+					for (let i = 0; i < targets.length; i++) {
+						if (targets[i].id == creep.memory.carrierSourceID) {
+							// 检查是否在矿区CONTAINER记录中
+							let on = false;
+							for (let val in memorySource) {
+								let spaceXYList = memorySource[val].spaceXYList;
+								for (let i2 = 0; i2 < spaceXYList.list.length; i2++) {
+									if (spaceXYList.list[i2] == creep.id) {
+										on = true;
+										break
 									}
-									if (on) break;
 								}
-								if (on) {
-									// 合法记录在矿区CONTAINER
-									source = targets[i];
-								} else {
-									// 不合法,移除
-									creep.memory.carrierSourceID = null;
-								}
+								if (on) break;
+							}
+							if (on) {
+								// 合法记录在矿区CONTAINER
+								source = targets[i];
+							} else {
+								// 不合法,移除
+								creep.memory.carrierSourceID = null;
 							}
 						}
-						if (source.id != creep.memory.carrierSourceID) {
-							// Throw.Error('creep ', creep.id, ' 找不到分配的矿CONTAINERID ', creep.memory.carrierSourceID);
-						}
+					}
+					if (source.id != creep.memory.carrierSourceID) {
+						// Throw.Error('creep ', creep.id, ' 找不到分配的矿CONTAINERID ', creep.memory.carrierSourceID);
 					}
 				} else {
 					let targets = _.compact(
