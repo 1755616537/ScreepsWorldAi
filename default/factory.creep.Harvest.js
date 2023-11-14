@@ -115,7 +115,7 @@ var pro = {
 					};
 					// 根据最大支持数量动态更新采集者数量
 					if (globalData.creepConfigs.harvest.AutomaticAssignNum) {
-						global.globalData.creepConfigs.harvest.number = total;
+						globalData.creepConfigs.harvest.number = total;
 					}
 				}
 
