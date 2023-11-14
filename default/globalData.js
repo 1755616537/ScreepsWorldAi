@@ -40,7 +40,7 @@ global.globalData = {
 			bodys: {
 				list: [WORK, WORK, WORK, CARRY, MOVE],
 				// 总能量数量（达到该植才允许生产,可以设比生产所需高点达到预留能量的效果,避免能量直接用完）
-				totalEnergyRequired: 300
+				totalEnergyRequired: 200
 			},
 			// 缩减版
 			bodysMinus: {
@@ -61,7 +61,7 @@ global.globalData = {
 		'upgrader': {
 			bodys: {
 				list: [WORK, WORK, CARRY, MOVE],
-				totalEnergyRequired: 300
+				totalEnergyRequired: 200
 			},
 			bodysMinus: {
 				list: [WORK, CARRY, MOVE],
@@ -79,7 +79,7 @@ global.globalData = {
 		'builder': {
 			bodys: {
 				list: [WORK, WORK, CARRY, MOVE],
-				totalEnergyRequired: 300
+				totalEnergyRequired: 200
 			},
 			bodysMinus: {
 				list: [WORK, CARRY, MOVE],
@@ -95,7 +95,7 @@ global.globalData = {
 		'carrier': {
 			bodys: {
 				list: [WORK, CARRY, CARRY, CARRY, CARRY, MOVE],
-				totalEnergyRequired: 300
+				totalEnergyRequired: 200
 			},
 			bodysMinus: {
 				list: [WORK, CARRY, MOVE],
@@ -113,7 +113,7 @@ global.globalData = {
 		'repairer': {
 			bodys: {
 				list: [WORK, WORK, CARRY, MOVE],
-				totalEnergyRequired: 300
+				totalEnergyRequired: 200
 			},
 			bodysMinus: {
 				list: [WORK, CARRY, MOVE],
@@ -129,7 +129,7 @@ global.globalData = {
 		'defender': {
 			bodys: {
 				list: [WORK, WORK, CARRY, MOVE],
-				totalEnergyRequired: 300
+				totalEnergyRequired: 200
 			},
 			bodysMinus: {
 				list: [WORK, CARRY, MOVE],
