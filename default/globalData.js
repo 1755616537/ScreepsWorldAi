@@ -109,7 +109,7 @@ global.globalData = {
 			},
 			number: 4,
 			// 矿区CONTAINER是否1v1运送
-			sourceContainer1v1: true
+			sourceContainer1v1: false
 		},
 		// 维修者
 		'repairer': {
