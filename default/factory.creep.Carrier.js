@@ -16,7 +16,7 @@ var pro = {
 					factory.creep.moveTo(creep, targets[0], 'Resource');
 				}
 			} else {
-				let source = {};
+				let source = null;
 				// 矿区CONTAINER是否1v1运送
 				if (globalData.creepConfigs.carrier.sourceContainer1v1) {
 					let memorySource = Memory.source.list;

@@ -15,7 +15,7 @@ var pro = {
 		if (creep.store.getFreeCapacity() > 0 || on) { // 背包未满 采矿
 			let sources = creep.room.find(FIND_SOURCES);
 			// 默认去采集第一个source
-			let source = sources.length > 0 ? sources[0] : {};
+			let source = sources.length > 0 ? sources[0] : null;
 
 			// 自动分配矿区
 			if (globalData.AutomaticAssignHarvest) {
@@ -188,10 +188,12 @@ var pro = {
 					// Throw.Error('creep ', creep.id, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
 				}
 			}
-
-			// 采集能量
-			if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-				factory.creep.moveTo(creep, source, 'Resource');
+			
+			if (source) {
+				// 采集能量
+				if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
+					factory.creep.moveTo(creep, source, 'Resource');
+				}
 			}
 		} else {
 			var targets = creep.room.find(FIND_STRUCTURES, {
