@@ -106,7 +106,7 @@ global.factory.creep = {
 						}
 					}
 				}
-				
+
 				// 采集者
 				if (Memory.creeps[name].role == globalData.carrier) {
 					// 从矿区记录删除
@@ -127,11 +127,12 @@ global.factory.creep = {
 							let spaceXYList = memorySource[val].spaceXYList;
 							for (let i = 0; i < spaceXYList.length; i++) {
 								let containerID = spaceXYList[i].containerID
-								if(carrierSourceID==containerID){
+								if (carrierSourceID == containerID) {
 									for (let i2 = 0; i2 < spaceXYList[i].list.length; i2++) {
-										if(spaceXYList[i].list[i2]==name){
+										if (spaceXYList[i].list[i2] == name) {
 											spaceXYList[i].list.splice(i, 1);
 											Memory.source.list[val].spaceXYList = spaceXYList;
+											on = true;
 											break
 										}
 									}
