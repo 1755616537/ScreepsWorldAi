@@ -104,10 +104,12 @@ var pro = {
 							}
 						}
 					}
-					if (source && source.id != creep.memory.carrierSourceID) {
+					if (source || source.id != creep.memory.carrierSourceID) {
 						// Throw.Error('creep ', creep.id, ' 找不到分配的矿CONTAINERID ', creep.memory.carrierSourceID);
 					}
-				} else {
+				}
+				
+				if(!source){
 					let targets = _.compact(
 						// 所有建筑
 						creep.room.find(FIND_STRUCTURES, {
