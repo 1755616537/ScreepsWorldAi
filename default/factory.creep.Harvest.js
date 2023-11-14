@@ -39,6 +39,8 @@ var pro = {
 					for (let i = 0; i < sources.length; i++) {
 						let val = sources[i];
 						let num = 0;
+						// 空地XY坐标列表
+						let spaceXYList = [];
 						let x_ini = x = val.pos.x - 1;
 						let y = val.pos.y - 1;
 						for (let i2 = 0; i2 < 3; i2++) {
@@ -65,6 +67,14 @@ var pro = {
 									// });
 									if (on) {
 										num++
+										spaceXYList.push({
+											x: x,
+											y: y,
+											// 如果存在CONTAINER记录允许运输列表
+											list: [],
+											// 当前坐标是否存在CONTAINER
+											containerID: null
+										})
 
 										// 自动建造对应数量的CONTAINER
 										if (globalData.AutomaticAssignHarvestCONTAINER) {
@@ -105,7 +115,9 @@ var pro = {
 							// 允许采集记录列表
 							list: [],
 							// 允许采集数量
-							harvestNum: num
+							harvestNum: num,
+							// 空地XY坐标列表
+							spaceXYList: spaceXYList
 						};
 					}
 					Memory.source = {
@@ -135,7 +147,7 @@ var pro = {
 						if (memorySourceListNull && val != memorySourceListNull) continue;
 						if (memorySource[val].list.length < memorySource[val].harvestNum) {
 							// 把creep ID记录到矿区
-							memorySource[val].list.push(creep.name);
+							memorySource[val].list.push(creep.id);
 							// 把矿区ID记录到creep
 							creep.memory.harvestSourceID = val;
 
@@ -152,7 +164,7 @@ var pro = {
 						let memorySourceList = memorySource[sources[i].id].list;
 						let on = false;
 						for (let i2 = 0; i2 < memorySourceList.length; i2++) {
-							if (memorySourceList[i2] == creep.name) {
+							if (memorySourceList[i2] == creep.id) {
 								on = true;
 								break
 							}
@@ -168,7 +180,7 @@ var pro = {
 					}
 				}
 				if (source.id != creep.memory.harvestSourceID) {
-					// Throw.Error('creep ', creep.name, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
+					// Throw.Error('creep ', creep.id, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
 				}
 			}
 

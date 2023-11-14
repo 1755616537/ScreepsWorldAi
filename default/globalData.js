@@ -107,7 +107,9 @@ global.globalData = {
 				],
 				totalEnergyRequired: 300
 			},
-			number: 4
+			number: 4,
+			// 矿区CONTAINER是否1v1运送
+			sourceContainer1v1: false
 		},
 		// 维修者
 		'repairer': {
