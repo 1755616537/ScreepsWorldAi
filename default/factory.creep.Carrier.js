@@ -67,6 +67,7 @@ var pro = {
 									creep.memory.carrierSourceID = containerID;
 
 									memorySource[val].spaceXYList = spaceXYList;
+									on = true;
 									break;
 								}
 							}
