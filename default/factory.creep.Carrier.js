@@ -18,7 +18,7 @@ var pro = {
 			} else {
 				let source = null;
 				// 矿区CONTAINER是否1v1运送
-				if (globalData.creepConfigs.carrier.sourceContainer1v1) {
+				if (globalData.creepConfigs.carrier.sourceContainer1v1 && !Memory.source) {
 					let memorySource = Memory.source.list;
 					// source周边的空地是否存在CONTAINER
 					for (let val in memorySource) {
