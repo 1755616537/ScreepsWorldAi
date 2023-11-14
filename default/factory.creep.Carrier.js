@@ -32,6 +32,9 @@ var pro = {
 							let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
 							if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
 								spaceXYList[i].containerID = found[0].id;
+							} else {
+								// 如果不存在CONTAINER就清楚CONTAINERID
+								spaceXYList[i].containerID = null;
 							}
 						}
 						memorySource[val].spaceXYList = spaceXYList;
