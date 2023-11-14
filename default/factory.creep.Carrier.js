@@ -84,11 +84,14 @@ var pro = {
 							let on = false;
 							for (let val in memorySource) {
 								let spaceXYList = memorySource[val].spaceXYList;
-								for (let i2 = 0; i2 < spaceXYList.list.length; i2++) {
-									if (spaceXYList.list[i2] == creep.id) {
-										on = true;
-										break
+								for (let i2 = 0; i2 < spaceXYList.length; i2++) {
+									for (let i3 = 0; i3 < spaceXYList[i2].list.length; i3++) {
+										if (spaceXYList.list[i2] == creep.id) {
+											on = true;
+											break
+										}
 									}
+									if (on) break;
 								}
 								if (on) break;
 							}
