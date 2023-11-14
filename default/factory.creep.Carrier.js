@@ -62,11 +62,11 @@ var pro = {
 										memoryContainerListNull].containerID) continue;
 								if (spaceXYList[i].list.length < 1) {
 									// 把creep ID记录到矿区CONTAINER
-									spaceXYList[i].list.push(creep.id);
+									spaceXYList[i].list.push(creep.name);
 									// 把矿区ID记录到creep
 									creep.memory.carrierSourceID = containerID;
 
-									memorySource[val].spaceXYList = spaceXYList;
+									Memory.source.list[val].spaceXYList = spaceXYList;
 									on = true;
 									break;
 								}
@@ -89,7 +89,7 @@ var pro = {
 								let spaceXYList = memorySource[val].spaceXYList;
 								for (let i2 = 0; i2 < spaceXYList.length; i2++) {
 									for (let i3 = 0; i3 < spaceXYList[i2].list.length; i3++) {
-										if (spaceXYList[i2].list[i3] == creep.id) {
+										if (spaceXYList[i2].list[i3] == creep.name) {
 											on = true;
 											break
 										}

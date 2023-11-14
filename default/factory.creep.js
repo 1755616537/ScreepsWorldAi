@@ -105,7 +105,42 @@ global.factory.creep = {
 							}
 						}
 					}
-
+				}
+				
+				// 采集者
+				if (Memory.creeps[name].role == globalData.carrier) {
+					// 从矿区记录删除
+					let carrierSourceID;
+					let on = false;
+					// 如果没有合法记录会不存在harvestSourceID,报错需要捕获
+					try {
+						carrierSourceID = Memory.creeps[name].carrierSourceID;
+						on = true;
+					} catch (e) {
+						//TODO handle the exception
+					}
+					// 是否合法记录了
+					if (on && carrierSourceID) {
+						let on = false;
+						let memorySource = Memory.source.list;
+						for (let val in memorySource) {
+							let spaceXYList = memorySource[val].spaceXYList;
+							for (let i = 0; i < spaceXYList.length; i++) {
+								let containerID = spaceXYList[i].containerID
+								if(carrierSourceID==containerID){
+									for (let i2 = 0; i2 < spaceXYList[i].list.length; i2++) {
+										if(spaceXYList[i].list[i2]==name){
+											spaceXYList[i].list.splice(i, 1);
+											Memory.source.list[val].spaceXYList = spaceXYList;
+											break
+										}
+									}
+									if (on) break;
+								}
+							}
+							if (on) break;
+						}
+					}
 				}
 
 				delete Memory.creeps[name];

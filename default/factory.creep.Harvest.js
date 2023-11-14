@@ -147,7 +147,7 @@ var pro = {
 						if (memorySourceListNull && val != memorySourceListNull) continue;
 						if (memorySource[val].list.length < memorySource[val].harvestNum) {
 							// 把creep ID记录到矿区
-							memorySource[val].list.push(creep.id);
+							memorySource[val].list.push(creep.name);
 							// 把矿区ID记录到creep
 							creep.memory.harvestSourceID = val;
 
@@ -164,7 +164,7 @@ var pro = {
 						let memorySourceList = memorySource[sources[i].id].list;
 						let on = false;
 						for (let i2 = 0; i2 < memorySourceList.length; i2++) {
-							if (memorySourceList[i2] == creep.id) {
+							if (memorySourceList[i2] == creep.name) {
 								on = true;
 								break
 							}
