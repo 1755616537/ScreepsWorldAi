@@ -179,7 +179,12 @@ var pro = {
 						break
 					}
 				}
-				if (source.id != creep.memory.harvestSourceID) {
+
+				if (source) {
+					if (source.id != creep.memory.harvestSourceID) {
+						// Throw.Error('creep ', creep.id, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
+					}
+				} else {
 					// Throw.Error('creep ', creep.id, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
 				}
 			}

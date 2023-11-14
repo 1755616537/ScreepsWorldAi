@@ -16,9 +16,7 @@ var pro = {
 					factory.creep.moveTo(creep, targets[0], 'Resource');
 				}
 			} else {
-				let source = {
-					id: null
-				};
+				let source = {};
 				// 矿区CONTAINER是否1v1运送
 				if (globalData.creepConfigs.carrier.sourceContainer1v1) {
 					let memorySource = Memory.source.list;
@@ -106,7 +104,11 @@ var pro = {
 							}
 						}
 					}
-					if (source.id != creep.memory.carrierSourceID) {
+					if (source) {
+						if (source.id != creep.memory.carrierSourceID) {
+							// Throw.Error('creep ', creep.id, ' 找不到分配的矿CONTAINERID ', creep.memory.carrierSourceID);
+						}
+					} else {
 						// Throw.Error('creep ', creep.id, ' 找不到分配的矿CONTAINERID ', creep.memory.carrierSourceID);
 					}
 				}
