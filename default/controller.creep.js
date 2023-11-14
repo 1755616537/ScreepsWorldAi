@@ -30,9 +30,13 @@ global.controller.creep = {
 		} else {
 			// 生产 采集
 			// 动态更新采集者数量
-			if (globalData.creepConfigs.harvest.AutomaticAssignNum && Memory.source.total && globalData
-				.creepConfigs.harvest.number != Memory.source.total) globalData
-				.creepConfigs.harvest.number = Memory.source.total;
+			try{
+				if (globalData.creepConfigs.harvest.AutomaticAssignNum && Memory.source.total && globalData
+					.creepConfigs.harvest.number != Memory.source.total) globalData
+					.creepConfigs.harvest.number = Memory.source.total;
+			}catch(e){
+				//TODO handle the exception
+			}
 			if (harvests.length < globalData.creepConfigs.harvest.number) {
 				factory.creep.addHarvest(harvests);
 			}
