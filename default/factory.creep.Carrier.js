@@ -54,6 +54,7 @@ var pro = {
 						}
 						for (let val in memorySource) {
 							// 找到空闲CONTAINER，优先分配给没有分配数量的CONTAINER
+							let on = false;
 							let spaceXYList = memorySource[val].spaceXYList;
 							for (let i = 0; i < spaceXYList.length; i++) {
 								let containerID = spaceXYList[i].containerID
@@ -69,6 +70,7 @@ var pro = {
 									break;
 								}
 							}
+							if (on) break;
 						}
 					}
 
