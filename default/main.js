@@ -8,23 +8,9 @@ require("main_mount")();
 module.exports.loop = function() {
 	// 任务调度启动
 	// controller.task.run();
-
+	
+	controller.Tower.run();
 	controller.creep.run();
-
-	var tower = Game.getObjectById('65533272618670f5499be7a9');
-	if (tower) {
-		var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-			filter: (structure) => structure.hits < structure.hitsMax
-		});
-		if (closestDamagedStructure) {
-			tower.repair(closestDamagedStructure);
-		}
-
-		var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-		if (closestHostile) {
-			tower.attack(closestHostile);
-		}
-	}
 
 	// clog('本次tips使用 CPU 时间总量 ',Game.cpu.getUsed())
 }

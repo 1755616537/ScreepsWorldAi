@@ -1,0 +1,6 @@
+
+global.factory.Tower = {
+	run: () => {
+		
+	}
+}
