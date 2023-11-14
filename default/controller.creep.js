@@ -29,6 +29,9 @@ global.controller.creep = {
 				});
 		} else {
 			// 生产 采集
+			// 动态更新采集者数量
+			if (globalData.creepConfigs.harvest.AutomaticAssignNum && Memory.source.total) globalData
+				.creepConfigs.harvest.number = Memory.source.total;
 			if (harvests.length < globalData.creepConfigs.harvest.number) {
 				factory.creep.addHarvest(harvests);
 			}
