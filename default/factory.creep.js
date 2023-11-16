@@ -317,11 +317,11 @@ global.factory.creep = {
 			filter: (structure) => {
 				// 找出需要储存能量
 				return (structure.structureType == STRUCTURE_TOWER) &&
-					structure.store.getUsedCapacity(RESOURCE_ENERGY) > 200;
+					structure.store.getUsedCapacity(RESOURCE_ENERGY) > 100;
 			}
 		});
 		if (targets.length > 0 && globalData.creepConfigs.repairer.onTower) {
-			return '存在TOWER能量大于200以上,不需要维修者';
+			return '存在TOWER能量大于100以上,不需要维修者';
 		}
 		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.repairer.bodys
 			.totalEnergyRequired) {
