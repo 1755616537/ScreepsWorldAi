@@ -172,7 +172,7 @@ function transfer(creep) {
 				structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
 		}
 	});
-	if (targets.length > 0) {
+	if (targets.length < 1) {
 		targets = creep.room.find(FIND_STRUCTURES, {
 			filter: (structure) => {
 				// 找出需要储存能量
@@ -182,7 +182,7 @@ function transfer(creep) {
 			}
 		});
 	}
-	if (targets.length > 0) {
+	if (targets.length < 1) {
 		targets = creep.room.find(FIND_STRUCTURES, {
 			filter: (structure) => {
 				// 找出需要储存能量
