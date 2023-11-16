@@ -313,6 +313,16 @@ global.factory.creep = {
 	addRepairer: (repairers, controller_level = 4) => {
 		let bodys;
 		let newName = globalData.repairer + Game.time;
+		let targets = creep.room.find(FIND_STRUCTURES, {
+			filter: (structure) => {
+				// 找出需要储存能量
+				return (structure.structureType == STRUCTURE_TOWER) &&
+					structure.store.getUsedCapacity(RESOURCE_ENERGY) > 200;
+			}
+		});
+		if (targets.length > 0 && globalData.creepConfigs.repairer.onTower) {
+			return '存在TOWER能量大于200以上,不需要维修者';
+		}
 		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.repairer.bodys
 			.totalEnergyRequired) {
 			bodys = globalData.creepConfigs.repairer.bodys.list;
