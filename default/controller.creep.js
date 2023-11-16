@@ -62,7 +62,8 @@ global.controller.creep = {
 						1))) {
 					priority = 'repairer';
 				} else if (carriers.length < 1) {
-					priority = 'carrier';
+					// 注释掉是因为 拥有CONTAINER才生产 会卡住优先顺序，不进行默认生成
+					// priority = 'carrier';
 				}
 				if (priority) {
 					switch (priority) {
