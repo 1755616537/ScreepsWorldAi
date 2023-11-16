@@ -191,14 +191,15 @@ function transfer(creep) {
 			}
 		});
 		// 去除矿区的CONTAINER
-		for (let i = 0; i < targets.length; i++) {
+		let targets2 = targets;
+		for (let i = 0; i < targets2.length; i++) {
 			let memorySource = Memory.source.list;
 			let on = false;
 			for (let val in memorySource) {
 				let spaceXYList = memorySource[val].spaceXYList;
 				for (let i2 = 0; i2 < spaceXYList.length; i2++) {
-					if (spaceXYList[i2].x == targets[i].pos.x && spaceXYList[i2].y == targets[i].pos.y) {
-						targets.splice(i, 1);
+					if (spaceXYList[i2].x == targets2[i].pos.x && spaceXYList[i2].y == targets2[i].pos.y) {
+						targets2.splice(i, 1);
 						on = true;
 						break;
 					}
@@ -206,6 +207,7 @@ function transfer(creep) {
 				if (on) break;
 			}
 		}
+		targets = targets2;
 	}
 	if (targets.length > 0) {
 		// 将资源从该 creep 转移至其他对象
