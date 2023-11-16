@@ -2,6 +2,12 @@ global.controller.Tower = {
 	run: () => {
 		var tower = Game.getObjectById('65533272618670f5499be7a9');
 		if (tower) {
+			// 攻击
+			var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+			if (closestHostile) {
+				tower.attack(closestHostile);
+			}
+			
 			// 维修
 			let targets = tower.room.find(FIND_STRUCTURES, {
 				filter: (structure) => {
@@ -43,11 +49,6 @@ global.controller.Tower = {
 			}
 			if (targets.length > 0) {
 				tower.repair(targets[0]);
-			}
-			// 攻击
-			var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-			if (closestHostile) {
-				tower.attack(closestHostile);
 			}
 		}
 	}
