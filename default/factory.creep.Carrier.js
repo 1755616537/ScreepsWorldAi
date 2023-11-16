@@ -186,7 +186,7 @@ function transfer(creep) {
 		targets = creep.room.find(FIND_STRUCTURES, {
 			filter: (structure) => {
 				// 找出需要储存能量
-				return (structure.structureType == CONTAINER) &&
+				return (structure.structureType == STRUCTURE_CONTAINER) &&
 					structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
 			}
 		});
