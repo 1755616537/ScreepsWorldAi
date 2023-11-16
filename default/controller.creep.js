@@ -30,16 +30,24 @@ global.controller.creep = {
 		} else {
 			// 生产 采集
 			// 动态更新采集者数量
-			try{
+			try {
 				if (globalData.creepConfigs.harvest.AutomaticAssignNum && Memory.source.total && globalData
 					.creepConfigs.harvest.number != Memory.source.total) globalData
 					.creepConfigs.harvest.number = Memory.source.total;
-			}catch(e){
+			} catch (e) {
 				//TODO handle the exception
 			}
 			if (harvests.length < globalData.creepConfigs.harvest.number) {
 				factory.creep.addHarvest(harvests);
 			}
+
+			let towers = factory.spawns.get(1).room.find(FIND_STRUCTURES, {
+				filter: (structure) => {
+					// 找出需要储存能量
+					return (structure.structureType == STRUCTURE_TOWER) &&
+						structure.store.getUsedCapacity(RESOURCE_ENERGY) > 100;
+				}
+			});
 
 			// 最少采集2个
 			if (harvests.length >= 2) {
@@ -49,7 +57,9 @@ global.controller.creep = {
 					priority = 'upgrader';
 				} else if (builders.length < 1) {
 					priority = 'builder';
-				} else if (repairers.length < 1) {
+				} else if (repairers.length < 1 && (!globalData.creepConfigs.repairer.onTower || (globalData
+						.creepConfigs.repairer.onTower && towers.length <
+						1))) {
 					priority = 'repairer';
 				} else if (carriers.length < 1) {
 					// priority = 'carrier';
