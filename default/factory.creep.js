@@ -313,7 +313,7 @@ global.factory.creep = {
 	addRepairer: (repairers, controller_level = 4) => {
 		let bodys;
 		let newName = globalData.repairer + Game.time;
-		let targets = creep.room.find(FIND_STRUCTURES, {
+		let targets = factory.spawns.get(1).room.find(FIND_STRUCTURES, {
 			filter: (structure) => {
 				// 找出需要储存能量
 				return (structure.structureType == STRUCTURE_TOWER) &&
