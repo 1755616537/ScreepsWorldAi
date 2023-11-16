@@ -165,15 +165,48 @@ global.factory.creep.Carrier = pro;
 
 function transfer(creep) {
 	// 找出需要补充能量的建筑
-	var targets = creep.room.find(FIND_STRUCTURES, {
+	let targets = creep.room.find(FIND_STRUCTURES, {
 		filter: (structure) => {
-			// 找出需要储存能量的EXTENSION，SPAW，TOWERN
-			return (structure.structureType == STRUCTURE_EXTENSION ||
-					structure.structureType == STRUCTURE_SPAWN ||
-					structure.structureType == STRUCTURE_TOWER) &&
+			// 找出需要储存能量
+			return (structure.structureType == STRUCTURE_TOWER) &&
 				structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
 		}
 	});
+	if (targets.length > 0) {
+		targets = creep.room.find(FIND_STRUCTURES, {
+			filter: (structure) => {
+				// 找出需要储存能量
+				return (structure.structureType == STRUCTURE_EXTENSION ||
+						structure.structureType == STRUCTURE_SPAWN) &&
+					structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+			}
+		});
+	}
+	if (targets.length > 0) {
+		targets = creep.room.find(FIND_STRUCTURES, {
+			filter: (structure) => {
+				// 找出需要储存能量
+				return (structure.structureType == CONTAINER) &&
+					structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+			}
+		});
+		// 去除矿区的CONTAINER
+		for (let i = 0; i < targets.length; i++) {
+			let memorySource = Memory.source.list;
+			let on = false;
+			for (let val in memorySource) {
+				let spaceXYList = memorySource[val].spaceXYList;
+				for (let i2 = 0; i2 < spaceXYList.length; i2++) {
+					if (spaceXYList[i2].x == targets[i].pos.x && spaceXYList[i2].y == targets[i].pos.y) {
+						targets.splice(i, 1);
+						on = true;
+						break;
+					}
+				}
+				if (on) break;
+			}
+		}
+	}
 	if (targets.length > 0) {
 		// 将资源从该 creep 转移至其他对象
 		if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {

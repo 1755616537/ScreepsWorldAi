@@ -6,7 +6,6 @@ global.controller.Tower = {
 			var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
 			if (closestHostile) {
 				tower.attack(closestHostile);
-				return
 			}
 			
 			// 维修
