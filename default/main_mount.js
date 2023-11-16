@@ -5,6 +5,7 @@ global.controller = {}
 require('globalData');
 // -------------------------------工具
 require("utils");
+require('超级移动优化hotfix 0.9.4');
 require("Throw");
 // -------------------------------工厂模块
 require('factory.task')
