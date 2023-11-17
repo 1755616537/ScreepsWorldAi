@@ -127,7 +127,7 @@ global.globalData = {
 			},
 			number: 2,
 			// tower创建拥有能量的时候不生成维修者
-			onTower: true
+			onTower: false
 		},
 		// 防御者
 		'defender': {
