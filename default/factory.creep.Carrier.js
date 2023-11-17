@@ -4,7 +4,7 @@ var pro = {
 
 	/** @param {Creep} creep **/
 	run: function(creep) {
-		if (creep.store.getFreeCapacity() > 0) { // 背包未满
+		if (creep.store.getUsedCapacity() == 0) { // 背包未满
 			// 所有掉落的资源
 			let targets = creep.room.find(FIND_DROPPED_RESOURCES);
 			// const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
@@ -33,7 +33,7 @@ var pro = {
 							if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
 								spaceXYList[i].containerID = found[0].id;
 							} else {
-								// 如果不存在CONTAINER就清楚CONTAINERID
+								// 如果不存在CONTAINER就清除CONTAINERID
 								spaceXYList[i].containerID = null;
 							}
 						}
