@@ -79,12 +79,14 @@ var pro = {
 				let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
 					filter: (structure) => {
 						// 找出有储存能量的container搬运
-						return (structure.structureType == STRUCTURE_CONTAINER ||
-								structure.structureType == STRUCTURE_EXTENSION ||
-								(structure.structureType == STRUCTURE_SPAWN &&
-									structure.store.getUsedCapacity(RESOURCE_ENERGY) > 250) ||
-								structure.structureType == STRUCTURE_TOWER) &&
+						return (structure.structureType == STRUCTURE_CONTAINER) &&
 							structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+						// return (structure.structureType == STRUCTURE_CONTAINER ||
+						// 		structure.structureType == STRUCTURE_EXTENSION ||
+						// 		(structure.structureType == STRUCTURE_SPAWN &&
+						// 			structure.store.getUsedCapacity(RESOURCE_ENERGY) > 250) ||
+						// 		structure.structureType == STRUCTURE_TOWER) &&
+						// 	structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
 					}
 				});
 
