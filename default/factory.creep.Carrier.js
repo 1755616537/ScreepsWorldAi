@@ -4,7 +4,7 @@ var pro = {
 
 	/** @param {Creep} creep **/
 	run: function(creep) {
-		if (creep.store.getFreeCapacity() == 0) { // 背包未满
+		if (creep.store.getFreeCapacity() > 0) { // 背包未满
 			// 所有掉落的资源
 			let targets = creep.room.find(FIND_DROPPED_RESOURCES);
 			// const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
