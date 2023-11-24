@@ -120,7 +120,7 @@ global.factory.creep = {
 						//TODO handle the exception
 					}
 					// 是否合法记录了
-					if (on && carrierSourceID) {
+					if (on && carrierSourceID && Memory.source && Memory.source.list) {
 						let on = false;
 						let memorySource = Memory.source.list;
 						for (let val in memorySource) {
