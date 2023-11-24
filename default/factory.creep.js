@@ -115,12 +115,13 @@ global.factory.creep = {
 					// 如果没有合法记录会不存在harvestSourceID,报错需要捕获
 					try {
 						carrierSourceID = Memory.creeps[name].carrierSourceID;
+						if (Memory.source && Memory.source.list) {}
 						on = true;
 					} catch (e) {
 						//TODO handle the exception
 					}
 					// 是否合法记录了
-					if (on && carrierSourceID && Memory.source && Memory.source.list) {
+					if (on && carrierSourceID) {
 						let on = false;
 						let memorySource = Memory.source.list;
 						for (let val in memorySource) {
