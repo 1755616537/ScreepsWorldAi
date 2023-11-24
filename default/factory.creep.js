@@ -84,19 +84,19 @@ global.factory.creep = {
 				// 采集者
 				if (Memory.creeps[name].role == globalData.harvest) {
 					// 从矿区记录删除
-					let harvestSourceID;
+					let harvestSourceID, memorySource, memorySourceList;
 					let on = false;
 					// 如果没有合法记录会不存在harvestSourceID,报错需要捕获
 					try {
 						harvestSourceID = Memory.creeps[name].harvestSourceID;
+						memorySource = Memory.source.list;
+						memorySourceList = memorySource[harvestSourceID].list;
 						on = true;
 					} catch (e) {
 						//TODO handle the exception
 					}
 					// 是否合法记录了
 					if (on && harvestSourceID) {
-						let memorySource = Memory.source.list;
-						let memorySourceList = memorySource[harvestSourceID].list;
 						for (let i = 0; i < memorySourceList.length; i++) {
 							if (memorySourceList[i] == name) {
 								memorySource[harvestSourceID].list.splice(i, 1);
@@ -110,12 +110,12 @@ global.factory.creep = {
 				// 运输者
 				if (Memory.creeps[name].role == globalData.carrier) {
 					// 从矿区记录删除
-					let carrierSourceID;
+					let carrierSourceID, memorySource;
 					let on = false;
 					// 如果没有合法记录会不存在harvestSourceID,报错需要捕获
 					try {
 						carrierSourceID = Memory.creeps[name].carrierSourceID;
-						if (Memory.source && Memory.source.list) {}
+						memorySource = Memory.source.list;
 						on = true;
 					} catch (e) {
 						//TODO handle the exception
@@ -123,7 +123,6 @@ global.factory.creep = {
 					// 是否合法记录了
 					if (on && carrierSourceID) {
 						let on = false;
-						let memorySource = Memory.source.list;
 						for (let val in memorySource) {
 							let spaceXYList = memorySource[val].spaceXYList;
 							for (let i = 0; i < spaceXYList.length; i++) {
