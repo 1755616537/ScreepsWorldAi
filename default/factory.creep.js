@@ -210,12 +210,19 @@ global.factory.creep = {
 				}
 			}
 			if (carriers.length > 2 && controller_level >= 4) {
-				if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.carrier
-					.bodysPlus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.carrier.bodysPlus.list;
-				} else {
-					return 'Plus 房间总能量数量未达到限制，无法生产';
+				const builds = factory.spawns.get(1).room.find(FIND_STRUCTURES, {
+					filter: {
+						structureType: STRUCTURE_CONTAINER
+					}
+				});
+				if (globalData.creepConfigs.carrier.sourceContainer1v1 && carriers.length >= builds.length){
+					if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.carrier
+						.bodysPlus
+						.totalEnergyRequired) {
+						bodys = globalData.creepConfigs.carrier.bodysPlus.list;
+					} else {
+						return 'Plus 房间总能量数量未达到限制，无法生产';
+					}
 				}
 			}
 		}
