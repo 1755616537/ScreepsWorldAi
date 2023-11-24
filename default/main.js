@@ -32,4 +32,5 @@ module.exports.loop = function() {
 // .createConstructionSite自动布局EXTENSION建筑 控制器等级3布局TOWER
 // -.每个运输者可以配置是否固定矿区运输,属于的在自由选择
 // .运输者，（取，放）状态切换，去取CONTAINER能量后可以选择去捡能量也可以去放
+// .每个STORAGE搭配一个运输者。如果存在STORAGE并且搭配有运输者，其他运输者才可以把能力放到STORAGE
 // W25N6房间
