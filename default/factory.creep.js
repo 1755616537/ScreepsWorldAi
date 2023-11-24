@@ -214,7 +214,7 @@ global.factory.creep = {
 			}
 			if (carriers.length > 2 && controller_level >= 4) {
 				if (globalData.creepConfigs.carrier.sourceContainer1v1 && carriers.length >= factory.source
-					.GetContainerLength()) {
+					.GetContainerLength() + 1) {
 					if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.carrier
 						.bodysPlus
 						.totalEnergyRequired) {
