@@ -234,7 +234,6 @@ var pro = {
 						// 返回该存储的剩余可用容量大于0的CONTAINER
 						return (
 								structure.structureType == STRUCTURE_EXTENSION ||
-								structure.structureType == STRUCTURE_STORAGE ||
 								// ||structure.structureType == STRUCTURE_TOWER
 								structure.structureType == STRUCTURE_SPAWN) &&
 							structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
