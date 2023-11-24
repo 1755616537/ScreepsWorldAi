@@ -1,6 +1,24 @@
 global.globalData = {
 	// 总输出
 	clog: true,
+	structuresShape: {
+		"spawn": "◎",
+		"extension": "ⓔ",
+		"link": "◈",
+		"road": "•",
+		"constructedWall": "▓",
+		"rampart": "⊙",
+		"storage": "▤",
+		"tower": "🔫",
+		"observer": "👀",
+		"powerSpawn": "❂",
+		"extractor": "☸",
+		"terminal": "✡",
+		"lab": "☢",
+		"container": "□",
+		"nuker": "▲",
+		"factory": "☭"
+	},
 	// 移动
 	Move: {
 		// 工作颜色
