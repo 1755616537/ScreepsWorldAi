@@ -21,3 +21,5 @@ class Task {
 	}
 	// new Task('',Task.TaskType_builder,'').toObject()
 }
+
+global.Task = Task;

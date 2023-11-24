@@ -3,6 +3,8 @@ global.factory = {};
 global.controller = {}
 // -------------------------------全局数据
 require('globalData');
+// -------------------------------构建函数
+require("class.constructor.task");
 // -------------------------------工具
 require("utils");
 require('超级移动优化hotfix 0.9.4');
