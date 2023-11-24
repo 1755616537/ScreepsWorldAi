@@ -165,25 +165,25 @@ global.factory.creep.Carrier = pro;
 
 function transfer(creep) {
 	// 找出需要补充能量的建筑
-	// let targets = creep.room.find(FIND_STRUCTURES, {
-	// 	filter: (structure) => {
-	// 		// 找出需要储存能量
-	// 		return (structure.structureType == STRUCTURE_TOWER) &&
-	// 			structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
-	// 	}
-	// });
-	// if (targets.length < 1) {
-		
-	// }
 	let targets = creep.room.find(FIND_STRUCTURES, {
 		filter: (structure) => {
 			// 找出需要储存能量
-			return (structure.structureType == STRUCTURE_EXTENSION ||
-					structure.structureType == STRUCTURE_SPAWN ||
-					structure.structureType == STRUCTURE_TOWER) &&
+			return (structure.structureType == STRUCTURE_STORAGE) &&
 				structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
 		}
 	});
+	if (targets.length < 1) {
+		targets = creep.room.find(FIND_STRUCTURES, {
+			filter: (structure) => {
+				// 找出需要储存能量
+				return (structure.structureType == STRUCTURE_EXTENSION ||
+						structure.structureType == STRUCTURE_SPAWN ||
+						structure.structureType == STRUCTURE_TOWER) &&
+					structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+			}
+		});
+	}
+
 	if (targets.length < 1) {
 		targets = creep.room.find(FIND_STRUCTURES, {
 			filter: (structure) => {
