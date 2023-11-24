@@ -9,6 +9,7 @@ require('超级移动优化hotfix 0.9.4');
 require("Throw");
 // -------------------------------工厂模块
 require('factory.task')
+require('factory.source')
 require('factory.spawn')
 require('factory.Tower')
 require('factory.creep')
