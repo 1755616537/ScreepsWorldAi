@@ -210,12 +210,7 @@ global.factory.creep = {
 				}
 			}
 			if (carriers.length > 2 && controller_level >= 4) {
-				const builds = factory.spawns.get(1).room.find(FIND_STRUCTURES, {
-					filter: {
-						structureType: STRUCTURE_CONTAINER
-					}
-				});
-				if (globalData.creepConfigs.carrier.sourceContainer1v1 && carriers.length >= builds.length){
+				if (globalData.creepConfigs.carrier.sourceContainer1v1 && carriers.length >= factory.source.GetContainerLength()){
 					if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.carrier
 						.bodysPlus
 						.totalEnergyRequired) {
