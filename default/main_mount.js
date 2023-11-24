@@ -28,7 +28,5 @@ module.exports = function() {
 	clog("脚本加载 Time " + Game.time + " , bucket " + Game.cpu.bucket);
 
 	// 客户端汉化显示
-	(function() {
-		Utils.cn();
-	}())
+	Utils.cn();
 }
