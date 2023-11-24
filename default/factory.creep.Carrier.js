@@ -47,10 +47,15 @@ var pro = {
 							let spaceXYList = memorySource[val].spaceXYList;
 							let on = false;
 							for (let i = 0; i < spaceXYList.length; i++) {
-								if (spaceXYList[i].list.length < 1) {
-									memoryContainerListNull = i;
-									ok = true;
-									break;
+								try {
+									if (spaceXYList[i].list.length < 1) {
+										memoryContainerListNull = i;
+										ok = true;
+										break;
+									}
+								} catch (e) {
+									//TODO handle the exception
+									spaceXYList[i].list = []
 								}
 							}
 							if (on) break;
