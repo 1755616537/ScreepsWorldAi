@@ -125,7 +125,7 @@ global.globalData = {
 				],
 				totalEnergyRequired: 300
 			},
-			number: 4,
+			number: 5,
 			// 矿区CONTAINER是否1v1运送
 			sourceContainer1v1: true
 		},
