@@ -7,7 +7,7 @@ class Task {
 	// static TaskType_repairer = 5;
 	// static TaskType_defender = 6;
 
-	constructor(taskName, taskType, executeCreep) {
+	constructor(info) {
 		// 任务名称
 		this.taskName = taskName;
 		// 任务类型
@@ -19,7 +19,7 @@ class Task {
 	toObject() {
 		return Object.assign({}, this);
 	}
-	// new Task('',Task.TaskType_builder,'').toObject()
+
 }
 
 global.Task = Task;

@@ -3,13 +3,18 @@ global.factory = {};
 global.controller = {}
 // -------------------------------全局数据
 require('globalData');
+// -------------------------------构建接口
+// require("interface")
 // -------------------------------构建函数
-require("class.constructor.task");
+require("class.Task");
+// -------------------------------封装
+// 报错
+require("Throw");
+// 日志
+require("log");
 // -------------------------------工具
 require("utils");
 require('超级移动优化hotfix 0.9.4');
-// 报错封装
-require("Throw");
 // -------------------------------工厂模块
 require('factory.task')
 require('factory.source')

@@ -233,6 +233,7 @@ global.factory.creep = {
 			});
 		if (returnData == OK) {
 			console.log('生成新的 运输者:' + newName);
+			console.log('生成新的 运输者: ' + newName);
 		}
 		return returnData
 	},
