@@ -38,7 +38,17 @@
 // TOUGH 	10 	无附加效果，唯一作用是增加 creep 的最大耐久值。可被强化以承受更多伤害。
 
 
-
+const dataStructure_task = {
+	current: '',
+	previous: '',
+	next: ''
+}
+const dataStructure_target={
+	x:null,
+	y:null,
+	// 房间名称
+	roomName:''
+}
 
 global.factory.creep = {
 	moveTo: (creep, target, type = '') => {
@@ -228,11 +238,12 @@ global.factory.creep = {
 		let returnData = factory.spawns.get(1).spawnCreep(bodys,
 			newName, {
 				memory: {
-					role: globalData.carrier
+					role: globalData.carrier,
+					task: dataStructure_task,
+					target: dataStructure_target
 				}
 			});
 		if (returnData == OK) {
-			console.log('生成新的 运输者:' + newName);
 			console.log('生成新的 运输者: ' + newName);
 		}
 		return returnData
