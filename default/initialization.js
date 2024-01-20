@@ -16,7 +16,7 @@ global.initialization = {
 // 控制器块初始化
 function controllerPiece(spawn = 1) {
 	let room;
-	switch (sequence) {
+	switch (spawn) {
 		case 1:
 			room = Game.rooms[globalData.roomName1];
 			break;
