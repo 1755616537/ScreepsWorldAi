@@ -21,11 +21,18 @@ require('factory.source')
 require('factory.spawn')
 require('factory.Tower')
 require('factory.creep')
+// 采集
 require('factory.creep.Harvest')
+// 升级
 require('factory.creep.Upgrader')
+// 建造
 require('factory.creep.Builder')
+// 运输
 require('factory.creep.Carrier')
+// 维修
 require('factory.creep.Repairer')
+// 占领
+require('factory.creep.Occupy')
 // -------------------------------控制器
 require('controller.task')
 require('controller.Tower')
