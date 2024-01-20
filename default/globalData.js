@@ -23,7 +23,7 @@ global.globalData = {
 	Move: {
 		// 工作颜色
 		WorkColor: '#ffaa00',
-		// 工作资源颜色
+		// 获取资源颜色
 		WorkResourceColor: '#ffff00',
 	},
 	// 房间1名称
