@@ -156,15 +156,15 @@ function spawn(spawn = 1) {
 		if (harvests.length >= 2) {
 			// 优先级顺序生产 每种保持最低1个
 			let priority;
-			if (upgraders.length < 1 && lobalData.creepConfigs.upgrader.number >= 1) {
+			if (upgraders.length < 1 && globalData.creepConfigs.upgrader.number >= 1) {
 				priority = 'upgrader';
-			} else if (builders.length < 1 && lobalData.creepConfigs.builder.number >= 1) {
+			} else if (builders.length < 1 && globalData.creepConfigs.builder.number >= 1) {
 				priority = 'builder';
-			} else if (repairers.length < 1 && lobalData.creepConfigs.repairer.number >= 1 && (!globalData.creepConfigs.repairer.onTower || (globalData
+			} else if (repairers.length < 1 && globalData.creepConfigs.repairer.number >= 1 && (!globalData.creepConfigs.repairer.onTower || (globalData
 					.creepConfigs.repairer.onTower && towers.length <
 					1))) {
 				priority = 'repairer';
-			} else if (carriers.length < 1 && lobalData.creepConfigs.carrier.number >= 1) {
+			} else if (carriers.length < 1 && globalData.creepConfigs.carrier.number >= 1) {
 				// 注释掉是因为 拥有CONTAINER才生产 会卡住优先顺序，不进行默认生成
 				// priority = 'carrier';
 			}
