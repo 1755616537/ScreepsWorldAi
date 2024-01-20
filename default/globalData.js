@@ -162,6 +162,22 @@ global.globalData = {
 				totalEnergyRequired: 300
 			},
 			number: 1
+		},
+		// 占领者
+		'occupier': {
+			bodys: {
+				list: [WORK, WORK, CARRY, MOVE],
+				totalEnergyRequired: 200
+			},
+			bodysMinus: {
+				list: [WORK, CARRY, MOVE],
+				totalEnergyRequired: 100
+			},
+			bodysPlus: {
+				list: [WORK, WORK, WORK, CARRY, MOVE],
+				totalEnergyRequired: 300
+			},
+			number: 1
 		}
 	},
 	// 角色部件配置

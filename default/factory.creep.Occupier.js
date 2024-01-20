@@ -1,25 +1,36 @@
 global.factory.creep.Occupy = {
 	run: (creep, roomName) => {
+		// 需要拥有CLAIM部件
 		// factory.creep.Occupy.run(Game.creeps['builder54894683'],'W48S54');
 		let room = Game.rooms[roomName];
-		
+
 		// 把小兵规划入特别行动
 		creep.memory.SpecialActions = {
 			code: 'Occupy',
 			mgs: roomName
 		};
-
+		
 		// 如果该房间不存在就先往房间走
 		if (!room) {
 			creep.moveTo(new RoomPosition(25, 25, roomName))
 		} else {
 			// 如果房间存在了就说明已经进入了该房间
 			// 移动到房间的控制器并占领
-			console.log(creep.claimController(room.controller))
 			if (creep.claimController(room.controller) == ERR_NOT_IN_RANGE) {
 				creep.moveTo(room.controller)
 			}
 		}
+
+		// factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE, CLAIM],
+		// 	'Occupy1号', {
+		// 		memory: {
+		// 			role: '',
+		// 			SpecialActions: {
+		// 				code: 'Occupy',
+		// 				mgs: 'W48S54'
+		// 			},
+		// 		}
+		// 	});
 
 		// 因为我们的 claimer 已经在房间里了
 		// 所以我们可以正常的获取该房间的对象。
