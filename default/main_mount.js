@@ -35,6 +35,8 @@ require('factory.creep.Repairer')
 require('factory.creep.Defender')
 // 占领
 require('factory.creep.Occupier')
+// 治疗
+require('factory.creep.TheHealer')
 // -------------------------------控制器
 require('controller.task')
 require('controller.Tower')

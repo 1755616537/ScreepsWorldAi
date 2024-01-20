@@ -54,6 +54,8 @@ global.globalData = {
 	farDefender: 'farDefender',
 	// 占领者ID
 	occupier: 'occupier',
+	// 治疗者ID
+	theHealer: 'theHealer',
 	// 自动分配矿区
 	AutomaticAssignHarvest: true,
 	// 自动分配建设采集区的CONTAINER
