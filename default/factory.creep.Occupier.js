@@ -2,14 +2,22 @@ global.factory.creep.Occupier = {
 	run: (creep, roomName) => {
 		// 需要拥有CLAIM部件
 		// factory.creep.Occupy.run(Game.creeps['builder54894683'],'W48S54');
+		
+		// 如果指定需要占领房间名称,覆盖原来的
+		if (roomName) {
+			creep.memory.occupyRoomName = roomName;
+		}
+		// 获取需要占领房间名称
+		let occupyRoomName = creep.memory.occupyRoomName;
+		if (!occupyRoomName){
+			// 获取不到不再执行程序
+			return;
+		}else{
+			roomName = occupyRoomName;
+		}
+
 		let room = Game.rooms[roomName];
 
-		// 把小兵规划入特别行动
-		creep.memory.SpecialActions = {
-			code: 'Occupy',
-			mgs: roomName
-		};
-		
 		// 如果该房间不存在就先往房间走
 		if (!room) {
 			creep.moveTo(new RoomPosition(25, 25, roomName))

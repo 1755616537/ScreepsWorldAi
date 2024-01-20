@@ -93,7 +93,7 @@ global.globalData = {
 				],
 				totalEnergyRequired: 300
 			},
-			number: 3
+			number: 1
 		},
 		// 建造者
 		'builder': {
@@ -109,7 +109,7 @@ global.globalData = {
 				list: [WORK, WORK, WORK, CARRY, MOVE],
 				totalEnergyRequired: 300
 			},
-			number: 2
+			number: 1
 		},
 		// 运输者
 		'carrier': {
@@ -163,7 +163,7 @@ global.globalData = {
 				list: [WORK, WORK, WORK, CARRY, MOVE],
 				totalEnergyRequired: 300
 			},
-			number: 1
+			number: 0
 		},
 		// 占领者
 		'occupier': {
@@ -179,7 +179,7 @@ global.globalData = {
 				list: [WORK, WORK, WORK, CARRY, MOVE],
 				totalEnergyRequired: 300
 			},
-			number: 1
+			number: 0
 		}
 	},
 	// 角色部件配置
