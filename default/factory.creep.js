@@ -158,7 +158,7 @@ global.factory.creep = {
 				}
 
 				delete Memory.creeps[name];
-				console.log('清楚不存在的creep内存:', name);
+				clog('清楚不存在的creep内存:', name);
 			}
 		}
 	},
@@ -199,7 +199,7 @@ global.factory.creep = {
 				}
 			});
 		if (returnData == OK) {
-			console.log('生成新的 采集者: ' + newName);
+			clog('生成新的 采集者: ' + newName);
 		}
 		return returnData
 	},
@@ -244,7 +244,7 @@ global.factory.creep = {
 				}
 			});
 		if (returnData == OK) {
-			console.log('生成新的 运输者: ' + newName);
+			clog('生成新的 运输者: ' + newName);
 		}
 		return returnData
 	},
@@ -284,7 +284,7 @@ global.factory.creep = {
 				}
 			});
 		if (returnData == OK) {
-			console.log('生成新的 升级者: ' + newName);
+			clog('生成新的 升级者: ' + newName);
 		}
 		return returnData
 	},
@@ -324,7 +324,7 @@ global.factory.creep = {
 				}
 			});
 		if (returnData == OK) {
-			console.log('生成新的 建造者:' + newName);
+			clog('生成新的 建造者:' + newName);
 		}
 		return returnData
 	},
@@ -374,7 +374,7 @@ global.factory.creep = {
 				}
 			});
 		if (returnData == OK) {
-			console.log('生成新的 维修者:' + newName);
+			clog('生成新的 维修者:' + newName);
 		}
 		return returnData
 	},
