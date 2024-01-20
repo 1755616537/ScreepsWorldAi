@@ -26,8 +26,12 @@ global.globalData = {
 		// 工作资源颜色
 		WorkResourceColor: '#ffff00',
 	},
-	// 主房间名称
+	// 房间1名称
 	roomName1: 'W47S54',
+	// 房间2名称
+	roomName2: 'W48S54',
+	// 房间3名称
+	roomName3: '',
 	// 基地1名称
 	SpawnName1: 'Spawn1',
 	// 基地2名称
