@@ -46,6 +46,8 @@ global.globalData = {
 	repairer: 'repairer',
 	// 防御者ID
 	defender: 'defender',
+	// 占领者ID
+	occupier: 'occupier',
 	// 自动分配矿区
 	AutomaticAssignHarvest: true,
 	// 自动分配建设采集区的CONTAINER

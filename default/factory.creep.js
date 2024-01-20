@@ -379,6 +379,86 @@ global.factory.creep = {
 		}
 		return returnData
 	},
+	addDefender: (defenders, controller_level = 4) => {
+		let bodys;
+		let newName = globalData.defender + Game.time;
+		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.defender.bodys
+			.totalEnergyRequired) {
+			bodys = globalData.creepConfigs.defender.bodys.list;
+		} else {
+			return '房间总能量数量未达到限制，无法生产';
+		}
+		if (defenders) {
+			if (defenders.length < 1) {
+				if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.defender
+					.bodysMinus
+					.totalEnergyRequired) {
+					bodys = globalData.creepConfigs.defender.bodysMinus.list;
+				} else {
+					return 'Minus 房间总能量数量未达到限制，无法生产';
+				}
+			}
+			if (defenders.length > 2 && controller_level >= 4) {
+				if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.defender
+					.bodysPlus
+					.totalEnergyRequired) {
+					bodys = globalData.creepConfigs.defender.bodysPlus.list;
+				} else {
+					return 'Plus 房间总能量数量未达到限制，无法生产';
+				}
+			}
+		}
+		let returnData = factory.spawns.get(1).spawnCreep(bodys,
+			newName, {
+				memory: {
+					role: globalData.defender
+				}
+			});
+		if (returnData == OK) {
+			clog('生成新的 防御者:' + newName);
+		}
+		return returnData
+	},
+	addOccupier: (occupiers, controller_level = 4) => {
+		let bodys;
+		let newName = globalData.occupier + Game.time;
+		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.occupier.bodys
+			.totalEnergyRequired) {
+			bodys = globalData.creepConfigs.occupier.bodys.list;
+		} else {
+			return '房间总能量数量未达到限制，无法生产';
+		}
+		if (occupiers) {
+			if (occupiers.length < 1) {
+				if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.occupier
+					.bodysMinus
+					.totalEnergyRequired) {
+					bodys = globalData.creepConfigs.occupier.bodysMinus.list;
+				} else {
+					return 'Minus 房间总能量数量未达到限制，无法生产';
+				}
+			}
+			if (occupiers.length > 2 && controller_level >= 4) {
+				if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.occupier
+					.bodysPlus
+					.totalEnergyRequired) {
+					bodys = globalData.creepConfigs.occupier.bodysPlus.list;
+				} else {
+					return 'Plus 房间总能量数量未达到限制，无法生产';
+				}
+			}
+		}
+		let returnData = factory.spawns.get(1).spawnCreep(bodys,
+			newName, {
+				memory: {
+					role: globalData.occupier
+				}
+			});
+		if (returnData == OK) {
+			clog('生成新的 占领者:' + newName);
+		}
+		return returnData
+	},
 	ComponentEnergyCalculation: (creepComponent = []) => {
 		// 部件能量计算
 		let total = 0;
