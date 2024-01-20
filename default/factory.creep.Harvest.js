@@ -188,7 +188,7 @@ var pro = {
 					// Throw.Error('creep ', creep.id, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
 				}
 			}
-			
+
 			if (source) {
 				// 采集能量
 				if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
@@ -255,6 +255,23 @@ var pro = {
 
 global.factory.creep.Harvest = pro;
 
-function all() {
-	return _.filter(Game.creeps, (creep) => creep.memory.role == globalData.harvest);
+function all(spawn) {
+	let returnData;
+	switch (spawn) {
+		case 1:
+			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.harvest && creep.memory
+				.spawn == globalData.SpawnName1));
+			break;
+		case 2:
+			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.harvest && creep.memory
+				.spawn == globalData.SpawnName2));
+			break;
+		case 3:
+			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.harvest && creep.memory
+				.spawn == globalData.SpawnName3));
+			break;
+		default:
+			returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.harvest);
+	}
+	return returnData;
 }

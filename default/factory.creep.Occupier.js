@@ -2,17 +2,17 @@ global.factory.creep.Occupier = {
 	run: (creep, roomName) => {
 		// 需要拥有CLAIM部件
 		// factory.creep.Occupy.run(Game.creeps['builder54894683'],'W48S54');
-		
+
 		// 如果指定需要占领房间名称,覆盖原来的
 		if (roomName) {
 			creep.memory.occupyRoomName = roomName;
 		}
 		// 获取需要占领房间名称
 		let occupyRoomName = creep.memory.occupyRoomName;
-		if (!occupyRoomName){
+		if (!occupyRoomName) {
 			// 获取不到不再执行程序
 			return;
-		}else{
+		} else {
 			roomName = occupyRoomName;
 		}
 
@@ -57,5 +57,30 @@ global.factory.creep.Occupier = {
 
 
 
+	},
+	ALL: (...e) => {
+		return all(...e);
 	}
+}
+
+
+function all(spawn) {
+	let returnData;
+	switch (spawn) {
+		case 1:
+			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.occupier && creep.memory
+				.spawn == globalData.SpawnName1));
+			break;
+		case 2:
+			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.occupier && creep.memory
+				.spawn == globalData.SpawnName2));
+			break;
+		case 3:
+			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.occupier && creep.memory
+				.spawn == globalData.SpawnName3));
+			break;
+		default:
+			returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.occupier);
+	}
+	return returnData;
 }

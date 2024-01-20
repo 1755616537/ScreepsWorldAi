@@ -196,7 +196,8 @@ global.factory.creep = {
 		let returnData = factory.spawns.get(spawn).spawnCreep(bodys,
 			newName, {
 				memory: {
-					role: globalData.harvest
+					role: globalData.harvest,
+					spawn: spawn
 				}
 			});
 		if (returnData == OK) {
@@ -241,7 +242,8 @@ global.factory.creep = {
 				memory: {
 					role: globalData.carrier,
 					task: dataStructure_task,
-					target: dataStructure_target
+					target: dataStructure_target,
+					spawn: spawn
 				}
 			});
 		if (returnData == OK) {
@@ -281,7 +283,8 @@ global.factory.creep = {
 		let returnData = factory.spawns.get(spawn).spawnCreep(bodys,
 			newName, {
 				memory: {
-					role: globalData.upgrader
+					role: globalData.upgrader,
+					spawn: spawn
 				}
 			});
 		if (returnData == OK) {
@@ -321,7 +324,8 @@ global.factory.creep = {
 		let returnData = factory.spawns.get(spawn).spawnCreep(bodys,
 			newName, {
 				memory: {
-					role: globalData.builder
+					role: globalData.builder,
+					spawn: spawn
 				}
 			});
 		if (returnData == OK) {
@@ -371,7 +375,8 @@ global.factory.creep = {
 		let returnData = factory.spawns.get(spawn).spawnCreep(bodys,
 			newName, {
 				memory: {
-					role: globalData.repairer
+					role: globalData.repairer,
+					spawn: spawn
 				}
 			});
 		if (returnData == OK) {
@@ -411,7 +416,8 @@ global.factory.creep = {
 		let returnData = factory.spawns.get(spawn).spawnCreep(bodys,
 			newName, {
 				memory: {
-					role: globalData.nearDefender
+					role: globalData.nearDefender,
+					spawn: spawn
 				}
 			});
 		if (returnData == OK) {
@@ -451,7 +457,8 @@ global.factory.creep = {
 		let returnData = factory.spawns.get(spawn).spawnCreep(bodys,
 			newName, {
 				memory: {
-					role: globalData.farDefender
+					role: globalData.farDefender,
+					spawn: spawn
 				}
 			});
 		if (returnData == OK) {
@@ -491,7 +498,8 @@ global.factory.creep = {
 		let returnData = factory.spawns.get(spawn).spawnCreep(bodys,
 			newName, {
 				memory: {
-					role: globalData.occupier
+					role: globalData.occupier,
+					spawn: spawn
 				}
 			});
 		if (returnData == OK) {

@@ -160,13 +160,33 @@ var pro = {
 			transfer(creep);
 		}
 	},
-	ALL: () => {
-		return _.filter(Game.creeps, (creep) => creep.memory.role == globalData.carrier);
+	ALL: (...e) => {
+		return all(...e);
 	}
 };
 
 global.factory.creep.Carrier = pro;
 
+function all(spawn) {
+	let returnData;
+	switch (spawn) {
+		case 1:
+			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.carrier && creep.memory
+				.spawn == globalData.SpawnName1));
+			break;
+		case 2:
+			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.carrier && creep.memory
+				.spawn == globalData.SpawnName2));
+			break;
+		case 3:
+			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.carrier && creep.memory
+				.spawn == globalData.SpawnName3));
+			break;
+		default:
+			returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.carrier);
+	}
+	return returnData;
+}
 
 function transfer(creep) {
 	// 找出需要补充能量的建筑
@@ -178,7 +198,7 @@ function transfer(creep) {
 	// 	}
 	// });
 	// if (targets.length < 1) {
-		
+
 	// }
 	let targets = creep.room.find(FIND_STRUCTURES, {
 		filter: (structure) => {

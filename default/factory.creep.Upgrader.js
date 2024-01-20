@@ -41,7 +41,7 @@ let pro = {
 						// 	structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
 					}
 				});
-				if(!target){
+				if (!target) {
 					// 找不到可搬运的地方,从基地搬运
 					target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
 						filter: (structure) => {
@@ -62,12 +62,33 @@ let pro = {
 			}
 		}
 	},
-	ALL: () => {
-		return _.filter(Game.creeps, (creep) => creep.memory.role == globalData.upgrader);
+	ALL: (...e) => {
+		return all(...e);
 	}
 };
 
 global.factory.creep.Upgrader = pro;
+
+function all(spawn) {
+	let returnData;
+	switch (spawn) {
+		case 1:
+			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.upgrader && creep.memory
+				.spawn == globalData.SpawnName1));
+			break;
+		case 2:
+			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.upgrader && creep.memory
+				.spawn == globalData.SpawnName2));
+			break;
+		case 3:
+			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.upgrader && creep.memory
+				.spawn == globalData.SpawnName3));
+			break;
+		default:
+			returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.upgrader);
+	}
+	return returnData;
+}
 
 
 
