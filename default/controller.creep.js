@@ -6,10 +6,10 @@ global.controller.creep = {
 
 		// 清理内存
 		factory.creep.CleanMemory();
-		
+
 		// 单独spawn管理
 		spawn(1);
-		
+
 		// 事件管理
 		for (let name in Game.creeps) {
 			let creep = Game.creeps[name];
@@ -57,34 +57,34 @@ global.controller.creep = {
 	}
 }
 
-function addHarvest(harvests, controller_level = 4) {
+function addHarvest(harvests, controller_level = 4, spawn) {
 	// 生产 采集
 	if (harvests.length < globalData.creepConfigs.harvest.number) {
-		let returnData = factory.creep.addHarvest(harvests, controller_level);
+		let returnData = factory.creep.addHarvest(harvests, controller_level, spawn);
 		// clog(returnData);
 		return returnData;
 	}
 }
 
-function addUpgrader(upgraders, controller_level) {
+function addUpgrader(upgraders, controller_level, spawn) {
 	// 生产 升级
 	if (upgraders.length < globalData.creepConfigs.upgrader.number) {
-		let returnData = factory.creep.addUpgrader(upgraders, controller_level);
+		let returnData = factory.creep.addUpgrader(upgraders, controller_level, spawn);
 		// clog(returnData);
 		return returnData;
 	}
 }
 
-function addBuilder(builders, controller_level) {
+function addBuilder(builders, controller_level, spawn) {
 	// 生产 建造 前提控制器2等级
 	if (builders.length < globalData.creepConfigs.builder.number) { // && controller_level >= 2
-		let returnData = factory.creep.addBuilder(builders, controller_level)
+		let returnData = factory.creep.addBuilder(builders, controller_level, spawn)
 		// clog(returnData);
 		return returnData;
 	}
 }
 
-function addCarrier(carriers, controller_level, spawn = 1) {
+function addCarrier(carriers, controller_level, spawn) {
 	// 生产 运输
 	if (carriers.length < globalData.creepConfigs.carrier.number) {
 		// 拥有CONTAINER才生产
@@ -94,17 +94,17 @@ function addCarrier(carriers, controller_level, spawn = 1) {
 			}
 		});
 		if (builds.length > 0) {
-			let returnData = factory.creep.addCarrier(carriers, controller_level);
+			let returnData = factory.creep.addCarrier(carriers, controller_level, spawn);
 			// clog(returnData);
 			return returnData;
 		};
 	}
 }
 
-function addRepairer(repairers, controller_level) {
+function addRepairer(repairers, controller_level, spawn) {
 	// 生产 维修
 	if (repairers.length < globalData.creepConfigs.repairer.number) {
-		let returnData = factory.creep.addRepairer(repairers, controller_level);
+		let returnData = factory.creep.addRepairer(repairers, controller_level, spawn);
 		// clog(returnData);
 		return returnData;
 	}
@@ -171,26 +171,26 @@ function spawn(spawn = 1) {
 			if (priority) {
 				switch (priority) {
 					case 'upgrader':
-						addUpgrader(upgraders, controller_level);
+						addUpgrader(upgraders, controller_level, spawn);
 						break;
 					case 'builder':
-						addBuilder(builders, controller_level);
+						addBuilder(builders, controller_level, spawn);
 						break;
 					case 'carrier':
 						addCarrier(carriers, controller_level, spawn);
 						break;
 					case 'repairer':
-						addRepairer(repairers, controller_level);
+						addRepairer(repairers, controller_level, spawn);
 						break;
 					default:
 				}
 			} else {
 				// 默认顺序生产
-				if (addHarvest(harvests, controller_level) != OK) {
+				if (addHarvest(harvests, controller_level, spawn) != OK) {
 					if (addCarrier(carriers, controller_level, spawn) != OK) {
-						if (addBuilder(builders, controller_level) != OK) {
-							if (addRepairer(repairers, controller_level) != OK) {
-								if (addUpgrader(upgraders, controller_level) != OK) {}
+						if (addBuilder(builders, controller_level, spawn) != OK) {
+							if (addRepairer(repairers, controller_level, spawn) != OK) {
+								if (addUpgrader(upgraders, controller_level, spawn) != OK) {}
 							}
 						}
 					}
