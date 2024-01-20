@@ -198,7 +198,7 @@ function spawn(spawn = 1) {
 
 			}
 		} else {
-			addHarvest(harvests);
+			addHarvest(harvests, controller_level, spawn);
 		}
 	}
 }
