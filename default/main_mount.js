@@ -42,10 +42,8 @@ require('controller.task')
 require('controller.Tower')
 require('controller.creep')
 // -------------------------------默认执行的初始化程序
+require('initialization')
 module.exports = function() {
-	clog('挂载拓展')
-	clog("脚本加载 Time " + Game.time + " , bucket " + Game.cpu.bucket);
-
-	// 客户端汉化显示
-	Utils.cn();
+	// 初始化
+	initialization.run();
 }
