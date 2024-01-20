@@ -27,7 +27,7 @@ global.globalData = {
 		WorkResourceColor: '#ffff00',
 	},
 	// 基地1名称
-	SpawnName1: 'Spawn1',
+	SpawnName1: 'W47S54',
 	// 基地2名称
 	SpawnName2: 'Spawn2',
 	// 基地3名称
