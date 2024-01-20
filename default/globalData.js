@@ -27,7 +27,7 @@ global.globalData = {
 		WorkResourceColor: '#ffff00',
 	},
 	// 基地1名称
-	SpawnName1: 'W47S54',
+	SpawnName1: 'Spawn1',
 	// 基地2名称
 	SpawnName2: 'Spawn2',
 	// 基地3名称
@@ -49,7 +49,7 @@ global.globalData = {
 	// 自动分配建设采集区的CONTAINER
 	AutomaticAssignHarvestCONTAINER: true,
 	// 主房间名称
-	roomName1: 'W12N4',
+	roomName1: 'W47S54',
 	// 角色配置
 	creepConfigs: {
 		// 采集者
