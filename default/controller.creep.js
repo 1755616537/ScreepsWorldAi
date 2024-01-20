@@ -139,7 +139,7 @@ function addUpgrader(upgraders, controller_level) {
 
 function addBuilder(builders, controller_level) {
 	// 生产 建造 前提控制器2等级
-	if (builders.length < globalData.creepConfigs.builder.number && controller_level >= 2) {
+	if (builders.length < globalData.creepConfigs.builder.number) {// && controller_level >= 2
 		let returnData = factory.creep.addBuilder(builders, controller_level)
 		clog(returnData);
 		return returnData;

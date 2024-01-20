@@ -35,3 +35,5 @@ module.exports.loop = function() {
 // .每个STORAGE搭配一个运输者。如果存在STORAGE并且搭配有运输者，其他运输者才可以把能力放到STORAGE
 // .运输者一对一搬运，把搬运目标地址写在运输者缓存里面，不在重复循环消耗CPU，new一个RoomPosition
 // 房间 W25N6  W42S57 W48S54
+
+// {"W47S54":{"name":"W47S54","energyAvailable":300,"energyCapacityAvailable":300,"visual":{"roomName":"W47S54"}}}
