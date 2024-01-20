@@ -162,10 +162,10 @@ global.factory.creep = {
 			}
 		}
 	},
-	addHarvest: (harvests, controller_level = 4) => {
+	addHarvest: (harvests, controller_level = 4, spawn = 1) => {
 		let bodys;
 		let newName = globalData.harvest + Game.time;
-		
+
 		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.harvest.bodys
 			.totalEnergyRequired) {
 			bodys = globalData.creepConfigs.harvest.bodys.list;
@@ -193,7 +193,7 @@ global.factory.creep = {
 				}
 			}
 		}
-		let returnData = factory.spawns.get(1).spawnCreep(bodys,
+		let returnData = factory.spawns.get(spawn).spawnCreep(bodys,
 			newName, {
 				memory: {
 					role: globalData.harvest
@@ -204,7 +204,7 @@ global.factory.creep = {
 		}
 		return returnData
 	},
-	addCarrier: (carriers, controller_level = 4) => {
+	addCarrier: (carriers, controller_level = 4, spawn = 1) => {
 		let bodys;
 		let newName = globalData.carrier + Game.time;
 		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.carrier.bodys
@@ -236,7 +236,7 @@ global.factory.creep = {
 				}
 			}
 		}
-		let returnData = factory.spawns.get(1).spawnCreep(bodys,
+		let returnData = factory.spawns.get(spawn).spawnCreep(bodys,
 			newName, {
 				memory: {
 					role: globalData.carrier,
@@ -249,7 +249,7 @@ global.factory.creep = {
 		}
 		return returnData
 	},
-	addUpgrader: (upgraders, controller_level = 4) => {
+	addUpgrader: (upgraders, controller_level = 4, spawn = 1) => {
 		let bodys;
 		let newName = globalData.upgrader + Game.time;
 		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.upgrader.bodys
@@ -278,7 +278,7 @@ global.factory.creep = {
 				}
 			}
 		}
-		let returnData = factory.spawns.get(1).spawnCreep(bodys,
+		let returnData = factory.spawns.get(spawn).spawnCreep(bodys,
 			newName, {
 				memory: {
 					role: globalData.upgrader
@@ -289,7 +289,7 @@ global.factory.creep = {
 		}
 		return returnData
 	},
-	addBuilder: (builders, controller_level = 4) => {
+	addBuilder: (builders, controller_level = 4, spawn = 1) => {
 		let bodys;
 		let newName = globalData.builder + Game.time;
 		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.builder.bodys
@@ -318,7 +318,7 @@ global.factory.creep = {
 				}
 			}
 		}
-		let returnData = factory.spawns.get(1).spawnCreep(bodys,
+		let returnData = factory.spawns.get(spawn).spawnCreep(bodys,
 			newName, {
 				memory: {
 					role: globalData.builder
@@ -329,10 +329,10 @@ global.factory.creep = {
 		}
 		return returnData
 	},
-	addRepairer: (repairers, controller_level = 4) => {
+	addRepairer: (repairers, controller_level = 4, spawn = 1) => {
 		let bodys;
 		let newName = globalData.repairer + Game.time;
-		let targets = factory.spawns.get(1).room.find(FIND_STRUCTURES, {
+		let targets = factory.spawns.get(spawn).room.find(FIND_STRUCTURES, {
 			filter: (structure) => {
 				// 找出需要储存能量
 				return (structure.structureType == STRUCTURE_TOWER) &&
@@ -368,7 +368,7 @@ global.factory.creep = {
 				}
 			}
 		}
-		let returnData = factory.spawns.get(1).spawnCreep(bodys,
+		let returnData = factory.spawns.get(spawn).spawnCreep(bodys,
 			newName, {
 				memory: {
 					role: globalData.repairer
@@ -379,7 +379,7 @@ global.factory.creep = {
 		}
 		return returnData
 	},
-	addNearDefender: (nearDefenders, controller_level = 4) => {
+	addNearDefender: (nearDefenders, controller_level = 4, spawn = 1) => {
 		let bodys;
 		let newName = globalData.nearDefender + Game.time;
 		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.nearDefender.bodys
@@ -408,7 +408,7 @@ global.factory.creep = {
 				}
 			}
 		}
-		let returnData = factory.spawns.get(1).spawnCreep(bodys,
+		let returnData = factory.spawns.get(spawn).spawnCreep(bodys,
 			newName, {
 				memory: {
 					role: globalData.nearDefender
@@ -419,7 +419,7 @@ global.factory.creep = {
 		}
 		return returnData
 	},
-	addFarDefender: (farDefenders, controller_level = 4) => {
+	addFarDefender: (farDefenders, controller_level = 4, spawn = 1) => {
 		let bodys;
 		let newName = globalData.farDefender + Game.time;
 		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.farDefender.bodys
@@ -448,7 +448,7 @@ global.factory.creep = {
 				}
 			}
 		}
-		let returnData = factory.spawns.get(1).spawnCreep(bodys,
+		let returnData = factory.spawns.get(spawn).spawnCreep(bodys,
 			newName, {
 				memory: {
 					role: globalData.farDefender
@@ -459,7 +459,7 @@ global.factory.creep = {
 		}
 		return returnData
 	},
-	addOccupier: (occupiers, controller_level = 4) => {
+	addOccupier: (occupiers, controller_level = 4, spawn = 1) => {
 		let bodys;
 		let newName = globalData.occupier + Game.time;
 		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.occupier.bodys
@@ -488,7 +488,7 @@ global.factory.creep = {
 				}
 			}
 		}
-		let returnData = factory.spawns.get(1).spawnCreep(bodys,
+		let returnData = factory.spawns.get(spawn).spawnCreep(bodys,
 			newName, {
 				memory: {
 					role: globalData.occupier
