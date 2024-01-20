@@ -112,8 +112,7 @@ global.controller.creep = {
 				// 	mgs:''
 				// }
 				switch (SpecialActions.code) {
-					case 'Occupy':
-						factory.creep.Occupier.run(creep, SpecialActions.mgs);
+					case '':
 						break;
 					default:
 				}
