@@ -165,7 +165,7 @@ global.factory.creep = {
 	addHarvest: (harvests, controller_level = 4) => {
 		let bodys;
 		let newName = globalData.harvest + Game.time;
-		// 当总creep数量小于1时,使用缩减版进行快速发展
+		
 		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.harvest.bodys
 			.totalEnergyRequired) {
 			bodys = globalData.creepConfigs.harvest.bodys.list;
@@ -173,7 +173,8 @@ global.factory.creep = {
 			return '房间总能量数量未达到限制，无法生产';
 		}
 		if ( /*Object.keys(Game.creeps).length < 1 ||*/ harvests) {
-			if (harvests.length < 1) {
+			// 当总creep数量小于2时,使用缩减版进行快速发展
+			if (harvests.length < 2) {
 				if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.harvest
 					.bodysMinus
 					.totalEnergyRequired) {
