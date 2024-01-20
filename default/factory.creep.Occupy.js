@@ -1,6 +1,6 @@
 global.factory.creep.Occupy = {
 	run: (creep, roomName) => {
-		// factory.creep.Occupy.run(Game.creeps['builder54893119'],W48S54);
+		// factory.creep.Occupy.run(Game.creeps['builder54894683'],'W48S54');
 		let room = Game.rooms['roomName'];
 		
 		// 把小兵规划入特别行动
@@ -15,6 +15,7 @@ global.factory.creep.Occupy = {
 		} else {
 			// 如果房间存在了就说明已经进入了该房间
 			// 移动到房间的控制器并占领
+			console.log(creep.claimController(room.controller))
 			if (creep.claimController(room.controller) == ERR_NOT_IN_RANGE) {
 				creep.moveTo(room.controller)
 			}
