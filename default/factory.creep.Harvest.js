@@ -5,7 +5,7 @@ var pro = {
 		// 没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器
 		// 脚下是否有CONTAINER，有就不移动
 		let on = false;
-		let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, globalData.roomName1)
+		let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, globalData.roomName1);
 		let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
 		if (found.length && found[0].structureType == STRUCTURE_CONTAINER && found[0].store.getFreeCapacity(
 				RESOURCE_ENERGY) > 0) {
@@ -196,6 +196,17 @@ var pro = {
 				}
 			}
 		} else {
+			// 脚下是否有CONTAINER没有建造完成,就优先建筑
+			let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, globalData.roomName1);
+			let found = creep.room.lookForAt(LOOK_CONSTRUCTION_SITES, targetPos);
+			if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
+				// 建造
+				if (creep.build(found[0]) == ERR_NOT_IN_RANGE) {
+					factory.creep.moveTo(creep, found[0]);
+				}
+				return
+			}
+
 			var targets = creep.room.find(FIND_STRUCTURES, {
 				filter: (structure) => {
 					// 返回该存储的剩余可用容量大于0的CONTAINER
@@ -258,10 +269,10 @@ global.factory.creep.Harvest = pro;
 function all(spawn) {
 	let returnData;
 
-	if(spawn){
+	if (spawn) {
 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.harvest && creep.memory
 			.spawn == spawn));
-	}else{
+	} else {
 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.harvest);
 	}
 	// switch (spawn) {
