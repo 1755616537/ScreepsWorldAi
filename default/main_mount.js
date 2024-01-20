@@ -34,7 +34,7 @@ require('factory.creep.Repairer')
 // 防御
 require('factory.creep.Defender')
 // 占领
-require('factory.creep.Occupy')
+require('factory.creep.Occupier')
 // -------------------------------控制器
 require('controller.task')
 require('controller.Tower')

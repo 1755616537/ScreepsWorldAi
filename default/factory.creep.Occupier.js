@@ -1,4 +1,4 @@
-global.factory.creep.Occupy = {
+global.factory.creep.Occupier = {
 	run: (creep, roomName) => {
 		// 需要拥有CLAIM部件
 		// factory.creep.Occupy.run(Game.creeps['builder54894683'],'W48S54');
