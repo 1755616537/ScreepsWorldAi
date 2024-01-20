@@ -37,5 +37,6 @@ module.exports.loop = function() {
 // -.采集如果脚下有CONTAINER，挖完就放进CONTAINER（没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器了）
 // spawn是否停止获取能量，先用于生产
 // 根据总能量上限energyCapacityAvailable，小于400，使用最低配置
+// 把每种小兵的取用能量加上状态,取满在用,用完在取
 
 // 房间 W25N6  W42S57 W48S54 W47S54
