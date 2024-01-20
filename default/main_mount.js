@@ -41,7 +41,7 @@ require('factory.creep.TheHealer')
 require('controller.task')
 require('controller.Tower')
 require('controller.creep')
-// -------------------------------默认执行的初始化程序
+// -------------------------------默认只执行一次的初始化程序
 require('initialization')
 module.exports = function() {
 	// 初始化
