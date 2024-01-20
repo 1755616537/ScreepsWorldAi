@@ -38,52 +38,50 @@ global.controller.creep = {
 				//TODO handle the exception
 			}
 			
-			// 优先生产采集
-			if (harvests.length < globalData.creepConfigs.harvest.number) {
-				factory.creep.addHarvest(harvests);
-			}else{
-				let towers = factory.spawns.get(1).room.find(FIND_STRUCTURES, {
-					filter: (structure) => {
-						// 找出需要储存能量
-						return (structure.structureType == STRUCTURE_TOWER) &&
-							structure.store.getUsedCapacity(RESOURCE_ENERGY) > 100;
+
+			let towers = factory.spawns.get(1).room.find(FIND_STRUCTURES, {
+				filter: (structure) => {
+					// 找出需要储存能量
+					return (structure.structureType == STRUCTURE_TOWER) &&
+						structure.store.getUsedCapacity(RESOURCE_ENERGY) > 100;
+				}
+			});
+
+			// 最少采集2个
+			if (harvests.length >= 2) {
+				// 优先级顺序生产 每种保持最低1个
+				let priority;
+				if (upgraders.length < 1) {
+					priority = 'upgrader';
+				} else if (builders.length < 1) {
+					priority = 'builder';
+				} else if (repairers.length < 1 && (!globalData.creepConfigs.repairer.onTower || (globalData
+						.creepConfigs.repairer.onTower && towers.length <
+						1))) {
+					priority = 'repairer';
+				} else if (carriers.length < 1) {
+					// 注释掉是因为 拥有CONTAINER才生产 会卡住优先顺序，不进行默认生成
+					// priority = 'carrier';
+				}
+				if (priority) {
+					switch (priority) {
+						case 'upgrader':
+							addUpgrader(upgraders, controller_level);
+							break;
+						case 'builder':
+							addBuilder(builders, controller_level);
+							break;
+						case 'carrier':
+							addCarrier(carriers, controller_level);
+							break;
+						case 'repairer':
+							addRepairer(repairers, controller_level);
+							break;
+						default:
 					}
-				});
-				
-				// 最少采集2个
-				if (harvests.length >= 2) {
-					// 优先级顺序生产 每种保持最低1个
-					let priority;
-					if (upgraders.length < 1) {
-						priority = 'upgrader';
-					} else if (builders.length < 1) {
-						priority = 'builder';
-					} else if (repairers.length < 1 && (!globalData.creepConfigs.repairer.onTower || (globalData
-							.creepConfigs.repairer.onTower && towers.length <
-							1))) {
-						priority = 'repairer';
-					} else if (carriers.length < 1) {
-						// 注释掉是因为 拥有CONTAINER才生产 会卡住优先顺序，不进行默认生成
-						// priority = 'carrier';
-					}
-					if (priority) {
-						switch (priority) {
-							case 'upgrader':
-								addUpgrader(upgraders, controller_level);
-								break;
-							case 'builder':
-								addBuilder(builders, controller_level);
-								break;
-							case 'carrier':
-								addCarrier(carriers, controller_level);
-								break;
-							case 'repairer':
-								addRepairer(repairers, controller_level);
-								break;
-							default:
-						}
-					} else {
-						// 默认顺序生产
+				} else {
+					// 默认顺序生产
+					if (addHarvest(harvests, controller_level) != OK) {
 						if (addCarrier(carriers, controller_level) != OK) {
 							if (addBuilder(builders, controller_level) != OK) {
 								if (addRepairer(repairers, controller_level) != OK) {
@@ -92,9 +90,11 @@ global.controller.creep = {
 							}
 						}
 					}
+					
 				}
+			}else{
+				addHarvest(harvests);
 			}
-			
 		}
 
 		// 事件管理
@@ -116,6 +116,15 @@ global.controller.creep = {
 				factory.creep.Repairer.run(creep);
 			}
 		}
+	}
+}
+
+function addHarvest(harvests, controller_level = 4) {
+	// 生产 采集
+	if (harvests.length < globalData.creepConfigs.harvest.number) {
+		let returnData = factory.creep.addHarvest(harvests, controller_level);
+		clog(returnData);
+		return factory.creep.addHarvest(harvests, controller_level);
 	}
 }
 
