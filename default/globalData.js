@@ -70,7 +70,7 @@ global.globalData = {
 				list: [WORK, WORK, WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE],
 				totalEnergyRequired: 300
 			},
-			// 总上限数量
+			// 总上限数量 最低必须两个
 			number: 2,
 			// 自动分配数量（开启 AutomaticAssignHarvest可以根据最大支持数量动态更新采集者数量）
 			AutomaticAssignNum: true
