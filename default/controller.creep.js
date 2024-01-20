@@ -134,7 +134,7 @@ global.controller.creep = {
 			if (creep.memory.role == globalData.repairer) {
 				factory.creep.Repairer.run(creep);
 			}
-			if (creep.memory.role == globalData.defender) {
+			if (creep.memory.role == globalData.nearDefender || creep.memory.role == globalData.farDefender) {
 				factory.creep.Defender.run(creep);
 			}
 			if (creep.memory.role == globalData.occupier) {
@@ -193,6 +193,6 @@ function addRepairer(repairers, controller_level) {
 	if (repairers.length < globalData.creepConfigs.repairer.number) {
 		let returnData = factory.creep.addRepairer(repairers, controller_level);
 		// clog(returnData);
-		return factory.creep.addRepairer(repairers, controller_level);
+		return returnData;
 	}
 }
