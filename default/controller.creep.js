@@ -123,7 +123,7 @@ function addHarvest(harvests, controller_level = 4) {
 	// 生产 采集
 	if (harvests.length < globalData.creepConfigs.harvest.number) {
 		let returnData = factory.creep.addHarvest(harvests, controller_level);
-		clog(returnData);
+		// clog(returnData);
 		return factory.creep.addHarvest(harvests, controller_level);
 	}
 }
@@ -132,7 +132,7 @@ function addUpgrader(upgraders, controller_level) {
 	// 生产 升级
 	if (upgraders.length < globalData.creepConfigs.upgrader.number) {
 		let returnData = factory.creep.addUpgrader(upgraders, controller_level);
-		clog(returnData);
+		// clog(returnData);
 		return returnData;
 	}
 }
@@ -141,7 +141,7 @@ function addBuilder(builders, controller_level) {
 	// 生产 建造 前提控制器2等级
 	if (builders.length < globalData.creepConfigs.builder.number) {// && controller_level >= 2
 		let returnData = factory.creep.addBuilder(builders, controller_level)
-		clog(returnData);
+		// clog(returnData);
 		return returnData;
 	}
 }
@@ -157,7 +157,7 @@ function addCarrier(carriers, controller_level) {
 		});
 		if (builds.length > 0) {
 			let returnData = factory.creep.addCarrier(carriers, controller_level);
-			clog(returnData);
+			// clog(returnData);
 			return returnData;
 		};
 	}
@@ -167,7 +167,7 @@ function addRepairer(repairers, controller_level) {
 	// 生产 维修
 	if (repairers.length < globalData.creepConfigs.repairer.number) {
 		let returnData = factory.creep.addRepairer(repairers, controller_level);
-		clog(returnData);
+		// clog(returnData);
 		return factory.creep.addRepairer(repairers, controller_level);
 	}
 }
