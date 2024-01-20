@@ -135,6 +135,9 @@ global.controller.creep = {
 			if (creep.memory.role == globalData.repairer) {
 				factory.creep.Repairer.run(creep);
 			}
+			if (creep.memory.role == globalData.defender) {
+				factory.creep.Defender.run(creep);
+			}
 		}
 	}
 }
