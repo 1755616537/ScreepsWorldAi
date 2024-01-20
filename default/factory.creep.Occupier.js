@@ -66,21 +66,28 @@ global.factory.creep.Occupier = {
 
 function all(spawn) {
 	let returnData;
-	switch (spawn) {
-		case 1:
-			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.occupier && creep.memory
-				.spawn == globalData.SpawnName1));
-			break;
-		case 2:
-			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.occupier && creep.memory
-				.spawn == globalData.SpawnName2));
-			break;
-		case 3:
-			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.occupier && creep.memory
-				.spawn == globalData.SpawnName3));
-			break;
-		default:
-			returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.occupier);
+	
+	if(spawn){
+		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.occupier && creep.memory
+			.spawn == spawn));
+	}else{
+		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.occupier);
 	}
+	// switch (spawn) {
+	// 	case 1:
+	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.occupier && creep.memory
+	// 			.spawn == globalData.SpawnName1));
+	// 		break;
+	// 	case 2:
+	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.occupier && creep.memory
+	// 			.spawn == globalData.SpawnName2));
+	// 		break;
+	// 	case 3:
+	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.occupier && creep.memory
+	// 			.spawn == globalData.SpawnName3));
+	// 		break;
+	// 	default:
+	// 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.occupier);
+	// }
 	return returnData;
 }

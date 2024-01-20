@@ -257,21 +257,28 @@ global.factory.creep.Harvest = pro;
 
 function all(spawn) {
 	let returnData;
-	switch (spawn) {
-		case 1:
-			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.harvest && creep.memory
-				.spawn == globalData.SpawnName1));
-			break;
-		case 2:
-			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.harvest && creep.memory
-				.spawn == globalData.SpawnName2));
-			break;
-		case 3:
-			returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.harvest && creep.memory
-				.spawn == globalData.SpawnName3));
-			break;
-		default:
-			returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.harvest);
+
+	if(spawn){
+		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.harvest && creep.memory
+			.spawn == spawn));
+	}else{
+		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.harvest);
 	}
+	// switch (spawn) {
+	// 	case 1:
+	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.harvest && creep.memory
+	// 			.spawn == globalData.SpawnName1));
+	// 		break;
+	// 	case 2:
+	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.harvest && creep.memory
+	// 			.spawn == globalData.SpawnName2));
+	// 		break;
+	// 	case 3:
+	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.harvest && creep.memory
+	// 			.spawn == globalData.SpawnName3));
+	// 		break;
+	// 	default:
+	// 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.harvest);
+	// }
 	return returnData;
 }
