@@ -102,8 +102,7 @@ global.controller.creep = {
 			let creep = Game.creeps[name];
 
 			// 特别行动
-			let SpecialActions = undefined;
-			SpecialActions = creep.memory.SpecialActions;
+			let SpecialActions = creep.memory.SpecialActions;
 			if (SpecialActions) {
 				// 数据格式
 				// SpecialActions:{

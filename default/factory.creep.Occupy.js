@@ -1,7 +1,7 @@
 global.factory.creep.Occupy = {
 	run: (creep, roomName) => {
 		// factory.creep.Occupy.run(Game.creeps['builder54894683'],'W48S54');
-		let room = Game.rooms['roomName'];
+		let room = Game.rooms[roomName];
 		
 		// 把小兵规划入特别行动
 		creep.memory.SpecialActions = {
