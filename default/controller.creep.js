@@ -37,7 +37,7 @@ global.controller.creep = {
 			} catch (e) {
 				//TODO handle the exception
 			}
-			
+
 
 			let towers = factory.spawns.get(1).room.find(FIND_STRUCTURES, {
 				filter: (structure) => {
@@ -90,9 +90,9 @@ global.controller.creep = {
 							}
 						}
 					}
-					
+
 				}
-			}else{
+			} else {
 				addHarvest(harvests);
 			}
 		}
@@ -100,6 +100,27 @@ global.controller.creep = {
 		// 事件管理
 		for (let name in Game.creeps) {
 			let creep = Game.creeps[name];
+
+			// 特别行动
+			let SpecialActions = undefined;
+			SpecialActions = creep.memory.SpecialActions;
+			if (SpecialActions) {
+				// 数据格式
+				// SpecialActions:{
+				// //代号
+				// 	code:'',
+				// //附加信息
+				// 	mgs:''
+				// }
+				switch (SpecialActions.code) {
+					case 'Occupy':
+						factory.creep.Occupy.run(creep, SpecialActions.mgs);
+						break;
+					default:
+				}
+				continue;
+			}
+
 			if (creep.memory.role == globalData.harvest) {
 				factory.creep.Harvest.run(creep);
 			}
@@ -124,7 +145,7 @@ function addHarvest(harvests, controller_level = 4) {
 	if (harvests.length < globalData.creepConfigs.harvest.number) {
 		let returnData = factory.creep.addHarvest(harvests, controller_level);
 		// clog(returnData);
-		return factory.creep.addHarvest(harvests, controller_level);
+		return returnData;
 	}
 }
 
@@ -139,7 +160,7 @@ function addUpgrader(upgraders, controller_level) {
 
 function addBuilder(builders, controller_level) {
 	// 生产 建造 前提控制器2等级
-	if (builders.length < globalData.creepConfigs.builder.number) {// && controller_level >= 2
+	if (builders.length < globalData.creepConfigs.builder.number) { // && controller_level >= 2
 		let returnData = factory.creep.addBuilder(builders, controller_level)
 		// clog(returnData);
 		return returnData;
