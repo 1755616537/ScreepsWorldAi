@@ -2,7 +2,7 @@ global.factory.spawns = {
 	get: (sequence) => {
 		switch (sequence) {
 			case 1:
-				return Game.spawns['Spawn1'];
+				return Game.spawns[globalData.SpawnName1];
 				break;
 			case 2:
 				return Game.spawns[globalData.SpawnName2];
