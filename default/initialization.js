@@ -12,15 +12,17 @@ global.initialization = {
 		// 9*9范围自动生成CONTAINER
 		let room = Game.rooms[globalData.roomName1];
 		let pos = room.controller.pos;
-		let found = _.filter(room.lookAtArea(pos.y - 1, pos.x - 1, pos.y + 1,
-				pos.x + 1, true), (f) =>
+		let found = room.lookAtArea(pos.y - 1, pos.x - 1, pos.y + 1,
+			pos.x + 1, true);
+		let foundFilter = _.filter(found, (f) =>
 			(f.terrain == 'plain' || f.terrain == 'swamp') &&
 			room.lookAt(f.pos)[0].structureType != STRUCTURE_WALL);
-		if (found.length > 1) {
+		if (foundFilter.length > 1) {
 			// 是否已经存在CONTAINER
-			if (_.filter(found, (f) => room.lookAt(f.pos)[0].structureType == STRUCTURE_CONTAINER).length < 1) {
-				let x = found[0].x;
-				let y = found[0].y;
+			if (_.filter(found, (f) => f.type == LOOK_CONSTRUCTION_SITES || room.lookAt(f.pos)[0].structureType ==
+					STRUCTURE_CONTAINER).length  < 1) {
+				let x = foundFilter[0].x;
+				let y = foundFilter[0].y;
 				// 指定位置创建一个新的 ConstructionSite
 				let returnData = Game.rooms[globalData.roomName1]
 					.createConstructionSite(x, y, STRUCTURE_CONTAINER);
@@ -28,6 +30,5 @@ global.initialization = {
 					returnData);
 			}
 		}
-
 	},
 }
