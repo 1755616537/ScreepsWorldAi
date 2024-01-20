@@ -46,7 +46,9 @@ var pro = {
 			if (targets.length < 1) {
 				targets = creep.room.find(FIND_CONSTRUCTION_SITES);
 			}
+
 			if (targets.length > 0) { // targets.length > 0  || 建筑位 > 0
+				// 建造
 				if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
 					factory.creep.moveTo(creep, targets[0]);
 				}
@@ -119,11 +121,11 @@ global.factory.creep.Builder = pro;
 
 function all(spawn) {
 	let returnData;
-	
-	if(spawn){
+
+	if (spawn) {
 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.builder && creep.memory
 			.spawn == spawn));
-	}else{
+	} else {
 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.builder);
 	}
 	// switch (spawn) {
