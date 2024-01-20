@@ -44,8 +44,10 @@ global.globalData = {
 	carrier: 'carrier',
 	// 维修者ID
 	repairer: 'repairer',
-	// 防御者ID
-	defender: 'defender',
+	// 防御者近战ID
+	nearDefender: 'nearDefender',
+	// 防御者远战ID
+	farDefender: 'farDefender',
 	// 占领者ID
 	occupier: 'occupier',
 	// 自动分配矿区
@@ -149,18 +151,34 @@ global.globalData = {
 			// tower创建拥有能量的时候不生成维修者
 			onTower: false
 		},
-		// 防御者
-		'defender': {
+		// 防御者-近战
+		'nearDefender': {
 			bodys: {
-				list: [WORK, WORK, CARRY, MOVE],
+				list: [WORK, WORK, CARRY, MOVE, ATTACK],
 				totalEnergyRequired: 200
 			},
 			bodysMinus: {
-				list: [WORK, CARRY, MOVE],
+				list: [WORK, CARRY, MOVE, ATTACK],
 				totalEnergyRequired: 100
 			},
 			bodysPlus: {
-				list: [WORK, WORK, WORK, CARRY, MOVE],
+				list: [WORK, WORK, WORK, CARRY, MOVE, ATTACK],
+				totalEnergyRequired: 300
+			},
+			number: 0
+		},
+		// 防御者-远战
+		'farDefender': {
+			bodys: {
+				list: [WORK, WORK, CARRY, MOVE, RANGED_ATTACK],
+				totalEnergyRequired: 200
+			},
+			bodysMinus: {
+				list: [WORK, CARRY, MOVE, RANGED_ATTACK],
+				totalEnergyRequired: 100
+			},
+			bodysPlus: {
+				list: [WORK, WORK, WORK, CARRY, MOVE, RANGED_ATTACK],
 				totalEnergyRequired: 300
 			},
 			number: 0
@@ -168,15 +186,31 @@ global.globalData = {
 		// 占领者
 		'occupier': {
 			bodys: {
-				list: [WORK, WORK, CARRY, MOVE],
+				list: [WORK, WORK, CARRY, MOVE, CLAIM],
 				totalEnergyRequired: 200
 			},
 			bodysMinus: {
-				list: [WORK, CARRY, MOVE],
+				list: [WORK, CARRY, MOVE, CLAIM],
 				totalEnergyRequired: 100
 			},
 			bodysPlus: {
-				list: [WORK, WORK, WORK, CARRY, MOVE],
+				list: [WORK, WORK, WORK, CARRY, MOVE, CLAIM],
+				totalEnergyRequired: 300
+			},
+			number: 0
+		},
+		// 治疗者
+		'theHealer': {
+			bodys: {
+				list: [WORK, WORK, CARRY, MOVE, HEAL],
+				totalEnergyRequired: 200
+			},
+			bodysMinus: {
+				list: [WORK, CARRY, MOVE, HEAL],
+				totalEnergyRequired: 100
+			},
+			bodysPlus: {
+				list: [WORK, WORK, WORK, CARRY, MOVE, HEAL],
 				totalEnergyRequired: 300
 			},
 			number: 0

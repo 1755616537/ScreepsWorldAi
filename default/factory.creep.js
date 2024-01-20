@@ -379,30 +379,30 @@ global.factory.creep = {
 		}
 		return returnData
 	},
-	addDefender: (defenders, controller_level = 4) => {
+	addNearDefender: (nearDefenders, controller_level = 4) => {
 		let bodys;
-		let newName = globalData.defender + Game.time;
-		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.defender.bodys
+		let newName = globalData.nearDefender + Game.time;
+		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.nearDefender.bodys
 			.totalEnergyRequired) {
-			bodys = globalData.creepConfigs.defender.bodys.list;
+			bodys = globalData.creepConfigs.nearDefender.bodys.list;
 		} else {
 			return '房间总能量数量未达到限制，无法生产';
 		}
-		if (defenders) {
-			if (defenders.length < 1) {
-				if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.defender
+		if (nearDefenders) {
+			if (nearDefenders.length < 1) {
+				if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.nearDefender
 					.bodysMinus
 					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.defender.bodysMinus.list;
+					bodys = globalData.creepConfigs.nearDefender.bodysMinus.list;
 				} else {
 					return 'Minus 房间总能量数量未达到限制，无法生产';
 				}
 			}
-			if (defenders.length > 2 && controller_level >= 4) {
-				if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.defender
+			if (nearDefenders.length > 2 && controller_level >= 4) {
+				if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.nearDefender
 					.bodysPlus
 					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.defender.bodysPlus.list;
+					bodys = globalData.creepConfigs.nearDefender.bodysPlus.list;
 				} else {
 					return 'Plus 房间总能量数量未达到限制，无法生产';
 				}
@@ -411,11 +411,51 @@ global.factory.creep = {
 		let returnData = factory.spawns.get(1).spawnCreep(bodys,
 			newName, {
 				memory: {
-					role: globalData.defender
+					role: globalData.nearDefender
 				}
 			});
 		if (returnData == OK) {
-			clog('生成新的 防御者:' + newName);
+			clog('生成新的 防御者-近战:' + newName);
+		}
+		return returnData
+	},
+	addFarDefender: (farDefenders, controller_level = 4) => {
+		let bodys;
+		let newName = globalData.farDefender + Game.time;
+		if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.farDefender.bodys
+			.totalEnergyRequired) {
+			bodys = globalData.creepConfigs.farDefender.bodys.list;
+		} else {
+			return '房间总能量数量未达到限制，无法生产';
+		}
+		if (farDefenders) {
+			if (farDefenders.length < 1) {
+				if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.farDefender
+					.bodysMinus
+					.totalEnergyRequired) {
+					bodys = globalData.creepConfigs.farDefender.bodysMinus.list;
+				} else {
+					return 'Minus 房间总能量数量未达到限制，无法生产';
+				}
+			}
+			if (farDefenders.length > 2 && controller_level >= 4) {
+				if (Game.rooms[globalData.roomName1].energyAvailable >= globalData.creepConfigs.farDefender
+					.bodysPlus
+					.totalEnergyRequired) {
+					bodys = globalData.creepConfigs.farDefender.bodysPlus.list;
+				} else {
+					return 'Plus 房间总能量数量未达到限制，无法生产';
+				}
+			}
+		}
+		let returnData = factory.spawns.get(1).spawnCreep(bodys,
+			newName, {
+				memory: {
+					role: globalData.farDefender
+				}
+			});
+		if (returnData == OK) {
+			clog('生成新的 防御者-远战:' + newName);
 		}
 		return returnData
 	},
