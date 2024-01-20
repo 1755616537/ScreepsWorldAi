@@ -43,11 +43,11 @@ const dataStructure_task = {
 	previous: '',
 	next: ''
 }
-const dataStructure_target={
-	x:null,
-	y:null,
+const dataStructure_target = {
+	x: null,
+	y: null,
 	// 房间名称
-	roomName:''
+	roomName: ''
 }
 
 global.factory.creep = {
