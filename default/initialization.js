@@ -10,7 +10,7 @@ global.initialization = {
 
 		// 控制器块初始化
 		let room = Game.rooms[globalData.roomName1];
-		let pos = creep.room.controller.pos;
+		let pos = room.controller.pos;
 		let found = _.filter(room.lookAtArea(pos.y - 1, pos.x - 1, pos.y + 1,
 				pos.x + 1, true), (f) =>
 			(f.terrain == 'plain' || f.terrain == 'swamp') &&
