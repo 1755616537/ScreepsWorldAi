@@ -244,7 +244,7 @@ function transfer(creep) {
 				// 检查是否在控制器CONTAINER记录中
 				let on = false;
 				for (let i2 = 0; i2 < memoryControllerContainer.list.length; i2++) {
-					if (creep.id == memoryControllerContainer.list[i2]) {
+					if (creep.name == memoryControllerContainer.list[i2]) {
 						on = true;
 						break;
 					}
