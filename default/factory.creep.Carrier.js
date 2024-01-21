@@ -216,15 +216,28 @@ function transfer(creep) {
 		}
 	}
 	if (memoryControllerContainer && memoryControllerContainer.id) {
-		console.log('111')
-		// for (var i = 0; i < memoryControllerContainer.list.length; i++) {}
+		let on = false;
+		for (var i = 0; i < memoryControllerContainer.list.length; i++) {
+			if (creep.id == memoryControllerContainer.list[i]) {
+				on = true;
+				break;
+			}
+		}
+		if (on) {
+			const source = Game.getObjectById(memoryControllerContainer.id);
+			// 将资源从该 creep 转移至其他对象
+			if (creep.transfer(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+				// 向目标移动
+				factory.creep.moveTo(creep, source);
+			}
+			return
+		}
 	} else {
 		let x = Memory.spawn[spawnName].controller.container.x;
 		let y = Memory.spawn[spawnName].controller.container.y;
 		let targetPos = new RoomPosition(x, y, creep.room.name)
 		// CONTAINER
 		let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
-		console.log('found ', found)
 		if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
 			Memory.spawn[spawnName].controller.container.id = found[0].id;
 		}
