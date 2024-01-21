@@ -222,7 +222,7 @@ function transfer(creep) {
 			const carriers = factory.creep.Carrier.ALL(roomSequence);
 			for (var i = 0; i < carriers.length; i++) {
 				if (!carriers[i].memory.TransportationTargetID) {
-					memoryControllerContainer.list.push(carriers[i].id);
+					memoryControllerContainer.list.push(carriers[i].name);
 					carriers[i].memory.TransportationTargetID = memoryControllerContainer.id;
 					break;
 				}
