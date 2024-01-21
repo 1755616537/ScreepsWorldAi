@@ -20,10 +20,12 @@ require('超级移动优化hotfix 0.9.4');
 require('factory.task')
 // 安全
 require('factory.Secure')
-// 能量区
-require('factory.source')
+// 房间
+require('factory.room')
 // 基地
 require('factory.spawn')
+// 能量区
+require('factory.source')
 // 塔
 require('factory.Tower')
 // 爬爬
