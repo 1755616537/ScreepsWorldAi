@@ -16,6 +16,16 @@ module.exports.loop = function() {
 	// clog('本次tips使用 CPU 时间总量 ',Game.cpu.getUsed())
 }
 
+// 中文API
+// https://screeps-cn.github.io/api/#
+// 英文API
+// https://docs.screeps.com/api/#
+// lodash
+// https://www.lodashjs.com/
+
+// 房间 W25N6  W42S57 W48S54 W47S54
+// https://screeps.com/a/#!/room/shard3/W47S54
+
 // 缓存的种类
 // 持久化存储：游戏的Memory对象，只有这个地方能实现真正可靠的长时间存储。
 // 半持久存储：js 的 Global对象，对象原型都属于半持久存储，这种存储会在游戏全局重置时被清除，一般存放允许丢失的数据。
@@ -33,6 +43,7 @@ module.exports.loop = function() {
 // .根据总能量上限energyCapacityAvailable，小于400，使用最低配置
 // .把每种小兵的取用能量加上状态,取满在用,用完在取
 // .当控制器区存在有能量的CONTAINER,从控制器区存的CONTAINER取能量
+// .BUG.矿区CONTAINER记录信息,控制器CONTAINER记录信息,在creep死亡后,没有正常删除信息,导致无法加入新creeps记录
 
 // 完成程序:
 // .(废弃(改完出现错误)[此名称是 Game.creeps 对象中指向该 creep 对象的哈希键]).把小兵ID放到memory里面，不在使用小兵名称作为唯一ID值判断，改为小兵ID
@@ -41,6 +52,3 @@ module.exports.loop = function() {
 // .采集如果脚下有CONTAINER，挖完就放进CONTAINER（没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器了）
 // .在升级控制器的9*9空位其中一个上放置一个CONTAINER（并且检测是否在控制器7*7范围内），多个升级小兵共享一个CONTAINER
 // .受到攻击掉血开启安全模式(getEventLog),Tower开启优先攻击模式
-
-
-// 房间 W25N6  W42S57 W48S54 W47S54
