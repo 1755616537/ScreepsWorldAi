@@ -136,61 +136,64 @@ var pro = {
 				}
 
 				let memorySource = Memory.spawn[spawnName].source.list;
-
-				if (!creep.memory.harvestSourceID) {
-					// 找出没有被分配完的矿区
-					let memorySourceListNull = null;
-					for (let val in memorySource) {
-						if (memorySource[val].list.length < 1) {
-							memorySourceListNull = val;
-							break;
-						}
-					}
-					for (let val in memorySource) {
-						// 找到空闲矿区，优先分配给没有分配数量的矿区
-						if (memorySourceListNull && val != memorySourceListNull) continue;
-						if (memorySource[val].list.length < memorySource[val].harvestNum) {
-							// 把creep ID记录到矿区
-							memorySource[val].list.push(creep.name);
-							// 把矿区ID记录到creep
-							creep.memory.harvestSourceID = val;
-
-							Memory.spawn[spawnName].source.list = memorySource;
-							break;
-						}
-					}
-				}
-
-				// 找出已经分配的矿区消息
-				for (let i = 0; i < sources.length; i++) {
-					if (sources[i].id == creep.memory.harvestSourceID) {
-						// 检查是否在矿区记录中
-						let memorySourceList = memorySource[sources[i].id].list;
-						let on = false;
-						for (let i2 = 0; i2 < memorySourceList.length; i2++) {
-							if (memorySourceList[i2] == creep.name) {
-								on = true;
-								break
+				if(memorySource){
+					if (!creep.memory.harvestSourceID) {
+						// 找出没有被分配完的矿区
+						let memorySourceListNull = null;
+						for (let val in memorySource) {
+							if (memorySource[val].list.length < 1) {
+								memorySourceListNull = val;
+								break;
 							}
 						}
-						if (on) {
-							// 合法记录在矿区
-							source = sources[i];
-						} else {
-							// 不合法,移除
-							creep.memory.harvestSourceID = null;
+						for (let val in memorySource) {
+							// 找到空闲矿区，优先分配给没有分配数量的矿区
+							if (memorySourceListNull && val != memorySourceListNull) continue;
+							if (memorySource[val].list.length < memorySource[val].harvestNum) {
+								// 把creep ID记录到矿区
+								memorySource[val].list.push(creep.name);
+								// 把矿区ID记录到creep
+								creep.memory.harvestSourceID = val;
+					
+								Memory.spawn[spawnName].source.list = memorySource;
+								break;
+							}
 						}
-						break
+					}
+					
+					// 找出已经分配的矿区消息
+					for (let i = 0; i < sources.length; i++) {
+						if (sources[i].id == creep.memory.harvestSourceID) {
+							// 检查是否在矿区记录中
+							let memorySourceList = memorySource[sources[i].id].list;
+							let on = false;
+							for (let i2 = 0; i2 < memorySourceList.length; i2++) {
+								if (memorySourceList[i2] == creep.name) {
+									on = true;
+									break
+								}
+							}
+							if (on) {
+								// 合法记录在矿区
+								source = sources[i];
+							} else {
+								// 不合法,移除
+								creep.memory.harvestSourceID = null;
+							}
+							break
+						}
+					}
+					
+					if (source) {
+						if (source.id != creep.memory.harvestSourceID) {
+							// Throw.Error('creep ', creep.id, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
+						}
+					} else {
+						// Throw.Error('creep ', creep.id, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
 					}
 				}
 
-				if (source) {
-					if (source.id != creep.memory.harvestSourceID) {
-						// Throw.Error('creep ', creep.id, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
-					}
-				} else {
-					// Throw.Error('creep ', creep.id, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
-				}
+				
 			}
 
 			if (source) {
