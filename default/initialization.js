@@ -16,6 +16,10 @@ global.initialization = {
 
 // 控制器块初始化
 function controllerPiece(spawn = 1) {
+	if (!Memory.spawn) {
+		Memory.spawn = []
+	}
+
 	let room = factory.room.get(spawn);
 	// 9*9范围自动生成CONTAINER
 	let pos = room.controller.pos;

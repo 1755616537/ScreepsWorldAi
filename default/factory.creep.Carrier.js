@@ -197,10 +197,9 @@ function transfer(creep) {
 		let found = room.lookAtArea(pos.y - 1, pos.x - 1, pos.y + 1, pos.x + 1, true);
 		let found2 = _.filter(found, (f) => f.type == LOOK_CONSTRUCTION_SITES || (f.type == LOOK_STRUCTURES && f
 			.structure.structureType == STRUCTURE_CONTAINER));
-		console.log('found2 ', JSON.stringify(found2))
 		if (found2.length > 0) {
-			let x = found2.x;
-			let y = found2.y;
+			let x = found2[0].x;
+			let y = found2[0].y;
 			Memory.spawn[roomSequence - 1].controller = {
 				container: {
 					x: x,
