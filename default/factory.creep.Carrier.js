@@ -185,11 +185,13 @@ function all(spawn) {
 function transfer(creep) {
 	// 房间序号
 	let roomSequence = factory.room.nameGetSequence(creep.room.name);
+	let room = creep.room;
 
 	let memoryControllerContainer;
 	try {
 		memoryControllerContainer = Memory.spawn[roomSequence - 1].controller.container;
 	} catch (e) {
+		// 控制器旁是否有CONTAINER或在建的CONTAINER
 		let pos = room.controller.pos;
 		let found = room.lookAtArea(pos.y - 1, pos.x - 1, pos.y + 1, pos.x + 1, true);
 		let found2 = _.filter(found, (f) => f.type == LOOK_CONSTRUCTION_SITES || (f.type == LOOK_STRUCTURES && f
