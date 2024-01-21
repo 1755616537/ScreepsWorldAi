@@ -37,6 +37,7 @@ function controllerPiece(spawn = 1) {
 	let foundFilter = _.filter(found, (f) =>
 		(f.terrain == 'plain' || f.terrain == 'swamp') &&
 		room.lookAt(f.pos)[0].structureType != STRUCTURE_WALL);
+		console.log(JSON.stringify(found))
 	if (foundFilter.length > 1) {
 		// 是否已经存在CONTAINER
 		if (_.filter(found, (f) => {
