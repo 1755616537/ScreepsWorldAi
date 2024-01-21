@@ -23,5 +23,15 @@ global.factory.room = {
 			return 3;
 		}
 		return 1;
+	},
+	sequenceGetName: (sequence) => {
+		if (sequence == 1) {
+			return globalData.room[0].name;
+		} else if (sequence == 2) {
+			return globalData.room[1].name;
+		} else if (sequence == 3) {
+			return globalData.room[2].name;
+		}
+		return globalData.room[0].name;
 	}
 }

@@ -8,7 +8,7 @@ global.initialization = {
 		clog('汉化 Utils.cn();');
 
 		if (!Memory.spawn) {
-			Memory.spawn = []
+			Memory.spawn = {}
 		}
 
 		// 矿区块初始化
@@ -20,8 +20,9 @@ global.initialization = {
 
 // 控制器块初始化
 function controllerPiece(spawn = 1) {
-	if (!Memory.spawn[spawn - 1]) {
-		Memory.spawn[spawn - 1] = {
+	let spawnName = factory.spawn.sequenceGetName(spawn);
+	if (!Memory.spawn[spawnName]) {
+		Memory.spawn[spawnName] = {
 			controller: {}
 		}
 	}
@@ -47,7 +48,7 @@ function controllerPiece(spawn = 1) {
 			let returnData = room.createConstructionSite(x, y, STRUCTURE_CONTAINER);
 			if (returnData != OK) {
 				clog(x, y, '自动建造对应数量的CONTAINER ', returnData);
-				Memory.spawn[spawn - 1].controller = {
+				Memory.spawn[spawnName].controller = {
 					container: {
 						x: x,
 						y: y,

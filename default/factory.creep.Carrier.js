@@ -185,12 +185,13 @@ function all(spawn) {
 function transfer(creep) {
 	// 房间序号
 	let roomSequence = factory.room.nameGetSequence(creep.room.name);
+	let spawnName = factory.spawn.sequenceGetName(roomSequence);
 	let room = creep.room;
 
 	// 给控制器CONTAINER,运输能量
 	let memoryControllerContainer;
 	try {
-		memoryControllerContainer = Memory.spawn[roomSequence - 1].controller.container;
+		memoryControllerContainer = Memory.spawn[spawnName].controller.container;
 	} catch (e) {
 		// 控制器旁是否有CONTAINER或在建的CONTAINER
 		let pos = room.controller.pos;
@@ -200,7 +201,7 @@ function transfer(creep) {
 		if (found2.length > 0) {
 			let x = found2[0].x;
 			let y = found2[0].y;
-			Memory.spawn[roomSequence - 1].controller = {
+			Memory.spawn[spawnName].controller = {
 				container: {
 					x: x,
 					y: y,
@@ -212,14 +213,17 @@ function transfer(creep) {
 		}
 	}
 	if (memoryControllerContainer && memoryControllerContainer.id) {
-		for (var i = 0; i < memoryControllerContainer.list.length; i++) {}
+		console.log('111')
+		// for (var i = 0; i < memoryControllerContainer.list.length; i++) {}
 	} else {
+		let x = Memory.spawn[spawnName].controller.container.x;
+		let y = Memory.spawn[spawnName].controller.container.y;
 		let targetPos = new RoomPosition(x, y, creep.room.name)
 		// CONTAINER
 		let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
 		console.log('found ', found)
 		if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
-			Memory.spawn[roomSequence - 1].controller.container.id = found[0].id;
+			Memory.spawn[spawnName].controller.container.id = found[0].id;
 		}
 	}
 
