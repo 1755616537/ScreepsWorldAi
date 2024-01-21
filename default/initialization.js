@@ -4,7 +4,8 @@ global.initialization = {
 		clog("脚本加载 Time " + Game.time + " , bucket " + Game.cpu.bucket);
 
 		// 客户端汉化显示
-		Utils.cn();
+		// Utils.cn();
+		clog('汉化 Utils.cn();');
 
 		// 矿区块初始化
 
