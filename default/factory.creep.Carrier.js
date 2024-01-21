@@ -192,7 +192,10 @@ function transfer(creep) {
 	let memoryControllerContainer;
 	try {
 		memoryControllerContainer = Memory.spawn[spawnName].controller.container;
+		if (!memoryControllerContainer.x || !memoryControllerContainer.y) Throw.Error(
+			'Memory.spawn[spawnName].controller.container不存在x或y');
 	} catch (e) {
+		if (!Memory.spawn[spawnName].controller) Memory.spawn[spawnName].controller = {};
 		// 控制器旁是否有CONTAINER或在建的CONTAINER
 		let pos = room.controller.pos;
 		let found = room.lookAtArea(pos.y - 1, pos.x - 1, pos.y + 1, pos.x + 1, true);
