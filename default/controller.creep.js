@@ -126,7 +126,7 @@ function spawn(spawnSequence = 1) {
 	// 母巢 (spawn) 是否正在孵化一个新的 creep
 	if (factory.spawn.get(spawnSequence).spawning) {
 		// 孵化，过程可视化
-		let spawningCreep = Game.creeps[factory.spawn.get(spawn).spawning.name];
+		let spawningCreep = Game.creeps[factory.spawn.get(spawnSequence).spawning.name];
 		factory.spawn.get(spawnSequence).room.visual.text(
 			'孵化🛠️' + spawningCreep.memory.role,
 			factory.spawn.get(spawnSequence).pos.x + 1,
