@@ -8,27 +8,36 @@ global.initialization = {
 		clog('汉化 Utils.cn();');
 
 		if (!Memory.spawn) {
-			Memory.spawn = {}
+			Memory.spawn = {
+				source: {},
+				controller: {}
+			}
 		}
 
 		// 矿区块初始化
+		sourcePiece(1);
 
 		// 控制器块初始化
 		controllerPiece(1);
 	},
 }
 
+function sourcePiece(spawnSequence = 1) {
+	let spawnName = factory.spawn.sequenceGetName(spawnSequence);
+	if (!Memory.spawn[spawnName].source) {
+		Memory.spawn[spawnName].source = {}
+	}
+}
+
 // 控制器块初始化
 function controllerPiece(spawnSequence = 1) {
 	let spawnName = factory.spawn.sequenceGetName(spawnSequence);
-	if (!Memory.spawn[spawnName]) {
-		Memory.spawn[spawnName] = {
-			controller: {}
-		}
+	if (!Memory.spawn[spawnName].controller) {
+		Memory.spawn[spawnName].controller = {}
 	}
 
 	let room = factory.room.get(spawnSequence);
-	
+
 	// 自动分配建设控制器区的CONTAINER
 	if (globalData.room[spawnSequence - 1].AutomaticAssignControllerCONTAINER) {
 		// 9*9范围自动生成CONTAINER
