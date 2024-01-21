@@ -32,6 +32,7 @@ module.exports.loop = function() {
 // .spawn是否停止获取能量，先用于生产
 // .根据总能量上限energyCapacityAvailable，小于400，使用最低配置
 // .把每种小兵的取用能量加上状态,取满在用,用完在取
+// .当控制器区存在有能量的CONTAINER,从控制器区存的CONTAINER取能量
 
 // 完成程序:
 // .(废弃(改完出现错误)[此名称是 Game.creeps 对象中指向该 creep 对象的哈希键]).把小兵ID放到memory里面，不在使用小兵名称作为唯一ID值判断，改为小兵ID
