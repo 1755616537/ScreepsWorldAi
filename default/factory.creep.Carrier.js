@@ -27,7 +27,7 @@ var pro = {
 						for (let i = 0; i < spaceXYList.length; i++) {
 							let x = spaceXYList[i].x;
 							let y = spaceXYList[i].y;
-							let targetPos = new RoomPosition(x, y, globalData.roomName1)
+							let targetPos = new RoomPosition(x, y, globalData.room[0].name)
 							// CONTAINER
 							let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
 							if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
@@ -176,22 +176,6 @@ function all(spawn) {
 	}else{
 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.carrier);
 	}
-	// switch (spawn) {
-	// 	case 1:
-	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.carrier && creep.memory
-	// 			.spawn == globalData.SpawnName1));
-	// 		break;
-	// 	case 2:
-	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.carrier && creep.memory
-	// 			.spawn == globalData.SpawnName2));
-	// 		break;
-	// 	case 3:
-	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.carrier && creep.memory
-	// 			.spawn == globalData.SpawnName3));
-	// 		break;
-	// 	default:
-	// 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.carrier);
-	// }
 	return returnData;
 }
 

@@ -26,28 +26,37 @@ global.globalData = {
 		// 获取资源颜色
 		WorkResourceColor: '#ffff00',
 	},
-	// 房间1名称
-	roomName1: 'W47S54',
-	// 房间2名称
-	roomName2: 'W48S54',
-	// 房间3名称
-	roomName3: '',
-	// 基地1名称
-	SpawnName1: 'Spawn1',
-	// 基地2名称
-	SpawnName2: 'Spawn2',
-	// 基地3名称
-	SpawnName3: 'Spawn3',
-	// 房间1自动安全(受到攻击自动开启)
-	room1AutomaticSecurity: true,
-	// 房间2自动安全(受到攻击自动开启)
-	room2AutomaticSecurity: true,
-	// 房间3自动安全(受到攻击自动开启)
-	room3AutomaticSecurity: true,
-	// 自动分配矿区
-	AutomaticAssignHarvest: true,
-	// 自动分配建设采集区的CONTAINER
-	AutomaticAssignHarvestCONTAINER: true,
+	// 房间
+	room:[
+		{
+			name:'W47S54',
+			SpawnName:'Spawn1',
+			// 自动安全(受到攻击自动开启)
+			AutomaticSecurity: true,
+			// 采集者自动分配矿区
+			AutomaticAssignHarvest: true,
+			// 自动分配建设采集区的CONTAINER
+			AutomaticAssignHarvestCONTAINER: true,
+			// 自动分配建设控制器区的CONTAINER
+			AutomaticAssignControllerCONTAINER: true
+		},
+		{
+			name:'W48S54',
+			SpawnName:'Spawn2',
+			AutomaticSecurity: true,
+			AutomaticAssignHarvest: true,
+			AutomaticAssignHarvestCONTAINER: true,
+			AutomaticAssignControllerCONTAINER: true
+		},
+		{
+			name:'',
+			SpawnName:'Spawn3',
+			AutomaticSecurity: true,
+			AutomaticAssignHarvest: true,
+			AutomaticAssignHarvestCONTAINER: true,
+			AutomaticAssignControllerCONTAINER: true
+		}
+	] ,
 	// 角色配置
 	creepConfigs: {
 		// 采集者

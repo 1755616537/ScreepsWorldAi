@@ -5,7 +5,7 @@ var pro = {
 		// 没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器
 		// 脚下是否有CONTAINER，有就不移动
 		let on = false;
-		let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, globalData.roomName1);
+		let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, globalData.room[0].name);
 		let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
 		if (found.length && found[0].structureType == STRUCTURE_CONTAINER && found[0].store.getFreeCapacity(
 				RESOURCE_ENERGY) > 0) {
@@ -18,7 +18,7 @@ var pro = {
 			let source = sources.length > 0 ? sources[0] : null;
 
 			// 自动分配矿区
-			if (globalData.AutomaticAssignHarvest) {
+			if (globalData.room[0].AutomaticAssignHarvest) {
 				// 没有分配到的Source
 
 				// 根据9*9计算矿区地形分配数量 只计算一次缓存后固定
@@ -34,7 +34,7 @@ var pro = {
 					// let dix=_.filter(creep.room.lookAtArea(LOOK_TERRAIN,zb.y-1,zb.x-1,zb.y+1,zb.x+1,1,(f)=>f.terrain=='plain' 8& creep.room.lookAt(f.pos)[0].structureType!-STRUCTURE_WALL).length)
 
 					let memorySource = {};
-					const terrain = new Room.Terrain(globalData.roomName1);
+					const terrain = new Room.Terrain(globalData.room[0].name);
 					let total = 0;
 					for (let i = 0; i < sources.length; i++) {
 						let val = sources[i];
@@ -49,7 +49,7 @@ var pro = {
 								if (terrain.get(x, y) != TERRAIN_MASK_WALL) {
 									// console.log(x, y)
 									let on = true;
-									let targetPos = new RoomPosition(x, y, globalData.roomName1)
+									let targetPos = new RoomPosition(x, y, globalData.room[0].name)
 									// 人造墙壁
 									let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
 									// console.log(found, ' found[1] +', found[1], "+")
@@ -77,7 +77,7 @@ var pro = {
 										})
 
 										// 自动建造对应数量的CONTAINER
-										if (globalData.AutomaticAssignHarvestCONTAINER) {
+										if (globalData.room[0].AutomaticAssignHarvestCONTAINER) {
 											let on = true;
 											// 已经存在有建筑了跳过
 											if (found.length) {
@@ -91,7 +91,7 @@ var pro = {
 											}
 											if (on) {
 												// 指定位置创建一个新的 ConstructionSite
-												let returnData = Game.rooms[globalData.roomName1]
+												let returnData = Game.rooms[globalData.room[0].name]
 													.createConstructionSite(x, y, STRUCTURE_CONTAINER);
 												if (returnData != OK) clog(x, y, '自动建造对应数量的CONTAINER ',
 													returnData);
@@ -197,7 +197,7 @@ var pro = {
 			}
 		} else {
 			// 脚下是否有CONTAINER没有建造完成,就优先建筑
-			let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, globalData.roomName1);
+			let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, globalData.room[0].name);
 			let found = creep.room.lookForAt(LOOK_CONSTRUCTION_SITES, targetPos);
 			if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
 				// 建造
@@ -275,21 +275,5 @@ function all(spawn) {
 	} else {
 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.harvest);
 	}
-	// switch (spawn) {
-	// 	case 1:
-	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.harvest && creep.memory
-	// 			.spawn == globalData.SpawnName1));
-	// 		break;
-	// 	case 2:
-	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.harvest && creep.memory
-	// 			.spawn == globalData.SpawnName2));
-	// 		break;
-	// 	case 3:
-	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.harvest && creep.memory
-	// 			.spawn == globalData.SpawnName3));
-	// 		break;
-	// 	default:
-	// 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.harvest);
-	// }
 	return returnData;
 }

@@ -17,22 +17,6 @@ function allNearDefender(spawn) {
 	}else{
 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.nearDefender);
 	}
-	// switch (spawn) {
-	// 	case 1:
-	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.nearDefender && creep.memory
-	// 			.spawn == globalData.SpawnName1));
-	// 		break;
-	// 	case 2:
-	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.nearDefender && creep.memory
-	// 			.spawn == globalData.SpawnName2));
-	// 		break;
-	// 	case 3:
-	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.nearDefender && creep.memory
-	// 			.spawn == globalData.SpawnName3));
-	// 		break;
-	// 	default:
-	// 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.nearDefender);
-	// }
 	return returnData;
 }
 
@@ -45,21 +29,5 @@ function allFarDefender(spawn) {
 	}else{
 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.farDefender);
 	}
-	// switch (spawn) {
-	// 	case 1:
-	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.farDefender && creep.memory
-	// 			.spawn == globalData.SpawnName1));
-	// 		break;
-	// 	case 2:
-	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.farDefender && creep.memory
-	// 			.spawn == globalData.SpawnName2));
-	// 		break;
-	// 	case 3:
-	// 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.farDefender && creep.memory
-	// 			.spawn == globalData.SpawnName3));
-	// 		break;
-	// 	default:
-	// 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.farDefender);
-	// }
 	return returnData;
 }

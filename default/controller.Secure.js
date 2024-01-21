@@ -15,11 +15,11 @@ global.controller.Secure = {
 
 			if (attackEvents.length > 0) {
 				let on = false;
-				if (room.name == globalData.roomName1 && globalData.room1AutomaticSecurity) {
+				if (room.name == globalData.room[0].name && globalData.room[0].AutomaticSecurity) {
 					on = true;
-				} else if (room.name == globalData.roomName2 && globalData.room2AutomaticSecurity) {
+				} else if (room.name == globalData.room[1].name && globalData.room[1].AutomaticSecurity) {
 					on = true;
-				} else if (room.name == globalData.roomName3 && globalData.room3AutomaticSecurity) {
+				} else if (room.name == globalData.room[2].name && globalData.room[2].AutomaticSecurity) {
 					on = true;
 				}
 				if (on) {

@@ -19,16 +19,16 @@ function controllerPiece(spawn = 1) {
 	let room;
 	switch (spawn) {
 		case 1:
-			room = Game.rooms[globalData.roomName1];
+			room = Game.rooms[globalData.room[0].name];
 			break;
 		case 2:
-			room = Game.rooms[globalData.roomName2];
+			room = Game.rooms[globalData.room[1].name];
 			break;
 		case 3:
-			room = Game.rooms[globalData.roomName3];
+			room = Game.rooms[globalData.room[2].name];
 			break;
 		default:
-			room = Game.rooms[globalData.roomName1];
+			room = Game.rooms[globalData.room[0].name];
 	}
 	// 9*9范围自动生成CONTAINER
 	let pos = room.controller.pos;
@@ -47,10 +47,20 @@ function controllerPiece(spawn = 1) {
 			let x = foundFilter[0].x;
 			let y = foundFilter[0].y;
 			// 指定位置创建一个新的 ConstructionSite
-			let returnData = Game.rooms[globalData.roomName1]
+			let returnData = Game.rooms[globalData.room[0].name]
 				.createConstructionSite(x, y, STRUCTURE_CONTAINER);
-			if (returnData != OK) clog(x, y, '自动建造对应数量的CONTAINER ',
-				returnData);
+			if (returnData != OK) {
+				clog(x, y, '自动建造对应数量的CONTAINER ', returnData);
+				Memory.spawn[spawn - 1].controller = {
+					container: {
+						x: x,
+						y: y,
+						ID: null,
+						// 运输者的ID列表
+						list: []
+					}
+				}
+			}
 		}
 	}
 }
