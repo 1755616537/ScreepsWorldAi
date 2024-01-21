@@ -1,0 +1,3 @@
+global.factory.Secure = {
+	run: () => {}
+}

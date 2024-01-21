@@ -16,10 +16,17 @@ require("log");
 require("utils");
 require('超级移动优化hotfix 0.9.4');
 // -------------------------------工厂模块
+// 任务
 require('factory.task')
+// 安全
+require('factory.Secure')
+// 能量区
 require('factory.source')
+// 基地
 require('factory.spawn')
+// 塔
 require('factory.Tower')
+// 爬爬
 require('factory.creep')
 // 采集
 require('factory.creep.Harvest')
@@ -38,8 +45,13 @@ require('factory.creep.Occupier')
 // 治疗
 require('factory.creep.TheHealer')
 // -------------------------------控制器
+// 任务
 require('controller.task')
+// 安全
+require('controller.Secure')
+// 塔
 require('controller.Tower')
+// 爬爬
 require('controller.creep')
 // -------------------------------默认只执行一次的初始化程序
 require('initialization')

@@ -38,24 +38,12 @@ global.globalData = {
 	SpawnName2: 'Spawn2',
 	// 基地3名称
 	SpawnName3: 'Spawn3',
-	// 采集者ID
-	harvest: 'harvest',
-	// 升级者ID
-	upgrader: 'upgrader',
-	// 建造者ID
-	builder: 'builder',
-	// 运输者ID
-	carrier: 'carrier',
-	// 维修者ID
-	repairer: 'repairer',
-	// 防御者近战ID
-	nearDefender: 'nearDefender',
-	// 防御者远战ID
-	farDefender: 'farDefender',
-	// 占领者ID
-	occupier: 'occupier',
-	// 治疗者ID
-	theHealer: 'theHealer',
+	// 房间1自动安全(受到攻击自动开启)
+	room1AutomaticSecurity: true,
+	// 房间2自动安全(受到攻击自动开启)
+	room2AutomaticSecurity: true,
+	// 房间3自动安全(受到攻击自动开启)
+	room3AutomaticSecurity: true,
 	// 自动分配矿区
 	AutomaticAssignHarvest: true,
 	// 自动分配建设采集区的CONTAINER
@@ -222,6 +210,24 @@ global.globalData = {
 			number: 0
 		}
 	},
+	// 采集者ID
+	harvest: 'harvest',
+	// 升级者ID
+	upgrader: 'upgrader',
+	// 建造者ID
+	builder: 'builder',
+	// 运输者ID
+	carrier: 'carrier',
+	// 维修者ID
+	repairer: 'repairer',
+	// 防御者近战ID
+	nearDefender: 'nearDefender',
+	// 防御者远战ID
+	farDefender: 'farDefender',
+	// 占领者ID
+	occupier: 'occupier',
+	// 治疗者ID
+	theHealer: 'theHealer',
 	// 角色部件配置
 	creepComponentConfigs: {
 		// 每 tick 减少 2 点疲惫值

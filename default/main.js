@@ -8,7 +8,8 @@ require("main_mount")();
 module.exports.loop = function() {
 	// 任务调度启动
 	// controller.task.run();
-
+	
+	controller.Secure.run();
 	controller.Tower.run();
 	controller.creep.run();
 
@@ -24,7 +25,6 @@ module.exports.loop = function() {
 // .统一任务调度机制
 // .多一种角色管理系统，不区分兵种，先统一分配后固定站岗，缺少了补上，1对1搬运
 // .自动铺路，矿，控制器。方案1：两点最近距离.方案2：走得次数多的地方铺路
-// .受到攻击掉血开启安全模式(getEventLog),Tower开启优先攻击模式
 // .createConstructionSite自动布局EXTENSION建筑 控制器等级3布局TOWER
 // .运输者，（取，放）状态切换，去取CONTAINER能量后可以选择去捡能量也可以去放
 // .每个STORAGE搭配一个运输者。如果存在STORAGE并且搭配有运输者，其他运输者才可以把能力放到STORAGE
@@ -39,6 +39,7 @@ module.exports.loop = function() {
 // .采集者，在矿区脚下的CONTAINER未建成，先采集能量了自己建，在运输到需要运输的地方
 // .采集如果脚下有CONTAINER，挖完就放进CONTAINER（没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器了）
 // .在升级控制器的9*9空位其中一个上放置一个CONTAINER（并且检测是否在控制器7*7范围内），多个升级小兵共享一个CONTAINER
+// .受到攻击掉血开启安全模式(getEventLog),Tower开启优先攻击模式
 
 
 // 房间 W25N6  W42S57 W48S54 W47S54
