@@ -187,6 +187,7 @@ function transfer(creep) {
 	let roomSequence = factory.room.nameGetSequence(creep.room.name);
 	let room = creep.room;
 
+	// 给控制器CONTAINER,运输能量
 	let memoryControllerContainer;
 	try {
 		memoryControllerContainer = Memory.spawn[roomSequence - 1].controller.container;
@@ -196,6 +197,7 @@ function transfer(creep) {
 		let found = room.lookAtArea(pos.y - 1, pos.x - 1, pos.y + 1, pos.x + 1, true);
 		let found2 = _.filter(found, (f) => f.type == LOOK_CONSTRUCTION_SITES || (f.type == LOOK_STRUCTURES && f
 			.structure.structureType == STRUCTURE_CONTAINER));
+		console.log('found2 ', found2)
 		if (found2.length > 0) {
 			let x = found2[0].x;
 			let y = found2[0].y;
