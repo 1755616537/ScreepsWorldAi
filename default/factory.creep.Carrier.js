@@ -220,12 +220,13 @@ function transfer(creep) {
 	if (memoryControllerContainer && memoryControllerContainer.id) {
 		// 没有分配运输者,进行分配
 		if (memoryControllerContainer.list.length < 1) {
-			const carriers = factory.creep.Carrier.ALL(roomSequence);
+			let carriers = factory.creep.Carrier.ALL(roomSequence);
 			for (var i = 0; i < carriers.length; i++) {
 				if (!carriers[i].memory.TransportationTargetID) {
-					clog(carriers[i].name,'已自动分配给控制器Container')
 					memoryControllerContainer.list.push(carriers[i].name);
+					// Memory.creeps[carriers[i].name].TransportationTargetID
 					carriers[i].memory.TransportationTargetID = memoryControllerContainer.id;
+					clog(carriers[i].name,'已自动分配给控制器Container')
 					break;
 				}
 			}
