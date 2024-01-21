@@ -7,6 +7,10 @@ global.initialization = {
 		// Utils.cn();
 		clog('汉化 Utils.cn();');
 
+		if (!Memory.spawn) {
+			Memory.spawn = []
+		}
+
 		// 矿区块初始化
 
 		// 控制器块初始化
@@ -16,8 +20,10 @@ global.initialization = {
 
 // 控制器块初始化
 function controllerPiece(spawn = 1) {
-	if (!Memory.spawn) {
-		Memory.spawn = []
+	if (!Memory.spawn[spawn - 1]) {
+		Memory.spawn[spawn - 1] = {
+			controller: {}
+		}
 	}
 
 	let room = factory.room.get(spawn);
