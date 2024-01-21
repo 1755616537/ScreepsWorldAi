@@ -26,7 +26,7 @@ function controllerPiece(spawn = 1) {
 		(f.terrain == 'plain' || f.terrain == 'swamp') &&
 		(f.type == LOOK_STRUCTURES && f.structure.structureType != STRUCTURE_WALL));
 
-	if (foundFilter.length > 1) {
+	if (foundFilter.length > 0) {
 		// 是否已经存在CONTAINER或在建的CONTAINER
 		let found2 = _.filter(found, (f) => f.type == LOOK_CONSTRUCTION_SITES || (f.type == LOOK_STRUCTURES && f
 			.structure.structureType == STRUCTURE_CONTAINER));
