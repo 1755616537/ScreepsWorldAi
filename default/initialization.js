@@ -40,9 +40,12 @@ function controllerPiece(spawn = 1) {
 		room.lookAt(f.pos)[0].structureType != STRUCTURE_WALL);
 	if (foundFilter.length > 1) {
 		// 是否已经存在CONTAINER
-		let found2 = _.filter(found, (f) => f.type == LOOK_CONSTRUCTION_SITES || room.lookAt(f.pos)[0].structureType ==
-			STRUCTURE_CONTAINER)
-		console.log(JSON.stringify(found2))
+		let found2 = _.filter(found, (f) => {
+			console.log('f ',JSON.stringify(f));
+			return f.type == LOOK_CONSTRUCTION_SITES || room.lookAt(f.pos)[0].structureType ==
+			STRUCTURE_CONTAINER;
+		});
+		console.log(JSON.stringify(found2));
 		if (found2.length < 1) {
 			let x = foundFilter[0].x;
 			let y = foundFilter[0].y;
