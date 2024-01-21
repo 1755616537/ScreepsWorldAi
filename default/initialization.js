@@ -34,6 +34,7 @@ function controllerPiece(spawn = 1) {
 	let pos = room.controller.pos;
 	let found = room.lookAtArea(pos.y - 1, pos.x - 1, pos.y + 1,
 		pos.x + 1, true);
+		console.log(found)
 	// 筛选出平原和沼泽非墙壁
 	let foundFilter = _.filter(found, (f) =>
 		(f.terrain == 'plain' || f.terrain == 'swamp') &&
