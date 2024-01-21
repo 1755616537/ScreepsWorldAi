@@ -199,7 +199,7 @@ function transfer(creep) {
 		if (found2.length > 0) {
 			let x = found2[0].x;
 			let y = found2[0].y;
-			Memory.spawn[spawn - 1].controller = {
+			Memory.spawn[roomSequence - 1].controller = {
 				container: {
 					x: x,
 					y: y,
