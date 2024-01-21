@@ -176,7 +176,7 @@ global.factory.creep = {
 						let on = false;
 						let i = 0;
 						for (; i < memoryControllerContainerList.length; i++) {
-							if (TransportationTargetID == memoryControllerContainerList[i]) {
+							if (memoryControllerContainerList[i] == name) {
 								on = true;
 								break;
 							}
