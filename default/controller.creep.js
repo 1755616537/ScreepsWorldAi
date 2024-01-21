@@ -112,8 +112,6 @@ function addRepairer(repairers, controller_level, spawnSequence) {
 
 
 function spawn(spawnSequence = 1) {
-	// 房间序号
-	let roomSequence = factory.room.nameGetSequence(creep.room.name);
 	let spawnName = factory.spawn.sequenceGetName(spawnSequence);
 
 	const harvests = factory.creep.Harvest.ALL(spawnSequence);
