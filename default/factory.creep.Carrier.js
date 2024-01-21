@@ -80,7 +80,7 @@ var pro = {
 
 									Memory.spawn[spawnName].source.list[val].spaceXYList = spaceXYList;
 									on = true;
-									clog(creep.name,'已自动分配给矿区',val,"Container",spaceXYList[i].containerID)
+									clog(creep.name, '已自动分配给矿区', val, "Container", spaceXYList[i].containerID)
 									break;
 								}
 							}
@@ -226,7 +226,7 @@ function transfer(creep) {
 					memoryControllerContainer.list.push(carriers[i].name);
 					// Memory.creeps[carriers[i].name].TransportationTargetID
 					carriers[i].memory.TransportationTargetID = memoryControllerContainer.id;
-					clog(carriers[i].name,'已自动分配给控制器Container')
+					clog(carriers[i].name, '已自动分配给控制器Container')
 					break;
 				}
 			}
@@ -305,20 +305,23 @@ function transfer(creep) {
 			}
 		});
 		// 去除矿区的CONTAINER
-		let targets2 = targets;
-		for (let i = 0; i < targets2.length; i++) {
+		let targets2 = [];
+		for (let i = 0; i < targets.length; i++) {
 			let memorySource = Memory.spawn[spawnName].source.list;
 			let on = false;
 			for (let val in memorySource) {
 				let spaceXYList = memorySource[val].spaceXYList;
 				for (let i2 = 0; i2 < spaceXYList.length; i2++) {
-					if (spaceXYList[i2].x == targets2[i].pos.x && spaceXYList[i2].y == targets2[i].pos.y) {
-						targets2.splice(i, 1);
+					if (spaceXYList[i2].x == targets[i].pos.x && spaceXYList[i2].y == targets[i].pos.y) {
+						// targets2.splice(i, 1);
 						on = true;
 						break;
 					}
 				}
 				if (on) break;
+			}
+			if (!on) {
+				targets2.push(targets[i])
 			}
 		}
 		targets = targets2;
