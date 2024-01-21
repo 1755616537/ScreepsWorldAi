@@ -232,6 +232,7 @@ global.factory.creep = {
 					spawn: spawnSequence
 				}
 			});
+		Game.creeps[newName].memory.id = Game.creeps[newName].id;
 		if (returnData == OK) {
 			clog('生成新的 采集者: ' + newName);
 		}
@@ -278,6 +279,7 @@ global.factory.creep = {
 					spawn: spawnSequence
 				}
 			});
+		Game.creeps[newName].memory.id = Game.creeps[newName].id;
 		if (returnData == OK) {
 			clog('生成新的 运输者: ' + newName);
 		}
@@ -319,6 +321,7 @@ global.factory.creep = {
 					spawn: spawnSequence
 				}
 			});
+		Game.creeps[newName].memory.id = Game.creeps[newName].id;
 		if (returnData == OK) {
 			clog('生成新的 升级者: ' + newName);
 		}
@@ -360,6 +363,7 @@ global.factory.creep = {
 					spawn: spawnSequence
 				}
 			});
+		Game.creeps[newName].memory.id = Game.creeps[newName].id;
 		if (returnData == OK) {
 			clog('生成新的 建造者:' + newName);
 		}
@@ -411,6 +415,7 @@ global.factory.creep = {
 					spawn: spawnSequence
 				}
 			});
+		Game.creeps[newName].memory.id = Game.creeps[newName].id;
 		if (returnData == OK) {
 			clog('生成新的 维修者:' + newName);
 		}
@@ -452,6 +457,7 @@ global.factory.creep = {
 					spawn: spawnSequence
 				}
 			});
+		Game.creeps[newName].memory.id = Game.creeps[newName].id;
 		if (returnData == OK) {
 			clog('生成新的 防御者-近战:' + newName);
 		}
@@ -493,6 +499,7 @@ global.factory.creep = {
 					spawn: spawnSequence
 				}
 			});
+		Game.creeps[newName].memory.id = Game.creeps[newName].id;
 		if (returnData == OK) {
 			clog('生成新的 防御者-远战:' + newName);
 		}
@@ -534,6 +541,7 @@ global.factory.creep = {
 					spawn: spawnSequence
 				}
 			});
+		Game.creeps[newName].memory.id = Game.creeps[newName].id;
 		if (returnData == OK) {
 			clog('生成新的 占领者:' + newName);
 		}
