@@ -34,8 +34,7 @@ function controllerPiece(spawn = 1) {
 			let x = foundFilter[0].x;
 			let y = foundFilter[0].y;
 			// 指定位置创建一个新的 ConstructionSite
-			let returnData = factory.room.get(spawn)
-				.createConstructionSite(x, y, STRUCTURE_CONTAINER);
+			let returnData = room.createConstructionSite(x, y, STRUCTURE_CONTAINER);
 			if (returnData != OK) {
 				clog(x, y, '自动建造对应数量的CONTAINER ', returnData);
 				Memory.spawn[spawn - 1].controller = {
