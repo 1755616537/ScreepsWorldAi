@@ -91,6 +91,10 @@ global.factory.creep = {
 
 		for (let name in Memory.creeps) { // 释放内存
 			if (!Game.creeps[name]) {
+				// 基地序号
+				let spawnSequence = Memory.creeps[name].spawn;
+				let spawnName = factory.spawn.sequenceGetName(spawnSequence);
+
 				// 采集者
 				if (Memory.creeps[name].role == globalData.harvest) {
 					// 从矿区记录删除
@@ -120,24 +124,24 @@ global.factory.creep = {
 				// 运输者
 				if (Memory.creeps[name].role == globalData.carrier) {
 					// 从矿区记录删除
-					let carrierSourceID, memorySource;
+					let TransportationTargetID, memorySource;
 					let on = false;
 					// 如果没有合法记录会不存在harvestSourceID,报错需要捕获
 					try {
-						carrierSourceID = Memory.creeps[name].carrierSourceID;
+						TransportationTargetID = Memory.creeps[name].TransportationTargetID;
 						memorySource = Memory.source.list;
 						on = true;
 					} catch (e) {
 						//TODO handle the exception
 					}
 					// 是否合法记录了
-					if (on && carrierSourceID) {
+					if (on && TransportationTargetID) {
 						let on = false;
 						for (let val in memorySource) {
 							let spaceXYList = memorySource[val].spaceXYList;
 							for (let i = 0; i < spaceXYList.length; i++) {
 								let containerID = spaceXYList[i].containerID
-								if (carrierSourceID == containerID) {
+								if (TransportationTargetID == containerID) {
 									let i2 = 0;
 									for (; i2 < spaceXYList[i].list.length; i2++) {
 										if (spaceXYList[i].list[i2] == name) {
@@ -153,6 +157,34 @@ global.factory.creep = {
 								}
 							}
 							if (on) break;
+						}
+					}
+
+					// 从控制器区记录删除
+					TransportationTargetID = null;
+					let memoryControllerContainerList;
+					on = false;
+					try {
+						TransportationTargetID = Memory.creeps[name].TransportationTargetID;
+						memoryControllerContainerList = Memory.spawn[spawnName].controller.container.list;
+						on = true;
+					} catch (e) {
+						//TODO handle the exception
+					}
+					// 是否合法记录了
+					if (on && TransportationTargetID) {
+						let on = false;
+						let i = 0;
+						for (; i < memoryControllerContainerList.length; i++) {
+							if (TransportationTargetID == memoryControllerContainerList[i]) {
+								on = true;
+								break;
+							}
+						}
+						if (on) {
+							memoryControllerContainerList.splice(i, 1);
+							Memory.spawn[spawnName].controller.container.list = memoryControllerContainerList;
+							break;
 						}
 					}
 				}

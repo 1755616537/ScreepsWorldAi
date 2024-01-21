@@ -43,7 +43,7 @@ var pro = {
 						memorySource[val].spaceXYList = spaceXYList;
 					}
 
-					if (!creep.memory.carrierSourceID) {
+					if (!creep.memory.TransportationTargetID) {
 						// 找出没有被分配完的CONTAINER
 						let memoryContainerListNull = null;
 						for (let val in memorySource) {
@@ -75,7 +75,7 @@ var pro = {
 									// 把creep ID记录到矿区CONTAINER
 									spaceXYList[i].list.push(creep.name);
 									// 把矿区ID记录到creep
-									creep.memory.carrierSourceID = containerID;
+									creep.memory.TransportationTargetID = containerID;
 
 									Memory.source.list[val].spaceXYList = spaceXYList;
 									on = true;
@@ -93,7 +93,7 @@ var pro = {
 						}
 					});
 					for (let i = 0; i < targets.length; i++) {
-						if (targets[i].id == creep.memory.carrierSourceID) {
+						if (targets[i].id == creep.memory.TransportationTargetID) {
 							// 检查是否在矿区CONTAINER记录中
 							let on = false;
 							for (let val in memorySource) {
@@ -114,16 +114,16 @@ var pro = {
 								source = targets[i];
 							} else {
 								// 不合法,移除
-								creep.memory.carrierSourceID = null;
+								creep.memory.TransportationTargetID = null;
 							}
 						}
 					}
 					if (source) {
-						if (source.id != creep.memory.carrierSourceID) {
-							// Throw.Error('creep ', creep.id, ' 找不到分配的矿CONTAINERID ', creep.memory.carrierSourceID);
+						if (source.id != creep.memory.TransportationTargetID) {
+							// Throw.Error('creep ', creep.id, ' 找不到分配的矿CONTAINERID ', creep.memory.TransportationTargetID);
 						}
 					} else {
-						// Throw.Error('creep ', creep.id, ' 找不到分配的矿CONTAINERID ', creep.memory.carrierSourceID);
+						// Throw.Error('creep ', creep.id, ' 找不到分配的矿CONTAINERID ', creep.memory.TransportationTargetID);
 					}
 				}
 
@@ -216,23 +216,44 @@ function transfer(creep) {
 		}
 	}
 	if (memoryControllerContainer && memoryControllerContainer.id) {
-		let on = false;
-		for (var i = 0; i < memoryControllerContainer.list.length; i++) {
-			if (creep.id == memoryControllerContainer.list[i]) {
-				on = true;
-				break;
+		let x = memoryControllerContainer.x;
+		let y = memoryControllerContainer.y;
+		let targetPos = new RoomPosition(x, y, creep.room.name)
+		// CONTAINER
+		let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
+		// 是否存在CONTAINER
+		if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
+			// 没有分配运输者,进行分配
+			if (memoryControllerContainer.list.length < 1) {
+				const carriers = factory.creep.Carrier.ALL(roomSequence);
+				for (var i = 0; i < carriers.length; i++) {
+					if (!carriers[i].memory.TransportationTargetID) {
+						memoryControllerContainer.list.push(carriers[i].id);
+						break;
+					}
+				}
 			}
-		}
-		if (on) {
-			const source = Game.getObjectById(memoryControllerContainer.id);
-			// 将资源从该 creep 转移至其他对象
-			if (creep.transfer(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-				// 向目标移动
-				factory.creep.moveTo(creep, source);
+			
+			// 已经分配运输者进行能量派送
+			let on = false;
+			for (var i = 0; i < memoryControllerContainer.list.length; i++) {
+				if (creep.id == memoryControllerContainer.list[i]) {
+					on = true;
+					break;
+				}
 			}
-			return
+			if (on) {
+				const source = Game.getObjectById(memoryControllerContainer.id);
+				// 将资源从该 creep 转移至其他对象
+				if (creep.transfer(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+					// 向目标移动
+					factory.creep.moveTo(creep, source);
+				}
+				return
+			}
 		}
 	} else {
+		// 存在正在建造的CONTAINER,检测是否建造完成
 		let x = Memory.spawn[spawnName].controller.container.x;
 		let y = Memory.spawn[spawnName].controller.container.y;
 		let targetPos = new RoomPosition(x, y, creep.room.name)
