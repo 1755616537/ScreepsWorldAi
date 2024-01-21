@@ -41,6 +41,7 @@ function controllerPiece(spawn = 1) {
 		// 是否已经存在CONTAINER
 		if (_.filter(found, (f) => {
 				let found = room.lookForAt(LOOK_STRUCTURES, f.pos);
+				console.log(found)
 				return f.type == LOOK_CONSTRUCTION_SITES || (found.length && found[0].structureType ==
 					STRUCTURE_CONTAINER);
 			}).length < 1) {
