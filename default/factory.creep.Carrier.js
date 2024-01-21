@@ -6,6 +6,7 @@ var pro = {
 	run: function(creep) {
 		// 房间序号
 		let roomSequence = factory.room.nameGetSequence(creep.room.name);
+		let spawnName = factory.spawn.sequenceGetName(roomSequence);
 
 		if (creep.store.getFreeCapacity() > 0) { // 背包未满
 			// 所有掉落的资源
@@ -21,8 +22,8 @@ var pro = {
 			} else {
 				let source = null;
 				// 矿区CONTAINER是否1v1运送
-				if (globalData.creepConfigs.carrier.sourceContainer1v1 && Memory.source) {
-					let memorySource = Memory.source.list;
+				if (globalData.creepConfigs.carrier.sourceContainer1v1 && Memory.spawn[spawnName].source) {
+					let memorySource = Memory.spawn[spawnName].source.list;
 					// source周边的空地是否存在CONTAINER
 					for (let val in memorySource) {
 						// 空地XY坐标列表
@@ -77,7 +78,7 @@ var pro = {
 									// 把矿区ID记录到creep
 									creep.memory.TransportationTargetID = containerID;
 
-									Memory.source.list[val].spaceXYList = spaceXYList;
+									Memory.spawn[spawnName].source.list[val].spaceXYList = spaceXYList;
 									on = true;
 									break;
 								}
@@ -227,7 +228,7 @@ function transfer(creep) {
 				}
 			}
 		}
-		
+
 		// 已经分配运输者进行能量派送
 		// 找出已经分配的控制器消息
 		let targets = creep.room.find(FIND_STRUCTURES, {
@@ -303,7 +304,7 @@ function transfer(creep) {
 		// 去除矿区的CONTAINER
 		let targets2 = targets;
 		for (let i = 0; i < targets2.length; i++) {
-			let memorySource = Memory.source.list;
+			let memorySource = Memory.spawn[spawnName].source.list;
 			let on = false;
 			for (let val in memorySource) {
 				let spaceXYList = memorySource[val].spaceXYList;

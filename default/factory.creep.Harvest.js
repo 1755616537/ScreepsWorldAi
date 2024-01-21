@@ -4,6 +4,7 @@ var pro = {
 	run: function(creep) {
 		// 房间序号
 		let roomSequence = factory.room.nameGetSequence(creep.room.name);
+		let spawnName = factory.spawn.sequenceGetName(roomSequence);
 		
 		// 没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器
 		// 脚下是否有CONTAINER，有就不移动
@@ -26,11 +27,11 @@ var pro = {
 
 				// 根据9*9计算矿区地形分配数量 只计算一次缓存后固定
 				// try {
-				// 	if (!Memory.source.list) {}
+				// 	if (!Memory.spawn[spawnName].source.list) {}
 				// } catch (e) {
-				// 	Memory.source.list = {};
+				// 	Memory.spawn[spawnName].source.list = {};
 				// }
-				if (!Memory.source) {
+				if (!Memory.spawn[spawnName].source) {
 
 					// 网上贡献的方法
 					// let zb=creep.room.find(FIND_SOURCES).pos;
@@ -123,7 +124,7 @@ var pro = {
 							spaceXYList: spaceXYList
 						};
 					}
-					Memory.source = {
+					Memory.spawn[spawnName].source = {
 						list: memorySource,
 						// 允许采集总数
 						total: total
@@ -134,7 +135,7 @@ var pro = {
 					}
 				}
 
-				let memorySource = Memory.source.list;
+				let memorySource = Memory.spawn[spawnName].source.list;
 
 				if (!creep.memory.harvestSourceID) {
 					// 找出没有被分配完的矿区
@@ -154,7 +155,7 @@ var pro = {
 							// 把矿区ID记录到creep
 							creep.memory.harvestSourceID = val;
 
-							Memory.source.list = memorySource;
+							Memory.spawn[spawnName].source.list = memorySource;
 							break;
 						}
 					}

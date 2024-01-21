@@ -57,78 +57,82 @@ global.controller.creep = {
 	}
 }
 
-function addHarvest(harvests, controller_level = 4, spawn) {
+function addHarvest(harvests, controller_level = 4, spawnSequence) {
 	// 生产 采集
 	if (harvests.length < globalData.creepConfigs.harvest.number) {
-		let returnData = factory.creep.addHarvest(harvests, controller_level, spawn);
+		let returnData = factory.creep.addHarvest(harvests, controller_level, spawnSequence);
 		// clog(returnData);
 		return returnData;
 	}
 }
 
-function addUpgrader(upgraders, controller_level, spawn) {
+function addUpgrader(upgraders, controller_level, spawnSequence) {
 	// 生产 升级
 	if (upgraders.length < globalData.creepConfigs.upgrader.number) {
-		let returnData = factory.creep.addUpgrader(upgraders, controller_level, spawn);
+		let returnData = factory.creep.addUpgrader(upgraders, controller_level, spawnSequence);
 		// clog(returnData);
 		return returnData;
 	}
 }
 
-function addBuilder(builders, controller_level, spawn) {
+function addBuilder(builders, controller_level, spawnSequence) {
 	// 生产 建造 前提控制器2等级
 	if (builders.length < globalData.creepConfigs.builder.number) { // && controller_level >= 2
-		let returnData = factory.creep.addBuilder(builders, controller_level, spawn)
+		let returnData = factory.creep.addBuilder(builders, controller_level, spawnSequence)
 		// clog(returnData);
 		return returnData;
 	}
 }
 
-function addCarrier(carriers, controller_level, spawn) {
+function addCarrier(carriers, controller_level, spawnSequence) {
 	// 生产 运输
 	if (carriers.length < globalData.creepConfigs.carrier.number) {
 		// 拥有CONTAINER才生产
-		const builds = factory.spawn.get(spawn).room.find(FIND_STRUCTURES, {
+		const builds = factory.spawn.get(spawnSequence).room.find(FIND_STRUCTURES, {
 			filter: {
 				structureType: STRUCTURE_CONTAINER
 			}
 		});
 		if (builds.length > 0) {
-			let returnData = factory.creep.addCarrier(carriers, controller_level, spawn);
+			let returnData = factory.creep.addCarrier(carriers, controller_level, spawnSequence);
 			// clog(returnData);
 			return returnData;
 		};
 	}
 }
 
-function addRepairer(repairers, controller_level, spawn) {
+function addRepairer(repairers, controller_level, spawnSequence) {
 	// 生产 维修
 	if (repairers.length < globalData.creepConfigs.repairer.number) {
-		let returnData = factory.creep.addRepairer(repairers, controller_level, spawn);
+		let returnData = factory.creep.addRepairer(repairers, controller_level, spawnSequence);
 		// clog(returnData);
 		return returnData;
 	}
 }
 
 
-function spawn(spawn = 1) {
-	const harvests = factory.creep.Harvest.ALL(spawn);
-	const upgraders = factory.creep.Upgrader.ALL(spawn);
-	const builders = factory.creep.Builder.ALL(spawn);
-	const carriers = factory.creep.Carrier.ALL(spawn);
-	const repairers = factory.creep.Repairer.ALL(spawn);
+function spawn(spawnSequence = 1) {
+	// 房间序号
+	let roomSequence = factory.room.nameGetSequence(creep.room.name);
+	let spawnName = factory.spawn.sequenceGetName(spawnSequence);
+
+	const harvests = factory.creep.Harvest.ALL(spawnSequence);
+	const upgraders = factory.creep.Upgrader.ALL(spawnSequence);
+	const builders = factory.creep.Builder.ALL(spawnSequence);
+	const carriers = factory.creep.Carrier.ALL(spawnSequence);
+	const repairers = factory.creep.Repairer.ALL(spawnSequence);
 
 	// 查看控制器等级
-	const controller_level = factory.spawn.get(spawn).room.controller.level;
+	const controller_level = factory.spawn.get(spawnSequence).room.controller.level;
 
 	// 母巢 (spawn) 是否正在孵化一个新的 creep
-	if (factory.spawn.get(spawn).spawning) {
+	if (factory.spawn.get(spawnSequence).spawning) {
 		// 孵化，过程可视化
 		let spawningCreep = Game.creeps[factory.spawn.get(spawn).spawning.name];
-		factory.spawn.get(spawn).room.visual.text(
+		factory.spawn.get(spawnSequence).room.visual.text(
 			'孵化🛠️' + spawningCreep.memory.role,
-			factory.spawn.get(spawn).pos.x + 1,
-			factory.spawn.get(spawn).pos.y, {
+			factory.spawn.get(spawnSequence).pos.x + 1,
+			factory.spawn.get(spawnSequence).pos.y, {
 				align: 'left',
 				opacity: 0.8
 			});
@@ -136,15 +140,15 @@ function spawn(spawn = 1) {
 		// 生产 采集
 		// 动态更新采集者数量
 		try {
-			if (globalData.creepConfigs.harvest.AutomaticAssignNum && Memory.source.total && globalData
-				.creepConfigs.harvest.number != Memory.source.total) globalData
-				.creepConfigs.harvest.number = Memory.source.total;
+			if (globalData.creepConfigs.harvest.AutomaticAssignNum && Memory.spawn[spawnName].source.total && globalData
+				.creepConfigs.harvest.number != Memory.spawn[spawnName].source.total) globalData
+				.creepConfigs.harvest.number = Memory.spawn[spawnName].source.total;
 		} catch (e) {
 			//TODO handle the exception
 		}
 
 
-		let towers = factory.spawn.get(spawn).room.find(FIND_STRUCTURES, {
+		let towers = factory.spawn.get(spawnSequence).room.find(FIND_STRUCTURES, {
 			filter: (structure) => {
 				// 找出需要储存能量
 				return (structure.structureType == STRUCTURE_TOWER) &&
@@ -160,9 +164,10 @@ function spawn(spawn = 1) {
 				priority = 'upgrader';
 			} else if (builders.length < 1 && globalData.creepConfigs.builder.number >= 1) {
 				priority = 'builder';
-			} else if (repairers.length < 1 && globalData.creepConfigs.repairer.number >= 1 && (!globalData.creepConfigs.repairer.onTower || (globalData
-					.creepConfigs.repairer.onTower && towers.length <
-					1))) {
+			} else if (repairers.length < 1 && globalData.creepConfigs.repairer.number >= 1 && (!globalData.creepConfigs
+					.repairer.onTower || (globalData
+						.creepConfigs.repairer.onTower && towers.length <
+						1))) {
 				priority = 'repairer';
 			} else if (carriers.length < 1 && globalData.creepConfigs.carrier.number >= 1) {
 				// 注释掉是因为 拥有CONTAINER才生产 会卡住优先顺序，不进行默认生成
@@ -171,26 +176,26 @@ function spawn(spawn = 1) {
 			if (priority) {
 				switch (priority) {
 					case 'upgrader':
-						addUpgrader(upgraders, controller_level, spawn);
+						addUpgrader(upgraders, controller_level, spawnSequence);
 						break;
 					case 'builder':
-						addBuilder(builders, controller_level, spawn);
+						addBuilder(builders, controller_level, spawnSequence);
 						break;
 					case 'carrier':
-						addCarrier(carriers, controller_level, spawn);
+						addCarrier(carriers, controller_level, spawnSequence);
 						break;
 					case 'repairer':
-						addRepairer(repairers, controller_level, spawn);
+						addRepairer(repairers, controller_level, spawnSequence);
 						break;
 					default:
 				}
 			} else {
 				// 默认顺序生产
-				if (addHarvest(harvests, controller_level, spawn) != OK) {
-					if (addCarrier(carriers, controller_level, spawn) != OK) {
-						if (addBuilder(builders, controller_level, spawn) != OK) {
-							if (addRepairer(repairers, controller_level, spawn) != OK) {
-								if (addUpgrader(upgraders, controller_level, spawn) != OK) {}
+				if (addHarvest(harvests, controller_level, spawnSequence) != OK) {
+					if (addCarrier(carriers, controller_level, spawnSequence) != OK) {
+						if (addBuilder(builders, controller_level, spawnSequence) != OK) {
+							if (addRepairer(repairers, controller_level, spawnSequence) != OK) {
+								if (addUpgrader(upgraders, controller_level, spawnSequence) != OK) {}
 							}
 						}
 					}
@@ -198,7 +203,7 @@ function spawn(spawn = 1) {
 
 			}
 		} else {
-			addHarvest(harvests, controller_level, spawn);
+			addHarvest(harvests, controller_level, spawnSequence);
 		}
 	}
 }
