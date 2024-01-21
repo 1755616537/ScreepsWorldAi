@@ -88,7 +88,7 @@ function addCarrier(carriers, controller_level, spawn) {
 	// 生产 运输
 	if (carriers.length < globalData.creepConfigs.carrier.number) {
 		// 拥有CONTAINER才生产
-		const builds = factory.spawns.get(spawn).room.find(FIND_STRUCTURES, {
+		const builds = factory.spawn.get(spawn).room.find(FIND_STRUCTURES, {
 			filter: {
 				structureType: STRUCTURE_CONTAINER
 			}
@@ -119,16 +119,16 @@ function spawn(spawn = 1) {
 	const repairers = factory.creep.Repairer.ALL(spawn);
 
 	// 查看控制器等级
-	const controller_level = factory.spawns.get(spawn).room.controller.level;
+	const controller_level = factory.spawn.get(spawn).room.controller.level;
 
 	// 母巢 (spawn) 是否正在孵化一个新的 creep
-	if (factory.spawns.get(spawn).spawning) {
+	if (factory.spawn.get(spawn).spawning) {
 		// 孵化，过程可视化
-		let spawningCreep = Game.creeps[factory.spawns.get(spawn).spawning.name];
-		factory.spawns.get(spawn).room.visual.text(
+		let spawningCreep = Game.creeps[factory.spawn.get(spawn).spawning.name];
+		factory.spawn.get(spawn).room.visual.text(
 			'孵化🛠️' + spawningCreep.memory.role,
-			factory.spawns.get(spawn).pos.x + 1,
-			factory.spawns.get(spawn).pos.y, {
+			factory.spawn.get(spawn).pos.x + 1,
+			factory.spawn.get(spawn).pos.y, {
 				align: 'left',
 				opacity: 0.8
 			});
@@ -144,7 +144,7 @@ function spawn(spawn = 1) {
 		}
 
 
-		let towers = factory.spawns.get(spawn).room.find(FIND_STRUCTURES, {
+		let towers = factory.spawn.get(spawn).room.find(FIND_STRUCTURES, {
 			filter: (structure) => {
 				// 找出需要储存能量
 				return (structure.structureType == STRUCTURE_TOWER) &&

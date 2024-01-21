@@ -1,6 +1,17 @@
 global.factory.creep.Occupier = {
 	run: (creep, roomName) => {
 		// 需要拥有CLAIM部件
+		// Game.spawns.Spawn1.spawnCreep([WORK, CARRY, MOVE], 'ee1', { memory: {}})
+		// {
+		// let creep = Game.creeps['ee1'];
+		// creep.moveTo(new RoomPosition(25, 25, 'W48S54'));
+		// let creep = Game.creeps['ee1'];
+		// let room = Game.rooms['W48S54'];
+		// if (creep.signController(room.controller, "I'm going to claim this room in a few days.") ==
+		// 	ERR_NOT_IN_RANGE) {
+		// 	creep.moveTo(room.controller);
+		// }
+
 		// factory.creep.Occupy.run(Game.creeps['builder54894683'],'W48S54');
 
 		// 如果指定需要占领房间名称,覆盖原来的
@@ -20,16 +31,28 @@ global.factory.creep.Occupier = {
 
 		// 如果该房间不存在就先往房间走
 		if (!room) {
-			creep.moveTo(new RoomPosition(25, 25, roomName))
+			creep.moveTo(new RoomPosition(25, 25, roomName));
 		} else {
 			// 如果房间存在了就说明已经进入了该房间
 			// 移动到房间的控制器并占领
-			if (creep.claimController(room.controller) == ERR_NOT_IN_RANGE) {
-				creep.moveTo(room.controller)
+			// if (creep.claimController(room.controller) == ERR_NOT_IN_RANGE) {
+			// 	creep.moveTo(room.controller)
+			// }
+
+			// 预定控制器
+			// if (creep.reserveController(room.controller) == ERR_NOT_IN_RANGE) {
+			// 	creep.moveTo(room.controller);
+			// }
+
+			// 对控制器签名
+			if (creep.signController(room.controller, "I'm going to claim this room in a few days.") ==
+				ERR_NOT_IN_RANGE) {
+				creep.moveTo(room.controller);
 			}
+
 		}
 
-		// factory.spawns.get(1).spawnCreep([WORK, CARRY, MOVE, CLAIM],
+		// factory.spawn.get(1).spawnCreep([WORK, CARRY, MOVE, CLAIM],
 		// 	'Occupy1号', {
 		// 		memory: {
 		// 			role: '',

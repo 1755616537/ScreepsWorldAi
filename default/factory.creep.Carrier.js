@@ -4,6 +4,9 @@ var pro = {
 
 	/** @param {Creep} creep **/
 	run: function(creep) {
+		// 房间序号
+		let roomSequence = factory.room.nameGetSequence(creep.room.name);
+		
 		if (creep.store.getFreeCapacity() > 0) { // 背包未满
 			// 所有掉落的资源
 			let targets = creep.room.find(FIND_DROPPED_RESOURCES);
@@ -27,7 +30,7 @@ var pro = {
 						for (let i = 0; i < spaceXYList.length; i++) {
 							let x = spaceXYList[i].x;
 							let y = spaceXYList[i].y;
-							let targetPos = new RoomPosition(x, y, globalData.room[0].name)
+							let targetPos = new RoomPosition(x, y, globalData.room[roomSequence - 1].name)
 							// CONTAINER
 							let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
 							if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
@@ -169,11 +172,11 @@ global.factory.creep.Carrier = pro;
 
 function all(spawn) {
 	let returnData;
-	
-	if(spawn){
+
+	if (spawn) {
 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.carrier && creep.memory
 			.spawn == spawn));
-	}else{
+	} else {
 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.carrier);
 	}
 	return returnData;

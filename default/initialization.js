@@ -16,20 +16,7 @@ global.initialization = {
 
 // 控制器块初始化
 function controllerPiece(spawn = 1) {
-	let room;
-	switch (spawn) {
-		case 1:
-			room = Game.rooms[globalData.room[0].name];
-			break;
-		case 2:
-			room = Game.rooms[globalData.room[1].name];
-			break;
-		case 3:
-			room = Game.rooms[globalData.room[2].name];
-			break;
-		default:
-			room = Game.rooms[globalData.room[0].name];
-	}
+	let room = factory.room.get(spawn);
 	// 9*9范围自动生成CONTAINER
 	let pos = room.controller.pos;
 	let found = room.lookAtArea(pos.y - 1, pos.x - 1, pos.y + 1,
@@ -47,7 +34,7 @@ function controllerPiece(spawn = 1) {
 			let x = foundFilter[0].x;
 			let y = foundFilter[0].y;
 			// 指定位置创建一个新的 ConstructionSite
-			let returnData = Game.rooms[globalData.room[0].name]
+			let returnData = factory.room.get(spawn)
 				.createConstructionSite(x, y, STRUCTURE_CONTAINER);
 			if (returnData != OK) {
 				clog(x, y, '自动建造对应数量的CONTAINER ', returnData);
