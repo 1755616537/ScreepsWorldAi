@@ -80,6 +80,7 @@ var pro = {
 
 									Memory.spawn[spawnName].source.list[val].spaceXYList = spaceXYList;
 									on = true;
+									clog(creep.name,'已自动分配给矿区',val,"Container",spaceXYList[i].containerID)
 									break;
 								}
 							}
@@ -222,6 +223,7 @@ function transfer(creep) {
 			const carriers = factory.creep.Carrier.ALL(roomSequence);
 			for (var i = 0; i < carriers.length; i++) {
 				if (!carriers[i].memory.TransportationTargetID) {
+					clog(carriers[i].name,'已自动分配给控制器Container')
 					memoryControllerContainer.list.push(carriers[i].name);
 					carriers[i].memory.TransportationTargetID = memoryControllerContainer.id;
 					break;
