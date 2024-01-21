@@ -188,7 +188,44 @@ function transfer(creep) {
 	let spawnName = factory.spawn.sequenceGetName(roomSequence);
 	let room = creep.room;
 
-	
+	// 给控制器CONTAINER,运输能量
+	let memoryControllerContainer;
+	try {
+		memoryControllerContainer = Memory.spawn[spawnName].controller.container;
+	} catch (e) {
+		// 控制器旁是否有CONTAINER或在建的CONTAINER
+		let pos = room.controller.pos;
+		let found = room.lookAtArea(pos.y - 1, pos.x - 1, pos.y + 1, pos.x + 1, true);
+		let found2 = _.filter(found, (f) => f.type == LOOK_CONSTRUCTION_SITES || (f.type == LOOK_STRUCTURES && f
+			.structure.structureType == STRUCTURE_CONTAINER));
+		if (found2.length > 0) {
+			let x = found2[0].x;
+			let y = found2[0].y;
+			Memory.spawn[spawnName].controller = {
+				container: {
+					x: x,
+					y: y,
+					id: null,
+					// 运输者的ID列表
+					list: []
+				}
+			}
+		}
+	}
+	if (memoryControllerContainer && memoryControllerContainer.id) {
+		console.log('111')
+		// for (var i = 0; i < memoryControllerContainer.list.length; i++) {}
+	} else {
+		let x = Memory.spawn[spawnName].controller.container.x;
+		let y = Memory.spawn[spawnName].controller.container.y;
+		let targetPos = new RoomPosition(x, y, creep.room.name)
+		// CONTAINER
+		let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
+		console.log('found ', found)
+		if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
+			Memory.spawn[spawnName].controller.container.id = found[0].id;
+		}
+	}
 
 	// 找出需要补充能量的建筑
 	// let targets = creep.room.find(FIND_STRUCTURES, {
