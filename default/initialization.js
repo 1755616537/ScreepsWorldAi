@@ -37,13 +37,14 @@ function controllerPiece(spawn = 1) {
 	let foundFilter = _.filter(found, (f) =>
 		(f.terrain == 'plain' || f.terrain == 'swamp') &&
 		room.lookAt(f.pos)[0].structureType != STRUCTURE_WALL);
-		console.log(JSON.stringify(found))
+	console.log(JSON.stringify(found))
 	if (foundFilter.length > 1) {
 		// 是否已经存在CONTAINER
 		if (_.filter(found, (f) => {
+				console.log(f)
 				let found = room.lookForAt(LOOK_STRUCTURES, f.pos);
 				console.log(found)
-				return f.type == LOOK_CONSTRUCTION_SITES || (found.length && found[0].structureType ==
+				return f.type == LOOK_CONSTRUCTION_SITES || (f.type == LOOK_STRUCTURES && f.structureType ==
 					STRUCTURE_CONTAINER);
 			}).length < 1) {
 			let x = foundFilter[0].x;
