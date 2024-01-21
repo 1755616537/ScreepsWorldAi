@@ -156,6 +156,7 @@ var pro = {
 								creep.memory.harvestSourceID = val;
 					
 								Memory.spawn[spawnName].source.list = memorySource;
+								clog(creep.name,'已自动分配给矿区',val)
 								break;
 							}
 						}
