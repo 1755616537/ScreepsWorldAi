@@ -263,7 +263,7 @@ var pro = {
 				target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
 					filter: (structure) => {
 						// 返回该存储的剩余可用容量大于0的CONTAINER
-						return (structure.structureType == STRUCTURE_CONTAINE) &&
+						return (structure.structureType == STRUCTURE_CONTAINER) &&
 							structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
 					}
 				});
