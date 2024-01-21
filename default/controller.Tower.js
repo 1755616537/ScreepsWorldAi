@@ -8,7 +8,7 @@ global.controller.Tower = {
 				tower.attack(closestHostile);
 				return
 			}
-			
+
 			// 维修
 			let targets = tower.room.find(FIND_STRUCTURES, {
 				filter: (structure) => {
@@ -52,5 +52,20 @@ global.controller.Tower = {
 				tower.repair(targets[0]);
 			}
 		}
+	}
+}
+
+function defendRoom(roomName) {
+	var hostiles = Game.rooms[roomName].find(FIND_HOSTILE_CREEPS);
+	if (hostiles.length > 0) {
+		var username = hostiles[0].owner.username;
+		Game.notify(`User ${username} spotted in room ${roomName}`);
+		var towers = Game.rooms[roomName].find(
+			FIND_MY_STRUCTURES, {
+				filter: {
+					structureType: STRUCTURE_TOWER
+				}
+			});
+		towers.forEach(tower => tower.attack(hostiles[0]));
 	}
 }
