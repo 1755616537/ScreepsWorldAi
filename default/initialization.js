@@ -39,13 +39,9 @@ function controllerPiece(spawn = 1) {
 		(f.terrain == 'plain' || f.terrain == 'swamp') &&
 		room.lookAt(f.pos)[0].structureType != STRUCTURE_WALL);
 	if (foundFilter.length > 1) {
-		// 是否已经存在CONTAINER
-		let found2 = _.filter(found, (f) => {
-			console.log();
-			return f.type == LOOK_CONSTRUCTION_SITES || (f.type == LOOK_STRUCTURES && f.structure
-				.structureType == STRUCTURE_CONTAINER);
-		});
-		console.log(JSON.stringify(found2));
+		// 是否已经存在CONTAINER或在建的CONTAINER
+		let found2 = _.filter(found, (f) => f.type == LOOK_CONSTRUCTION_SITES || (f.type == LOOK_STRUCTURES && f
+			.structure.structureType == STRUCTURE_CONTAINER));
 		if (found2.length < 1) {
 			let x = foundFilter[0].x;
 			let y = foundFilter[0].y;
