@@ -14,6 +14,11 @@ global.initialization = {
 			}
 		}
 
+		for (let name in Game.creeps) {
+			if (!Game.creeps[name].memory.id) Game.creeps[name].memory.id = Game.creeps[name].id;
+		}
+
+
 		// 矿区块初始化
 		sourcePiece(1);
 
