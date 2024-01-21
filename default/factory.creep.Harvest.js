@@ -8,7 +8,7 @@ var pro = {
 		// 没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器
 		// 脚下是否有CONTAINER，有就不移动
 		let on = false;
-		let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, globalData.room[roomSequence - 1].name);
+		let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, creep.room.name);
 		let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
 		if (found.length && found[0].structureType == STRUCTURE_CONTAINER && found[0].store.getFreeCapacity(
 				RESOURCE_ENERGY) > 0) {
@@ -37,7 +37,7 @@ var pro = {
 					// let dix=_.filter(creep.room.lookAtArea(LOOK_TERRAIN,zb.y-1,zb.x-1,zb.y+1,zb.x+1,1,(f)=>f.terrain=='plain' 8& creep.room.lookAt(f.pos)[0].structureType!-STRUCTURE_WALL).length)
 
 					let memorySource = {};
-					const terrain = new Room.Terrain(globalData.room[roomSequence - 1].name);
+					const terrain = new Room.Terrain(creep.room.name);
 					let total = 0;
 					for (let i = 0; i < sources.length; i++) {
 						let val = sources[i];
@@ -52,7 +52,7 @@ var pro = {
 								if (terrain.get(x, y) != TERRAIN_MASK_WALL) {
 									// console.log(x, y)
 									let on = true;
-									let targetPos = new RoomPosition(x, y, globalData.room[roomSequence - 1].name)
+									let targetPos = new RoomPosition(x, y, creep.room.name)
 									// 人造墙壁
 									let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
 									// console.log(found, ' found[1] +', found[1], "+")
@@ -200,7 +200,7 @@ var pro = {
 			}
 		} else {
 			// 脚下是否有CONTAINER没有建造完成,就优先建筑
-			let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, globalData.room[roomSequence - 1].name);
+			let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, creep.room.name);
 			let found = creep.room.lookForAt(LOOK_CONSTRUCTION_SITES, targetPos);
 			if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
 				// 建造

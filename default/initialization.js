@@ -41,7 +41,7 @@ function controllerPiece(spawn = 1) {
 					container: {
 						x: x,
 						y: y,
-						ID: null,
+						id: null,
 						// 运输者的ID列表
 						list: []
 					}

@@ -6,7 +6,7 @@ var pro = {
 	run: function(creep) {
 		// 房间序号
 		let roomSequence = factory.room.nameGetSequence(creep.room.name);
-		
+
 		if (creep.store.getFreeCapacity() > 0) { // 背包未满
 			// 所有掉落的资源
 			let targets = creep.room.find(FIND_DROPPED_RESOURCES);
@@ -30,7 +30,7 @@ var pro = {
 						for (let i = 0; i < spaceXYList.length; i++) {
 							let x = spaceXYList[i].x;
 							let y = spaceXYList[i].y;
-							let targetPos = new RoomPosition(x, y, globalData.room[roomSequence - 1].name)
+							let targetPos = new RoomPosition(x, y, creep.room.name)
 							// CONTAINER
 							let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
 							if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
@@ -183,6 +183,24 @@ function all(spawn) {
 }
 
 function transfer(creep) {
+	// 房间序号
+	let roomSequence = factory.room.nameGetSequence(creep.room.name);
+
+	let memoryControllerContainer = Memory.spawn[roomSequence - 1].controller.container;
+	if (memoryControllerContainer.id) {
+		for (var i = 0; i < memoryControllerContainer.list.length; i++) {
+			Things[i]
+		}
+	} else {
+		let targetPos = new RoomPosition(x, y, creep.room.name)
+		// CONTAINER
+		let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
+		console.log('found ', found)
+		if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
+			Memory.spawn[roomSequence - 1].controller.container.id = found[0].id;
+		}
+	}
+
 	// 找出需要补充能量的建筑
 	// let targets = creep.room.find(FIND_STRUCTURES, {
 	// 	filter: (structure) => {
