@@ -10,14 +10,14 @@ var pro = {
 
 		if (creep.store.getFreeCapacity() > 0) { // 背包未满
 			// 所有掉落的资源
-			let targets = creep.room.findClosestByPath(FIND_DROPPED_RESOURCES);
+			let target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
 			// const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
 			// if(target)
-			if (targets.length > 0) {
+			if (target) {
 				// 捡起一个物品 (如捡起一些能量)
-				if (creep.pickup(targets[0]) == ERR_NOT_IN_RANGE) {
+				if (creep.pickup(target) == ERR_NOT_IN_RANGE) {
 					// 向目标移动
-					factory.creep.moveTo(creep, targets[0], 'Resource');
+					factory.creep.moveTo(creep, target, 'Resource');
 				}
 			} else {
 				let source = null;
@@ -132,7 +132,7 @@ var pro = {
 				if (!source) {
 					let targets = _.compact(
 						// 所有建筑
-						creep.room.findClosestByPath(FIND_STRUCTURES, {
+						creep.pos.findClosestByPath(FIND_STRUCTURES, {
 							filter: (structure) => {
 								// 找出有储存能量的container搬运
 								return (structure.structureType == STRUCTURE_CONTAINER) &&
