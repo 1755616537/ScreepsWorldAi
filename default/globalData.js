@@ -98,7 +98,7 @@ global.globalData = {
 				],
 				totalEnergyRequired: 300
 			},
-			number: 1
+			number: 2
 		},
 		// 建造者
 		'builder': {
