@@ -159,6 +159,23 @@ global.factory.creep = {
 							if (on) break;
 						}
 					}
+					// 再次扫描,记录列表里面的creep是否还还活,把已经死亡的去除
+					// if (on && memorySource) {
+					// 	let memorySource2 = [];
+					// 	for (var i = 0; i < memorySource.length; i++) {
+					// 		let on = false;
+					// 		for (let name in Memory.creeps) {
+					// 			if (name == memorySource[i]) {
+					// 				on = true;
+					// 				break;
+					// 			}
+					// 		}
+					// 		if (on) {
+					// 			memorySource2.push(memorySource[i]);
+					// 		}
+					// 	}
+					// 	Memory.spawn[spawnName].source.list = memorySource2;
+					// }
 
 					// 从控制器区记录删除
 					TransportationTargetID = null;
@@ -186,6 +203,23 @@ global.factory.creep = {
 							Memory.spawn[spawnName].controller.container.list = memoryControllerContainerList;
 							break;
 						}
+					}
+					// 再次扫描,记录列表里面的creep是否还还活,把已经死亡的去除
+					if (on && memoryControllerContainerList) {
+						let memoryControllerContainerList2 = [];
+						for (var i = 0; i < memoryControllerContainerList.length; i++) {
+							let on = false;
+							for (let name in Memory.creeps) {
+								if (name == memoryControllerContainerList[i]) {
+									on = true;
+									break;
+								}
+							}
+							if (on) {
+								memoryControllerContainerList2.push(memoryControllerContainerList[i]);
+							}
+						}
+						Memory.spawn[spawnName].controller.container.list = memoryControllerContainerList2;
 					}
 				}
 
