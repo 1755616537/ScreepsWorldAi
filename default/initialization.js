@@ -37,16 +37,18 @@ function controllerPiece(spawn = 1) {
 	let foundFilter = _.filter(found, (f) =>
 		(f.terrain == 'plain' || f.terrain == 'swamp') &&
 		room.lookAt(f.pos)[0].structureType != STRUCTURE_WALL);
-	console.log(JSON.stringify(found))
 	if (foundFilter.length > 1) {
 		// 是否已经存在CONTAINER
-		if (_.filter(found, (f) => {
-				console.log(f)
+		let a=_.filter(found, (f) => {
+			console.log(JSON.stringify(f))
 				let found = room.lookForAt(LOOK_STRUCTURES, f.pos);
-				console.log(found)
+				console.log(JSON.stringify(found))
+				console.log('----------------------')
 				return f.type == LOOK_CONSTRUCTION_SITES || (f.type == LOOK_STRUCTURES && f.structureType ==
 					STRUCTURE_CONTAINER);
-			}).length < 1) {
+			})
+			console.log(JSON.stringify(a))
+		if (a.length < 1) {
 			let x = foundFilter[0].x;
 			let y = foundFilter[0].y;
 			// 指定位置创建一个新的 ConstructionSite
