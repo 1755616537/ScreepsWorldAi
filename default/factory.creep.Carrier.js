@@ -186,11 +186,30 @@ function transfer(creep) {
 	// 房间序号
 	let roomSequence = factory.room.nameGetSequence(creep.room.name);
 
-	let memoryControllerContainer = Memory.spawn[roomSequence - 1].controller.container;
-	if (memoryControllerContainer.id) {
-		for (var i = 0; i < memoryControllerContainer.list.length; i++) {
-			Things[i]
+	let memoryControllerContainer;
+	try {
+		memoryControllerContainer = Memory.spawn[roomSequence - 1].controller.container;
+	} catch (e) {
+		let pos = room.controller.pos;
+		let found = room.lookAtArea(pos.y - 1, pos.x - 1, pos.y + 1, pos.x + 1, true);
+		let found2 = _.filter(found, (f) => f.type == LOOK_CONSTRUCTION_SITES || (f.type == LOOK_STRUCTURES && f
+			.structure.structureType == STRUCTURE_CONTAINER));
+		if (found2.length > 0) {
+			let x = found2[0].x;
+			let y = found2[0].y;
+			Memory.spawn[spawn - 1].controller = {
+				container: {
+					x: x,
+					y: y,
+					id: null,
+					// 运输者的ID列表
+					list: []
+				}
+			}
 		}
+	}
+	if (memoryControllerContainer && memoryControllerContainer.id) {
+		for (var i = 0; i < memoryControllerContainer.list.length; i++) {}
 	} else {
 		let targetPos = new RoomPosition(x, y, creep.room.name)
 		// CONTAINER
