@@ -222,7 +222,6 @@ function transfer(creep) {
 		if (memoryControllerContainer.list.length < 1) {
 			if (!creep.memory.TransportationTargetID) {
 				memoryControllerContainer.list.push(creep.name);
-				// Memory.creeps[creep.name].TransportationTargetID
 				creep.memory.TransportationTargetID = memoryControllerContainer.id;
 				clog(creep.name, '已自动分配给控制器Container');
 			}
