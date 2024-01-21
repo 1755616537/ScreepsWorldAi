@@ -258,6 +258,16 @@ var pro = {
 					}
 				});
 			}
+			if (!target) {
+				// CONTAINER满了或者没有建  查找到该位置路径最短的对象
+				target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+					filter: (structure) => {
+						// 返回该存储的剩余可用容量大于0的CONTAINER
+						return (structure.structureType == STRUCTURE_CONTAINE) &&
+							structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+					}
+				});
+			}
 			if (target) {
 				// 将资源从该 creep 转移至其他对象
 				if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
