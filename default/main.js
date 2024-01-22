@@ -37,6 +37,7 @@ module.exports.loop = function() {
 // .多一种角色管理系统，不区分兵种，先统一分配后固定站岗，缺少了补上，1对1搬运
 // .自动铺路，矿，控制器。方案1：两点最近距离.方案2：走得次数多的地方铺路
 // .createConstructionSite自动布局EXTENSION建筑 控制器等级3布局TOWER
+// .外矿采集
 // .每个STORAGE搭配一个运输者。如果存在STORAGE并且搭配有运输者，其他运输者才可以把能量放到STORAGE
 // .spawn是否停止获取能量，先用于生产
 // .根据总能量上限energyCapacityAvailable，小于400，使用最低配置
