@@ -370,7 +370,7 @@ function transfer(creep) {
 		}
 	} else {
 		// 储存能量都满了不用搬运能量,先干其他
-		targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+		let targets = creep.room.find(FIND_CONSTRUCTION_SITES);
 		if (targets.length > 0) {
 			// 建造
 			if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
