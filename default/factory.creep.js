@@ -180,7 +180,7 @@ global.factory.creep = {
 										}
 										if (on) {
 											spaceXYList[i].list.splice(i2, 1);
-											Memory.spawn[spawnName].source.list[val].spaceXYList = spaceXYList;
+											Memory.spawn[spawnName].source.list[val].spaceXYList[i].list = spaceXYList[i].list;
 											break;
 										}
 									}
