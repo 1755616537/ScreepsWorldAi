@@ -37,14 +37,9 @@ module.exports.loop = function() {
 // .多一种角色管理系统，不区分兵种，先统一分配后固定站岗，缺少了补上，1对1搬运
 // .自动铺路，矿，控制器。方案1：两点最近距离.方案2：走得次数多的地方铺路
 // .createConstructionSite自动布局EXTENSION建筑 控制器等级3布局TOWER
-// .运输者，（取，放）状态切换，去取CONTAINER能量后可以选择去捡能量也可以去放
-// .每个STORAGE搭配一个运输者。如果存在STORAGE并且搭配有运输者，其他运输者才可以把能力放到STORAGE
-// .运输者一对一搬运，把搬运目标地址写在运输者缓存里面，不在重复循环消耗CPU，new一个RoomPosition
+// .每个STORAGE搭配一个运输者。如果存在STORAGE并且搭配有运输者，其他运输者才可以把能量放到STORAGE
 // .spawn是否停止获取能量，先用于生产
 // .根据总能量上限energyCapacityAvailable，小于400，使用最低配置
-// .把每种小兵的取用能量加上状态,取满在用,用完在取
-// .当控制器区存在有能量的CONTAINER,从控制器区存的CONTAINER取能量
-// .BUG.矿区CONTAINER记录信息,控制器CONTAINER记录信息,在creep死亡后,没有正常删除信息,导致无法加入新creeps记录
 
 // 完成程序:
 // .(废弃(改完出现错误)[此名称是 Game.creeps 对象中指向该 creep 对象的哈希键]).把小兵ID放到memory里面，不在使用小兵名称作为唯一ID值判断，改为小兵ID
@@ -53,3 +48,8 @@ module.exports.loop = function() {
 // .在升级控制器的9*9空位其中一个上放置一个CONTAINER（并且检测是否在控制器7*7范围内），多个升级小兵共享一个CONTAINER
 // .受到攻击掉血开启安全模式(getEventLog),Tower开启优先攻击模式
 // .采集者，在矿区脚下的CONTAINER未建成，先采集能量了自己建，在运输到需要运输的地方。至少留下一个运输到基地，不自己建
+// .运输者，（取，放）状态切换，去取CONTAINER能量后可以选择去捡能量也可以去放
+// .运输者一对一搬运，把搬运目标地址写在运输者缓存里面，不在重复循环消耗CPU，new一个RoomPosition
+// .把每种小兵的取用能量加上状态,取满在用,用完在取
+// .当控制器区存在有能量的CONTAINER,从控制器区存的CONTAINER取能量
+// .BUG.矿区CONTAINER记录信息,控制器CONTAINER记录信息,在creep死亡后,没有正常删除信息,导致无法加入新creeps记录
