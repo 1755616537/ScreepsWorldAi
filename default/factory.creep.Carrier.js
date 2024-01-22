@@ -42,7 +42,7 @@ var pro = {
 								// 指定位置创建一个新的 ConstructionSite
 								let returnData = factory.room.get(roomSequence)
 									.createConstructionSite(x, y, STRUCTURE_CONTAINER);
-								if (returnData != OK) clog(x, y, '自动建造对应数量的CONTAINER ',
+								if (returnData != OK) clog(x, y, '矿区自动建造对应数量的CONTAINER ',
 									returnData);
 							}
 						}
@@ -236,7 +236,7 @@ function transfer(creep) {
 		// 指定位置创建一个新的 ConstructionSite
 		let returnData = room.createConstructionSite(x, y, STRUCTURE_CONTAINER);
 		if (returnData != OK) {
-			clog(x, y, '自动建造对应数量的CONTAINER ', returnData);
+			clog(x, y, '控制器自动建造对应数量的CONTAINER ', returnData);
 			Memory.spawn[spawnName].controller = {
 				container: {
 					x: x,
