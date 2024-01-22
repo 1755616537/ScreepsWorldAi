@@ -219,11 +219,13 @@ var pro = {
 
 			const harvests = factory.creep.Harvest.ALL(roomSequence);
 			if (_.size(harvestBuildCONTAINERList) < harvests.length) {
-				// 建造
-				if (creep.build(found[0]) == ERR_NOT_IN_RANGE) {
-					factory.creep.moveTo(creep, found[0]);
+				if(harvestBuildCONTAINERList[creep.name]){
+					// 建造
+					if (creep.build(found[0]) == ERR_NOT_IN_RANGE) {
+						factory.creep.moveTo(creep, found[0]);
+					}
+					return
 				}
-				return
 			}else{
 				if(harvestBuildCONTAINERList[creep.name]){
 					harvestBuildCONTAINERList[creep.name] = false;
