@@ -8,7 +8,7 @@ global.factory.creep.TheHealer = {
 		if(target) {
 			// 治疗
 		    if(creep.heal(target) == ERR_NOT_IN_RANGE) {
-		        creep.moveTo(target);
+		        factory.creep.moveTo(creep, target);
 		    }
 		}
 

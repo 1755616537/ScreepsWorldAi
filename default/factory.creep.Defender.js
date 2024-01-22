@@ -43,7 +43,7 @@ function nearDefenderRun(creep) {
 	if(target) {
 		// 使用近战攻击
 	    if(creep.attack(target) == ERR_NOT_IN_RANGE) {
-	        creep.moveTo(target);
+	        factory.creep.moveTo(creep, target);
 	    }
 	}
 
@@ -57,7 +57,7 @@ function farDefenderRun(creep) {
 		
 		// 远程攻击其他 creep 或者建筑
 		if(creep.rangedAttack(targets[0]) == ERR_NOT_IN_RANGE) {
-		    creep.moveTo(targets[0]);
+		    factory.creep.moveTo(creep, targets[0]);
 		}
 	}
 

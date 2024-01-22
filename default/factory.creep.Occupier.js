@@ -31,7 +31,7 @@ global.factory.creep.Occupier = {
 
 		// 如果该房间不存在就先往房间走
 		if (!room) {
-			creep.moveTo(new RoomPosition(25, 25, roomName));
+			factory.creep.moveTo(creep, new RoomPosition(25, 25, roomName));
 		} else {
 			// 如果房间存在了就说明已经进入了该房间
 			// 移动到房间的控制器并占领
@@ -47,7 +47,7 @@ global.factory.creep.Occupier = {
 			// 对控制器签名
 			if (creep.signController(room.controller, "I'm going to claim this room in a few days.") ==
 				ERR_NOT_IN_RANGE) {
-				creep.moveTo(room.controller);
+				factory.creep.moveTo(creep, room.controller);
 			}
 
 		}
