@@ -203,6 +203,7 @@ var pro = {
 				}
 			}
 		} else {
+			// 至少留下一个运输到基地
 			if (!Memory.spawn[spawnName].source.harvestBuildCONTAINERList) Memory.spawn[spawnName].source
 				.harvestBuildCONTAINERList = {};
 			let harvestBuildCONTAINERList = Memory.spawn[spawnName].source.harvestBuildCONTAINERList;
@@ -216,7 +217,6 @@ var pro = {
 				harvestBuildCONTAINERList = _.omit(harvestBuildCONTAINERList, creep.name);
 			}
 			Memory.spawn[spawnName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList;
-
 			const harvests = factory.creep.Harvest.ALL(roomSequence);
 			if (_.size(harvestBuildCONTAINERList) < harvests.length) {
 				if(harvestBuildCONTAINERList[creep.name]){

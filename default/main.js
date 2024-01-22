@@ -45,7 +45,6 @@ module.exports.loop = function() {
 // .把每种小兵的取用能量加上状态,取满在用,用完在取
 // .当控制器区存在有能量的CONTAINER,从控制器区存的CONTAINER取能量
 // .BUG.矿区CONTAINER记录信息,控制器CONTAINER记录信息,在creep死亡后,没有正常删除信息,导致无法加入新creeps记录
-// .采集者，在矿区脚下的CONTAINER未建成，先采集能量了自己建，在运输到需要运输的地方。至少留下一个运输到基地，不自己建
 
 // 完成程序:
 // .(废弃(改完出现错误)[此名称是 Game.creeps 对象中指向该 creep 对象的哈希键]).把小兵ID放到memory里面，不在使用小兵名称作为唯一ID值判断，改为小兵ID
@@ -53,3 +52,4 @@ module.exports.loop = function() {
 // .采集如果脚下有CONTAINER，挖完就放进CONTAINER（没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器了）
 // .在升级控制器的9*9空位其中一个上放置一个CONTAINER（并且检测是否在控制器7*7范围内），多个升级小兵共享一个CONTAINER
 // .受到攻击掉血开启安全模式(getEventLog),Tower开启优先攻击模式
+// .采集者，在矿区脚下的CONTAINER未建成，先采集能量了自己建，在运输到需要运输的地方。至少留下一个运输到基地，不自己建
