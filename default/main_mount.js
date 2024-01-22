@@ -49,6 +49,8 @@ require('factory.creep.TheHealer')
 // -------------------------------控制器
 // 任务
 require('controller.task')
+// 房间
+require('controller.room')
 // 安全
 require('controller.Secure')
 // 塔
