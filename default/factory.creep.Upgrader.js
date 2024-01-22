@@ -51,6 +51,10 @@ let pro = {
 						}
 					});
 				}
+				if (!target) {
+					// 采集死完后,自己去采集
+					target = creep.pos.findClosestByPath(FIND_SOURCES);
+				}
 
 				if (target) {
 					// 从建筑(structure)中拿取资源
