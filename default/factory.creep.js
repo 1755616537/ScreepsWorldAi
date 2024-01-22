@@ -119,6 +119,34 @@ global.factory.creep = {
 							}
 						}
 					}
+					
+					// 从采集建造CONTAINER记录删除
+					let harvestBuildCONTAINERList;
+					on = false;
+					try {
+						if (!Memory.spawn[spawnName].source.harvestBuildCONTAINERList) Memory.spawn[spawnName].source
+							.harvestBuildCONTAINERList = {};
+						harvestBuildCONTAINERList = Memory.spawn[spawnName].source.harvestBuildCONTAINERList;
+						on = true;
+					} catch (e) {
+						//TODO handle the exception
+					}
+					
+					if (on && _.size(harvestBuildCONTAINERList) > 0) {
+						let on = false;
+						for (i in harvestBuildCONTAINERList) {
+							if (name == i) {
+								on = true;
+								return false;
+							}
+						}
+						if(on){
+							harvestBuildCONTAINERList[name] = false;
+							harvestBuildCONTAINERList = _.omit(harvestBuildCONTAINERList, name);
+							
+							Memory.spawn[spawnName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList;
+						}
+					}
 				}
 
 				// 运输者
