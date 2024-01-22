@@ -7,7 +7,7 @@ global.initialization = {
 
 		// 客户端汉化显示
 		// Utils.cn();
-		clog('汉化 Utils.cn();');
+		clog('【提示】: 手动汉化输入【Utils.cn();】');
 
 		if (!Memory.spawn) {
 			Memory.spawn = {
