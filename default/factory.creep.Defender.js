@@ -1,5 +1,11 @@
 global.factory.creep.Defender = {
-	run: (creep) => {},
+	run: (creep) => {
+		if (creep.memory.role == globalData.nearDefender) {
+			nearDefenderRun(creep);
+		} else if (creep.memory.role == globalData.farDefender) {
+			farDefenderRun(creep);
+		}
+	},
 	ALLNearDefender: (...e) => {
 		return allNearDefender(...e);
 	},
@@ -10,11 +16,11 @@ global.factory.creep.Defender = {
 
 function allNearDefender(spawn) {
 	let returnData;
-	
-	if(spawn){
+
+	if (spawn) {
 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.nearDefender && creep.memory
 			.spawn == spawn));
-	}else{
+	} else {
 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.nearDefender);
 	}
 	return returnData;
@@ -22,12 +28,26 @@ function allNearDefender(spawn) {
 
 function allFarDefender(spawn) {
 	let returnData;
-	
-	if(spawn){
+
+	if (spawn) {
 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.farDefender && creep.memory
 			.spawn == spawn));
-	}else{
+	} else {
 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.farDefender);
 	}
 	return returnData;
+}
+
+function nearDefenderRun(creep) {
+	const target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+	if(target) {
+	    if(creep.attack(target) == ERR_NOT_IN_RANGE) {
+	        creep.moveTo(target);
+	    }
+	}
+
+}
+
+function farDefenderRun(creep) {
+
 }

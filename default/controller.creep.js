@@ -50,6 +50,9 @@ global.controller.creep = {
 			if (creep.memory.role == globalData.nearDefender || creep.memory.role == globalData.farDefender) {
 				factory.creep.Defender.run(creep);
 			}
+			if (creep.memory.role == globalData.theHealer) {
+				factory.creep.TheHealer.run(creep);
+			}
 			if (creep.memory.role == globalData.occupier) {
 				factory.creep.Occupier.run(creep);
 			}
