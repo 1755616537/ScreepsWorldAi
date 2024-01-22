@@ -46,8 +46,9 @@ let pro = {
 					target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
 						filter: (structure) => {
 							// 找出有储存能量的container搬运
-							return (structure.structureType == STRUCTURE_SPAWN) &&
-								structure.store.getUsedCapacity(RESOURCE_ENERGY) > 200;
+							return (structure.structureType == STRUCTURE_SPAWN ||
+								structure.structureType == STRUCTURE_EXTENSION
+							) && structure.store.getUsedCapacity(RESOURCE_ENERGY) > 200;
 						}
 					});
 				}
@@ -82,11 +83,11 @@ global.factory.creep.Upgrader = pro;
 
 function all(spawn) {
 	let returnData;
-	
-	if(spawn){
+
+	if (spawn) {
 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.upgrader && creep.memory
 			.spawn == spawn));
-	}else{
+	} else {
 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.upgrader);
 	}
 	return returnData;
