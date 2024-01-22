@@ -36,13 +36,12 @@ var pro = {
 							if (found.length > 0) {
 								if (found[0].structureType == STRUCTURE_CONTAINER) {
 									spaceXYList[i].containerID = found[0].id;
-								} else if (found.type == LOOK_CONSTRUCTION_SITES) {
+								} else if (found[0].type == LOOK_CONSTRUCTION_SITES) {
 									// 正在建造CONTAINER
 								}
 							} else {
 								// 如果不存在CONTAINER就清除CONTAINERID
 								spaceXYList[i].containerID = null;
-
 
 								// 指定位置创建一个新的 ConstructionSite
 								let returnData = factory.room.get(roomSequence)
