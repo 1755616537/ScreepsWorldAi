@@ -167,7 +167,7 @@ global.globalData = {
 				list: [MOVE, ATTACK],
 				totalEnergyRequired: 300
 			},
-			number: 0
+			number: 1
 		},
 		// 防御者-远战
 		'farDefender': {
@@ -199,7 +199,7 @@ global.globalData = {
 				list: [MOVE, HEAL],
 				totalEnergyRequired: 300
 			},
-			number: 0
+			number: 1
 		},
 		// 占领者
 		'occupier': {
