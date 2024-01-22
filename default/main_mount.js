@@ -40,7 +40,7 @@ require('factory.creep.Builder')
 require('factory.creep.Carrier')
 // 维修
 require('factory.creep.Repairer')
-// 防御
+// 攻击-防御
 require('factory.creep.Defender')
 // 占领
 require('factory.creep.Occupier')

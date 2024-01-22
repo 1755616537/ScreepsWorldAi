@@ -185,22 +185,6 @@ global.globalData = {
 			},
 			number: 0
 		},
-		// 占领者
-		'occupier': {
-			bodys: {
-				list: [MOVE, CLAIM],
-				totalEnergyRequired: 200
-			},
-			bodysMinus: {
-				list: [MOVE, CLAIM],
-				totalEnergyRequired: 100
-			},
-			bodysPlus: {
-				list: [MOVE, CLAIM],
-				totalEnergyRequired: 300
-			},
-			number: 0
-		},
 		// 治疗者
 		'theHealer': {
 			bodys: {
@@ -213,6 +197,22 @@ global.globalData = {
 			},
 			bodysPlus: {
 				list: [MOVE, HEAL],
+				totalEnergyRequired: 300
+			},
+			number: 0
+		},
+		// 占领者
+		'occupier': {
+			bodys: {
+				list: [MOVE, CLAIM],
+				totalEnergyRequired: 200
+			},
+			bodysMinus: {
+				list: [MOVE, CLAIM],
+				totalEnergyRequired: 100
+			},
+			bodysPlus: {
+				list: [MOVE, CLAIM],
 				totalEnergyRequired: 300
 			},
 			number: 0

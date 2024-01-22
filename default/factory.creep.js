@@ -647,6 +647,48 @@ global.factory.creep = {
 		}
 		return returnData
 	},
+	addTheHealer: (theHealers, controller_level = 4, spawnSequence = 1) => {
+		let bodys;
+		let newName = globalData.theHealer + Game.time;
+		if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.theHealer.bodys
+			.totalEnergyRequired) {
+			bodys = globalData.creepConfigs.theHealer.bodys.list;
+		} else {
+			return '房间总能量数量未达到限制，无法生产';
+		}
+		if (theHealers) {
+			if (theHealers.length < 1) {
+				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.theHealer
+					.bodysMinus
+					.totalEnergyRequired) {
+					bodys = globalData.creepConfigs.theHealer.bodysMinus.list;
+				} else {
+					return 'Minus 房间总能量数量未达到限制，无法生产';
+				}
+			}
+			if (theHealers.length > 2 && controller_level >= 4) {
+				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.theHealer
+					.bodysPlus
+					.totalEnergyRequired) {
+					bodys = globalData.creepConfigs.theHealer.bodysPlus.list;
+				} else {
+					return 'Plus 房间总能量数量未达到限制，无法生产';
+				}
+			}
+		}
+		let returnData = factory.spawn.get(spawnSequence).spawnCreep(bodys,
+			newName, {
+				memory: {
+					role: globalData.theHealer,
+					spawn: spawnSequence
+				}
+			});
+		if (returnData == OK) {
+			Game.creeps[newName].memory.id = Game.creeps[newName].id;
+			clog('生成新的 治疗者:' + newName);
+		}
+		return returnData
+	},
 	ComponentEnergyCalculation: (creepComponent = []) => {
 		// 部件能量计算
 		let total = 0;

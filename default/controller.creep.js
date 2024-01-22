@@ -120,6 +120,42 @@ function addRepairer(repairers, controller_level, spawnSequence) {
 	}
 }
 
+function addNearDefender(nearDefenders, controller_level, spawnSequence) {
+	// 生产 防御者-近战
+	if (nearDefenders.length < globalData.creepConfigs.nearDefender.number) {
+		let returnData = factory.creep.addNearDefender(nearDefenders, controller_level, spawnSequence);
+		// clog(returnData);
+		return returnData;
+	}
+}
+
+function addFarDefender(farDefenders, controller_level, spawnSequence) {
+	// 生产 防御者-远战
+	if (farDefenders.length < globalData.creepConfigs.farDefender.number) {
+		let returnData = factory.creep.addFarDefender(farDefenders, controller_level, spawnSequence);
+		// clog(returnData);
+		return returnData;
+	}
+}
+
+function addTheHealer(theHealers, controller_level, spawnSequence) {
+	// 生产 治疗者
+	if (theHealers.length < globalData.creepConfigs.theHealer.number) {
+		let returnData = factory.creep.addTheHealer(theHealers, controller_level, spawnSequence);
+		// clog(returnData);
+		return returnData;
+	}
+}
+
+function addOccupier(occupiers, controller_level, spawnSequence) {
+	// 生产 占领者
+	if (occupiers.length < globalData.creepConfigs.occupier.number) {
+		let returnData = factory.creep.addOccupier(occupiers, controller_level, spawnSequence);
+		// clog(returnData);
+		return returnData;
+	}
+}
+
 
 function spawn(spawnSequence = 1) {
 	let spawnName = factory.spawn.sequenceGetName(spawnSequence);
@@ -129,6 +165,10 @@ function spawn(spawnSequence = 1) {
 	const builders = factory.creep.Builder.ALL(spawnSequence);
 	const carriers = factory.creep.Carrier.ALL(spawnSequence);
 	const repairers = factory.creep.Repairer.ALL(spawnSequence);
+	const nearDefenders = factory.creep.Defender.ALLNearDefender(spawnSequence);
+	const farDefenders = factory.creep.Defender.ALLFarDefender(spawnSequence);
+	const theHealers = factory.creep.TheHealer.ALL(spawnSequence);
+	const occupiers = factory.creep.Occupier.ALL(spawnSequence);
 
 	// 查看控制器等级
 	const controller_level = factory.spawn.get(spawnSequence).room.controller.level;
@@ -184,6 +224,12 @@ function spawn(spawnSequence = 1) {
 		} else if (carriers.length < 1 && globalData.creepConfigs.carrier.number >= 1) {
 			// 注释掉是因为 拥有CONTAINER才生产 会卡住优先顺序，不进行默认生成
 			// priority = 'carrier';
+		} else if (nearDefenders.length < 1 && globalData.creepConfigs.nearDefender.number >= 1) {
+			priority = 'nearDefender';
+		} else if (theHealers.length < 1 && globalData.creepConfigs.theHealer.number >= 1) {
+			priority = 'theHealer';
+		} else if (occupiers.length < 1 && globalData.creepConfigs.occupier.number >= 1) {
+			// priority = 'occupier';
 		}
 		if (priority) {
 			switch (priority) {
@@ -202,6 +248,18 @@ function spawn(spawnSequence = 1) {
 				case 'repairer':
 					addRepairer(repairers, controller_level, spawnSequence);
 					break;
+				case 'nearDefender':
+					addNearDefender(nearDefenders, controller_level, spawnSequence);
+					break;
+				case 'farDefender':
+					addFarDefender(farDefenders, controller_level, spawnSequence);
+					break;
+				case 'theHealer':
+					addTheHealer(theHealers, controller_level, spawnSequence);
+					break;
+				case 'occupier':
+					addOccupier(occupiers, controller_level, spawnSequence);
+					break;
 				default:
 			}
 		} else {
@@ -210,7 +268,15 @@ function spawn(spawnSequence = 1) {
 				if (addCarrier(carriers, controller_level, spawnSequence) != OK) {
 					if (addBuilder(builders, controller_level, spawnSequence) != OK) {
 						if (addRepairer(repairers, controller_level, spawnSequence) != OK) {
-							if (addUpgrader(upgraders, controller_level, spawnSequence) != OK) {}
+							if (addUpgrader(upgraders, controller_level, spawnSequence) != OK) {
+								if (addNearDefender(upgraders, controller_level, spawnSequence) != OK) {
+									if (addFarDefender(upgraders, controller_level, spawnSequence) != OK) {
+										if (addTheHealer(upgraders, controller_level, spawnSequence) != OK) {
+											if (addOccupier(upgraders, controller_level, spawnSequence) != OK) {}
+										}
+									}
+								}
+							}
 						}
 					}
 				}
