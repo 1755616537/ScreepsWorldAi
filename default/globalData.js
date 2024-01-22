@@ -169,7 +169,7 @@ global.globalData = {
 				],
 				totalEnergyRequired: 300
 			},
-			number: 1
+			number: 0
 		},
 		// 防御者-远战
 		'farDefender': {
