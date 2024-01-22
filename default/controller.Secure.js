@@ -12,6 +12,10 @@ global.controller.Secure = {
 					clog(event);
 				}
 			});
+			let buildEvents = _.filter(eventLog, {
+				event: EVENT_BUILD
+			});
+			console.log(JSON.stringify(buildEvents))
 
 			if (attackEvents.length > 0) {
 				let on = false;
