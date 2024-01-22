@@ -4,6 +4,7 @@ global.controller.room = {
 		sourceContainer(1);
 		controllerContainer(1);
 		harvestBuildCONTAINER(1);
+		containerEnergyStat(1);
 	}
 }
 
@@ -104,4 +105,21 @@ function harvestBuildCONTAINER(roomSequence) {
 		Memory.spawn[spawnName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList2;
 
 	}
+}
+
+// CONTAINER能量统计
+function containerEnergyStat(roomSequence) {
+	let spawnName = factory.spawn.sequenceGetName(roomSequence);
+	let targets = factory.room.get(roomSequence).find(FIND_STRUCTURES, {
+		filter: (structure) => {
+			return (structure.structureType == STRUCTURE_CONTAINER) &&
+				structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+		}
+	});
+	let targetsStore = [];
+	for (var i = 0; i < targets.length; i++) {
+		targetsStore.push(targets[i].store[RESOURCE_ENERGY]);
+	}
+	const total = _.sum(targetsStore);
+	Memory.spawn[spawnName].containerEnergyStat = total;
 }
