@@ -71,7 +71,7 @@ function addUpgrader(upgraders, controller_level, spawnSequence) {
 	// 生产 升级
 	if (upgraders.length < globalData.creepConfigs.upgrader.number) {
 		let returnData;
-		// 房间总能量在2000以下时,只会存在一个升级者
+		// 房间CONTAINER总能量在2000以下时,只会存在一个升级者
 		if (upgraders.length > 0) {
 			if (Memory.spawn[spawnName].containerEnergyStat > 2000) {
 				returnData = factory.creep.addUpgrader(upgraders, controller_level, spawnSequence);
