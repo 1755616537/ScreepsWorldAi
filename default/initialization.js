@@ -1,7 +1,9 @@
 global.initialization = {
 	run: () => {
-		clog('挂载拓展')
-		clog("脚本加载 Time " + Game.time + " , bucket " + Game.cpu.bucket);
+		clog('【挂载拓展】【完成】 Time ' + Game.time)
+		clog("【脚本加载】 Time " + Game.time + " , bucket " + Game.cpu.bucket);
+
+		clog("【初始化】【开始】 Time " + Game.time);
 
 		// 客户端汉化显示
 		// Utils.cn();
@@ -24,6 +26,9 @@ global.initialization = {
 
 		// 控制器块初始化
 		controllerPiece(1);
+		
+		
+		clog("【初始化】【结束】 Time " + Game.time);
 	},
 }
 
