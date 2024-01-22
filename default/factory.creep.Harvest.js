@@ -27,7 +27,7 @@ var pro = {
 			on = true;
 		}
 
-		if (creep.memory.work || on) { // 背包未满 采矿
+		if (!creep.memory.work || on) {
 			let sources = creep.room.find(FIND_SOURCES);
 			// 默认去采集第一个source
 			let source = sources.length > 0 ? sources[0] : null;
