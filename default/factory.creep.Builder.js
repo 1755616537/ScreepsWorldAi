@@ -2,16 +2,16 @@ var pro = {
 
 	/** @param {Creep} creep **/
 	run: function(creep) {
-		if (creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) { // building && 背包为空
-			creep.memory.building = false; // 变为 非building状态
+		if (creep.memory.work && creep.store[RESOURCE_ENERGY] == 0) { // work && 背包为空
+			creep.memory.work = false; // 变为 非work状态
 			creep.say('🔄 收获');
 		}
-		if (!creep.memory.building && creep.store.getFreeCapacity() == 0) { // 非building状态 && 背包满(空余为0)
-			creep.memory.building = true; // 变为 building状态
+		if (!creep.memory.work && creep.store.getFreeCapacity() == 0) { // 非work状态 && 背包满(空余为0)
+			creep.memory.work = true; // 变为 work状态
 			creep.say('🚧 建造');
 		}
 
-		if (creep.memory.building) { // building状态的时候
+		if (creep.memory.work) { // work状态的时候
 			// 寻找建筑位
 			// 路
 			let targets = creep.room.find(FIND_CONSTRUCTION_SITES, {
@@ -66,7 +66,7 @@ var pro = {
 					}
 				}
 			}
-		} else { // 非building状态的时候， 到source旁边并采集
+		} else { // 非work状态的时候， 到source旁边并采集
 			const harvests = factory.creep.Harvest.ALL();
 			if (harvests.length < 2) {
 				// 采集死完后,自己去采集

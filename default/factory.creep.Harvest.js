@@ -2,6 +2,17 @@ var pro = {
 
 	/** @param {Creep} creep **/
 	run: function(creep) {
+		// work && 背包为空
+		if (creep.memory.work && creep.store[RESOURCE_ENERGY] == 0) {
+			creep.memory.work = false;
+			creep.say('🔄 收获');
+		}
+		// 非work状态 && 背包满(空余为0)
+		if (!creep.memory.work && creep.store.getFreeCapacity() == 0) {
+			creep.memory.work = true;
+			creep.say('🛒 存放');
+		}
+
 		// 房间序号
 		let roomSequence = factory.room.nameGetSequence(creep.room.name);
 		let spawnName = factory.spawn.sequenceGetName(roomSequence);
@@ -16,7 +27,7 @@ var pro = {
 			on = true;
 		}
 
-		if (creep.store.getFreeCapacity() > 0 || on) { // 背包未满 采矿
+		if (creep.memory.work || on) { // 背包未满 采矿
 			let sources = creep.room.find(FIND_SOURCES);
 			// 默认去采集第一个source
 			let source = sources.length > 0 ? sources[0] : null;
@@ -214,7 +225,7 @@ var pro = {
 			} catch (e) {
 				//TODO handle the exception
 			}
-			if(on){
+			if (on) {
 				// 脚下是否有CONTAINER没有建造完成,就优先建筑
 				let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, creep.room.name);
 				let found = creep.room.lookForAt(LOOK_CONSTRUCTION_SITES, targetPos);
@@ -227,23 +238,23 @@ var pro = {
 				Memory.spawn[spawnName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList;
 				const harvests = factory.creep.Harvest.ALL(roomSequence);
 				if (_.size(harvestBuildCONTAINERList) < harvests.length) {
-					if(harvestBuildCONTAINERList[creep.name]){
+					if (harvestBuildCONTAINERList[creep.name]) {
 						// 建造
 						if (creep.build(found[0]) == ERR_NOT_IN_RANGE) {
 							factory.creep.moveTo(creep, found[0]);
 						}
 						return
 					}
-				}else{
-					if(harvestBuildCONTAINERList[creep.name]){
+				} else {
+					if (harvestBuildCONTAINERList[creep.name]) {
 						harvestBuildCONTAINERList[creep.name] = false;
 						harvestBuildCONTAINERList = _.omit(harvestBuildCONTAINERList, creep.name);
-						
+
 						Memory.spawn[spawnName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList;
 					}
 				}
 			}
-			
+
 
 			var targets = creep.room.find(FIND_STRUCTURES, {
 				filter: (structure) => {

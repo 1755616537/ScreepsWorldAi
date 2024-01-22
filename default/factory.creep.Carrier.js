@@ -4,11 +4,22 @@ var pro = {
 
 	/** @param {Creep} creep **/
 	run: function(creep) {
+		// work && 背包为空
+		if (creep.memory.work && creep.store[RESOURCE_ENERGY] == 0) {
+			creep.memory.work = false;
+			creep.say('🔄 收获');
+		}
+		// 非work状态 && 背包满(空余为0)
+		if (!creep.memory.work && creep.store.getFreeCapacity() == 0) {
+			creep.memory.work = true;
+			creep.say('🛒 存放');
+		}
+		
 		// 房间序号
 		let roomSequence = factory.room.nameGetSequence(creep.room.name);
 		let spawnName = factory.spawn.sequenceGetName(roomSequence);
 
-		if (creep.store.getFreeCapacity() > 0) { // 背包未满
+		if (creep.memory.work) { // 背包未满
 			// 所有掉落的资源
 			let target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
 			// const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);

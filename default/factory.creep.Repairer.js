@@ -4,16 +4,16 @@ var pro = {
 
 	/** @param {Creep} creep **/
 	run: function(creep) {
-		if (creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) { // building && 背包为空
-			creep.memory.building = false; // 变为 非building状态
+		if (creep.memory.work && creep.store[RESOURCE_ENERGY] == 0) { // work && 背包为空
+			creep.memory.work = false; // 变为 非work状态
 			creep.say('🔄 收获');
 		}
-		if (!creep.memory.building && creep.store.getFreeCapacity() == 0) { // 非building状态 && 背包满(空余为0)
-			creep.memory.building = true; // 变为 building状态
+		if (!creep.memory.work && creep.store.getFreeCapacity() == 0) { // 非work状态 && 背包满(空余为0)
+			creep.memory.work = true; // 变为 work状态
 			creep.say('🚧 维修');
 		}
 
-		if (creep.memory.building) { // building状态的时候
+		if (creep.memory.work) { // work状态的时候
 			// 修复受损建筑 优先CONTAINER
 			let targets = creep.room.find(FIND_STRUCTURES, {
 				filter: (structure) => {
@@ -57,11 +57,12 @@ var pro = {
 			targets.sort((a, b) => a.hits - b.hits);
 
 			if (targets.length > 0) {
+				// 维修
 				if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
 					factory.creep.moveTo(creep, targets[0]);
 				}
 			}
-		} else { // 非building状态的时候， 到source旁边并采集
+		} else { // 非work状态的时候， 到source旁边并采集
 			const harvests = factory.creep.Harvest.ALL();
 			if (harvests.length < 2) {
 				// 采集死完后,自己去采集
