@@ -73,8 +73,8 @@ var pro = {
 				}
 			}
 		} else { // 非work状态的时候， 到source旁边并采集
-			const harvests = factory.creep.Harvest.ALL();
-			if (harvests.length < 2) {
+			const harvests = factory.creep.Harvest.ALL(roomSequence);
+			if (harvests.length < 1) {
 				// 采集死完后,自己去采集
 				let target = creep.pos.findClosestByPath(FIND_SOURCES);
 				if (target) {

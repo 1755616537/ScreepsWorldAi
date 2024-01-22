@@ -11,14 +11,18 @@ let pro = {
 			creep.memory.work = true;
 			creep.say('⚡ 升级');
 		}
+		
+		// 房间序号
+		let roomSequence = factory.room.nameGetSequence(creep.room.name);
+		let spawnName = factory.spawn.sequenceGetName(roomSequence);
 
 		if (creep.memory.work) { // 升级状态，找到控制器并升级 + 可视化
 			if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
 				factory.creep.moveTo(creep, creep.room.controller);
 			}
 		} else { // 采集状态 + 可视化
-			const harvests = factory.creep.Harvest.ALL();
-			if (harvests.length < 2) {
+			const harvests = factory.creep.Harvest.ALL(roomSequence);
+			if (harvests.length < 1) {
 				// 采集死完后,自己去采集
 				let target = creep.pos.findClosestByPath(FIND_SOURCES);
 				if (target) {

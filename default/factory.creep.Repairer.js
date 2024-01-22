@@ -12,6 +12,10 @@ var pro = {
 			creep.memory.work = true; // 变为 work状态
 			creep.say('🚧 维修');
 		}
+		
+		// 房间序号
+		let roomSequence = factory.room.nameGetSequence(creep.room.name);
+		let spawnName = factory.spawn.sequenceGetName(roomSequence);
 
 		if (creep.memory.work) { // work状态的时候
 			// 修复受损建筑 优先CONTAINER
@@ -78,8 +82,8 @@ var pro = {
 				}
 			}
 		} else { // 非work状态的时候， 到source旁边并采集
-			const harvests = factory.creep.Harvest.ALL();
-			if (harvests.length < 2) {
+			const harvests = factory.creep.Harvest.ALL(roomSequence);
+			if (harvests.length < 1) {
 				// 采集死完后,自己去采集
 				let target = creep.pos.findClosestByPath(FIND_SOURCES);
 				if (target) {
