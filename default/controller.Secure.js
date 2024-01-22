@@ -13,7 +13,7 @@ global.controller.Secure = {
 				}
 			});
 			let buildEvents = _.filter(eventLog, {
-				event: EVENT_BUILD
+				event: EVENT_HARVEST
 			});
 			console.log(JSON.stringify(buildEvents))
 
