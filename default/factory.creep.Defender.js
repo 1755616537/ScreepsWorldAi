@@ -40,24 +40,24 @@ function allFarDefender(spawn) {
 
 function nearDefenderRun(creep) {
 	const target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-	if(target) {
+	if (target) {
 		// 使用近战攻击
-	    if(creep.attack(target) == ERR_NOT_IN_RANGE) {
-	        factory.creep.moveTo(creep, target);
-	    }
+		if (creep.attack(target) == ERR_NOT_IN_RANGE) {
+			factory.creep.moveTo(creep, target);
+		}
 	}
 
 }
 
 function farDefenderRun(creep) {
 	const targets = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 3);
-	if(targets.length > 0) {
+	if (targets.length > 0) {
 		// 3 格范围内的所有敌方 creep 和建筑进行攻击
 		// creep.rangedMassAttack();
-		
+
 		// 远程攻击其他 creep 或者建筑
-		if(creep.rangedAttack(targets[0]) == ERR_NOT_IN_RANGE) {
-		    factory.creep.moveTo(creep, targets[0]);
+		if (creep.rangedAttack(targets[0]) == ERR_NOT_IN_RANGE) {
+			factory.creep.moveTo(creep, targets[0]);
 		}
 	}
 
