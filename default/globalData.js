@@ -157,15 +157,15 @@ global.globalData = {
 		// 防御者-近战
 		'nearDefender': {
 			bodys: {
-				list: [WORK, WORK, CARRY, MOVE, ATTACK],
+				list: [MOVE, ATTACK],
 				totalEnergyRequired: 200
 			},
 			bodysMinus: {
-				list: [WORK, CARRY, MOVE, ATTACK],
+				list: [MOVE, ATTACK],
 				totalEnergyRequired: 100
 			},
 			bodysPlus: {
-				list: [WORK, WORK, WORK, CARRY, MOVE, ATTACK],
+				list: [MOVE, ATTACK],
 				totalEnergyRequired: 300
 			},
 			number: 0
@@ -173,15 +173,15 @@ global.globalData = {
 		// 防御者-远战
 		'farDefender': {
 			bodys: {
-				list: [WORK, WORK, CARRY, MOVE, RANGED_ATTACK],
+				list: [MOVE, RANGED_ATTACK],
 				totalEnergyRequired: 200
 			},
 			bodysMinus: {
-				list: [WORK, CARRY, MOVE, RANGED_ATTACK],
+				list: [ MOVE, RANGED_ATTACK],
 				totalEnergyRequired: 100
 			},
 			bodysPlus: {
-				list: [WORK, WORK, WORK, CARRY, MOVE, RANGED_ATTACK],
+				list: [ MOVE, RANGED_ATTACK],
 				totalEnergyRequired: 300
 			},
 			number: 0
@@ -189,15 +189,15 @@ global.globalData = {
 		// 占领者
 		'occupier': {
 			bodys: {
-				list: [WORK, WORK, CARRY, MOVE, CLAIM],
+				list: [MOVE, CLAIM],
 				totalEnergyRequired: 200
 			},
 			bodysMinus: {
-				list: [WORK, CARRY, MOVE, CLAIM],
+				list: [MOVE, CLAIM],
 				totalEnergyRequired: 100
 			},
 			bodysPlus: {
-				list: [WORK, WORK, WORK, CARRY, MOVE, CLAIM],
+				list: [MOVE, CLAIM],
 				totalEnergyRequired: 300
 			},
 			number: 0
@@ -205,15 +205,15 @@ global.globalData = {
 		// 治疗者
 		'theHealer': {
 			bodys: {
-				list: [WORK, WORK, CARRY, MOVE, HEAL],
+				list: [MOVE, HEAL],
 				totalEnergyRequired: 200
 			},
 			bodysMinus: {
-				list: [WORK, CARRY, MOVE, HEAL],
+				list: [MOVE, HEAL],
 				totalEnergyRequired: 100
 			},
 			bodysPlus: {
-				list: [WORK, WORK, WORK, CARRY, MOVE, HEAL],
+				list: [MOVE, HEAL],
 				totalEnergyRequired: 300
 			},
 			number: 0
