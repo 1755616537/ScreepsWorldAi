@@ -42,7 +42,7 @@ var pro = {
 								
 								// 是否有正在建造的CONSTRUCTION
 								let found = creep.room.lookForAt(LOOK_CONSTRUCTION_SITES, targetPos);
-								if (found.length && found[0].structureType == STRUCTURE_CONTAINER){
+								if (found.length && found[0].structureType != STRUCTURE_CONTAINER){
 									// 指定位置创建一个新的 ConstructionSite
 									let returnData = factory.room.get(roomSequence)
 										.createConstructionSite(x, y, STRUCTURE_CONTAINER);
