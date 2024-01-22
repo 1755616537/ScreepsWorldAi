@@ -110,7 +110,7 @@ global.factory.creep = {
 						//TODO handle the exception
 					}
 					// 是否合法记录了
-					if (on && harvestSourceID) {
+					if (on && harvestSourceID && memorySource && memorySourceList) {
 						for (let i = 0; i < memorySourceList.length; i++) {
 							if (memorySourceList[i] == name) {
 								memorySource[harvestSourceID].list.splice(i, 1);
@@ -123,67 +123,72 @@ global.factory.creep = {
 
 				// 运输者
 				if (Memory.creeps[name].role == globalData.carrier) {
-					// 从矿区记录删除
-					let TransportationTargetID, memorySource;
-					let on = false;
-					// 如果没有合法记录会不存在harvestSourceID,报错需要捕获
-					try {
-						TransportationTargetID = Memory.creeps[name].TransportationTargetID;
-						memorySource = Memory.spawn[spawnName].source.list;
-						on = true;
-					} catch (e) {
-						//TODO handle the exception
-					}
-					// 是否合法记录了
-					if (on && TransportationTargetID) {
+					{
+						// 从矿区记录删除
+						let TransportationTargetID, memorySource;
 						let on = false;
-						for (let val in memorySource) {
-							let spaceXYList = memorySource[val].spaceXYList;
-							for (let i = 0; i < spaceXYList.length; i++) {
-								let containerID = spaceXYList[i].containerID
-								if (TransportationTargetID == containerID) {
-									let i2 = 0;
-									for (; i2 < spaceXYList[i].list.length; i2++) {
-										if (spaceXYList[i].list[i2] == name) {
-											on = true;
-											break
+						// 如果没有合法记录会不存在harvestSourceID,报错需要捕获
+						try {
+							TransportationTargetID = Memory.creeps[name].TransportationTargetID;
+							memorySource = Memory.spawn[spawnName].source.list;
+							on = true;
+						} catch (e) {
+							//TODO handle the exception
+						}
+						// 是否合法记录了
+						if (on && TransportationTargetID && memorySource) {
+							let on = false;
+							for (let val in memorySource) {
+								let spaceXYList = memorySource[val].spaceXYList;
+								for (let i = 0; i < spaceXYList.length; i++) {
+									let containerID = spaceXYList[i].containerID
+									if (TransportationTargetID == containerID) {
+										let i2 = 0;
+										for (; i2 < spaceXYList[i].list.length; i2++) {
+											if (spaceXYList[i].list[i2] == name) {
+												on = true;
+												break
+											}
+										}
+										if (on) {
+											spaceXYList[i].list.splice(i2, 1);
+											Memory.spawn[spawnName].source.list[val].spaceXYList = spaceXYList;
+											break;
 										}
 									}
-									if (on) {
-										spaceXYList[i].list.splice(i2, 1);
-										Memory.spawn[spawnName].source.list[val].spaceXYList = spaceXYList;
-										break;
-									}
 								}
+								if (on) break;
 							}
-							if (on) break;
 						}
 					}
 
-					// 从控制器区记录删除
-					TransportationTargetID = null;
-					let memoryControllerContainerList = null;
-					on = false;
-					try {
-						TransportationTargetID = Memory.creeps[name].TransportationTargetID;
-						memoryControllerContainerList = Memory.spawn[spawnName].controller.container.list;
-						on = true;
-					} catch (e) {
-						//TODO handle the exception
-					}
-					// 是否合法记录了
-					if (on && TransportationTargetID) {
-						let on = false;
-						let i = 0;
-						for (; i < memoryControllerContainerList.length; i++) {
-							if (memoryControllerContainerList[i] == name) {
-								on = true;
-								break;
-							}
+					{
+						// 从控制器区记录删除
+						// let TransportationTargetID;
+						let memoryControllerContainerList;
+						on = false;
+						try {
+							// TransportationTargetID = Memory.creeps[name].TransportationTargetID;
+							memoryControllerContainerList = Memory.spawn[spawnName].controller.container.list;
+							on = true;
+						} catch (e) {
+							//TODO handle the exception
 						}
-						if (on) {
-							memoryControllerContainerList.splice(i, 1);
-							Memory.spawn[spawnName].controller.container.list = memoryControllerContainerList;
+						// 是否合法记录了
+						if (on && memoryControllerContainerList) {
+							let on = false;
+							let i = 0;
+							for (; i < memoryControllerContainerList.length; i++) {
+								if (memoryControllerContainerList[i] == name) {
+									on = true;
+									break;
+								}
+							}
+							if (on) {
+								memoryControllerContainerList.splice(i, 1);
+								Memory.spawn[spawnName].controller.container.list =
+									memoryControllerContainerList;
+							}
 						}
 					}
 				}
@@ -194,7 +199,7 @@ global.factory.creep = {
 		}
 
 
-		
+
 		// {
 		// 	// 矿区Container
 		// 	// 再次扫描,记录列表里面的creep是否还还活,把已经死亡的去除
