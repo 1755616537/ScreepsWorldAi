@@ -156,15 +156,17 @@ global.globalData = {
 		// 防御者-近战
 		'nearDefender': {
 			bodys: {
-				list: [MOVE, ATTACK],
+				list: [MOVE, ATTACK, ATTACK, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH],
 				totalEnergyRequired: 200
 			},
 			bodysMinus: {
-				list: [MOVE, ATTACK],
+				list: [MOVE, ATTACK, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH],
 				totalEnergyRequired: 100
 			},
 			bodysPlus: {
-				list: [MOVE, ATTACK],
+				list: [MOVE, ATTACK, ATTACK, ATTACK, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH,
+					TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH
+				],
 				totalEnergyRequired: 300
 			},
 			number: 1
@@ -172,15 +174,20 @@ global.globalData = {
 		// 防御者-远战
 		'farDefender': {
 			bodys: {
-				list: [MOVE, RANGED_ATTACK],
+				list: [MOVE, RANGED_ATTACK, RANGED_ATTACK, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH,
+					TOUGH, TOUGH
+				],
 				totalEnergyRequired: 200
 			},
 			bodysMinus: {
-				list: [MOVE, RANGED_ATTACK],
+				list: [MOVE, RANGED_ATTACK, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH],
 				totalEnergyRequired: 100
 			},
 			bodysPlus: {
-				list: [MOVE, RANGED_ATTACK],
+				list: [MOVE, RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH,
+					TOUGH, TOUGH, TOUGH,
+					TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH
+				],
 				totalEnergyRequired: 300
 			},
 			number: 0
@@ -188,7 +195,7 @@ global.globalData = {
 		// 治疗者
 		'theHealer': {
 			bodys: {
-				list: [MOVE, HEAL],
+				list: [MOVE, HEAL, HEAL],
 				totalEnergyRequired: 200
 			},
 			bodysMinus: {
@@ -196,7 +203,7 @@ global.globalData = {
 				totalEnergyRequired: 100
 			},
 			bodysPlus: {
-				list: [MOVE, HEAL],
+				list: [MOVE, HEAL, HEAL, HEAL],
 				totalEnergyRequired: 300
 			},
 			number: 0
@@ -204,7 +211,7 @@ global.globalData = {
 		// 占领者
 		'occupier': {
 			bodys: {
-				list: [MOVE, CLAIM],
+				list: [MOVE, CLAIM, CLAIM],
 				totalEnergyRequired: 200
 			},
 			bodysMinus: {
@@ -212,7 +219,7 @@ global.globalData = {
 				totalEnergyRequired: 100
 			},
 			bodysPlus: {
-				list: [MOVE, CLAIM],
+				list: [MOVE, CLAIM, CLAIM, CLAIM],
 				totalEnergyRequired: 300
 			},
 			number: 0

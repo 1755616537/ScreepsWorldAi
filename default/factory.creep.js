@@ -119,19 +119,20 @@ global.factory.creep = {
 							}
 						}
 					}
-					
+
 					// 从采集建造CONTAINER记录删除
 					let harvestBuildCONTAINERList;
 					on = false;
 					try {
-						if (!Memory.spawn[spawnName].source.harvestBuildCONTAINERList) Memory.spawn[spawnName].source
+						if (!Memory.spawn[spawnName].source.harvestBuildCONTAINERList) Memory.spawn[spawnName]
+							.source
 							.harvestBuildCONTAINERList = {};
 						harvestBuildCONTAINERList = Memory.spawn[spawnName].source.harvestBuildCONTAINERList;
 						on = true;
 					} catch (e) {
 						//TODO handle the exception
 					}
-					
+
 					if (on && _.size(harvestBuildCONTAINERList) > 0) {
 						let on = false;
 						for (i in harvestBuildCONTAINERList) {
@@ -140,11 +141,12 @@ global.factory.creep = {
 								return false;
 							}
 						}
-						if(on){
+						if (on) {
 							harvestBuildCONTAINERList[name] = false;
 							harvestBuildCONTAINERList = _.omit(harvestBuildCONTAINERList, name);
-							
-							Memory.spawn[spawnName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList;
+
+							Memory.spawn[spawnName].source.harvestBuildCONTAINERList =
+								harvestBuildCONTAINERList;
 						}
 					}
 				}
@@ -180,7 +182,8 @@ global.factory.creep = {
 										}
 										if (on) {
 											spaceXYList[i].list.splice(i2, 1);
-											Memory.spawn[spawnName].source.list[val].spaceXYList[i].list = spaceXYList[i].list;
+											Memory.spawn[spawnName].source.list[val].spaceXYList[i].list =
+												spaceXYList[i].list;
 											break;
 										}
 									}
