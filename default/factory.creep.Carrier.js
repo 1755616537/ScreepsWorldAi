@@ -32,13 +32,18 @@ var pro = {
 							let x = spaceXYList[i].x;
 							let y = spaceXYList[i].y;
 							let targetPos = new RoomPosition(x, y, creep.room.name)
-							// CONTAINER
 							let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
-							if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
-								spaceXYList[i].containerID = found[0].id;
+							if (found.length > 0) {
+								if (found[0].structureType == STRUCTURE_CONTAINER) {
+									spaceXYList[i].containerID = found[0].id;
+								} else if (found.type == LOOK_CONSTRUCTION_SITES) {
+									// 正在建造CONTAINER
+								}
 							} else {
 								// 如果不存在CONTAINER就清除CONTAINERID
 								spaceXYList[i].containerID = null;
+
+
 								// 指定位置创建一个新的 ConstructionSite
 								let returnData = factory.room.get(roomSequence)
 									.createConstructionSite(x, y, STRUCTURE_CONTAINER);
@@ -227,7 +232,7 @@ function transfer(creep) {
 		}
 	}
 
-	if (found2.length < 1 && on) {
+	if (found2.length < 1 && on && memoryControllerContainer.x && memoryControllerContainer.y) {
 		// 如果不存在CONTAINER就清除CONTAINERID
 		Memory.spawn[spawnName].controller.container.id = null;
 
