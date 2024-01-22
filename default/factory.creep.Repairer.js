@@ -86,6 +86,28 @@ var pro = {
 						// 	structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
 					}
 				});
+				if (!target) {
+					// 找不到可搬运的地方,从基地搬运
+					target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+						filter: (structure) => {
+							// 找出有储存能量的container搬运
+							return (structure.structureType == STRUCTURE_SPAWN ||
+								structure.structureType == STRUCTURE_EXTENSION
+							) && structure.store.getUsedCapacity(RESOURCE_ENERGY) > 200;
+						}
+					});
+				}
+				if (!target) {
+					// 采集死完后,自己去采集
+					target = creep.pos.findClosestByPath(FIND_SOURCES);
+					if (target) {
+						if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
+							// 向目标移动
+							factory.creep.moveTo(creep, target, 'Resource');
+						}
+						return
+					}
+				}
 
 				if (target) {
 					// 从建筑(structure)中拿取资源
