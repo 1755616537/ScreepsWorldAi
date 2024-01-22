@@ -12,10 +12,8 @@ global.controller.Secure = {
 					clog(event);
 				}
 			});
-			let buildEvents = _.filter(eventLog, {
-				event: EVENT_HARVEST
-			});
-			console.log(JSON.stringify(buildEvents))
+			// objectId 自己ID
+			// data.targetId - 目标对象 ID
 
 			if (attackEvents.length > 0) {
 				let on = false;
