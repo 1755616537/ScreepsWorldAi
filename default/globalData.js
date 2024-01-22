@@ -149,7 +149,7 @@ global.globalData = {
 				list: [WORK, WORK, WORK, CARRY, MOVE],
 				totalEnergyRequired: 300
 			},
-			number: 1,
+			number: 2,
 			// tower创建拥有能量的时候不生成维修者
 			onTower: false
 		},
