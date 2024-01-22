@@ -32,22 +32,23 @@ var pro = {
 							let x = spaceXYList[i].x;
 							let y = spaceXYList[i].y;
 							let targetPos = new RoomPosition(x, y, creep.room.name)
+							// CONTAINER
 							let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
-							if (found.length > 0) {
-								if (found[0].structureType == STRUCTURE_CONTAINER) {
-									spaceXYList[i].containerID = found[0].id;
-								} else if (found[0].type == LOOK_CONSTRUCTION_SITES) {
-									// 正在建造CONTAINER
-								}
+							if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
+								spaceXYList[i].containerID = found[0].id;
 							} else {
 								// 如果不存在CONTAINER就清除CONTAINERID
 								spaceXYList[i].containerID = null;
-
-								// 指定位置创建一个新的 ConstructionSite
-								let returnData = factory.room.get(roomSequence)
-									.createConstructionSite(x, y, STRUCTURE_CONTAINER);
-								if (returnData != OK) clog(x, y, '矿区自动建造对应数量的CONTAINER ',
-									returnData);
+								
+								// 是否有正在建造的CONSTRUCTION
+								let found = creep.room.lookForAt(LOOK_CONSTRUCTION_SITES, targetPos);
+								if (found.length && found[0].type != LOOK_CONSTRUCTION_SITES){
+									// 指定位置创建一个新的 ConstructionSite
+									let returnData = factory.room.get(roomSequence)
+										.createConstructionSite(x, y, STRUCTURE_CONTAINER);
+									if (returnData != OK) clog(x, y, '矿区自动建造对应数量的CONTAINER ',
+										returnData);
+								}
 							}
 						}
 						memorySource[val].spaceXYList = spaceXYList;
