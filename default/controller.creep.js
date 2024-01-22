@@ -69,7 +69,14 @@ function addHarvest(harvests, controller_level = 4, spawnSequence) {
 function addUpgrader(upgraders, controller_level, spawnSequence) {
 	// 生产 升级
 	if (upgraders.length < globalData.creepConfigs.upgrader.number) {
-		let returnData = factory.creep.addUpgrader(upgraders, controller_level, spawnSequence);
+		let returnData;
+		// 房间总能量在2000以下时,只会存在一个升级者
+		if (upgraders.length >= 1 && factory.spawn.get(spawnSequence).room.energyAvailable > 2000) {
+			returnData = factory.creep.addUpgrader(upgraders, controller_level, spawnSequence);
+		} else {
+			returnData = factory.creep.addUpgrader(upgraders, controller_level, spawnSequence);
+		}
+
 		// clog(returnData);
 		return returnData;
 	}
