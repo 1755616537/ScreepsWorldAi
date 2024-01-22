@@ -194,7 +194,7 @@ function transfer(creep) {
 	let roomSequence = factory.room.nameGetSequence(creep.room.name);
 	let spawnName = factory.spawn.sequenceGetName(roomSequence);
 	let room = creep.room;
-	
+
 	// 控制器旁是否有CONTAINER或在建的CONTAINER
 	let pos = room.controller.pos;
 	let found = room.lookAtArea(pos.y - 1, pos.x - 1, pos.y + 1, pos.x + 1, true);
@@ -203,13 +203,15 @@ function transfer(creep) {
 
 	// 给控制器CONTAINER,运输能量
 	let memoryControllerContainer;
+	let on = false;
 	try {
 		memoryControllerContainer = Memory.spawn[spawnName].controller.container;
 		if (!memoryControllerContainer.x || !memoryControllerContainer.y) Throw.Error(
 			'Memory.spawn[spawnName].controller.container不存在x或y');
+		on = true;
 	} catch (e) {
 		if (!Memory.spawn[spawnName].controller) Memory.spawn[spawnName].controller = {};
-		
+
 		if (found2.length > 0) {
 			let x = found2[0].x;
 			let y = found2[0].y;
@@ -224,13 +226,13 @@ function transfer(creep) {
 			}
 		}
 	}
-	
-	if (found2.length < 1) {
+
+	if (found2.length < 1 && on) {
 		// 如果不存在CONTAINER就清除CONTAINERID
 		Memory.spawn[spawnName].controller.container.id = null;
-				
-		let x = found2[0].x;
-		let y = found2[0].y;
+
+		let x = memoryControllerContainer.x;
+		let y = memoryControllerContainer.y;
 		// 指定位置创建一个新的 ConstructionSite
 		let returnData = room.createConstructionSite(x, y, STRUCTURE_CONTAINER);
 		if (returnData != OK) {
@@ -246,7 +248,7 @@ function transfer(creep) {
 			}
 		}
 	}
-	
+
 	if (memoryControllerContainer && memoryControllerContainer.id) {
 		// 没有分配运输者,进行分配
 		if (memoryControllerContainer.list.length < 1) {
@@ -256,9 +258,10 @@ function transfer(creep) {
 				clog(creep.name, '已自动分配给控制器Container');
 			}
 		}
-		
+
 		// 运输能量
-		if (creep.memory.TransportationTargetID && creep.memory.TransportationTargetID==memoryControllerContainer.id) {
+		if (creep.memory.TransportationTargetID && creep.memory.TransportationTargetID == memoryControllerContainer
+			.id) {
 			// 检查是否在控制器CONTAINER记录中
 			let on = false;
 			for (let i2 = 0; i2 < memoryControllerContainer.list.length; i2++) {
