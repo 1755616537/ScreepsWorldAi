@@ -19,7 +19,7 @@ var pro = {
 		let roomSequence = factory.room.nameGetSequence(creep.room.name);
 		let spawnName = factory.spawn.sequenceGetName(roomSequence);
 
-		if (creep.memory.work) { // 背包未满
+		if (!creep.memory.work) { // 背包未满
 			// 所有掉落的资源
 			let target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
 			// const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
