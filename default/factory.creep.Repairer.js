@@ -61,6 +61,21 @@ var pro = {
 				if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
 					factory.creep.moveTo(creep, targets[0]);
 				}
+			}else{
+				// 不用维修了,先干其他
+				let targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+				if (targets.length > 0) {
+					// 建造
+					if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
+						factory.creep.moveTo(creep, targets[0]);
+					}
+				}
+				if (targets.length < 1) {
+					// 升级
+					if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+						factory.creep.moveTo(creep, creep.room.controller);
+					}
+				}
 			}
 		} else { // 非work状态的时候， 到source旁边并采集
 			const harvests = factory.creep.Harvest.ALL();
