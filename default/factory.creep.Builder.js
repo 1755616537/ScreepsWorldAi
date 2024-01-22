@@ -10,6 +10,10 @@ var pro = {
 			creep.memory.work = true; // 变为 work状态
 			creep.say('🚧 建造');
 		}
+		
+		// 房间序号
+		let roomSequence = factory.room.nameGetSequence(creep.room.name);
+		let spawnName = factory.spawn.sequenceGetName(roomSequence);
 
 		if (creep.memory.work) { // work状态的时候
 			// 寻找建筑位
