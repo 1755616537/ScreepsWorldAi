@@ -104,6 +104,13 @@ var pro = {
 				if (!target) {
 					// 采集死完后,自己去采集
 					target = creep.pos.findClosestByPath(FIND_SOURCES);
+					if (target) {
+						if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
+							// 向目标移动
+							factory.creep.moveTo(creep, target, 'Resource');
+						}
+						return
+					}
 				}
 
 				if (target) {
