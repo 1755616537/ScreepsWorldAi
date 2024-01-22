@@ -97,7 +97,7 @@ var pro = {
 						filter: (structure) => {
 							// 找出有储存能量的container搬运
 							return (structure.structureType == STRUCTURE_SPAWN) &&
-								structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+								structure.store.getUsedCapacity(RESOURCE_ENERGY) > 200;
 						}
 					});
 				}
