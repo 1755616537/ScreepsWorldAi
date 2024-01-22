@@ -27,10 +27,9 @@ global.globalData = {
 		WorkResourceColor: '#ffff00',
 	},
 	// 房间
-	room:[
-		{
-			name:'W47S54',
-			SpawnName:'Spawn1',
+	room: [{
+			name: 'W47S54',
+			SpawnName: 'Spawn1',
 			// 自动安全(受到攻击自动开启)
 			AutomaticSecurity: true,
 			// 采集者自动分配矿区
@@ -41,22 +40,22 @@ global.globalData = {
 			AutomaticAssignControllerCONTAINER: true
 		},
 		{
-			name:'W48S54',
-			SpawnName:'Spawn2',
+			name: 'W48S54',
+			SpawnName: 'Spawn2',
 			AutomaticSecurity: true,
 			AutomaticAssignHarvest: true,
 			AutomaticAssignHarvestCONTAINER: true,
 			AutomaticAssignControllerCONTAINER: true
 		},
 		{
-			name:'',
-			SpawnName:'Spawn3',
+			name: '',
+			SpawnName: 'Spawn3',
 			AutomaticSecurity: true,
 			AutomaticAssignHarvest: true,
 			AutomaticAssignHarvestCONTAINER: true,
 			AutomaticAssignControllerCONTAINER: true
 		}
-	] ,
+	],
 	// 角色配置
 	creepConfigs: {
 		// 采集者
@@ -177,11 +176,11 @@ global.globalData = {
 				totalEnergyRequired: 200
 			},
 			bodysMinus: {
-				list: [ MOVE, RANGED_ATTACK],
+				list: [MOVE, RANGED_ATTACK],
 				totalEnergyRequired: 100
 			},
 			bodysPlus: {
-				list: [ MOVE, RANGED_ATTACK],
+				list: [MOVE, RANGED_ATTACK],
 				totalEnergyRequired: 300
 			},
 			number: 0
