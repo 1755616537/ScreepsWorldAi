@@ -369,7 +369,7 @@ function transfer(creep) {
 			factory.creep.moveTo(creep, targets[0]);
 		}
 	} else {
-		// 都满了不用搬运能量,去建造
+		// 都满了不用搬运能量,先干其他
 		targets = creep.room.find(FIND_CONSTRUCTION_SITES);
 		if (targets.length > 0) {
 			// 建造
@@ -377,5 +377,24 @@ function transfer(creep) {
 				factory.creep.moveTo(creep, targets[0]);
 			}
 		}
+		if (targets.length < 1) {
+			targets = creep.room.find(FIND_STRUCTURES, {
+				filter: object => object.hits < object.hitsMax
+			});
+			targets.sort((a, b) => a.hits - b.hits);
+			if (targets.length > 0) {
+				// 维修
+				if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
+					factory.creep.moveTo(creep, targets[0]);
+				}
+			}
+		}
+		if (targets.length < 1) {
+			// 升级
+			if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+				factory.creep.moveTo(creep, creep.room.controller);
+			}
+		}
+		
 	}
 }
