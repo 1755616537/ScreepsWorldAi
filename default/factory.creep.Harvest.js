@@ -5,7 +5,7 @@ var pro = {
 		// 房间序号
 		let roomSequence = factory.room.nameGetSequence(creep.room.name);
 		let spawnName = factory.spawn.sequenceGetName(roomSequence);
-		
+
 		// 没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器
 		// 脚下是否有CONTAINER，有就不移动
 		let on = false;
@@ -136,7 +136,7 @@ var pro = {
 				}
 
 				let memorySource = Memory.spawn[spawnName].source.list;
-				if(memorySource){
+				if (memorySource) {
 					if (!creep.memory.harvestSourceID) {
 						// 找出没有被分配完的矿区
 						let memorySourceListNull = null;
@@ -154,14 +154,14 @@ var pro = {
 								memorySource[val].list.push(creep.name);
 								// 把矿区ID记录到creep
 								creep.memory.harvestSourceID = val;
-					
+
 								Memory.spawn[spawnName].source.list = memorySource;
-								clog(creep.name,'已自动分配给矿区',val)
+								clog(creep.name, '已自动分配给矿区', val)
 								break;
 							}
 						}
 					}
-					
+
 					// 找出已经分配的矿区消息
 					for (let i = 0; i < sources.length; i++) {
 						if (sources[i].id == creep.memory.harvestSourceID) {
@@ -184,7 +184,7 @@ var pro = {
 							break
 						}
 					}
-					
+
 					if (source) {
 						if (source.id != creep.memory.harvestSourceID) {
 							// Throw.Error('creep ', creep.id, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
@@ -193,7 +193,7 @@ var pro = {
 						// Throw.Error('creep ', creep.id, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
 					}
 				}
-				
+
 			}
 
 			if (source) {
@@ -203,15 +203,34 @@ var pro = {
 				}
 			}
 		} else {
+			if (!Memory.spawn[spawnName].source.harvestBuildCONTAINERList) Memory.spawn[spawnName].source
+				.harvestBuildCONTAINERList = {};
+			let harvestBuildCONTAINERList = Memory.spawn[spawnName].source.harvestBuildCONTAINERList;
 			// 脚下是否有CONTAINER没有建造完成,就优先建筑
 			let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, creep.room.name);
 			let found = creep.room.lookForAt(LOOK_CONSTRUCTION_SITES, targetPos);
 			if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
+				harvestBuildCONTAINERList[creep.name] = true;
+			} else {
+				harvestBuildCONTAINERList[creep.name] = false;
+				harvestBuildCONTAINERList = _.omit(harvestBuildCONTAINERList, creep.name);
+			}
+			Memory.spawn[spawnName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList;
+
+			const harvests = factory.creep.Harvest.ALL(roomSequence);
+			if (_.size(harvestBuildCONTAINERList) < harvests.length) {
 				// 建造
 				if (creep.build(found[0]) == ERR_NOT_IN_RANGE) {
 					factory.creep.moveTo(creep, found[0]);
 				}
 				return
+			}else{
+				if(harvestBuildCONTAINERList[creep.name]){
+					harvestBuildCONTAINERList[creep.name] = false;
+					harvestBuildCONTAINERList = _.omit(harvestBuildCONTAINERList, creep.name);
+					
+					Memory.spawn[spawnName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList;
+				}
 			}
 
 			var targets = creep.room.find(FIND_STRUCTURES, {
