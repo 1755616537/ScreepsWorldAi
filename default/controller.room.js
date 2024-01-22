@@ -71,3 +71,28 @@ function controllerContainer(roomSequence) {
 		}
 	}
 }
+
+// 采集建造CONTAINER记录管理
+function harvestBuildCONTAINER(roomSequence) {
+	let spawnName = factory.spawn.sequenceGetName(roomSequence);
+
+	if (!Memory.spawn[spawnName].source.harvestBuildCONTAINERList) Memory.spawn[spawnName].source
+		.harvestBuildCONTAINERList = {};
+	let harvestBuildCONTAINERList = Memory.spawn[spawnName].source.harvestBuildCONTAINERList;
+	if (_.size(harvestBuildCONTAINERList) > 0) {
+		// 检查是否记录中的creep是否还存活
+		let harvestBuildCONTAINERList2 = {};
+		for (i in harvestBuildCONTAINERList) {
+			let on = false;
+			_.forEach(Game.creeps, (creep) => {
+				if (creep.name == i) {
+					on = true;
+					return false;
+				}
+			})
+			if (on) harvestBuildCONTAINERList2[i] = harvestBuildCONTAINERList[i];
+		}
+		Memory.spawn[spawnName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList2;
+
+	}
+}
