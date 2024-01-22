@@ -306,7 +306,7 @@ global.factory.creep = {
 		}
 		if ( /*Object.keys(Game.creeps).length < 1 ||*/ harvests) {
 			// 当总creep数量小于2时,使用缩减版进行快速发展（注意：当建筑只剩基地时最高能量300）
-			if (harvests.length < 2) {
+			if (harvests.length < 1) {
 				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.harvest
 					.bodysMinus
 					.totalEnergyRequired) {

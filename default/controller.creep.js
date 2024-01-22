@@ -123,6 +123,9 @@ function spawn(spawnSequence = 1) {
 	// 查看控制器等级
 	const controller_level = factory.spawn.get(spawnSequence).room.controller.level;
 
+	// 矿区
+	let sources = factory.room.get(spawnSequence).find(FIND_SOURCES);
+
 	// 母巢 (spawn) 是否正在孵化一个新的 creep
 	if (factory.spawn.get(spawnSequence).spawning) {
 		// 孵化，过程可视化
@@ -154,54 +157,55 @@ function spawn(spawnSequence = 1) {
 			}
 		});
 
-		// 最少采集2个
-		if (harvests.length >= 2) {
-			// 优先级顺序生产 每种保持最低1个
-			let priority;
-			if (upgraders.length < 1 && globalData.creepConfigs.upgrader.number >= 1) {
-				priority = 'upgrader';
-			} else if (builders.length < 1 && globalData.creepConfigs.builder.number >= 1) {
-				priority = 'builder';
-			} else if (repairers.length < 1 && globalData.creepConfigs.repairer.number >= 1 && (!globalData.creepConfigs
-					.repairer.onTower || (globalData
-						.creepConfigs.repairer.onTower && towers.length <
-						1))) {
-				priority = 'repairer';
-			} else if (carriers.length < 1 && globalData.creepConfigs.carrier.number >= 1) {
-				// 注释掉是因为 拥有CONTAINER才生产 会卡住优先顺序，不进行默认生成
-				// priority = 'carrier';
+		// 优先级顺序生产 每种保持最低1个
+		let priority;
+		// 采集最低和矿区一样的数量
+		if (harvests.length < 1 && globalData.creepConfigs.harvest.number >= 1 && harvests.length < sources.length) {
+			priority = 'harvest';
+		} else if (upgraders.length < 1 && globalData.creepConfigs.upgrader.number >= 1) {
+			priority = 'upgrader';
+		} else if (builders.length < 1 && globalData.creepConfigs.builder.number >= 1) {
+			priority = 'builder';
+		} else if (repairers.length < 1 && globalData.creepConfigs.repairer.number >= 1 && (!globalData.creepConfigs
+				.repairer.onTower || (globalData
+					.creepConfigs.repairer.onTower && towers.length <
+					1))) {
+			priority = 'repairer';
+		} else if (carriers.length < 1 && globalData.creepConfigs.carrier.number >= 1) {
+			// 注释掉是因为 拥有CONTAINER才生产 会卡住优先顺序，不进行默认生成
+			// priority = 'carrier';
+		}
+		if (priority) {
+			switch (priority) {
+				case 'harvest':
+					addHarvest(upgraders, controller_level, spawnSequence);
+					break;
+				case 'upgrader':
+					addUpgrader(upgraders, controller_level, spawnSequence);
+					break;
+				case 'builder':
+					addBuilder(builders, controller_level, spawnSequence);
+					break;
+				case 'carrier':
+					addCarrier(carriers, controller_level, spawnSequence);
+					break;
+				case 'repairer':
+					addRepairer(repairers, controller_level, spawnSequence);
+					break;
+				default:
 			}
-			if (priority) {
-				switch (priority) {
-					case 'upgrader':
-						addUpgrader(upgraders, controller_level, spawnSequence);
-						break;
-					case 'builder':
-						addBuilder(builders, controller_level, spawnSequence);
-						break;
-					case 'carrier':
-						addCarrier(carriers, controller_level, spawnSequence);
-						break;
-					case 'repairer':
-						addRepairer(repairers, controller_level, spawnSequence);
-						break;
-					default:
-				}
-			} else {
-				// 默认顺序生产
-				if (addHarvest(harvests, controller_level, spawnSequence) != OK) {
-					if (addCarrier(carriers, controller_level, spawnSequence) != OK) {
-						if (addBuilder(builders, controller_level, spawnSequence) != OK) {
-							if (addRepairer(repairers, controller_level, spawnSequence) != OK) {
-								if (addUpgrader(upgraders, controller_level, spawnSequence) != OK) {}
-							}
+		} else {
+			// 默认顺序生产
+			if (addHarvest(harvests, controller_level, spawnSequence) != OK) {
+				if (addCarrier(carriers, controller_level, spawnSequence) != OK) {
+					if (addBuilder(builders, controller_level, spawnSequence) != OK) {
+						if (addRepairer(repairers, controller_level, spawnSequence) != OK) {
+							if (addUpgrader(upgraders, controller_level, spawnSequence) != OK) {}
 						}
 					}
 				}
-
 			}
-		} else {
-			addHarvest(harvests, controller_level, spawnSequence);
+
 		}
 	}
 }
