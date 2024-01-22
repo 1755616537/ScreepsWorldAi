@@ -39,6 +39,11 @@ var pro = {
 							} else {
 								// 如果不存在CONTAINER就清除CONTAINERID
 								spaceXYList[i].containerID = null;
+								// 指定位置创建一个新的 ConstructionSite
+								let returnData = factory.room.get(roomSequence)
+									.createConstructionSite(x, y, STRUCTURE_CONTAINER);
+								if (returnData != OK) clog(x, y, '自动建造对应数量的CONTAINER ',
+									returnData);
 							}
 						}
 						memorySource[val].spaceXYList = spaceXYList;
@@ -213,6 +218,26 @@ function transfer(creep) {
 					id: null,
 					// 运输者的ID列表
 					list: []
+				}
+			}
+		} else {
+			// 如果不存在CONTAINER就清除CONTAINERID
+			Memory.spawn[spawnName].controller.container.id = null;
+
+			let x = found2[0].x;
+			let y = found2[0].y;
+			// 指定位置创建一个新的 ConstructionSite
+			let returnData = room.createConstructionSite(x, y, STRUCTURE_CONTAINER);
+			if (returnData != OK) {
+				clog(x, y, '自动建造对应数量的CONTAINER ', returnData);
+				Memory.spawn[spawnName].controller = {
+					container: {
+						x: x,
+						y: y,
+						id: null,
+						// 运输者的ID列表
+						list: []
+					}
 				}
 			}
 		}
