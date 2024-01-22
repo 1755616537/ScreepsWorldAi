@@ -39,10 +39,10 @@ var pro = {
 							} else {
 								// 如果不存在CONTAINER就清除CONTAINERID
 								spaceXYList[i].containerID = null;
-								
+
 								// 是否有正在建造的CONSTRUCTION
 								let found = creep.room.lookForAt(LOOK_CONSTRUCTION_SITES, targetPos);
-								if (found.length && found[0].structureType != STRUCTURE_CONTAINER){
+								if (found.length && found[0].structureType != STRUCTURE_CONTAINER) {
 									// 指定位置创建一个新的 ConstructionSite
 									let returnData = factory.room.get(roomSequence)
 										.createConstructionSite(x, y, STRUCTURE_CONTAINER);
@@ -356,6 +356,15 @@ function transfer(creep) {
 		if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 			// 向目标移动
 			factory.creep.moveTo(creep, targets[0]);
+		}
+	} else {
+		// 都满了不用搬运能量,去建造
+		targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+		if (targets.length > 0) {
+			// 建造
+			if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
+				factory.creep.moveTo(creep, targets[0]);
+			}
 		}
 	}
 }
