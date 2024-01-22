@@ -256,38 +256,29 @@ function transfer(creep) {
 				clog(creep.name, '已自动分配给控制器Container');
 			}
 		}
-
-		if (creep.memory.TransportationTargetID) {
-			// 找出已经分配的控制器消息
-			let targets = creep.room.find(FIND_STRUCTURES, {
-				filter: (structure) => {
-					return structure.structureType == STRUCTURE_CONTAINER;
+		
+		// 运输能量
+		if (creep.memory.TransportationTargetID && creep.memory.TransportationTargetID==memoryControllerContainer.id) {
+			// 检查是否在控制器CONTAINER记录中
+			let on = false;
+			for (let i2 = 0; i2 < memoryControllerContainer.list.length; i2++) {
+				if (creep.name == memoryControllerContainer.list[i2]) {
+					on = true;
+					break;
 				}
-			});
-			for (let i = 0; i < targets.length; i++) {
-				if (targets[i].id == creep.memory.TransportationTargetID) {
-					// 检查是否在控制器CONTAINER记录中
-					let on = false;
-					for (let i2 = 0; i2 < memoryControllerContainer.list.length; i2++) {
-						if (creep.name == memoryControllerContainer.list[i2]) {
-							on = true;
-							break;
-						}
-					}
-					if (on) {
-						// 合法记录在控制器CONTAINER
-						const source = Game.getObjectById(memoryControllerContainer.id);
-						// 将资源从该 creep 转移至其他对象
-						if (creep.transfer(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-							// 向目标移动
-							factory.creep.moveTo(creep, source);
-						}
-						return
-					} else {
-						// 不合法,移除
-						creep.memory.TransportationTargetID = null;
-					}
+			}
+			if (on) {
+				// 合法记录在控制器CONTAINER
+				const source = Game.getObjectById(memoryControllerContainer.id);
+				// 将资源从该 creep 转移至其他对象
+				if (creep.transfer(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+					// 向目标移动
+					factory.creep.moveTo(creep, source);
 				}
+				return
+			} else {
+				// 不合法,移除
+				creep.memory.TransportationTargetID = null;
 			}
 		}
 	} else {
