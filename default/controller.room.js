@@ -3,6 +3,7 @@ global.controller.room = {
 
 		sourceContainer(1);
 		controllerContainer(1);
+		harvestBuildCONTAINER(1);
 	}
 }
 
