@@ -204,36 +204,46 @@ var pro = {
 			}
 		} else {
 			// 至少留下一个运输到基地
-			if (!Memory.spawn[spawnName].source.harvestBuildCONTAINERList) Memory.spawn[spawnName].source
-				.harvestBuildCONTAINERList = {};
-			let harvestBuildCONTAINERList = Memory.spawn[spawnName].source.harvestBuildCONTAINERList;
-			// 脚下是否有CONTAINER没有建造完成,就优先建筑
-			let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, creep.room.name);
-			let found = creep.room.lookForAt(LOOK_CONSTRUCTION_SITES, targetPos);
-			if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
-				harvestBuildCONTAINERList[creep.name] = true;
-			} else {
-				harvestBuildCONTAINERList[creep.name] = false;
-				harvestBuildCONTAINERList = _.omit(harvestBuildCONTAINERList, creep.name);
+			let harvestBuildCONTAINERList;
+			let on = false;
+			try {
+				if (!Memory.spawn[spawnName].source.harvestBuildCONTAINERList) Memory.spawn[spawnName].source
+					.harvestBuildCONTAINERList = {};
+				harvestBuildCONTAINERList = Memory.spawn[spawnName].source.harvestBuildCONTAINERList;
+				on = true;
+			} catch (e) {
+				//TODO handle the exception
 			}
-			Memory.spawn[spawnName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList;
-			const harvests = factory.creep.Harvest.ALL(roomSequence);
-			if (_.size(harvestBuildCONTAINERList) < harvests.length) {
-				if(harvestBuildCONTAINERList[creep.name]){
-					// 建造
-					if (creep.build(found[0]) == ERR_NOT_IN_RANGE) {
-						factory.creep.moveTo(creep, found[0]);
-					}
-					return
-				}
-			}else{
-				if(harvestBuildCONTAINERList[creep.name]){
+			if(on){
+				// 脚下是否有CONTAINER没有建造完成,就优先建筑
+				let targetPos = new RoomPosition(creep.pos.x, creep.pos.y, creep.room.name);
+				let found = creep.room.lookForAt(LOOK_CONSTRUCTION_SITES, targetPos);
+				if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
+					harvestBuildCONTAINERList[creep.name] = true;
+				} else {
 					harvestBuildCONTAINERList[creep.name] = false;
 					harvestBuildCONTAINERList = _.omit(harvestBuildCONTAINERList, creep.name);
-					
-					Memory.spawn[spawnName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList;
+				}
+				Memory.spawn[spawnName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList;
+				const harvests = factory.creep.Harvest.ALL(roomSequence);
+				if (_.size(harvestBuildCONTAINERList) < harvests.length) {
+					if(harvestBuildCONTAINERList[creep.name]){
+						// 建造
+						if (creep.build(found[0]) == ERR_NOT_IN_RANGE) {
+							factory.creep.moveTo(creep, found[0]);
+						}
+						return
+					}
+				}else{
+					if(harvestBuildCONTAINERList[creep.name]){
+						harvestBuildCONTAINERList[creep.name] = false;
+						harvestBuildCONTAINERList = _.omit(harvestBuildCONTAINERList, creep.name);
+						
+						Memory.spawn[spawnName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList;
+					}
 				}
 			}
+			
 
 			var targets = creep.room.find(FIND_STRUCTURES, {
 				filter: (structure) => {
