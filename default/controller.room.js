@@ -38,8 +38,16 @@ function sourceContainer(roomSequence) {
 					if (on) {
 						let creepName = spaceXYList[i].list[i2];
 						let containerID = spaceXYList[i].containerID;
-						let TransportationTarget = Game.creeps[creepName].memory.TransportationTarget;
-						if (TransportationTarget) {
+						let TransportationTarget;
+						let on = false;
+						// 如果没有合法记录会不存在,报错需要捕获
+						try {
+							TransportationTarget = Game.creeps[creepName].memory.TransportationTarget;
+							on = true;
+						} catch (e) {
+							//TODO handle the exception
+						}
+						if (TransportationTarget && on) {
 							if (TransportationTarget.id == containerID && TransportationTarget.type == 'Source') {
 								spaceXYListList2.push(creepName);
 							} else {
@@ -81,8 +89,16 @@ function controllerContainer(roomSequence) {
 				if (on) {
 					let creepName = memoryControllerContainer.list[i];
 					let containerID = memoryControllerContainer.id;
-					let TransportationTarget = Game.creeps[creepName].memory.TransportationTarget;
-					if (TransportationTarget) {
+					let TransportationTarget;
+					let on = false;
+					// 如果没有合法记录会不存在,报错需要捕获
+					try {
+						TransportationTarget = Game.creeps[creepName].memory.TransportationTarget;
+						on = true;
+					} catch (e) {
+						//TODO handle the exception
+					}
+					if (TransportationTarget && on) {
 						if (TransportationTarget.id == containerID && TransportationTarget.type ==
 							'ControllerContainer') {
 							memoryControllerContainerList2.push(creepName);
