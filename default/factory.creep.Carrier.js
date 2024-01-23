@@ -161,7 +161,7 @@ var pro = {
 				}
 
 				if (!source) {
-					let targets = _.compact(
+					let targets = _.concat(
 						// 所有建筑
 						creep.pos.findClosestByPath(FIND_STRUCTURES, {
 							filter: (structure) => {
