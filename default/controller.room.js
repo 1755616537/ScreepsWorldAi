@@ -240,7 +240,7 @@ function upgraderOuterRoom(roomSequence) {
 			}
 		} else {
 			// 掉落的资源
-			let targets = factory.room.get(1).find(FIND_DROPPED_RESOURCES);
+			let targets = room.find(FIND_DROPPED_RESOURCES);
 			if (targets.length < 1) {
 				targets = [];
 			}
@@ -328,7 +328,7 @@ function builderOuterRoom(roomSequence) {
 			}
 		} else {
 			// 掉落的资源
-			let targets = factory.room.get(1).find(FIND_DROPPED_RESOURCES);
+			let targets = room.find(FIND_DROPPED_RESOURCES);
 			if (targets.length < 1) {
 				targets = [];
 			}
