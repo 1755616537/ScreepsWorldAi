@@ -329,9 +329,6 @@ function builderOuterRoom(roomSequence) {
 		} else {
 			// 掉落的资源
 			let targets = room.find(FIND_DROPPED_RESOURCES);
-			if (targets.length < 1) {
-				targets = [];
-			}
 			targets.concat(
 				// 所有墓碑
 				room.find(FIND_TOMBSTONES),
