@@ -170,7 +170,21 @@ var pro = {
 						}
 					})
 					let targets = [];
-					if (target) targets.push(target);
+					if (target) {
+						let memoryControllerContainer;
+						let on = false;
+						try {
+							memoryControllerContainer = Memory.spawn[spawnName].controller.container;
+							on = true;
+						} catch (e) {
+
+						}
+						if (on && memoryControllerContainer && memoryControllerContainer.id) {
+							if (target.id != memoryControllerContainer.id) {
+								targets.push(target);
+							}
+						}
+					}
 					targets.concat(
 						// 所有墓碑
 						creep.room.find(FIND_TOMBSTONES),
