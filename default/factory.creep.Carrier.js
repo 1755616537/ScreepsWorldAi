@@ -114,14 +114,14 @@ var pro = {
 					}
 
 					// 找出已经分配的矿区消息
-					let targets = creep.room.find(FIND_STRUCTURES, {
-						filter: (structure) => {
-							return structure.structureType == STRUCTURE_CONTAINER;
-						}
-					});
 					TransportationTarget = creep.memory.TransportationTarget;
 					if (TransportationTarget && TransportationTarget.type ==
 						'Source') {
+						let targets = creep.room.find(FIND_STRUCTURES, {
+							filter: (structure) => {
+								return structure.structureType == STRUCTURE_CONTAINER;
+							}
+						});
 						for (let i = 0; i < targets.length; i++) {
 							if (targets[i].id == TransportationTarget.id) {
 								// 检查是否在矿区CONTAINER记录中
@@ -175,10 +175,11 @@ var pro = {
 						// 所有废墟
 						creep.room.find(FIND_RUINS)
 					);
+					console.log(creep.name)
 					if (targets.length > 0) {
 						source = targets[0];
-						console.log('creep',creep.name);
-						console.log('source',source);
+						console.log('creep', creep.name);
+						console.log('source', source);
 					}
 				}
 
