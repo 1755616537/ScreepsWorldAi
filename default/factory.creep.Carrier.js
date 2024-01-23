@@ -171,17 +171,14 @@ var pro = {
 					})
 					let targets = [];
 					if (target) targets.push(target);
-					targets.concat( // 所有墓碑
+					targets.concat(
+						// 所有墓碑
 						creep.room.find(FIND_TOMBSTONES),
 						// 所有废墟
-						creep.room.find(FIND_RUINS));
-					console.log(target)
-					console.log(JSON.stringify(targets))
-					console.log(JSON.stringify(creep.room.find(FIND_TOMBSTONES)))
+						creep.room.find(FIND_RUINS)
+					);
 					if (targets.length > 0) {
 						source = targets[0];
-						console.log('creep', creep.name);
-						console.log('source', source);
 					}
 				}
 
