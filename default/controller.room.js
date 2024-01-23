@@ -257,6 +257,15 @@ function upgraderOuterRoom(roomSequence) {
 							structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
 					}
 				});
+				if (targets.length < 1) {
+					targets = [];
+				}
+				targets.concat(
+					// 所有墓碑
+					room.find(FIND_TOMBSTONES),
+					// 所有废墟
+					room.find(FIND_RUINS)
+				);
 			}
 			if (targets.length > 0) {
 				// 从建筑(structure)中拿取资源
@@ -336,6 +345,15 @@ function builderOuterRoom(roomSequence) {
 							structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
 					}
 				});
+				if (targets.length < 1) {
+					targets = [];
+				}
+				targets.concat(
+					// 所有墓碑
+					room.find(FIND_TOMBSTONES),
+					// 所有废墟
+					room.find(FIND_RUINS)
+				);
 			}
 			if (targets.length > 0) {
 				// 从建筑(structure)中拿取资源
