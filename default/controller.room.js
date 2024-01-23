@@ -35,7 +35,13 @@ function sourceContainer(roomSequence) {
 							return false;
 						}
 					})
-					if (on) spaceXYListList2.push(spaceXYList[i].list[i2]);
+					if (on) {
+						let creepName = spaceXYList[i].list[i2];
+						let containerID = spaceXYList[i].containerID;
+						if (Game.creeps[creepName].memory.TransportationTargetID == containerID) {
+							spaceXYListList2.push(creepName);
+						}
+					}
 				}
 				Memory.spawn[spawnName].source.list[val].spaceXYList[i].list = spaceXYListList2;
 			}
@@ -67,7 +73,13 @@ function controllerContainer(roomSequence) {
 						return false;
 					}
 				})
-				if (on) memoryControllerContainerList2.push(memoryControllerContainer.list[i]);
+				if (on) {
+					let creepName = memoryControllerContainer.list[i];
+					let containerID = memoryControllerContainer.id;
+					if (Game.creeps[creepName].memory.TransportationTargetID == containerID) {
+						memoryControllerContainerList2.push(creepName);
+					}
+				}
 			}
 			Memory.spawn[spawnName].controller.container.list = memoryControllerContainerList2;
 		}
