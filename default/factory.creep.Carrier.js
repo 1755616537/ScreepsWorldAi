@@ -183,7 +183,6 @@ var pro = {
 								structure.store.getUsedCapacity(RESOURCE_ENERGY) > 100;
 						}
 					})
-					console.log(target.id, ' ', creep.name)
 					let targets = [];
 					if (target) {
 						targets.push(target);
