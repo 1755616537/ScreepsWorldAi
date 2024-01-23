@@ -84,7 +84,7 @@ global.globalData = {
 		// 升级者
 		'upgrader': {
 			bodys: {
-				list: [WORK, WORK, WORK, WORK, WORK, CARRY, MOVE],
+				list: [WORK, WORK, CARRY, MOVE],
 				totalEnergyRequired: 200
 			},
 			bodysMinus: {
