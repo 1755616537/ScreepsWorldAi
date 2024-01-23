@@ -15,7 +15,6 @@ global.controller.room = {
 					// console.log(JSON.stringify(event))
 					let target = Game.getObjectById(event.data.targetId);
 					if (target && target.progress && target.progressTotal) {
-						console.log(target.progress, ' ', target.progressTotal)
 						if (target.progress == target.progressTotal) {
 							Game.notify(
 								`【${spawnName}】房间,${event.data.structureType} x${event.data.x} y${event.data.y}【建造】【完成】`
