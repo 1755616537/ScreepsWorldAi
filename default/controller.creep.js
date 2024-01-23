@@ -41,7 +41,9 @@ global.controller.creep = {
 				}
 			}
 			if (creep.memory.role == globalData.builder) {
-				factory.creep.Builder.run(creep);
+				if(!creep.memory.builderOuterRoom){
+					factory.creep.Builder.run(creep);
+				}
 			}
 			if (creep.memory.role == globalData.carrier) {
 				factory.creep.Carrier.run(creep);
