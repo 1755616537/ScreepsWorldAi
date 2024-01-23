@@ -329,13 +329,13 @@ function builderOuterRoom(roomSequence) {
 		} else {
 			// 掉落的资源
 			let targets = room.find(FIND_DROPPED_RESOURCES);
-			targets.concat(
+			targets = targets.concat(
 				// 所有墓碑
 				room.find(FIND_TOMBSTONES),
 				// 所有废墟
 				room.find(FIND_RUINS)
 			);
-			console.log('targets',JSON.stringify(targets))
+			console.log('targets', JSON.stringify(targets))
 			if (targets.length < 1) {
 				let sources = room.find(FIND_SOURCES);
 				// 采集能量
