@@ -97,7 +97,7 @@ global.factory.creep = {
 
 				// 采集者
 				if (Memory.creeps[name].role == globalData.harvest) {
-					// 从矿区记录删除
+					// 从能量源区记录删除
 					let harvestSourceID, memorySource, memorySourceList;
 					let on = false;
 					// 如果没有合法记录会不存在harvestSourceID,报错需要捕获
@@ -154,7 +154,7 @@ global.factory.creep = {
 				// 运输者
 				if (Memory.creeps[name].role == globalData.carrier) {
 					{
-						// 从矿区记录删除
+						// 从能量源区记录删除
 						let TransportationTargetID, memorySource;
 						let on = false;
 						// 如果没有合法记录会不存在harvestSourceID,报错需要捕获
@@ -232,7 +232,7 @@ global.factory.creep = {
 
 
 		// {
-		// 	// 矿区Container
+		// 	// 能量源区Container
 		// 	// 再次扫描,记录列表里面的creep是否还还活,把已经死亡的去除
 		// 	let TransportationTargetID, memorySource;
 		// 	let on = false;

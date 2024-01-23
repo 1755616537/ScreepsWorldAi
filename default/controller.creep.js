@@ -180,7 +180,7 @@ function spawn(spawnSequence = 1) {
 	// 查看控制器等级
 	const controller_level = factory.spawn.get(spawnSequence).room.controller.level;
 
-	// 矿区
+	// 能量源区
 	let sources = factory.room.get(spawnSequence).find(FIND_SOURCES);
 
 	// 母巢 (spawn) 是否正在孵化一个新的 creep
@@ -216,7 +216,7 @@ function spawn(spawnSequence = 1) {
 
 		// 优先级顺序生产 每种保持最低1个
 		let priority;
-		// 采集最低和矿区一样的数量
+		// 采集最低和能量源区一样的数量
 		if ((harvests.length < 1 && globalData.creepConfigs.harvest.number >= 1) || (harvests.length < sources.length &&
 				globalData.creepConfigs.harvest.number >= sources.length)) {
 			priority = 'harvest';

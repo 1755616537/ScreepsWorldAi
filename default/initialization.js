@@ -21,7 +21,7 @@ global.initialization = {
 		}
 
 
-		// 矿区块初始化
+		// 能量源区块初始化
 		sourcePiece(1);
 
 		// 控制器块初始化

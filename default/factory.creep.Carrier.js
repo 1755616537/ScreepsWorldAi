@@ -32,7 +32,7 @@ var pro = {
 				}
 			} else {
 				let source = null;
-				// 矿区CONTAINER是否1v1运送
+				// 能量源区CONTAINER是否1v1运送
 				if (globalData.creepConfigs.carrier.sourceContainer1v1 && Memory.spawn[spawnName].source) {
 					let memorySource = Memory.spawn[spawnName].source.list;
 					// source周边的空地是否存在CONTAINER
@@ -57,7 +57,7 @@ var pro = {
 									// 指定位置创建一个新的 ConstructionSite
 									let returnData = factory.room.get(roomSequence)
 										.createConstructionSite(x, y, STRUCTURE_CONTAINER);
-									if (returnData != OK) clog(x, y, '矿区自动建造对应数量的CONTAINER ',
+									if (returnData != OK) clog(x, y, '能量源区自动建造对应数量的CONTAINER ',
 										returnData);
 								}
 							}
@@ -95,9 +95,9 @@ var pro = {
 								if (memoryContainerListNull && containerID != spaceXYList[
 										memoryContainerListNull].containerID) continue;
 								if (spaceXYList[i].list.length < 1) {
-									// 把creep ID记录到矿区CONTAINER
+									// 把creep ID记录到能量源区CONTAINER
 									spaceXYList[i].list.push(creep.name);
-									// 把矿区ID记录到creep
+									// 把能量源区ID记录到creep
 									creep.memory.TransportationTarget = {
 										id: containerID,
 										type: 'Source'
@@ -105,7 +105,7 @@ var pro = {
 
 									Memory.spawn[spawnName].source.list[val].spaceXYList = spaceXYList;
 									on = true;
-									clog(creep.name, '已自动分配给矿区', val, "Container", spaceXYList[i].containerID)
+									clog(creep.name, '已自动分配给能量源区', val, "Container", spaceXYList[i].containerID)
 									break;
 								}
 							}
@@ -113,7 +113,7 @@ var pro = {
 						}
 					}
 
-					// 找出已经分配的矿区消息
+					// 找出已经分配的能量源区消息
 					TransportationTarget = creep.memory.TransportationTarget;
 					if (TransportationTarget && TransportationTarget.type ==
 						'Source') {
@@ -124,7 +124,7 @@ var pro = {
 						});
 						for (let i = 0; i < targets.length; i++) {
 							if (targets[i].id == TransportationTarget.id) {
-								// 检查是否在矿区CONTAINER记录中
+								// 检查是否在能量源区CONTAINER记录中
 								let on = false;
 								for (let val in memorySource) {
 									let spaceXYList = memorySource[val].spaceXYList;
@@ -140,7 +140,7 @@ var pro = {
 									if (on) break;
 								}
 								if (on) {
-									// 合法记录在矿区CONTAINER
+									// 合法记录在能量源区CONTAINER
 									source = targets[i];
 								} else {
 									// 不合法,移除
@@ -153,10 +153,10 @@ var pro = {
 					if (source) {
 						if (TransportationTarget && source.id != TransportationTarget.id &&
 							TransportationTarget == 'Source') {
-							// Throw.Error('creep ', creep.id, ' 找不到分配的矿CONTAINERID ', creep.memory.TransportationTargetID);
+							// Throw.Error('creep ', creep.id, ' 找不到分配的能量源CONTAINERID ', creep.memory.TransportationTargetID);
 						}
 					} else {
-						// Throw.Error('creep ', creep.id, ' 找不到分配的矿CONTAINERID ', creep.memory.TransportationTargetID);
+						// Throw.Error('creep ', creep.id, ' 找不到分配的能量源CONTAINERID ', creep.memory.TransportationTargetID);
 					}
 				}
 
@@ -271,7 +271,7 @@ function transfer(creep) {
 					structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
 			}
 		});
-		// 去除矿区的CONTAINER
+		// 去除能量源区的CONTAINER
 		let targets2 = [];
 		for (let i = 0; i < targets.length; i++) {
 			let memorySource = Memory.spawn[spawnName].source.list;

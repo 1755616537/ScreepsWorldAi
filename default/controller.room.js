@@ -50,7 +50,7 @@ global.controller.room = {
 	}
 }
 
-// 矿区Container记录管理
+// 能量源区Container记录管理
 function sourceContainer(roomSequence) {
 	let spawnName = factory.spawn.sequenceGetName(roomSequence);
 
@@ -63,7 +63,7 @@ function sourceContainer(roomSequence) {
 	} catch (e) {
 		//TODO handle the exception
 	}
-	// 检查是否在矿区CONTAINER中记录creep是否还存活
+	// 检查是否在能量源区CONTAINER中记录creep是否还存活
 	if (on && memorySource) {
 		for (let val in memorySource) {
 			let spaceXYList = memorySource[val].spaceXYList;

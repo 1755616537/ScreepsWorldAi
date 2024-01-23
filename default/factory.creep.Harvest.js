@@ -32,11 +32,11 @@ var pro = {
 			// 默认去采集第一个source
 			let source = sources.length > 0 ? sources[0] : null;
 
-			// 自动分配矿区
+			// 自动分配能量源区
 			if (globalData.room[roomSequence - 1].AutomaticAssignHarvest) {
 				// 没有分配到的Source
 
-				// 根据9*9计算矿区地形分配数量 只计算一次缓存后固定
+				// 根据9*9计算能量源区地形分配数量 只计算一次缓存后固定
 				// try {
 				// 	if (!Memory.spawn[spawnName].source.list) {}
 				// } catch (e) {
@@ -149,7 +149,7 @@ var pro = {
 				let memorySource = Memory.spawn[spawnName].source.list;
 				if (memorySource) {
 					if (!creep.memory.harvestSourceID) {
-						// 找出没有被分配完的矿区
+						// 找出没有被分配完的能量源区
 						let memorySourceListNull = null;
 						for (let val in memorySource) {
 							if (memorySource[val].list.length < 1) {
@@ -158,25 +158,25 @@ var pro = {
 							}
 						}
 						for (let val in memorySource) {
-							// 找到空闲矿区，优先分配给没有分配数量的矿区
+							// 找到空闲能量源区，优先分配给没有分配数量的能量源区
 							if (memorySourceListNull && val != memorySourceListNull) continue;
 							if (memorySource[val].list.length < memorySource[val].harvestNum) {
-								// 把creep ID记录到矿区
+								// 把creep ID记录到能量源区
 								memorySource[val].list.push(creep.name);
-								// 把矿区ID记录到creep
+								// 把能量源区ID记录到creep
 								creep.memory.harvestSourceID = val;
 
 								Memory.spawn[spawnName].source.list = memorySource;
-								clog(creep.name, '已自动分配给矿区', val)
+								clog(creep.name, '已自动分配给能量源区', val)
 								break;
 							}
 						}
 					}
 
-					// 找出已经分配的矿区消息
+					// 找出已经分配的能量源区消息
 					for (let i = 0; i < sources.length; i++) {
 						if (sources[i].id == creep.memory.harvestSourceID) {
-							// 检查是否在矿区记录中
+							// 检查是否在能量源区记录中
 							let memorySourceList = memorySource[sources[i].id].list;
 							let on = false;
 							for (let i2 = 0; i2 < memorySourceList.length; i2++) {
@@ -186,7 +186,7 @@ var pro = {
 								}
 							}
 							if (on) {
-								// 合法记录在矿区
+								// 合法记录在能量源区
 								source = sources[i];
 							} else {
 								// 不合法,移除
@@ -198,10 +198,10 @@ var pro = {
 
 					if (source) {
 						if (source.id != creep.memory.harvestSourceID) {
-							// Throw.Error('creep ', creep.id, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
+							// Throw.Error('creep ', creep.id, ' 找不到分配的能量源ID ', creep.memory.harvestSourceID);
 						}
 					} else {
-						// Throw.Error('creep ', creep.id, ' 找不到分配的矿ID ', creep.memory.harvestSourceID);
+						// Throw.Error('creep ', creep.id, ' 找不到分配的能量源ID ', creep.memory.harvestSourceID);
 					}
 				}
 
