@@ -338,6 +338,7 @@ function builderOuterRoom(roomSequence) {
 				// 所有废墟
 				room.find(FIND_RUINS)
 			);
+			console.log('FIND_RUINS',JSON.stringify(room.find(FIND_RUINS)))
 			if (targets.length < 1) {
 				let sources = room.find(FIND_SOURCES);
 				// 采集能量
