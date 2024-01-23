@@ -175,7 +175,7 @@ var pro = {
 						// 所有废墟
 						creep.room.find(FIND_RUINS)
 					);
-					console.log(creep.name)
+					console.log(JSON.stringify(targets))
 					if (targets.length > 0) {
 						source = targets[0];
 						console.log('creep', creep.name);
