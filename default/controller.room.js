@@ -1,6 +1,29 @@
 global.controller.room = {
 	run: () => {
 
+		_.forEach(Game.rooms, room => {
+			// 房间序号
+			let roomSequence = factory.room.nameGetSequence(room.name);
+			let spawnName = factory.spawn.sequenceGetName(roomSequence);
+
+			let eventLog = room.getEventLog();
+			let buildEvents = _.filter(eventLog, {
+				event: EVENT_BUILD
+			});
+			if (buildEvents.length > 0) {
+				buildEvents.forEach(event => {
+					console.log(event.amount)
+					// if (event.amount == 100) {
+					// 	let target = Game.getObjectById(event.data.targetId);
+					// 	Game.notify(
+					// 		`【${spawnName}】房间,${target.structureType} x${target.pos.x} y${target.pos.y}【建造】【完成】`
+					// 		);
+					// }
+				});
+			}
+		});
+
+
 		sourceContainer(1);
 		controllerContainer(1);
 		harvestBuildCONTAINER(1);
