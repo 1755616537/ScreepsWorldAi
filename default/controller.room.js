@@ -12,7 +12,7 @@ global.controller.room = {
 			});
 			if (buildEvents.length > 0) {
 				buildEvents.forEach(event => {
-					console.log(event.amount)
+					console.log(JSON.stringify(event))
 					// if (event.amount == 100) {
 					// 	let target = Game.getObjectById(event.data.targetId);
 					// 	Game.notify(
