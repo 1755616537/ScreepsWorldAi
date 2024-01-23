@@ -213,7 +213,8 @@ function spawn(spawnSequence = 1) {
 		// 优先级顺序生产 每种保持最低1个
 		let priority;
 		// 采集最低和矿区一样的数量
-		if (harvests.length < 1 && globalData.creepConfigs.harvest.number >= 1 && harvests.length < sources.length) {
+		if ((harvests.length < 1 && globalData.creepConfigs.harvest.number >= 1) || (harvests.length < sources.length &&
+				globalData.creepConfigs.harvest.number >= sources.length)) {
 			priority = 'harvest';
 		} else if (upgraders.length < 1 && globalData.creepConfigs.upgrader.number >= 1) {
 			priority = 'upgrader';
