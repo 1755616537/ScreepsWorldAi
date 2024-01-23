@@ -62,7 +62,7 @@ global.globalData = {
 		'harvest': {
 			// 普通版
 			bodys: {
-				list: [WORK, WORK, WORK, WORK, CARRY, MOVE],
+				list: [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, MOVE],
 				// 总能量数量（达到该植才允许生产,可以设比生产所需高点达到预留能量的效果,避免能量直接用完）
 				totalEnergyRequired: 200
 			},
