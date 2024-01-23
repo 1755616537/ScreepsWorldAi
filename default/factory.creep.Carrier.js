@@ -161,16 +161,16 @@ var pro = {
 				}
 
 				if (!source) {
-					let targets = _.concat(
-						[],
-						// 所有建筑
-						creep.pos.findClosestByPath(FIND_STRUCTURES, {
-							filter: (structure) => {
-								// 找出有储存能量的container搬运
-								return (structure.structureType == STRUCTURE_CONTAINER) &&
-									structure.store.getUsedCapacity(RESOURCE_ENERGY) > 100;
-							}
-						}),
+					// 所有建筑
+					let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+						filter: (structure) => {
+							// 找出有储存能量的container搬运
+							return (structure.structureType == STRUCTURE_CONTAINER) &&
+								structure.store.getUsedCapacity(RESOURCE_ENERGY) > 100;
+						}
+					})
+					let targets = _.compact(
+						target ? target : [],
 						// 所有墓碑
 						creep.room.find(FIND_TOMBSTONES),
 						// 所有废墟
