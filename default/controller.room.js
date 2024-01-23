@@ -38,10 +38,13 @@ function sourceContainer(roomSequence) {
 					if (on) {
 						let creepName = spaceXYList[i].list[i2];
 						let containerID = spaceXYList[i].containerID;
-						if (Game.creeps[creepName].memory.TransportationTargetID == containerID) {
-							spaceXYListList2.push(creepName);
-						} else {
-							Game.creeps[creepName].memory.TransportationTargetID = null;
+						let TransportationTarget = Game.creeps[creepName].memory.TransportationTarget;
+						if (TransportationTarget) {
+							if (TransportationTarget.id == containerID && TransportationTarget.type == 'Source') {
+								spaceXYListList2.push(creepName);
+							} else {
+								Game.creeps[creepName].memory.TransportationTarget = {};
+							}
 						}
 					}
 				}
@@ -78,10 +81,13 @@ function controllerContainer(roomSequence) {
 				if (on) {
 					let creepName = memoryControllerContainer.list[i];
 					let containerID = memoryControllerContainer.id;
-					if (Game.creeps[creepName].memory.TransportationTargetID == containerID) {
-						memoryControllerContainerList2.push(creepName);
-					} else {
-						Game.creeps[creepName].memory.TransportationTargetID = null;
+					let TransportationTarget = Game.creeps[creepName].memory.TransportationTarget;
+					if (TransportationTarget) {
+						if (TransportationTarget.id == containerID && TransportationTarget.type == 'Container') {
+							memoryControllerContainerList2.push(creepName);
+						} else {
+							Game.creeps[creepName].memory.TransportationTarget = {};
+						}
 					}
 				}
 			}

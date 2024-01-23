@@ -65,7 +65,8 @@ var pro = {
 						memorySource[val].spaceXYList = spaceXYList;
 					}
 
-					if (!creep.memory.TransportationTargetID) {
+					let TransportationTarget = creep.memory.TransportationTarget;
+					if (!TransportationTarget && !TransportationTarget.id && !TransportationTarget.type) {
 						// 找出没有被分配完的CONTAINER
 						let memoryContainerListNull = null;
 						for (let val in memorySource) {
@@ -97,7 +98,10 @@ var pro = {
 									// 把creep ID记录到矿区CONTAINER
 									spaceXYList[i].list.push(creep.name);
 									// 把矿区ID记录到creep
-									creep.memory.TransportationTargetID = containerID;
+									creep.memory.TransportationTarget = {
+										id: containerID,
+										type: 'Source'
+									};
 
 									Memory.spawn[spawnName].source.list[val].spaceXYList = spaceXYList;
 									on = true;
@@ -115,34 +119,40 @@ var pro = {
 							return structure.structureType == STRUCTURE_CONTAINER;
 						}
 					});
-					for (let i = 0; i < targets.length; i++) {
-						if (targets[i].id == creep.memory.TransportationTargetID) {
-							// 检查是否在矿区CONTAINER记录中
-							let on = false;
-							for (let val in memorySource) {
-								let spaceXYList = memorySource[val].spaceXYList;
-								for (let i2 = 0; i2 < spaceXYList.length; i2++) {
-									for (let i3 = 0; i3 < spaceXYList[i2].list.length; i3++) {
-										if (spaceXYList[i2].list[i3] == creep.name) {
-											on = true;
-											break
+					TransportationTarget = creep.memory.TransportationTarget;
+					if (TransportationTarget) {
+						for (let i = 0; i < targets.length; i++) {
+							if (targets[i].id == TransportationTarget.id && TransportationTarget.type ==
+								'Source') {
+								// 检查是否在矿区CONTAINER记录中
+								let on = false;
+								for (let val in memorySource) {
+									let spaceXYList = memorySource[val].spaceXYList;
+									for (let i2 = 0; i2 < spaceXYList.length; i2++) {
+										for (let i3 = 0; i3 < spaceXYList[i2].list.length; i3++) {
+											if (spaceXYList[i2].list[i3] == creep.name) {
+												on = true;
+												break
+											}
 										}
+										if (on) break;
 									}
 									if (on) break;
 								}
-								if (on) break;
-							}
-							if (on) {
-								// 合法记录在矿区CONTAINER
-								source = targets[i];
-							} else {
-								// 不合法,移除
-								// creep.memory.TransportationTargetID = null;
+								if (on) {
+									// 合法记录在矿区CONTAINER
+									source = targets[i];
+								} else {
+									// 不合法,移除
+									creep.memory.TransportationTarget = {};
+								}
 							}
 						}
 					}
+
 					if (source) {
-						if (source.id != creep.memory.TransportationTargetID) {
+						if (TransportationTarget && source.id != TransportationTarget.id &&
+							TransportationTarget == 'Source') {
 							// Throw.Error('creep ', creep.id, ' 找不到分配的矿CONTAINERID ', creep.memory.TransportationTargetID);
 						}
 					} else {
@@ -266,18 +276,23 @@ function transfer(creep) {
 	}
 
 	if (memoryControllerContainer && memoryControllerContainer.id) {
+		let TransportationTarget = creep.memory.TransportationTarget;
 		// 没有分配运输者,进行分配
 		if (memoryControllerContainer.list.length < 1) {
-			if (!creep.memory.TransportationTargetID) {
-				memoryControllerContainer.list.push(creep.name);
-				creep.memory.TransportationTargetID = memoryControllerContainer.id;
+			if (!TransportationTarget) {
+				if (!TransportationTarget.id && !TransportationTarget.type)
+					memoryControllerContainer.list.push(creep.name);
+				creep.memory.TransportationTarget = {
+					id: memoryControllerContainer.id,
+					type: 'Container'
+				};
 				clog(creep.name, '已自动分配给控制器Container', memoryControllerContainer.id);
 			}
 		}
 
 		// 运输能量
-		if (creep.memory.TransportationTargetID && creep.memory.TransportationTargetID == memoryControllerContainer
-			.id) {
+		if (TransportationTarget && TransportationTarget.id && TransportationTarget.id == memoryControllerContainer
+			.id && TransportationTarget.type == 'Container') {
 			// 检查是否在控制器CONTAINER记录中
 			let on = false;
 			for (let i2 = 0; i2 < memoryControllerContainer.list.length; i2++) {
@@ -297,7 +312,7 @@ function transfer(creep) {
 				return
 			} else {
 				// 不合法,移除
-				// creep.memory.TransportationTargetID = null;
+				creep.memory.TransportationTarget = {};
 			}
 		}
 	} else {
