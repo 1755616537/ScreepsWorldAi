@@ -169,8 +169,9 @@ var pro = {
 								structure.store.getUsedCapacity(RESOURCE_ENERGY) > 100;
 						}
 					})
+					let array = [];
 					let targets = _.concat(
-						[],
+						array,
 						target ? target : [],
 						// 所有墓碑
 						creep.room.find(FIND_TOMBSTONES),
