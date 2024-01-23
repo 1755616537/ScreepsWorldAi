@@ -161,29 +161,32 @@ var pro = {
 				}
 
 				if (!source) {
-					// 所有建筑
+					// 所有建筑 去除控制器Container
+					let memoryControllerContainer;
+					let on = false;
+					try {
+						memoryControllerContainer = Memory.spawn[spawnName].controller.container;
+						on = true;
+					} catch (e) {
+
+					}
+					if (on && memoryControllerContainer && memoryControllerContainer.id) {
+						on = true;
+					} else {
+						on = false;
+					}
 					let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
 						filter: (structure) => {
 							// 找出有储存能量的container搬运
 							return (structure.structureType == STRUCTURE_CONTAINER) &&
+								on ? structure.id != memoryControllerContainer.id : true &&
 								structure.store.getUsedCapacity(RESOURCE_ENERGY) > 100;
 						}
 					})
+					console.log(target.id, ' ', creep.name)
 					let targets = [];
 					if (target) {
-						let memoryControllerContainer;
-						let on = false;
-						try {
-							memoryControllerContainer = Memory.spawn[spawnName].controller.container;
-							on = true;
-						} catch (e) {
-
-						}
-						if (on && memoryControllerContainer && memoryControllerContainer.id) {
-							if (target.id != memoryControllerContainer.id) {
-								targets.push(target);
-							}
-						}
+						targets.push(target);
 					}
 					targets.concat(
 						// 所有墓碑
