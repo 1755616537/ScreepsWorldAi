@@ -179,6 +179,7 @@ var pro = {
 						creep.room.find(FIND_RUINS)
 					);
 					console.log(JSON.stringify(targets))
+					console.log(JSON.stringify(creep.room.find(FIND_TOMBSTONES)))
 					if (targets.length > 0) {
 						source = targets[0];
 						console.log('creep', creep.name);
