@@ -334,9 +334,9 @@ function builderOuterRoom(roomSequence) {
 			}
 			targets.concat(
 				// 所有墓碑
-				_.compact(room.find(FIND_TOMBSTONES)),
+				room.find(FIND_TOMBSTONES),
 				// 所有废墟
-				_.compact(room.find(FIND_RUINS))
+				room.find(FIND_RUINS)
 			);
 			console.log('targets',JSON.stringify(targets))
 			if (targets.length < 1) {
