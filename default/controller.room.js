@@ -12,13 +12,14 @@ global.controller.room = {
 			});
 			if (buildEvents.length > 0) {
 				buildEvents.forEach(event => {
-					console.log(JSON.stringify(event))
-					// if (event.amount == 100) {
-					// 	let target = Game.getObjectById(event.data.targetId);
-					// 	Game.notify(
-					// 		`【${spawnName}】房间,${target.structureType} x${target.pos.x} y${target.pos.y}【建造】【完成】`
-					// 		);
-					// }
+					// console.log(JSON.stringify(event))
+					let target = Game.getObjectById(event.data.targetId);
+					console.log(target.progress)
+					if (target.progress == 100) {
+						Game.notify(
+							`【${spawnName}】房间,${event.data.structureType} x${event.data.x} y${event.data.y}【建造】【完成】`
+						);
+					}
 				});
 			}
 		});
