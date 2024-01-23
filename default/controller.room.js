@@ -238,7 +238,7 @@ function upgraderOuterRoom(roomSequence) {
 				factory.creep.moveTo(creep, room.controller);
 			}
 		} else {
-			let target = room.find(FIND_STRUCTURES, {
+			let target = factory.room.get(1).find(FIND_STRUCTURES, {
 				filter: (structure) => {
 					// 找出有储存能量的container搬运
 					return (structure.structureType == STRUCTURE_CONTAINER) &&
@@ -304,7 +304,7 @@ function builderOuterRoom(roomSequence) {
 				}
 			}
 		} else {
-			let target = room.find(FIND_STRUCTURES, {
+			let target = factory.room.get(1).find(FIND_STRUCTURES, {
 				filter: (structure) => {
 					// 找出有储存能量的container搬运
 					return (structure.structureType == STRUCTURE_CONTAINER) &&
