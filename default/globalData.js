@@ -79,7 +79,9 @@ global.globalData = {
 			// 总上限数量
 			number: 2,
 			// 自动分配数量（开启 AutomaticAssignHarvest可以根据最大支持数量动态更新采集者数量）
-			AutomaticAssignNum: true
+			AutomaticAssignNum: true,
+			// 自动分配根据可用能量容量上限调整bodys
+			AutomaticAssignBodysEnergyCapacityAvailable: true
 		},
 		// 升级者
 		'upgrader': {
