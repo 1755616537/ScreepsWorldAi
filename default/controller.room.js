@@ -40,6 +40,8 @@ function sourceContainer(roomSequence) {
 						let containerID = spaceXYList[i].containerID;
 						if (Game.creeps[creepName].memory.TransportationTargetID == containerID) {
 							spaceXYListList2.push(creepName);
+						} else {
+							Game.creeps[creepName].memory.TransportationTargetID = null;
 						}
 					}
 				}
@@ -78,6 +80,8 @@ function controllerContainer(roomSequence) {
 					let containerID = memoryControllerContainer.id;
 					if (Game.creeps[creepName].memory.TransportationTargetID == containerID) {
 						memoryControllerContainerList2.push(creepName);
+					} else {
+						Game.creeps[creepName].memory.TransportationTargetID = null;
 					}
 				}
 			}
