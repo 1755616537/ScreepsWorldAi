@@ -238,7 +238,7 @@ function spawn(spawnSequence = 1) {
 		if (priority) {
 			switch (priority) {
 				case 'harvest':
-					addHarvest(upgraders, controller_level, spawnSequence);
+					addHarvest(harvests, controller_level, spawnSequence);
 					break;
 				case 'upgrader':
 					addUpgrader(upgraders, controller_level, spawnSequence);
