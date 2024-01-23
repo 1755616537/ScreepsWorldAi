@@ -66,7 +66,7 @@ var pro = {
 					}
 
 					let TransportationTarget = creep.memory.TransportationTarget;
-					if (!TransportationTarget && !TransportationTarget.id && !TransportationTarget.type) {
+					if (!TransportationTarget) {
 						// 找出没有被分配完的CONTAINER
 						let memoryContainerListNull = null;
 						for (let val in memorySource) {
@@ -280,8 +280,7 @@ function transfer(creep) {
 		// 没有分配运输者,进行分配
 		if (memoryControllerContainer.list.length < 1) {
 			if (!TransportationTarget) {
-				if (!TransportationTarget.id && !TransportationTarget.type)
-					memoryControllerContainer.list.push(creep.name);
+				memoryControllerContainer.list.push(creep.name);
 				creep.memory.TransportationTarget = {
 					id: memoryControllerContainer.id,
 					type: 'Container'
