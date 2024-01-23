@@ -222,7 +222,7 @@ global.globalData = {
 				list: [MOVE, CLAIM, CLAIM, CLAIM],
 				totalEnergyRequired: 300
 			},
-			number: 0
+			number: 1
 		}
 	},
 	// 采集者ID
