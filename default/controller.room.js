@@ -14,7 +14,7 @@ global.controller.room = {
 				buildEvents.forEach(event => {
 					// console.log(JSON.stringify(event))
 					let target = Game.getObjectById(event.data.targetId);
-					if (target.progress && target.progressTotal) {
+					if (target && target.progress && target.progressTotal) {
 						console.log(target.progress, ' ', target.progressTotal)
 						if (target.progress == target.progressTotal) {
 							Game.notify(
