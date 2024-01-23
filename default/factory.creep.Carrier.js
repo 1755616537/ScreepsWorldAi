@@ -179,7 +179,7 @@ var pro = {
 						filter: (structure) => {
 							// 找出有储存能量的container搬运
 							return (structure.structureType == STRUCTURE_CONTAINER) &&
-								on ? structure.id != memoryControllerContainer.id : true &&
+								(on ? structure.id != memoryControllerContainer.id : true) &&
 								structure.store.getUsedCapacity(RESOURCE_ENERGY) > 100;
 						}
 					})
