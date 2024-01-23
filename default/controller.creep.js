@@ -36,7 +36,9 @@ global.controller.creep = {
 				factory.creep.Harvest.run(creep);
 			}
 			if (creep.memory.role == globalData.upgrader) {
-				factory.creep.Upgrader.run(creep);
+				if(!creep.memory.upgraderOuterRoom){
+					factory.creep.Upgrader.run(creep);
+				}
 			}
 			if (creep.memory.role == globalData.builder) {
 				factory.creep.Builder.run(creep);

@@ -44,6 +44,8 @@ global.controller.room = {
 		controllerContainer(1);
 		harvestBuildCONTAINER(1);
 		containerEnergyStat(1);
+
+		upgraderOuterRoom(2);
 	}
 }
 
@@ -189,4 +191,66 @@ function containerEnergyStat(roomSequence) {
 		);
 	}
 	Memory.spawn[spawnName].containerEnergyStat = total;
+}
+
+function upgraderOuterRoom(roomSequence) {
+	let spawnName = factory.spawn.sequenceGetName(roomSequence);
+	let room = factory.room.get(roomSequence);
+
+
+	let creepName = '';
+	const upgraders = factory.creep.Upgrader.ALL(1);
+	if (upgraders < 1) return;
+	// 是否已存在
+	_.forEach(upgraders, upgrader => {
+		if (upgrader.memory.upgraderOuterRoom) {
+			creepName = upgrader.name;
+			return false;
+		}
+	})
+	// 找新的
+	if (!creepName) {
+		_.forEach(upgraders, upgrader => {
+			if (!upgrader.memory.upgraderOuterRoom) {
+				upgrader.memory.upgraderOuterRoom = roomSequence;
+				creepName = upgrader.name;
+				return false;
+			}
+		})
+	}
+	let creep = Game.creeps[creepName];
+
+	if (!room) {
+		factory.creep.moveTo(creep, new RoomPosition(43, 17, roomName));
+	} else {
+		if (creep.memory.work && creep.store[RESOURCE_ENERGY] == 0) { // 升级状态&&能量不足的时候，变为采集者
+			creep.memory.work = false;
+			creep.say('🔄 采集');
+		}
+		if (!creep.memory.work && creep.store.getFreeCapacity() == 0) { // 非升级状态&&能量满的时候，变为升级状态
+			creep.memory.work = true;
+			creep.say('⚡ 升级');
+		}
+
+		if (creep.memory.work) { // 升级状态，找到控制器并升级 + 可视化
+			if (creep.upgradeController(room.controller) == ERR_NOT_IN_RANGE) {
+				factory.creep.moveTo(creep, room.controller);
+			}
+		} else {
+			let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+				filter: (structure) => {
+					// 找出有储存能量的container搬运
+					return (structure.structureType == STRUCTURE_CONTAINER) &&
+						structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+				}
+			});
+			if (target) {
+				// 从建筑(structure)中拿取资源
+				if (creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+					// 向目标移动
+					factory.creep.moveTo(creep, target, 'Resource');
+				}
+			}
+		}
+	}
 }
