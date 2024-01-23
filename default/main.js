@@ -41,8 +41,9 @@ module.exports.loop = function() {
 // .外矿采集
 // .每个STORAGE搭配一个运输者。如果存在STORAGE并且搭配有运输者，其他运输者才可以把能量放到STORAGE
 // .spawn是否停止获取能量，先用于生产
-// .根据总能量上限energyCapacityAvailable，小于400，使用最低配置
+// .可以选择根据总能量上限energyCapacityAvailable动态调整配置
 // .TOWER逻辑顺序攻击，维修，治疗，运输者是否1v1运送能量或者1v运送能量
+// .Game.notify邮件提示配置开关添加
 
 // 完成程序:
 // .(废弃(改完出现错误)[此名称是 Game.creeps 对象中指向该 creep 对象的哈希键]).把小兵ID放到memory里面，不在使用小兵名称作为唯一ID值判断，改为小兵ID
