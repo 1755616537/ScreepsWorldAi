@@ -194,6 +194,7 @@ function containerEnergyStat(roomSequence) {
 	Memory.spawn[spawnName].containerEnergyStat = total;
 }
 
+// 临时外部房间,升级
 function upgraderOuterRoom(roomSequence) {
 	let spawnName = factory.spawn.sequenceGetName(roomSequence);
 	let room = factory.room.get(roomSequence);
@@ -256,6 +257,7 @@ function upgraderOuterRoom(roomSequence) {
 	}
 }
 
+// 临时外部房间,建造
 function builderOuterRoom(roomSequence) {
 	let spawnName = factory.spawn.sequenceGetName(roomSequence);
 	let room = factory.room.get(roomSequence);
