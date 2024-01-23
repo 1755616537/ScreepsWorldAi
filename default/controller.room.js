@@ -46,6 +46,7 @@ global.controller.room = {
 		containerEnergyStat(1);
 
 		upgraderOuterRoom(2);
+		builderOuterRoom(2);
 	}
 }
 
@@ -237,7 +238,73 @@ function upgraderOuterRoom(roomSequence) {
 				factory.creep.moveTo(creep, room.controller);
 			}
 		} else {
-			let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+			let target = room.find(FIND_STRUCTURES, {
+				filter: (structure) => {
+					// 找出有储存能量的container搬运
+					return (structure.structureType == STRUCTURE_CONTAINER) &&
+						structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+				}
+			});
+			if (target) {
+				// 从建筑(structure)中拿取资源
+				if (creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+					// 向目标移动
+					factory.creep.moveTo(creep, target, 'Resource');
+				}
+			}
+		}
+	}
+}
+
+function builderOuterRoom(roomSequence) {
+	let spawnName = factory.spawn.sequenceGetName(roomSequence);
+	let room = factory.room.get(roomSequence);
+
+
+	let creepName = '';
+	const builders = factory.creep.Builder.ALL(1);
+	if (builders < 1) return;
+	// 是否已存在
+	_.forEach(builders, builder => {
+		if (builder.memory.builderOuterRoom) {
+			creepName = builder.name;
+			return false;
+		}
+	})
+	// 找新的
+	if (!creepName) {
+		_.forEach(builders, builder => {
+			if (!builder.memory.builderOuterRoom) {
+				builder.memory.builderOuterRoom = roomSequence;
+				creepName = builder.name;
+				return false;
+			}
+		})
+	}
+	let creep = Game.creeps[creepName];
+
+	if (!room) {
+		factory.creep.moveTo(creep, new RoomPosition(43, 17, roomName));
+	} else {
+		if (creep.memory.work && creep.store[RESOURCE_ENERGY] == 0) { // work && 背包为空
+			creep.memory.work = false; // 变为 非work状态
+			creep.say('🔄 收获');
+		}
+		if (!creep.memory.work && creep.store.getFreeCapacity() == 0) { // 非work状态 && 背包满(空余为0)
+			creep.memory.work = true; // 变为 work状态
+			creep.say('🚧 建造');
+		}
+
+		if (creep.memory.work) {
+			let targets = room.find(FIND_CONSTRUCTION_SITES);
+			if (targets.length > 0) {
+				// 建造
+				if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
+					factory.creep.moveTo(creep, targets[0]);
+				}
+			}
+		} else {
+			let target = room.find(FIND_STRUCTURES, {
 				filter: (structure) => {
 					// 找出有储存能量的container搬运
 					return (structure.structureType == STRUCTURE_CONTAINER) &&

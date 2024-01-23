@@ -113,7 +113,7 @@ global.globalData = {
 				list: [WORK, WORK, WORK, CARRY, MOVE],
 				totalEnergyRequired: 300
 			},
-			number: 1
+			number: 2
 		},
 		// 运输者
 		'carrier': {
