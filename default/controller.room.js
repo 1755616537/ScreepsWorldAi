@@ -23,12 +23,12 @@ function sourceContainer(roomSequence) {
 	}
 	// 检查是否在矿区CONTAINER中记录creep是否还存活
 	if (on && memorySource) {
-		let on = false;
 		for (let val in memorySource) {
 			let spaceXYList = memorySource[val].spaceXYList;
 			for (let i = 0; i < spaceXYList.length; i++) {
 				let spaceXYListList2 = [];
 				for (let i2 = 0; i2 < spaceXYList[i].list.length; i2++) {
+					let on = false;
 					_.forEach(Game.creeps, (creep) => {
 						if (creep.name == spaceXYList[i].list[i2]) {
 							on = true;
@@ -38,16 +38,8 @@ function sourceContainer(roomSequence) {
 					if (on) {
 						let creepName = spaceXYList[i].list[i2];
 						let containerID = spaceXYList[i].containerID;
-						let TransportationTarget;
-						let on = false;
-						// 如果没有合法记录会不存在,报错需要捕获
-						try {
-							TransportationTarget = Game.creeps[creepName].memory.TransportationTarget;
-							on = true;
-						} catch (e) {
-							//TODO handle the exception
-						}
-						if (TransportationTarget && on) {
+						let TransportationTarget = Game.creeps[creepName].memory.TransportationTarget;
+						if (TransportationTarget) {
 							if (TransportationTarget.id == containerID && TransportationTarget.type == 'Source') {
 								spaceXYListList2.push(creepName);
 							} else {
@@ -89,16 +81,8 @@ function controllerContainer(roomSequence) {
 				if (on) {
 					let creepName = memoryControllerContainer.list[i];
 					let containerID = memoryControllerContainer.id;
-					let TransportationTarget;
-					let on = false;
-					// 如果没有合法记录会不存在,报错需要捕获
-					try {
-						TransportationTarget = Game.creeps[creepName].memory.TransportationTarget;
-						on = true;
-					} catch (e) {
-						//TODO handle the exception
-					}
-					if (TransportationTarget && on) {
+					let TransportationTarget = Game.creeps[creepName].memory.TransportationTarget;
+					if (TransportationTarget) {
 						if (TransportationTarget.id == containerID && TransportationTarget.type ==
 							'ControllerContainer') {
 							memoryControllerContainerList2.push(creepName);
