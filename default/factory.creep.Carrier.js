@@ -14,7 +14,7 @@ var pro = {
 			creep.memory.work = true;
 			creep.say('🛒 存放');
 		}
-		
+
 		// 房间序号
 		let roomSequence = factory.room.nameGetSequence(creep.room.name);
 		let spawnName = factory.spawn.sequenceGetName(roomSequence);
@@ -137,7 +137,7 @@ var pro = {
 								source = targets[i];
 							} else {
 								// 不合法,移除
-								creep.memory.TransportationTargetID = null;
+								// creep.memory.TransportationTargetID = null;
 							}
 						}
 					}
@@ -271,7 +271,7 @@ function transfer(creep) {
 			if (!creep.memory.TransportationTargetID) {
 				memoryControllerContainer.list.push(creep.name);
 				creep.memory.TransportationTargetID = memoryControllerContainer.id;
-				clog(creep.name, '已自动分配给控制器Container');
+				clog(creep.name, '已自动分配给控制器Container', memoryControllerContainer.id);
 			}
 		}
 
@@ -297,7 +297,7 @@ function transfer(creep) {
 				return
 			} else {
 				// 不合法,移除
-				creep.memory.TransportationTargetID = null;
+				// creep.memory.TransportationTargetID = null;
 			}
 		}
 	} else {
@@ -395,6 +395,6 @@ function transfer(creep) {
 				factory.creep.moveTo(creep, creep.room.controller);
 			}
 		}
-		
+
 	}
 }
