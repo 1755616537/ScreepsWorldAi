@@ -442,7 +442,8 @@ function transferControllerContainer(creep) {
 	return false;
 }
 
-function transferTower(creep) { // 房间序号
+function transferTower(creep) {
+	// 房间序号
 	let roomSequence = factory.room.nameGetSequence(creep.room.name);
 	let spawnName = factory.spawn.sequenceGetName(roomSequence);
 
@@ -473,25 +474,55 @@ function transferTower(creep) { // 房间序号
 		if (!Memory.spawn[spawnName].Tower.carryList) Memory.spawn[spawnName].Tower.carryList = [];
 	}
 
-
-
-	// 如果不存在CONTAINER就清除CONTAINERID
-	Memory.spawn[spawnName].controller.container.id = null;
-
-	let x = memoryControllerContainer.x;
-	let y = memoryControllerContainer.y;
-	// 指定位置创建一个新的 ConstructionSite
-	let returnData = creep.room.createConstructionSite(x, y, STRUCTURE_CONTAINER);
-	if (returnData != OK) {
-		clog(x, y, '控制器自动建造对应数量的CONTAINER ', returnData);
-		Memory.spawn[spawnName].controller = {
-			container: {
-				x: x,
-				y: y,
-				id: null,
-				// 运输者的ID列表
-				list: []
+	if (on && memoryTower) {
+		let TransportationTarget = creep.memory.TransportationTarget;
+		// 没有分配运输者,进行分配
+		if (memoryTower.list.length < 1) {
+			if (!TransportationTarget) {
+				memoryTower.list.push(creep.name);
+				creep.memory.TransportationTarget = {
+					id: memoryTower.id,
+					type: 'Tower'
+				};
+				clog(creep.name, '已自动分配给Tower', memoryTower.id);
 			}
 		}
+
+		// 运输能量
+		if (TransportationTarget && TransportationTarget.id && TransportationTarget.id == memoryTower
+			.id && TransportationTarget.type == 'Tower') {
+			// 检查是否在Tower记录中
+			let on = false;
+			for (let i2 = 0; i2 < memoryTower.list.length; i2++) {
+				if (creep.name == memoryTower.list[i2]) {
+					on = true;
+					break;
+				}
+			}
+			if (on) {
+				// 合法记录
+				const source = Game.getObjectById(memoryTower.id);
+				// 将资源从该 creep 转移至其他对象
+				if (creep.transfer(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+					// 向目标移动
+					factory.creep.moveTo(creep, source);
+				}
+				return true;
+			} else {
+				// 不合法,移除
+				creep.memory.TransportationTarget = null;
+			}
+		}
+	} else {
+		// 存在正在建造的CONTAINER,检测是否建造完成
+		let x = Memory.spawn[spawnName].controller.container.x;
+		let y = Memory.spawn[spawnName].controller.container.y;
+		let targetPos = new RoomPosition(x, y, creep.room.name)
+		// CONTAINER
+		let found = creep.room.lookForAt(LOOK_STRUCTURES, targetPos);
+		if (found.length && found[0].structureType == STRUCTURE_CONTAINER) {
+			Memory.spawn[spawnName].controller.container.id = found[0].id;
+		}
 	}
+	return false;
 }
