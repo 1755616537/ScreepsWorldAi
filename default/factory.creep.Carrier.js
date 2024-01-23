@@ -144,7 +144,7 @@ var pro = {
 									source = targets[i];
 								} else {
 									// 不合法,移除
-									creep.memory.TransportationTarget = {};
+									creep.memory.TransportationTarget = null;
 								}
 							}
 						}
@@ -407,7 +407,7 @@ function transferControllerContainer(creep) {
 				return true;
 			} else {
 				// 不合法,移除
-				creep.memory.TransportationTarget = {};
+				creep.memory.TransportationTarget = null;
 			}
 		}
 	} else {
@@ -438,7 +438,7 @@ function transferTower(creep){// 房间序号
 	}
 	
 	let memoryTowerList;
-	let on = false;
+	on = false;
 	try {
 		memoryTowerList = Memory.spawn[spawnName].Tower.list;
 		on = true;
@@ -447,7 +447,7 @@ function transferTower(creep){// 房间序号
 	}
 	
 	let memoryTowerCarryList;
-	let on = false;
+	on = false;
 	try {
 		memoryTowerList = Memory.spawn[spawnName].Tower.carryList;
 		on = true;
