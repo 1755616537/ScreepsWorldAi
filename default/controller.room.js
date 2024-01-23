@@ -356,6 +356,7 @@ function builderOuterRoom(roomSequence) {
 				});
 			}
 			if (targets.length > 0) {
+				console.log(JSON.stringify(targets))
 				// 从建筑(structure)中拿取资源
 				if (creep.withdraw(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 					// 向目标移动
