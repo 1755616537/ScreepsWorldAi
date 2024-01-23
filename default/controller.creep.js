@@ -216,7 +216,6 @@ function spawn(spawnSequence = 1) {
 		if ((harvests.length < 1 && globalData.creepConfigs.harvest.number >= 1) || (harvests.length < sources.length &&
 				globalData.creepConfigs.harvest.number >= sources.length)) {
 			priority = 'harvest';
-			console.log(1)
 		} else if (upgraders.length < 1 && globalData.creepConfigs.upgrader.number >= 1) {
 			priority = 'upgrader';
 		} else if (builders.length < 1 && globalData.creepConfigs.builder.number >= 1) {
