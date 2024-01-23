@@ -13,10 +13,10 @@ global.controller.room = {
 			});
 			if (buildEvents.length > 0) {
 				buildEvents.forEach(event => {
-					// console.log(JSON.stringify(event))
 					let target = Game.getObjectById(event.data.targetId);
 					if (target && target.progress && target.progressTotal) {
 						if (target.progress + event.data.amount >= target.progressTotal) {
+							console.log(JSON.stringify(event))
 							Game.notify(
 								`【${spawnName}】房间,id【${event.data.targetId}】${event.data.structureType} x${event.data.x} y${event.data.y}【建造】【完成】`
 							);
@@ -31,7 +31,7 @@ global.controller.room = {
 			});
 			if (objectDestroyedEvents.length > 0) {
 				objectDestroyedEvents.forEach(event => {
-					// console.log(JSON.stringify(event))
+					console.log(JSON.stringify(event))
 					Game.notify(
 						`【${spawnName}】房间,id【${event.data.targetId}】${event.data.type} x${event.data.x} y${event.data.y}【被摧毁】`
 					);
