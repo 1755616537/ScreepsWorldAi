@@ -18,7 +18,7 @@ global.controller.room = {
 					if (target && target.progress && target.progressTotal) {
 						if (target.progress + event.data.amount >= target.progressTotal) {
 							Game.notify(
-								`【${spawnName}】房间,${event.data.structureType} x${event.data.x} y${event.data.y}【建造】【完成】`
+								`【${spawnName}】房间,id【${event.data.targetId}】${event.data.structureType} x${event.data.x} y${event.data.y}【建造】【完成】`
 							);
 						}
 					}
@@ -31,9 +31,9 @@ global.controller.room = {
 			});
 			if (objectDestroyedEvents.length > 0) {
 				objectDestroyedEvents.forEach(event => {
-					console.log(JSON.stringify(event))
+					// console.log(JSON.stringify(event))
 					Game.notify(
-						`【${spawnName}】房间,${event.data.type} x${event.data.x} y${event.data.y}【被摧毁】`
+						`【${spawnName}】房间,id【${event.data.targetId}】${event.data.type} x${event.data.x} y${event.data.y}【被摧毁】`
 					);
 				});
 			}
@@ -183,5 +183,10 @@ function containerEnergyStat(roomSequence) {
 		targetsStore.push(targets[i].store[RESOURCE_ENERGY]);
 	}
 	const total = _.sum(targetsStore);
+	if (total < 1000) {
+		Game.notify(
+			`【${spawnName}】房间【CONTAINER能量不足1000】`
+		);
+	}
 	Memory.spawn[spawnName].containerEnergyStat = total;
 }
