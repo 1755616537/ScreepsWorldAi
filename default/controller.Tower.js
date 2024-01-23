@@ -17,7 +17,7 @@ global.controller.Tower = {
 
 function work(tower) {
 	// 攻击
-	var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+	let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
 	if (closestHostile) {
 		tower.attack(closestHostile);
 		return
@@ -64,5 +64,17 @@ function work(tower) {
 	}
 	if (targets.length > 0) {
 		tower.repair(targets[0]);
+	}
+
+	// 治疗
+	let closestMYCreep = tower.pos.findClosestByRange(FIND_MY_CREEPS, {
+		filter: function(object) {
+			return object.hits < object.hitsMax;
+		}
+	});
+	if (closestMYCreep) {
+		// 治疗
+		tower.heal(closestMYCreep);
+		return;
 	}
 }
