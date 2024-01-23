@@ -313,6 +313,14 @@ function builderOuterRoom(roomSequence) {
 			// 掉落的资源
 			let targets = factory.room.get(1).find(FIND_DROPPED_RESOURCES);
 			if (targets.length < 1) {
+				let sources = room.find(FIND_SOURCES);
+				// 采集能量
+				if (creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+					factory.creep.moveTo(creep, sources[0], 'Resource');
+				}
+				return;
+			}
+			if (targets.length < 1) {
 				targets = factory.room.get(1).find(FIND_STRUCTURES, {
 					filter: (structure) => {
 						// 找出有储存能量的container搬运
