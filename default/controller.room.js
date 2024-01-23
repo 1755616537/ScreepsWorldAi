@@ -83,7 +83,7 @@ function controllerContainer(roomSequence) {
 					let containerID = memoryControllerContainer.id;
 					let TransportationTarget = Game.creeps[creepName].memory.TransportationTarget;
 					if (TransportationTarget) {
-						if (TransportationTarget.id == containerID && TransportationTarget.type == 'Container') {
+						if (TransportationTarget.id == containerID && TransportationTarget.type == 'ControllerContainer') {
 							memoryControllerContainerList2.push(creepName);
 						} else {
 							Game.creeps[creepName].memory.TransportationTarget = {};
