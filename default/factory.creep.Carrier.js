@@ -187,7 +187,7 @@ var pro = {
 					if (target) {
 						targets.push(target);
 					}
-					targets.concat(
+					targets = targets.concat(
 						// 所有墓碑
 						creep.room.find(FIND_TOMBSTONES),
 						// 所有废墟
