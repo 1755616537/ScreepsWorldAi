@@ -7,6 +7,7 @@ global.controller.room = {
 			let spawnName = factory.spawn.sequenceGetName(roomSequence);
 
 			let eventLog = room.getEventLog();
+			// 建造完成 邮件提示
 			let buildEvents = _.filter(eventLog, {
 				event: EVENT_BUILD
 			});
@@ -21,6 +22,19 @@ global.controller.room = {
 							);
 						}
 					}
+				});
+			}
+
+			// 一个游戏对象被摧毁或是被消灭 邮件提示
+			let objectDestroyedEvents = _.filter(eventLog, {
+				event: EVENT_OBJECT_DESTROYED
+			});
+			if (objectDestroyedEvents.length > 0) {
+				objectDestroyedEvents.forEach(event => {
+					console.log(JSON.stringify(event))
+					Game.notify(
+						`【${spawnName}】房间,${event.data.type} x${event.data.x} y${event.data.y}【被摧毁】`
+					);
 				});
 			}
 		});
