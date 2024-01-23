@@ -177,12 +177,12 @@ var pro = {
 					);
 					if (targets.length > 0) {
 						source = targets[0];
+						console.log('creep',creep.name);
+						console.log('source',source);
 					}
 				}
 
 				if (source) {
-					console.log('creep',creep.name);
-					console.log('source',source);
 					// 从建筑(structure)中拿取资源
 					if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 						// 向目标移动
