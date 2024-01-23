@@ -233,7 +233,7 @@ function spawn(spawnSequence = 1) {
 		} else if (theHealers.length < 1 && globalData.creepConfigs.theHealer.number >= 1) {
 			priority = 'theHealer';
 		} else if (occupiers.length < 1 && globalData.creepConfigs.occupier.number >= 1 && factory.spawn.get(
-				spawnSequence).roomenergyCapacityAvailable >= 650) {
+				spawnSequence).room.energyCapacityAvailable >= 650) {
 			priority = 'occupier';
 		}
 		if (priority) {
