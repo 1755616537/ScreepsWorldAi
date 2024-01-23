@@ -64,7 +64,7 @@ function addHarvest(harvests, controller_level = 4, spawnSequence) {
 	// 生产 采集
 	if (harvests.length < globalData.creepConfigs.harvest.number) {
 		let returnData = factory.creep.addHarvest(harvests, controller_level, spawnSequence);
-		clog(returnData);
+		// clog(returnData);
 		return returnData;
 	}
 }
