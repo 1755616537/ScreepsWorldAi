@@ -120,10 +120,10 @@ var pro = {
 						}
 					});
 					TransportationTarget = creep.memory.TransportationTarget;
-					if (TransportationTarget) {
+					if (TransportationTarget && TransportationTarget.type ==
+						'Source') {
 						for (let i = 0; i < targets.length; i++) {
-							if (targets[i].id == TransportationTarget.id && TransportationTarget.type ==
-								'Source') {
+							if (targets[i].id == TransportationTarget.id) {
 								// 检查是否在矿区CONTAINER记录中
 								let on = false;
 								for (let val in memorySource) {
@@ -219,7 +219,7 @@ function transfer(creep) {
 	// 房间序号
 	let roomSequence = factory.room.nameGetSequence(creep.room.name);
 	let spawnName = factory.spawn.sequenceGetName(roomSequence);
-	
+
 	// 给控制器CONTAINER,运输能量
 	if (transferControllerContainer(creep)) return;
 	// 给Tower,运输能量
@@ -317,13 +317,13 @@ function transferControllerContainer(creep) {
 	// 房间序号
 	let roomSequence = factory.room.nameGetSequence(creep.room.name);
 	let spawnName = factory.spawn.sequenceGetName(roomSequence);
-	
+
 	// 控制器旁是否有CONTAINER或在建的CONTAINER
 	let pos = creep.room.controller.pos;
 	let found = creep.room.lookAtArea(pos.y - 1, pos.x - 1, pos.y + 1, pos.x + 1, true);
 	let found2 = _.filter(found, (f) => f.type == LOOK_CONSTRUCTION_SITES || (f.type == LOOK_STRUCTURES && f
 		.structure.structureType == STRUCTURE_CONTAINER));
-	
+
 	let memoryControllerContainer;
 	let on = false;
 	try {
@@ -424,10 +424,10 @@ function transferControllerContainer(creep) {
 	return false;
 }
 
-function transferTower(creep){// 房间序号
+function transferTower(creep) { // 房间序号
 	let roomSequence = factory.room.nameGetSequence(creep.room.name);
 	let spawnName = factory.spawn.sequenceGetName(roomSequence);
-	
+
 	let memoryTower;
 	let on = false;
 	try {
@@ -436,7 +436,7 @@ function transferTower(creep){// 房间序号
 	} catch (e) {
 		if (!Memory.spawn[spawnName].Tower) Memory.spawn[spawnName].Tower = {};
 	}
-	
+
 	let memoryTowerList;
 	on = false;
 	try {
@@ -445,7 +445,7 @@ function transferTower(creep){// 房间序号
 	} catch (e) {
 		if (!Memory.spawn[spawnName].Tower.list) Memory.spawn[spawnName].Tower.list = [];
 	}
-	
+
 	let memoryTowerCarryList;
 	on = false;
 	try {
@@ -454,12 +454,12 @@ function transferTower(creep){// 房间序号
 	} catch (e) {
 		if (!Memory.spawn[spawnName].Tower.carryList) Memory.spawn[spawnName].Tower.carryList = [];
 	}
-	
-	
-	
+
+
+
 	// 如果不存在CONTAINER就清除CONTAINERID
 	Memory.spawn[spawnName].controller.container.id = null;
-	
+
 	let x = memoryControllerContainer.x;
 	let y = memoryControllerContainer.y;
 	// 指定位置创建一个新的 ConstructionSite
