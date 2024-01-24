@@ -16,6 +16,7 @@ var pro = {
 		// 房间序号
 		let roomSequence = factory.room.nameGetSequence(creep.room.name);
 		let spawnName = factory.spawn.sequenceGetName(roomSequence);
+		let roomName = factory.room.sequenceGetName(roomSequence);
 
 		// 没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器
 		// 脚下是否有CONTAINER，有就不移动
@@ -109,9 +110,11 @@ var pro = {
 												let returnData = factory.room.get(roomSequence)
 													.createConstructionSite(x, y, STRUCTURE_CONTAINER);
 												if (returnData == OK) {
-													clog(x, y, '自动建造对应数量的CONTAINER ', returnData);
+													clog('自动建造对应数量的CONTAINER 房间', roomName, ' x', x, ' y', y,
+														returnData);
 												} else {
-													clog(x, y, '自动建造对应数量的CONTAINER ', returnData);
+													clog('自动建造对应数量的CONTAINER 房间', roomName, ' x', x, ' y', y,
+														returnData);
 												}
 												// OK	0	这个操作已经成功纳入计划。
 												// ERR_NOT_OWNER	-1	该房间被敌对玩家占领（claim）或预定（reserve）。
@@ -170,7 +173,7 @@ var pro = {
 								creep.memory.harvestSourceID = val;
 
 								Memory.spawn[spawnName].source.list = memorySource;
-								clog(creep.name, '已自动分配给能量源区', val)
+								clog('房间', roomName, ' ', creep.name, '已自动分配给能量源区', val)
 								break;
 							}
 						}
