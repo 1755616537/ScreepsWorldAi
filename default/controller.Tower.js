@@ -66,7 +66,7 @@ function work(tower) {
 	if (targets.length > 0) {
 		tower.repair(targets[0]);
 	}
-	
+
 	if (targets.length < 1) {
 		// 治疗
 		let closestMYCreep = tower.pos.findClosestByRange(FIND_MY_CREEPS, {
@@ -74,12 +74,11 @@ function work(tower) {
 				return object.hits < object.hitsMax;
 			}
 		});
-		
-		closestMYCreep.sort((a, b) => a.hits - b.hits);
-		
+
 		if (closestMYCreep) {
 			// 治疗
 			tower.heal(closestMYCreep);
+			return;
 		}
 	}
 }
