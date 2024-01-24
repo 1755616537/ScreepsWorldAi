@@ -34,12 +34,10 @@ function spawnPiece(spawnSequence = 1) {
 	}
 
 	// 能量源区块初始化
-	sourcePiece(1);
-	sourcePiece(2);
+	sourcePiece(spawnSequence);
 
 	// 控制器块初始化
-	controllerPiece(1);
-	controllerPiece(2);
+	controllerPiece(spawnSequence);
 }
 
 function sourcePiece(spawnSequence = 1) {
