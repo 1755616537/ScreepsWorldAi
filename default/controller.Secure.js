@@ -50,6 +50,7 @@ global.controller.Secure = {
 						//TODO handle the exception
 					}
 				}
+				// console.log(JSON.stringify(Game.getObjectById('')))
 				
 				let initiate = Game.getObjectById(objectId);
 				let username;
