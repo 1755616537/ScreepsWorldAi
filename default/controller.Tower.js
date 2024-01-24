@@ -60,7 +60,10 @@ function work(tower) {
 	}
 	if (targets.length < 1) {
 		targets = tower.room.find(FIND_STRUCTURES, {
-			filter: (structure) => structure.hits < structure.hitsMax
+			filter: (structure) => {
+				return structure.hits < structure.hitsMax &&
+					structure.structureType != STRUCTURE_WALL;
+			}
 		});
 	}
 	targets.sort((a, b) => a.hits - b.hits);
