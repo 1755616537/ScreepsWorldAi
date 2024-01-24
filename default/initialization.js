@@ -71,6 +71,7 @@ function controllerPiece(spawnSequence = 1) {
 			// 是否已经存在CONTAINER或在建的CONTAINER
 			let found2 = _.filter(found, (f) => f.type == LOOK_CONSTRUCTION_SITES || (f.type == LOOK_STRUCTURES && f
 				.structure.structureType == STRUCTURE_CONTAINER));
+				console.log(found2)
 			if (found2.length < 1) {
 				let x = foundFilter[0].x;
 				let y = foundFilter[0].y;
