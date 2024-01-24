@@ -271,13 +271,13 @@ function transfer(creep) {
 		}
 	});
 	if (targets.length < 1) {
-		targets = creep.room.find(FIND_STRUCTURES, {
-			filter: (structure) => {
-				// 找出需要储存能量
-				return (structure.structureType == STRUCTURE_TOWER) &&
-					structure.store.getFreeCapacity(RESOURCE_ENERGY) > structure.store.getCapacity() / 2;
-			}
-		});
+		// targets = creep.room.find(FIND_STRUCTURES, {
+		// 	filter: (structure) => {
+		// 		// 找出需要储存能量
+		// 		return (structure.structureType == STRUCTURE_TOWER) &&
+		// 			structure.store.getFreeCapacity(RESOURCE_ENERGY) > structure.store.getCapacity() / 2;
+		// 	}
+		// });
 	}
 	if (targets.length < 1) {
 		targets = creep.room.find(FIND_STRUCTURES, {
