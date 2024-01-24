@@ -44,6 +44,9 @@ let pro = {
 				}
 				if (on && memoryControllerContainer && memoryControllerContainer.id) {
 					target = Game.getObjectById(memoryControllerContainer.id);
+					if (target.store.getUsedCapacity(RESOURCE_ENERGY) == 0) {
+						target = null;
+					}
 				}
 
 				if (!target) {
