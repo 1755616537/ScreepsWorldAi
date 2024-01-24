@@ -28,6 +28,7 @@ var pro = {
 					if (creep.dismantle(targets[0]) == ERR_NOT_IN_RANGE) {
 						factory.creep.moveTo(targets[0]);
 					}
+					return;
 				}
 			}
 
