@@ -62,17 +62,17 @@ function controllerPiece(spawnSequence = 1) {
 		let pos = room.controller.pos;
 		let found = room.lookAtArea(pos.y - 1, pos.x - 1, pos.y + 1,
 			pos.x + 1, true);
-			console.log(JSON.stringify(found))
+		console.log(JSON.stringify(found))
 		// 筛选出平原和沼泽非墙壁
 		let foundFilter = _.filter(found, (f) =>
 			(f.terrain == 'plain' || f.terrain == 'swamp') ||
-			(f.type == LOOK_STRUCTURES && f.structure.structureType != STRUCTURE_WALL));
-console.log(foundFilter.length)
+			!(f.type == LOOK_STRUCTURES && f.structure.structureType == STRUCTURE_WALL));
+		console.log(foundFilter.length)
 		if (foundFilter.length > 0) {
 			// 是否已经存在CONTAINER或在建的CONTAINER
 			let found2 = _.filter(found, (f) => f.type == LOOK_CONSTRUCTION_SITES || (f.type == LOOK_STRUCTURES && f
 				.structure.structureType == STRUCTURE_CONTAINER));
-				console.log(found2.length)
+			console.log(found2.length)
 			if (found2.length < 1) {
 				let x = foundFilter[0].x;
 				let y = foundFilter[0].y;
