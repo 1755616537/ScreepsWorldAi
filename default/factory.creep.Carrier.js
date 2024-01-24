@@ -276,7 +276,7 @@ function transfer(creep) {
 				// 找出需要储存能量
 				return (structure.structureType == STRUCTURE_TOWER) &&
 					structure.store.getFreeCapacity(RESOURCE_ENERGY) > structure.store.getCapacity(
-						RESOURCE_ENERGY) / 2;
+						RESOURCE_ENERGY) / 3;
 			}
 		});
 	}
