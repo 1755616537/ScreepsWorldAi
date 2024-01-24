@@ -241,44 +241,53 @@ function upgraderOuterRoom(roomSequence) {
 		} else {
 			// 掉落的资源
 			let targets = room.find(FIND_DROPPED_RESOURCES);
-			targets = targets.concat(
-				// 所有墓碑
-				room.find(FIND_TOMBSTONES, {
-					filter: (structure) => {
-						return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
-					}
-				}),
-				// 所有废墟
-				room.find(FIND_RUINS, {
-					filter: (structure) => {
-						return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
-					}
-				}),
-			);
-			if (targets.length < 1) {
-				let sources = room.find(FIND_SOURCES);
-				// 采集能量
-				if (creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-					factory.creep.moveTo(creep, sources[0], 'Resource');
-				}
-				return;
-			}
-			if (targets.length < 1) {
-				targets = factory.room.get(1).find(FIND_STRUCTURES, {
-					filter: (structure) => {
-						// 找出有储存能量的container搬运
-						return (structure.structureType == STRUCTURE_CONTAINER) &&
-							structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
-					}
-				});
-			}
 			if (targets.length > 0) {
-				// 从建筑(structure)中拿取资源
-				if (creep.withdraw(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+				// 捡起一个物品 (如捡起一些能量)
+				if (creep.pickup(targets[0]) == ERR_NOT_IN_RANGE) {
 					// 向目标移动
 					factory.creep.moveTo(creep, targets[0], 'Resource');
 				}
+			} else {
+				targets = targets.concat(
+					// 所有墓碑
+					room.find(FIND_TOMBSTONES, {
+						filter: (structure) => {
+							return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
+						}
+					}),
+					// 所有废墟
+					room.find(FIND_RUINS, {
+						filter: (structure) => {
+							return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
+						}
+					}),
+				);
+				if (targets.length < 1) {
+					let sources = room.find(FIND_SOURCES);
+					// 采集能量
+					if (creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+						factory.creep.moveTo(creep, sources[0], 'Resource');
+					}
+					return;
+				}
+				if (targets.length < 1) {
+					targets = factory.room.get(1).find(FIND_STRUCTURES, {
+						filter: (structure) => {
+							// 找出有储存能量的container搬运
+							return (structure.structureType == STRUCTURE_CONTAINER) &&
+								structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+						}
+					});
+				}
+				if (targets.length > 0) {
+					// 从建筑(structure)中拿取资源
+					if (creep.withdraw(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+						// 向目标移动
+						factory.creep.moveTo(creep, targets[0], 'Resource');
+					}
+				}
 			}
+
 		}
 	}
 }
@@ -334,42 +343,50 @@ function builderOuterRoom(roomSequence) {
 		} else {
 			// 掉落的资源
 			let targets = room.find(FIND_DROPPED_RESOURCES);
-			targets = targets.concat(
-				// 所有墓碑
-				room.find(FIND_TOMBSTONES, {
-					filter: (structure) => {
-						return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
-					}
-				}),
-				// 所有废墟
-				room.find(FIND_RUINS, {
-					filter: (structure) => {
-						return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
-					}
-				}),
-			);
-			if (targets.length < 1) {
-				let sources = room.find(FIND_SOURCES);
-				// 采集能量
-				if (creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-					factory.creep.moveTo(creep, sources[0], 'Resource');
-				}
-				return;
-			}
-			if (targets.length < 1) {
-				targets = factory.room.get(1).find(FIND_STRUCTURES, {
-					filter: (structure) => {
-						// 找出有储存能量的container搬运
-						return (structure.structureType == STRUCTURE_CONTAINER) &&
-							structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
-					}
-				});
-			}
 			if (targets.length > 0) {
-				// 从建筑(structure)中拿取资源
-				if (creep.withdraw(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+				// 捡起一个物品 (如捡起一些能量)
+				if (creep.pickup(targets[0]) == ERR_NOT_IN_RANGE) {
 					// 向目标移动
 					factory.creep.moveTo(creep, targets[0], 'Resource');
+				}
+			}else{
+				targets = targets.concat(
+					// 所有墓碑
+					room.find(FIND_TOMBSTONES, {
+						filter: (structure) => {
+							return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
+						}
+					}),
+					// 所有废墟
+					room.find(FIND_RUINS, {
+						filter: (structure) => {
+							return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
+						}
+					}),
+				);
+				if (targets.length < 1) {
+					let sources = room.find(FIND_SOURCES);
+					// 采集能量
+					if (creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+						factory.creep.moveTo(creep, sources[0], 'Resource');
+					}
+					return;
+				}
+				if (targets.length < 1) {
+					targets = factory.room.get(1).find(FIND_STRUCTURES, {
+						filter: (structure) => {
+							// 找出有储存能量的container搬运
+							return (structure.structureType == STRUCTURE_CONTAINER) &&
+								structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+						}
+					});
+				}
+				if (targets.length > 0) {
+					// 从建筑(structure)中拿取资源
+					if (creep.withdraw(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+						// 向目标移动
+						factory.creep.moveTo(creep, targets[0], 'Resource');
+					}
 				}
 			}
 		}
