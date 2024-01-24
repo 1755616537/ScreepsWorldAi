@@ -65,7 +65,7 @@ function controllerPiece(spawnSequence = 1) {
 			console.log(JSON.stringify(found))
 		// 筛选出平原和沼泽非墙壁
 		let foundFilter = _.filter(found, (f) =>
-			(f.terrain == 'plain' || f.terrain == 'swamp') &&
+			(f.terrain == 'plain' || f.terrain == 'swamp') ||
 			(f.type == LOOK_STRUCTURES && f.structure.structureType != STRUCTURE_WALL));
 console.log(foundFilter.length)
 		if (foundFilter.length > 0) {
