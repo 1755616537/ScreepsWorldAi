@@ -10,12 +10,27 @@ var pro = {
 			creep.memory.work = true; // 变为 work状态
 			creep.say('🚧 建造');
 		}
-		
+
 		// 房间序号
 		let roomSequence = factory.room.nameGetSequence(creep.room.name);
 		let spawnName = factory.spawn.sequenceGetName(roomSequence);
 
 		if (creep.memory.work) { // work状态的时候
+			{
+				// 拆解
+				// 所有废墟
+				let targets = creep.room.find(FIND_RUINS, {
+					filter: (structure) => {
+						return (structure.store.getFreeCapacity(RESOURCE_ENERGY) == 0);
+					}
+				});
+				if (targets.length > 0) {
+					if (creep.dismantle(targets[0]) == ERR_NOT_IN_RANGE) {
+						factory.creep.moveTo(targets[0]);
+					}
+				}
+			}
+
 			// 寻找建筑位
 			// 路
 			let targets = creep.room.find(FIND_CONSTRUCTION_SITES, {
@@ -68,7 +83,7 @@ var pro = {
 						factory.creep.moveTo(creep, targets[0]);
 					}
 				}
-				
+
 				if (targets.length < 1) {
 					// 升级
 					if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
