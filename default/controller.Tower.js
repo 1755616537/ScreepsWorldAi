@@ -62,6 +62,7 @@ function work(tower) {
 			filter: (structure) => structure.hits < structure.hitsMax
 		});
 	}
+	targets.sort((a, b) => a.hits - b.hits);
 	if (targets.length > 0) {
 		tower.repair(targets[0]);
 	}
