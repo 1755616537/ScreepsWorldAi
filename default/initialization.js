@@ -23,10 +23,11 @@ global.initialization = {
 
 		// 能量源区块初始化
 		sourcePiece(1);
+		sourcePiece(2);
 
 		// 控制器块初始化
 		controllerPiece(1);
-		
+		controllerPiece(2);
 		
 		clog("【初始化】【结束】 Time " + Game.time);
 	},
