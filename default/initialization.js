@@ -20,17 +20,25 @@ global.initialization = {
 			if (!Game.creeps[name].memory.id) Game.creeps[name].memory.id = Game.creeps[name].id;
 		}
 
+		spawnPiece(1);
+		spawnPiece(2);
 
-		// 能量源区块初始化
-		sourcePiece(1);
-		sourcePiece(2);
-
-		// 控制器块初始化
-		controllerPiece(1);
-		controllerPiece(2);
-		
 		clog("【初始化】【结束】 Time " + Game.time);
 	},
+}
+
+function spawnPiece(spawnSequence = 1) {
+	if (!Memory.spawn[spawnName]) {
+		Memory.spawn[spawnName] = {}
+	}
+
+	// 能量源区块初始化
+	sourcePiece(1);
+	sourcePiece(2);
+
+	// 控制器块初始化
+	controllerPiece(1);
+	controllerPiece(2);
 }
 
 function sourcePiece(spawnSequence = 1) {
