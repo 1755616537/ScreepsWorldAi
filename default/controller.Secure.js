@@ -37,21 +37,24 @@ global.controller.Secure = {
 				// 目标对象ID
 				let targetId = event.data.targetId;
 
-				
+
 				let target = Game.getObjectById(targetId);
-				let type, structureType, x, y;
+				let structureType, x, y;
 				if (target) {
 					try {
-						type = target.type;
-						structureType = target.structure.structureType;
-						x = target.x;
-						y = target.y;
+						x = target.pos.x;
+						y = target.pos.y;
+					} catch (e) {
+						//TODO handle the exception
+					}
+					try {
+						structureType = target.structureType;
 					} catch (e) {
 						//TODO handle the exception
 					}
 				}
 				// console.log(JSON.stringify(Game.getObjectById('')))
-				
+
 				let initiate = Game.getObjectById(objectId);
 				let username;
 				if (initiate) {
@@ -67,7 +70,7 @@ global.controller.Secure = {
 					clog(event);
 
 					let text = '【';
-					if (type) text += '类型' + type + ' ';
+					// if (type) text += '类型' + type + ' ';
 					if (structureType) text += 'structureType' + structureType + ' ';
 					if (damage) text += '受到伤害量' + damage + ' ';
 					if (x) text += 'x' + x + ' ';
