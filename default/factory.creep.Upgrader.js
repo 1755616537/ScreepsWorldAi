@@ -11,7 +11,7 @@ let pro = {
 			creep.memory.work = true;
 			creep.say('⚡ 升级');
 		}
-		
+
 		// 房间序号
 		let roomSequence = factory.room.nameGetSequence(creep.room.name);
 		let spawnName = factory.spawn.sequenceGetName(roomSequence);
@@ -32,19 +32,35 @@ let pro = {
 					}
 				}
 			} else {
-				let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-					filter: (structure) => {
-						// 找出有储存能量的container搬运
-						return (structure.structureType == STRUCTURE_CONTAINER) &&
-							structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
-						// return (structure.structureType == STRUCTURE_CONTAINER ||
-						// 		structure.structureType == STRUCTURE_EXTENSION ||
-						// 		(structure.structureType == STRUCTURE_SPAWN &&
-						// 			structure.store.getUsedCapacity(RESOURCE_ENERGY) > 250) ||
-						// 		structure.structureType == STRUCTURE_TOWER) &&
-						// 	structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
-					}
-				});
+				let target;
+
+				let memoryControllerContainer;
+				let on = false;
+				try {
+					memoryControllerContainer = Memory.spawn[spawnName].controller.container;
+					on = true;
+				} catch (e) {
+					//TODO handle the exception
+				}
+				if (on && memoryControllerContainer && memoryControllerContainer.id) {
+					target = Game.getObjectById(memoryControllerContainer.id);
+				}
+
+				if (!target) {
+					target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+						filter: (structure) => {
+							// 找出有储存能量的container搬运
+							return (structure.structureType == STRUCTURE_CONTAINER) &&
+								structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+							// return (structure.structureType == STRUCTURE_CONTAINER ||
+							// 		structure.structureType == STRUCTURE_EXTENSION ||
+							// 		(structure.structureType == STRUCTURE_SPAWN &&
+							// 			structure.store.getUsedCapacity(RESOURCE_ENERGY) > 250) ||
+							// 		structure.structureType == STRUCTURE_TOWER) &&
+							// 	structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+						}
+					});
+				}
 				if (!target) {
 					// 找不到可搬运的地方,从基地搬运
 					target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
