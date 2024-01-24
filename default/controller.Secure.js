@@ -28,6 +28,7 @@ global.controller.Secure = {
 				event: EVENT_ATTACK
 			});
 			let attackMy = false;
+			let textAll = '';
 			attackEvents.forEach(event => {
 				// 事件者ID
 				let objectId = event.objectId;
@@ -36,20 +37,48 @@ global.controller.Secure = {
 				// 目标对象ID
 				let targetId = event.data.targetId;
 
-				let initiate = Game.getObjectById(objectId);
+				
 				let target = Game.getObjectById(targetId);
+				let type, structureType, x, y;
+				if (target) {
+					try {
+						type = target.type;
+						structureType = target.structure.structureType;
+						x = target.x;
+						y = target.y;
+					} catch (e) {
+						//TODO handle the exception
+					}
+				}
+				
+				let initiate = Game.getObjectById(objectId);
+				let username;
+				if (initiate) {
+					try {
+						username = initiate.owner.username;
+					} catch (e) {
+						//TODO handle the exception
+					}
+				}
 
-				// let type = target.type;
-				// let structureType = target.structure.structureType;
-				// let text = '类型' + type + ' 造成伤害量' + damage
 				if (target && target.my) {
 					attackMy = true;
 					clog(event);
+
+					let text = '【';
+					if (type) text += '类型' + type + ' ';
+					if (structureType) text += 'structureType' + structureType + ' ';
+					if (damage) text += '受到伤害量' + damage + ' ';
+					if (x) text += 'x' + x + ' ';
+					if (y) text += 'y' + y + ' ';
+					if (username) text += '对方用户名称' + username + ' ';
+					text += '】';
+					textAll += text;
 				}
 			});
 
 			if (attackEvents.length > 0 && attackMy) {
-				Game.notify(`【${spawnName}】房间,正在遭受攻击`);
+				Game.notify(`【${spawnName}】房间,正在遭受攻击 ` + textAll);
 
 				let on = false;
 				if (room.name == globalData.room[0].name && globalData.room[0].AutomaticSecurity) {
