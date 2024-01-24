@@ -42,6 +42,8 @@ global.controller.room = {
 			}
 		});
 
+		roomVisual(1);
+
 
 		sourceContainer(1);
 		controllerContainer(1);
@@ -51,6 +53,56 @@ global.controller.room = {
 		upgraderOuterRoom(2);
 		// builderOuterRoom(2);
 	}
+}
+
+// 房间显示文本
+function roomVisual(roomSequence) {
+	let room = factory.room.get(roomSequence);
+
+	const harvests = factory.creep.Harvest.ALL(roomSequence);
+	const upgraders = factory.creep.Upgrader.ALL(roomSequence);
+	const builders = factory.creep.Builder.ALL(roomSequence);
+	const carriers = factory.creep.Carrier.ALL(roomSequence);
+	const repairers = factory.creep.Repairer.ALL(roomSequence);
+	const nearDefenders = factory.creep.Defender.ALLNearDefender(roomSequence);
+	const farDefenders = factory.creep.Defender.ALLFarDefender(roomSequence);
+	const theHealers = factory.creep.TheHealer.ALL(roomSequence);
+	const occupiers = factory.creep.Occupier.ALL(roomSequence);
+
+	// 查看控制器等级
+	const controller_level = factory.spawn.get(roomSequence).room.controller.level;
+	
+	room.visual.RoomVisual().text('控制器等级:' + controller_level, 1, 1, {
+		align: 'left',
+	});
+
+	room.visual.RoomVisual().text('采集者:' + harvests.length, 1, 2, {
+		align: 'left',
+	});
+	room.visual.RoomVisual().text('升级者:' + upgraders.length, 1, 3, {
+		align: 'left'
+	});
+	room.visual.RoomVisual().text('建造者:' + builders.length, 1, 4, {
+		align: 'left'
+	});
+	room.visual.RoomVisual().text('运输者:' + carriers.length, 1, 5, {
+		align: 'left'
+	});
+	room.visual.RoomVisual().text('维修者:' + repairers.length, 1, 6, {
+		align: 'left'
+	});
+	room.visual.RoomVisual().text('近战者:' + nearDefenders.length, 1, 7, {
+		align: 'left'
+	});
+	room.visual.RoomVisual().text('远战者:' + farDefenders.length, 1, 8, {
+		align: 'left'
+	});
+	room.visual.RoomVisual().text('治疗者:' + theHealers.length, 1, 9, {
+		align: 'left'
+	});
+	room.visual.RoomVisual().text('占领者:' + occupiers.length, 1, 10, {
+		align: 'left'
+	});
 }
 
 // 能量源区Container记录管理
