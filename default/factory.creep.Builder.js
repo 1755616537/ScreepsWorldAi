@@ -10,7 +10,7 @@ var pro = {
 			creep.memory.work = true; // 变为 work状态
 			creep.say('🚧 建造');
 		}
-
+		
 		// 房间序号
 		let roomSequence = factory.room.nameGetSequence(creep.room.name);
 		let spawnName = factory.spawn.sequenceGetName(roomSequence);
@@ -68,7 +68,7 @@ var pro = {
 						factory.creep.moveTo(creep, targets[0]);
 					}
 				}
-
+				
 				if (targets.length < 1) {
 					// 升级
 					if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
