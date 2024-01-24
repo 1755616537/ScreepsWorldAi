@@ -32,9 +32,12 @@ global.controller.room = {
 			if (objectDestroyedEvents.length > 0) {
 				objectDestroyedEvents.forEach(event => {
 					// console.log(JSON.stringify(event))
-					Game.notify(
-						`【${spawnName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
-					);
+					if (event.data.type != 'creep') {
+						Game.notify(
+							`【${spawnName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
+						);
+					}
+
 				});
 			}
 		});
@@ -349,7 +352,7 @@ function builderOuterRoom(roomSequence) {
 					// 向目标移动
 					factory.creep.moveTo(creep, targets[0], 'Resource');
 				}
-			}else{
+			} else {
 				targets = targets.concat(
 					// 所有墓碑
 					room.find(FIND_TOMBSTONES, {
