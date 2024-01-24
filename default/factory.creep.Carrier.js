@@ -189,9 +189,17 @@ var pro = {
 					}
 					targets = targets.concat(
 						// 所有墓碑
-						creep.room.find(FIND_TOMBSTONES),
+						creep.room.find(FIND_TOMBSTONES, {
+							filter: (structure) => {
+								return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
+							}
+						}),
 						// 所有废墟
-						creep.room.find(FIND_RUINS)
+						creep.room.find(FIND_RUINS, {
+							filter: (structure) => {
+								return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
+							}
+						}),
 					);
 					if (targets.length > 0) {
 						source = targets[0];

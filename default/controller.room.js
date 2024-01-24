@@ -243,9 +243,17 @@ function upgraderOuterRoom(roomSequence) {
 			let targets = room.find(FIND_DROPPED_RESOURCES);
 			targets = targets.concat(
 				// 所有墓碑
-				room.find(FIND_TOMBSTONES),
+				room.find(FIND_TOMBSTONES, {
+					filter: (structure) => {
+						return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
+					}
+				}),
 				// 所有废墟
-				room.find(FIND_RUINS)
+				room.find(FIND_RUINS, {
+					filter: (structure) => {
+						return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
+					}
+				}),
 			);
 			if (targets.length < 1) {
 				let sources = room.find(FIND_SOURCES);
@@ -328,9 +336,17 @@ function builderOuterRoom(roomSequence) {
 			let targets = room.find(FIND_DROPPED_RESOURCES);
 			targets = targets.concat(
 				// 所有墓碑
-				room.find(FIND_TOMBSTONES),
+				room.find(FIND_TOMBSTONES, {
+					filter: (structure) => {
+						return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
+					}
+				}),
 				// 所有废墟
-				room.find(FIND_RUINS)
+				room.find(FIND_RUINS, {
+					filter: (structure) => {
+						return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
+					}
+				}),
 			);
 			if (targets.length < 1) {
 				let sources = room.find(FIND_SOURCES);
