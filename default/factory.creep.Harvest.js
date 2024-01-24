@@ -43,7 +43,7 @@ var pro = {
 				// } catch (e) {
 				// 	Memory.spawn[spawnName].source.list = {};
 				// }
-				if (!Memory.spawn[spawnName].source) {
+				if (!Memory.spawn[spawnName].source || !Memory.spawn[spawnName].source.list) {
 
 					// 网上贡献的方法
 					// let zb=creep.room.find(FIND_SOURCES).pos;
