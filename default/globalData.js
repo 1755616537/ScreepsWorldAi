@@ -60,7 +60,7 @@ global.globalData = {
 	creepConfigs: {
 		// 采集者
 		'harvest': {
-			// 普通版
+			// 普通版（6*WORK已经是1对1能量源300秒采集3000的极限，多了会浪费,5*WORK勉强剩余450多能量）
 			bodys: {
 				list: [WORK, WORK, WORK, WORK, WORK, CARRY, MOVE],
 				// 总能量数量（达到该植才允许生产,可以设比生产所需高点达到预留能量的效果,避免能量直接用完）
