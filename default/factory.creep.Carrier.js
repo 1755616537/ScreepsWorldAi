@@ -311,7 +311,7 @@ function transfer(creep) {
 			}
 		}
 		targets = targets2;
-		
+
 		// 如果剩余数量大于1，去除控制器区的CONTAINER
 		if (targets.length > 1) {
 			let targets2 = [];
