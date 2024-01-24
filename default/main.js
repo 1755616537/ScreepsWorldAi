@@ -43,8 +43,10 @@ module.exports.loop = function() {
 // .spawn是否停止获取能量，先用于生产
 // .可以选择根据总能量上限energyCapacityAvailable动态调整配置
 // .TOWER逻辑顺序攻击，维修，治疗，运输者是否1v1运送能量或者1vN运送能量
+// .矿床Mineral，稀有资源储备Deposit。自动9*9内建CONTAINER(允许在路road上面建)，限制就1个CONTAINER
 // .Game.notify邮件提示配置开关添加
 // .限制每个能量源就1个CONTAINER
+// .BUG.把自动建CONTAINER允许在路road上面建
 // .采集者，升级者，会根据区域9*9哪里有CONTAINER或正在建造的CONTAINER坐标上面站着，如果已经站有一个，不做此限制
 
 // 完成程序:
