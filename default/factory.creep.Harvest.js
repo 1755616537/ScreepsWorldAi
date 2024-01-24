@@ -108,8 +108,11 @@ var pro = {
 												// 指定位置创建一个新的 ConstructionSite
 												let returnData = factory.room.get(roomSequence)
 													.createConstructionSite(x, y, STRUCTURE_CONTAINER);
-												if (returnData != OK) clog(x, y, '自动建造对应数量的CONTAINER ',
-													returnData);
+												if (returnData == OK) {
+													clog(x, y, '自动建造对应数量的CONTAINER ', returnData);
+												} else {
+													clog(x, y, '自动建造对应数量的CONTAINER ', returnData);
+												}
 												// OK	0	这个操作已经成功纳入计划。
 												// ERR_NOT_OWNER	-1	该房间被敌对玩家占领（claim）或预定（reserve）。
 												// ERR_INVALID_TARGET	-7	T该建筑无法被放置在指定位置。
@@ -315,7 +318,7 @@ var pro = {
 				if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 					factory.creep.moveTo(creep, target);
 				}
-			}else{
+			} else {
 				// 储存能量都满了不用搬运能量,先干其他
 				let targets = creep.room.find(FIND_CONSTRUCTION_SITES);
 				if (targets.length > 0) {

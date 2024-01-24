@@ -66,18 +66,18 @@ function controllerPiece(spawnSequence = 1) {
 		let foundFilter = _.filter(found, (f) =>
 			(f.terrain == 'plain' || f.terrain == 'swamp') &&
 			(f.type == LOOK_STRUCTURES ? f.structure.structureType != STRUCTURE_WALL : true));
-			console.log(foundFilter.length)
 		if (foundFilter.length > 0) {
 			// 是否已经存在CONTAINER或在建的CONTAINER
 			let found2 = _.filter(found, (f) => f.type == LOOK_CONSTRUCTION_SITES || (f.type == LOOK_STRUCTURES && f
 				.structure.structureType == STRUCTURE_CONTAINER));
-				console.log(found2.length)
 			if (found2.length < 1) {
 				let x = foundFilter[0].x;
 				let y = foundFilter[0].y;
 				// 指定位置创建一个新的 ConstructionSite
 				let returnData = room.createConstructionSite(x, y, STRUCTURE_CONTAINER);
-				if (returnData != OK) {
+				if (returnData == OK) {
+					clog(x, y, '自动建造对应数量的CONTAINER ', returnData);
+				} else {
 					clog(x, y, '自动建造对应数量的CONTAINER ', returnData);
 					Memory.spawn[spawnName].controller = {
 						container: {
