@@ -29,7 +29,7 @@ global.initialization = {
 
 function spawnPiece(spawnSequence = 1) {
 	let spawnName = factory.spawn.sequenceGetName(spawnSequence);
-	if (_.size(Memory.spawn[spawnName]) < 1) {
+	if (!Memory.spawn[spawnName]) {
 		Memory.spawn[spawnName] = {}
 	}
 
