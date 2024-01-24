@@ -66,7 +66,8 @@ function controllerPiece(spawnSequence = 1) {
 		// 筛选出平原和沼泽非墙壁
 		let foundFilter = _.filter(found, (f) =>
 			(f.terrain == 'plain' || f.terrain == 'swamp') ||
-			!(f.type == LOOK_STRUCTURES && f.structure.structureType == STRUCTURE_WALL));
+			(f.type == LOOK_STRUCTURES && f.structure.structureType != STRUCTURE_WALL && f.structure
+				.structureType != STRUCTURE_CONTROLLER));
 		console.log(foundFilter.length)
 		if (foundFilter.length > 0) {
 			// 是否已经存在CONTAINER或在建的CONTAINER
