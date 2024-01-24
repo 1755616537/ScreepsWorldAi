@@ -21,7 +21,7 @@ global.initialization = {
 		}
 
 		spawnPiece(1);
-		spawnPiece(2);
+		// spawnPiece(2);
 
 		clog("【初始化】【结束】 Time " + Game.time);
 	},
