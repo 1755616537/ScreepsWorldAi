@@ -9,6 +9,7 @@ global.controller.creep = {
 
 		// 单独spawn管理
 		spawn(1);
+		spawn(2);
 
 		// 事件管理
 		for (let name in Game.creeps) {
