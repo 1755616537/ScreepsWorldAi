@@ -72,35 +72,35 @@ function roomVisual(roomSequence) {
 	// 查看控制器等级
 	const controller_level = factory.spawn.get(roomSequence).room.controller.level;
 	
-	room.visual.RoomVisual().text('控制器等级:' + controller_level, 1, 1, {
+	room.visual.text('控制器等级:' + controller_level, 1, 1, {
 		align: 'left',
 	});
 
-	room.visual.RoomVisual().text('采集者:' + harvests.length, 1, 2, {
+	room.visual.text('采集者:' + harvests.length, 1, 2, {
 		align: 'left',
 	});
-	room.visual.RoomVisual().text('升级者:' + upgraders.length, 1, 3, {
+	room.visual.text('升级者:' + upgraders.length, 1, 3, {
 		align: 'left'
 	});
-	room.visual.RoomVisual().text('建造者:' + builders.length, 1, 4, {
+	room.visual.text('建造者:' + builders.length, 1, 4, {
 		align: 'left'
 	});
-	room.visual.RoomVisual().text('运输者:' + carriers.length, 1, 5, {
+	room.visual.text('运输者:' + carriers.length, 1, 5, {
 		align: 'left'
 	});
-	room.visual.RoomVisual().text('维修者:' + repairers.length, 1, 6, {
+	room.visual.text('维修者:' + repairers.length, 1, 6, {
 		align: 'left'
 	});
-	room.visual.RoomVisual().text('近战者:' + nearDefenders.length, 1, 7, {
+	room.visual.text('近战者:' + nearDefenders.length, 1, 7, {
 		align: 'left'
 	});
-	room.visual.RoomVisual().text('远战者:' + farDefenders.length, 1, 8, {
+	room.visual.text('远战者:' + farDefenders.length, 1, 8, {
 		align: 'left'
 	});
-	room.visual.RoomVisual().text('治疗者:' + theHealers.length, 1, 9, {
+	room.visual.text('治疗者:' + theHealers.length, 1, 9, {
 		align: 'left'
 	});
-	room.visual.RoomVisual().text('占领者:' + occupiers.length, 1, 10, {
+	room.visual.text('占领者:' + occupiers.length, 1, 10, {
 		align: 'left'
 	});
 }
