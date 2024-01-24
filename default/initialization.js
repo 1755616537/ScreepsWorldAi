@@ -22,6 +22,15 @@ global.initialization = {
 
 		spawnPiece(1);
 		// spawnPiece(2);
+		
+		
+		let room = factory.room.get(1);
+		let targets = room.find(FIND_STRUCTURES, {
+			filter: (structure) => {
+				return structure.structureType == STRUCTURE_WALL;
+			}
+		});
+		console.log(JSON.stringify(targets))
 
 		clog("【初始化】【结束】 Time " + Game.time);
 	},
