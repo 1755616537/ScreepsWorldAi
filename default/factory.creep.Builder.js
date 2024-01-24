@@ -21,7 +21,7 @@ var pro = {
 				// 所有废墟
 				let targets = creep.room.find(FIND_RUINS, {
 					filter: (structure) => {
-						return (structure.store.getFreeCapacity(RESOURCE_ENERGY) == 0);
+						return (structure.store.getUsedCapacity(RESOURCE_ENERGY) == 0);
 					}
 				});
 				if (targets.length > 0) {
