@@ -49,7 +49,7 @@ global.controller.room = {
 		containerEnergyStat(1);
 
 		upgraderOuterRoom(2);
-		builderOuterRoom(2);
+		// builderOuterRoom(2);
 	}
 }
 
