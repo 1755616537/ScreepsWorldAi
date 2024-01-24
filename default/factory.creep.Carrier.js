@@ -18,6 +18,7 @@ var pro = {
 		// 房间序号
 		let roomSequence = factory.room.nameGetSequence(creep.room.name);
 		let spawnName = factory.spawn.sequenceGetName(roomSequence);
+		let roomName = factory.room.sequenceGetName(roomSequence);
 
 		if (!creep.memory.work) {
 			// 所有掉落的资源
@@ -57,8 +58,13 @@ var pro = {
 									// 指定位置创建一个新的 ConstructionSite
 									let returnData = factory.room.get(roomSequence)
 										.createConstructionSite(x, y, STRUCTURE_CONTAINER);
-									if (returnData != OK) clog(x, y, '能量源区自动建造对应数量的CONTAINER ',
-										returnData);
+									if (returnData != OK) {
+										clog('能量源区自动建造对应数量的CONTAINER 房间', roomName, ' x', x, ' y', y,
+											returnData);
+									} else {
+										clog('能量源区自动建造对应数量的CONTAINER 房间', roomName, ' x', x, ' y', y,
+											returnData);
+									}
 								}
 							}
 						}
@@ -105,7 +111,8 @@ var pro = {
 
 									Memory.spawn[spawnName].source.list[val].spaceXYList = spaceXYList;
 									on = true;
-									clog(creep.name, '已自动分配给能量源区', val, "Container", spaceXYList[i].containerID)
+									clog('房间', roomName, ' ', creep.name, '已自动分配给能量源区', val, "Container",
+										spaceXYList[i].containerID)
 									break;
 								}
 							}
@@ -370,6 +377,7 @@ function transferControllerContainer(creep) {
 	// 房间序号
 	let roomSequence = factory.room.nameGetSequence(creep.room.name);
 	let spawnName = factory.spawn.sequenceGetName(roomSequence);
+	let roomName = factory.room.sequenceGetName(roomSequence);
 
 	// 控制器旁是否有CONTAINER或在建的CONTAINER
 	let pos = creep.room.controller.pos;
@@ -411,7 +419,7 @@ function transferControllerContainer(creep) {
 		// 指定位置创建一个新的 ConstructionSite
 		let returnData = creep.room.createConstructionSite(x, y, STRUCTURE_CONTAINER);
 		if (returnData != OK) {
-			clog(x, y, '控制器自动建造对应数量的CONTAINER ', returnData);
+			clog('自动建造对应数量的CONTAINER 房间', roomName, ' x', x, ' y', y, returnData);
 			Memory.spawn[spawnName].controller = {
 				container: {
 					x: x,
@@ -434,7 +442,7 @@ function transferControllerContainer(creep) {
 					id: memoryControllerContainer.id,
 					type: 'ControllerContainer'
 				};
-				clog(creep.name, '已自动分配给控制器Container', memoryControllerContainer.id);
+				clog('房间', roomName, ' ', creep.name, '已自动分配给控制器Container', memoryControllerContainer.id);
 			}
 		}
 
@@ -481,6 +489,7 @@ function transferTower(creep) {
 	// 房间序号
 	let roomSequence = factory.room.nameGetSequence(creep.room.name);
 	let spawnName = factory.spawn.sequenceGetName(roomSequence);
+	let roomName = factory.room.sequenceGetName(spawnSequence);
 
 	let memoryTower;
 	let on = false;
@@ -519,7 +528,7 @@ function transferTower(creep) {
 					id: memoryTower.id,
 					type: 'Tower'
 				};
-				clog(creep.name, '已自动分配给Tower', memoryTower.id);
+				clog('房间', roomName, ' ', creep.name, '已自动分配给Tower', memoryTower.id);
 			}
 		}
 

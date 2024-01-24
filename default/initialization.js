@@ -50,6 +50,7 @@ function sourcePiece(spawnSequence = 1) {
 // 控制器块初始化
 function controllerPiece(spawnSequence = 1) {
 	let spawnName = factory.spawn.sequenceGetName(spawnSequence);
+	let roomName = factory.room.sequenceGetName(spawnSequence);
 	if (!Memory.spawn[spawnName].controller) {
 		Memory.spawn[spawnName].controller = {}
 	}
@@ -76,9 +77,9 @@ function controllerPiece(spawnSequence = 1) {
 				// 指定位置创建一个新的 ConstructionSite
 				let returnData = room.createConstructionSite(x, y, STRUCTURE_CONTAINER);
 				if (returnData == OK) {
-					clog(x, y, '自动建造对应数量的CONTAINER ', returnData);
+					clog('自动建造对应数量的CONTAINER 房间', roomName, ' x', x, ' y', y, returnData);
 				} else {
-					clog(x, y, '自动建造对应数量的CONTAINER ', returnData);
+					clog('自动建造对应数量的CONTAINER 房间', roomName, ' x', x, ' y', y, returnData);
 					Memory.spawn[spawnName].controller = {
 						container: {
 							x: x,
