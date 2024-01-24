@@ -275,7 +275,8 @@ function transfer(creep) {
 			filter: (structure) => {
 				// 找出需要储存能量
 				return (structure.structureType == STRUCTURE_TOWER) &&
-					structure.store.getFreeCapacity(RESOURCE_ENERGY) > structure.store.getCapacity(RESOURCE_ENERGY) / 2;
+					structure.store.getFreeCapacity(RESOURCE_ENERGY) > structure.store.getCapacity(
+						RESOURCE_ENERGY) / 2;
 			}
 		});
 	}
@@ -289,9 +290,10 @@ function transfer(creep) {
 		});
 		// 去除能量源区的CONTAINER
 		let targets2 = [];
+		let memorySource = Memory.spawn[spawnName].source.list;
 		for (let i = 0; i < targets.length; i++) {
-			let memorySource = Memory.spawn[spawnName].source.list;
 			let on = false;
+			// 能量源区的CONTAINER
 			for (let val in memorySource) {
 				let spaceXYList = memorySource[val].spaceXYList;
 				for (let i2 = 0; i2 < spaceXYList.length; i2++) {
@@ -303,11 +305,28 @@ function transfer(creep) {
 				}
 				if (on) break;
 			}
+
 			if (!on) {
 				targets2.push(targets[i])
 			}
 		}
 		targets = targets2;
+		
+		// 如果剩余数量大于1，去除控制器区的CONTAINER
+		if (targets.length > 1) {
+			let targets2 = [];
+			let memoryControllerContainer = Memory.spawn[spawnName].controller.container;
+			for (var i = 0; i < targets.length; i++) {
+				// 控制器区的CONTAINER
+				if (targets[i].pos.x == memoryControllerContainer.x && targets[i].pos.y == memoryControllerContainer
+					.y) {
+
+				} else {
+					targets2.push(targets[i])
+				}
+			}
+			targets = targets2;
+		}
 	}
 	if (targets.length > 0) {
 		// 将资源从该 creep 转移至其他对象
