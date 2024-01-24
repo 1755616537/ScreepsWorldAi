@@ -53,7 +53,8 @@ function work(tower) {
 		targets = tower.room.find(FIND_STRUCTURES, {
 			filter: (structure) => {
 				return (structure.structureType == STRUCTURE_WALL) &&
-					structure.hits < structure.hitsMax;
+					structure.hits < structure.hitsMax &&
+					structure.hits < 100 * 10000;
 			}
 		});
 	}
