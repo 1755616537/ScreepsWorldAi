@@ -27,16 +27,28 @@ global.controller.Secure = {
 			let attackEvents = _.filter(eventLog, {
 				event: EVENT_ATTACK
 			});
+			let attackMy = false;
 			attackEvents.forEach(event => {
-				let target = Game.getObjectById(event.data.targetId);
+				// 事件者ID
+				let objectId = event.objectId;
+				// 造成的 hit 伤害量
+				let damage = event.data.damage;
+				// 目标对象ID
+				let targetId = event.data.targetId;
+
+				let initiate = Game.getObjectById(objectId);
+				let target = Game.getObjectById(targetId);
+
+				// let type = target.type;
+				// let structureType = target.structure.structureType;
+				// let text = '类型' + type + ' 造成伤害量' + damage
 				if (target && target.my) {
+					attackMy = true;
 					clog(event);
 				}
 			});
-			// objectId 自己ID
-			// data.targetId - 目标对象 ID
 
-			if (attackEvents.length > 0) {
+			if (attackEvents.length > 0 && attackMy) {
 				Game.notify(`【${spawnName}】房间,正在遭受攻击`);
 
 				let on = false;
