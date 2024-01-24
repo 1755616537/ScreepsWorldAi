@@ -66,16 +66,20 @@ function work(tower) {
 	if (targets.length > 0) {
 		tower.repair(targets[0]);
 	}
-
-	// 治疗
-	let closestMYCreep = tower.pos.findClosestByRange(FIND_MY_CREEPS, {
-		filter: function(object) {
-			return object.hits < object.hitsMax;
-		}
-	});
-	if (closestMYCreep) {
+	
+	if (targets.length < 1) {
 		// 治疗
-		tower.heal(closestMYCreep);
-		return;
+		let closestMYCreep = tower.pos.findClosestByRange(FIND_MY_CREEPS, {
+			filter: function(object) {
+				return object.hits < object.hitsMax;
+			}
+		});
+		
+		closestMYCreep.sort((a, b) => a.hits - b.hits);
+		
+		if (closestMYCreep) {
+			// 治疗
+			tower.heal(closestMYCreep);
+		}
 	}
 }
