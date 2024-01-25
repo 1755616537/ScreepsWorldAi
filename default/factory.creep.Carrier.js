@@ -343,6 +343,7 @@ function transfer(creep) {
 					structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
 			}
 		});
+		console.log('targets',targets)
 	}
 	if (targets.length > 0) {
 		let resourceGhodium = false;
