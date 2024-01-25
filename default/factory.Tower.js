@@ -11,7 +11,9 @@ global.factory.Tower = {
 		});
 		if (targets.length) {
 			_.forEach(targets, target => {
-				work(target);
+				// work(target);
+				const source = Game.getObjectById('65b28bef2bc6a1b1bbf53');
+				tower.attack(source);
 			});
 		}
 	}
