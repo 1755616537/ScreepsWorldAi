@@ -22,19 +22,19 @@ function work(tower) {
 		tower.attack(closestHostile);
 		return
 	}
-	
+
 	// 治疗
-	let closestMYCreep = tower.pos.findClosestByRange(FIND_MY_CREEPS, {
+	let closestMYCreep = tower.room.find(FIND_MY_CREEPS, {
 		filter: function(object) {
 			return object.hits < object.hitsMax;
 		}
 	});
-	
+
 	closestMYCreep.sort((a, b) => a.hits - b.hits);
-		
-	if (closestMYCreep) {
+
+	if (closestMYCreep.length > 0) {
 		// 治疗
-		tower.heal(closestMYCreep);
+		tower.heal(closestMYCreep[0]);
 		return;
 	}
 
