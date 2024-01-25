@@ -259,7 +259,7 @@ function containerEnergyStat(roomSequence) {
 	}
 	const total = _.sum(targetsStore);
 	if (total < 500) {
-		clog('房间' + roomName,'CONTAINER能量不足500');
+		// clog('房间' + roomName,'CONTAINER能量不足500');
 		// Utils.notify(
 		// 	`【${roomName}】房间【CONTAINER能量不足500】`
 		// );
