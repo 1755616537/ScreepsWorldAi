@@ -7,8 +7,8 @@ global.controller.creep = {
 		// 清理内存
 		factory.creep.CleanMemory();
 
-		// 生产孵化Creep
-		produceCreep(1);
+		// spawn生产孵化Creep
+		spawnProduceCreep(1);
 
 		// 事件管理
 		eventManagement();
@@ -170,8 +170,8 @@ function eventManagement() {
 	}
 }
 
-// 生产孵化Creep
-function produceCreep(spawnSequence = 1) {
+// spawn生产孵化Creep
+function spawnProduceCreep(spawnSequence = 1) {
 	let spawnName = factory.spawn.sequenceGetName(spawnSequence);
 
 	const harvests = factory.creep.Harvest.ALL(spawnSequence);
