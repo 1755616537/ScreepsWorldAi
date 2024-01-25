@@ -77,9 +77,16 @@ global.factory.Secure = {
 				if (username) text += '对方用户名称' + username + ' ';
 				text += '】';
 				textAll += text;
+
+				if (!Memory.attackEventsList) Memory.attackEventsList = [];
+				let time = Game.time;
+				Memory.attackEventsList.push({
+					targetId: targetId,
+					time: time
+				})
 			}
 		});
-		
+
 		let objectDestroyedMy = false;
 		// 一个游戏对象被摧毁或是被消灭
 		let objectDestroyedEvents = _.filter(eventLog, {
@@ -90,10 +97,28 @@ global.factory.Secure = {
 				// 事件者ID
 				let objectId = event.objectId;
 
+				let time = Game.time;
+				let attackEventsList = Memory.attackEventsList;
+				for (var i = 0; i < attackEventsList.length; i++) {
+					if (attackEventsList[i].targetId == objectId) {
+						if (time - attackEventsList[i].time <= 5) {
+							objectDestroyedMy = true;
+							break;
+						}
+					}
+				}
+				// 清理超时的记录
+				let attackEventsList2 = [];
+				for (var i = 0; i < attackEventsList.length; i++) {
+					if (time - attackEventsList[i].time <= 5) {
+						attackEventsList2.push(attackEventsList[i]);
+					}
+				}
+				Memory.attackEventsList = attackEventsList2;
 			});
 		}
-		
-		if (attackEvents.length > 0 && attackMy){
+
+		if (attackEvents.length > 0 && attackMy) {
 			Utils.notify(`【${roomName}】房间,正在遭受攻击 ` + textAll);
 		}
 
