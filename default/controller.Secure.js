@@ -94,7 +94,7 @@ global.controller.Secure = {
 					.AutomaticSecurity) {
 					on = true;
 				}
-				if (on) {
+				if (on && false) {
 					// 开启安全模式
 					let returnData = room.controller.activateSafeMode();
 					if (returnData == OK) {
