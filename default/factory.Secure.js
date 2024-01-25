@@ -98,6 +98,7 @@ global.factory.Secure = {
 				let objectId = event.objectId;
 
 				let time = Game.time;
+				if (!Memory.attackEventsList) Memory.attackEventsList = [];
 				let attackEventsList = Memory.attackEventsList;
 				for (var i = 0; i < attackEventsList.length; i++) {
 					if (attackEventsList[i].targetId == objectId) {
