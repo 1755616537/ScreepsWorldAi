@@ -46,7 +46,8 @@ module.exports.loop = function() {
 // .矿床Mineral，稀有资源储备Deposit。自动9*9内建CONTAINER(允许在路road上面建)，限制就1个CONTAINER
 // .Game.notify邮件提示配置开关添加,统一入口使用
 // .限制每个能量源就1个CONTAINER
-// .BUG.把自动建CONTAINER允许在路road上面建
+// .BUG.把自动建CONTAINER允许在路road和可穿透墙rampart上面建
+// .设置限制TOWER维修rampart到1M就不维修
 // .采集者，升级者，会根据区域9*9哪里有CONTAINER或正在建造的CONTAINER坐标上面站着，如果已经站有一个，不做此限制
 
 // 完成程序:
