@@ -4,6 +4,7 @@ global.controller.room = {
 		_.forEach(Game.rooms, room => {
 			// 房间序号
 			let roomSequence = factory.room.nameGetSequence(room.name);
+			let roomName = room.name;
 			let spawnName = factory.spawn.sequenceGetName(roomSequence);
 
 			// 安全
@@ -21,9 +22,9 @@ global.controller.room = {
 					let target = Game.getObjectById(event.data.targetId);
 					if (target && target.progress && target.progressTotal) {
 						if (target.progress + event.data.amount >= target.progressTotal) {
-							// console.log(JSON.stringify(event))
+							clog('房间' + roomName,'建造完成',JSON.stringify(event));
 							Utils.notify(
-								`【${spawnName}】房间,id【${event.data.targetId}】${event.data.structureType} x${event.data.x} y${event.data.y}【建造】【完成】`
+								`【${roomName}】房间,id【${event.data.targetId}】${event.data.structureType} x${event.data.x} y${event.data.y}【建造】【完成】`
 							);
 						}
 					}
@@ -36,10 +37,10 @@ global.controller.room = {
 			});
 			if (objectDestroyedEvents.length > 0) {
 				objectDestroyedEvents.forEach(event => {
-					// console.log(JSON.stringify(event))
+					clog('房间' + roomName,'一个游戏对象被摧毁或是被消灭',JSON.stringify(event));
 					if (event.data.type != 'creep') {
 						Utils.notify(
-							`【${spawnName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
+							`【${roomName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
 						);
 					}
 
@@ -244,6 +245,7 @@ function harvestBuildCONTAINER(roomSequence) {
 
 // CONTAINER能量统计
 function containerEnergyStat(roomSequence) {
+	let roomName = factory.room.sequenceGetName(roomSequence);
 	let spawnName = factory.spawn.sequenceGetName(roomSequence);
 	let targets = factory.room.get(roomSequence).find(FIND_STRUCTURES, {
 		filter: (structure) => {
@@ -257,8 +259,9 @@ function containerEnergyStat(roomSequence) {
 	}
 	const total = _.sum(targetsStore);
 	if (total < 500) {
+		clog('房间' + roomName,'CONTAINER能量不足500');
 		// Utils.notify(
-		// 	`【${spawnName}】房间【CONTAINER能量不足500】`
+		// 	`【${roomName}】房间【CONTAINER能量不足500】`
 		// );
 	}
 	Memory.spawn[spawnName].containerEnergyStat = total;

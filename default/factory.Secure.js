@@ -1,6 +1,7 @@
 global.factory.Secure = {
 	run: (roomSequence) => {
 		let spawnName = factory.spawn.sequenceGetName(roomSequence);
+		let roomName = factory.room.sequenceGetName(roomSequence);
 
 		let room = factory.room.get(roomSequence);
 
@@ -17,7 +18,7 @@ global.factory.Secure = {
 			_.forEach(usernameList, username => {
 				usernameListString += '【' + username + '】';
 			});
-			Utils.notify(`发现用户${usernameListString}派CREEPS到【${spawnName}】房间中`);
+			Utils.notify(`发现用户${usernameListString}派CREEPS到【${roomName}】房间中`);
 		}
 
 		// 查找针对您的 creep 和建筑的所有敌对行动
@@ -65,7 +66,7 @@ global.factory.Secure = {
 
 			if (target && target.my) {
 				attackMy = true;
-				clog('正在受到伤害',JSON.stringify(event));
+				clog('房间' + roomName, '正在受到伤害', JSON.stringify(event));
 
 				let text = '【';
 				// if (type) text += '类型' + type + ' ';
@@ -86,13 +87,13 @@ global.factory.Secure = {
 			objectDestroyedEvents.forEach(event => {
 				// 事件者ID
 				let objectId = event.objectId;
-				
+
 				console.log(JSON.stringify(event));
 			});
 		}
 
 		if (attackEvents.length > 0 && attackMy) {
-			Utils.notify(`【${spawnName}】房间,正在遭受攻击 ` + textAll);
+			Utils.notify(`【${roomName}】房间,正在遭受攻击 ` + textAll);
 
 			let on = false;
 			if (room.name == globalData.room[0].name && globalData.room[0].AutomaticSecurity) {
@@ -108,17 +109,17 @@ global.factory.Secure = {
 				// 开启安全模式
 				let returnData = room.controller.activateSafeMode();
 				if (returnData == OK) {
-					Utils.notify(`【${spawnName}】房间,开启安全模式【成功】`);
+					Utils.notify(`【${roomName}】房间,开启安全模式【成功】`);
 				} else if (returnData == ERR_BUSY) {
-					Utils.notify(`【${spawnName}】房间,开启安全模式【失败】,已经有其他房间处于安全模式下了`);
+					Utils.notify(`【${roomName}】房间,开启安全模式【失败】,已经有其他房间处于安全模式下了`);
 				} else if (returnData == ERR_NOT_ENOUGH_RESOURCES) {
-					Utils.notify(`【${spawnName}】房间,开启安全模式【失败】,没有足够的可用激活次数`);
+					Utils.notify(`【${roomName}】房间,开启安全模式【失败】,没有足够的可用激活次数`);
 				} else if (returnData == ERR_TIRED) {
 					Utils.notify(
-						`【${spawnName}】房间,开启安全模式【失败】,上一个安全模式仍在冷却中，或者控制器正处于 upgradeBlocked 状态，或者控制器的降级计时器已经超过了 50% + 5000 tick 甚至更久`
+						`【${roomName}】房间,开启安全模式【失败】,上一个安全模式仍在冷却中，或者控制器正处于 upgradeBlocked 状态，或者控制器的降级计时器已经超过了 50% + 5000 tick 甚至更久`
 					);
 				} else {
-					Utils.notify(`【${spawnName}】房间,开启安全模式【失败】,未知原因${returnData}`);
+					Utils.notify(`【${roomName}】房间,开启安全模式【失败】,未知原因${returnData}`);
 				}
 			}
 		}
