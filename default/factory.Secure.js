@@ -65,7 +65,7 @@ global.factory.Secure = {
 
 			if (target && target.my) {
 				attackMy = true;
-				clog(event);
+				clog('正在受到伤害',JSON.stringify(event));
 
 				let text = '【';
 				// if (type) text += '类型' + type + ' ';
@@ -87,7 +87,7 @@ global.factory.Secure = {
 				// 事件者ID
 				let objectId = event.objectId;
 				
-				console.log(JSON.stringify(event))
+				console.log(JSON.stringify(event));
 			});
 		}
 
