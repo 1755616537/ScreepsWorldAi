@@ -12,56 +12,45 @@ Creep.prototype.requestTask = function() {
 global.controller.task = {
 	run: () => {
 
-		// 正在执行任务队列
-		let performList = [];
-		try {
-			performList = factory.task.perform.getALL();
-		} catch (e) {
-			//TODO handle the exception
-		}
+		// 建立任务
+		addTask();
 
-		for (let val in performList) {
-			switch (val.type) {
-				case globalData.havester:
-					// 采集
-					break;
-				case globalData.upgrader:
-					// 升级
-					break;
-				case globalData.builder:
-					// 建造
-					break;
-				case globalData.carrier:
-					// 运输
-					break;
-				case globalData.repairer:
-					// 维修
-					break;
-				case globalData.defender:
-					// 防御
-					break;
-				case globalData.attack:
-					// 攻击
-					break;
-				case globalData.treat:
-					// 治疗
-					break;
-				default:
-					clog('无效任务', task);
-			}
-		}
+		// 派发任务
+		// dispatchTasks();
 
+		// 执行任务
+		// performTasks();
 
-		// 检查任务队列
-		let task = {};
-		try {
-			task = factory.task.get();
-		} catch (e) {
-			//TODO handle the exception
-			return
-		}
+	}
+}
 
-		switch (task.type) {
+// 请求指派任务
+function assignTask(creep) {
+
+}
+
+// 建立添加任务
+function addTask() {
+	_.forEach(Game.rooms, room => {
+		
+	});
+}
+// 派发任务
+function dispatchTasks() {
+
+}
+// 执行任务
+function performTasks() {
+	// 正在执行任务队列
+	let performList = [];
+	try {
+		performList = factory.task.perform.getALL();
+	} catch (e) {
+		//TODO handle the exception
+	}
+
+	for (let val in performList) {
+		switch (val.type) {
 			case globalData.havester:
 				// 采集
 				break;
@@ -89,60 +78,5 @@ global.controller.task = {
 			default:
 				clog('无效任务', task);
 		}
-
-	},
-	priorityPower: (...e) => {
-		return priorityPower(...e);
 	}
-}
-
-// 优先权限 判定 （空闲，计算距离，小兵类型，小兵属性）
-function priorityPower(creep, event) {
-	switch (event) {
-		case globalData.havester:
-			// 采集
-			break;
-		case globalData.upgrader:
-			// 升级
-			break;
-		case globalData.builder:
-			// 建造
-			break;
-		case globalData.carrier:
-			// 运输
-			break;
-		case globalData.repairer:
-			// 维修
-			break;
-		case globalData.defender:
-			// 防御
-			break;
-		case globalData.attack:
-			// 攻击
-			break;
-		case globalData.treat:
-			// 治疗
-			break;
-		default:
-			clog('无效任务', task);
-	}
-}
-
-// 空闲没有任务的creep
-function idleCreep() {
-	let creepList = _.filter(Game.creeps, (creep) => creep.memory.TaskState == '0');
-	if (creepList.length < 1) {
-		Throw.Error('没有空闲creep');
-	}
-	return creepList;
-}
-
-// 指派任务
-function assignTask(creep) {
-
-}
-
-// 采集
-function havester() {
-
 }
