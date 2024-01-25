@@ -22,9 +22,6 @@ global.initialization = {
 
 		spawnPiece(1);
 		// spawnPiece(2);
-		for (var i = 0; i < 3; i++) {
-			Utils.notify('1');
-		}
 
 		clog("【初始化】【结束】 Time " + Game.time);
 	},
