@@ -347,20 +347,27 @@ function transfer(creep) {
 	if (targets.length > 0) {
 		let resourceGhodium = false;
 		for (const resourceType in creep.carry) {
-			console.log(resourceType, resourceType == RESOURCE_GHODIUM)
+			// console.log(resourceType)
 			if (_.startsWith(resourceType, RESOURCE_GHODIUM)) {
 				resourceGhodium = true;
 			}
 		}
-		let storage = factory.spawn.get(roomSequence);
 		if (resourceGhodium) {
-			// 将资源从该 creep 转移至其他对象
-			console.log(creep.transfer(storage, RESOURCE_GHODIUM))
-			if (creep.transfer(storage, RESOURCE_GHODIUM) == ERR_NOT_IN_RANGE) {
-				// 向目标移动
-				factory.creep.moveTo(creep, storage);
+			let targets2 = creep.room.find(FIND_STRUCTURES, {
+				filter: (structure) => {
+					return (structure.structureType == STRUCTURE_STORAGE) &&
+						structure.store.getFreeCapacity() > 0;
+				}
+			});
+			if (targets2.length > 0) {
+				let storage = targets2[0];
+				// 将资源从该 creep 转移至其他对象
+				if (creep.transfer(storage, RESOURCE_GHODIUM) == ERR_NOT_IN_RANGE) {
+					// 向目标移动
+					factory.creep.moveTo(creep, storage);
+				}
+				return;
 			}
-			return;
 		}
 		// 将资源从该 creep 转移至其他对象
 		if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
