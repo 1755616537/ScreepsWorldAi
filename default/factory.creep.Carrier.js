@@ -314,7 +314,7 @@ function transfer(creep) {
 			}
 
 			if (!on) {
-				targets2.push(targets[i])
+				targets2.push(targets[i]);
 			}
 		}
 		targets = targets2;
@@ -329,7 +329,7 @@ function transfer(creep) {
 					.y) {
 
 				} else {
-					targets2.push(targets[i])
+					targets2.push(targets[i]);
 				}
 			}
 			targets = targets2;
@@ -343,7 +343,6 @@ function transfer(creep) {
 					structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
 			}
 		});
-		console.log('targets',targets)
 	}
 	if (targets.length > 0) {
 		let resourceGhodium = false;
