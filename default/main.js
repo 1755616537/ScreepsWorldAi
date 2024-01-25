@@ -43,8 +43,10 @@ module.exports.loop = function() {
 // .spawn是否停止获取能量，先用于生产
 // .可以选择根据总能量上限energyCapacityAvailable动态调整配置
 // .TOWER逻辑顺序攻击，维修，治疗，运输者是否1v1运送能量或者1vN运送能量
+// .安全模式，发现敌人安全模式开启，在外creep返回墙内
+// .在一分钟内受到攻击，并且我方建筑物被摧毁，才开启控制器安全模式
 // .矿床Mineral，稀有资源储备Deposit。自动9*9内建CONTAINER(允许在路road上面建)，限制就1个CONTAINER
-// .Game.notify邮件提示配置开关添加,统一入口使用
+// .Game.notify邮件提示配置开关添加,统一入口使用，限制一分钟内有相同信息不重复发送
 // .限制每个能量源就1个CONTAINER
 // .BUG.把自动建CONTAINER允许在路road和可穿透墙rampart上面建
 // .设置限制TOWER维修rampart到1M就不维修
