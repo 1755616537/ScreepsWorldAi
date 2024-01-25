@@ -17,8 +17,8 @@ global.controller.room = {
 					if (target && target.progress && target.progressTotal) {
 						if (target.progress + event.data.amount >= target.progressTotal) {
 							// console.log(JSON.stringify(event))
-							Game.notify(
-								`Time ${Game.time}【${spawnName}】房间,id【${event.data.targetId}】${event.data.structureType} x${event.data.x} y${event.data.y}【建造】【完成】`
+							Utils.notify(
+								`【${spawnName}】房间,id【${event.data.targetId}】${event.data.structureType} x${event.data.x} y${event.data.y}【建造】【完成】`
 							);
 						}
 					}
@@ -33,8 +33,8 @@ global.controller.room = {
 				objectDestroyedEvents.forEach(event => {
 					// console.log(JSON.stringify(event))
 					if (event.data.type != 'creep') {
-						Game.notify(
-							`Time ${Game.time}【${spawnName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
+						Utils.notify(
+							`【${spawnName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
 						);
 					}
 
@@ -242,7 +242,7 @@ function containerEnergyStat(roomSequence) {
 	}
 	const total = _.sum(targetsStore);
 	if (total < 500) {
-		// Game.notify(
+		// Utils.notify(
 		// 	`【${spawnName}】房间【CONTAINER能量不足500】`
 		// );
 	}
