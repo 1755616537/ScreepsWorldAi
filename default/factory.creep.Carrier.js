@@ -354,6 +354,7 @@ function transfer(creep) {
 		let storage = factory.spawn.get(roomSequence);
 		if (resourceGhodium) {
 			// 将资源从该 creep 转移至其他对象
+			console.log(creep.transfer(storage, RESOURCE_GHODIUM))
 			if (creep.transfer(storage, RESOURCE_GHODIUM) == ERR_NOT_IN_RANGE) {
 				// 向目标移动
 				factory.creep.moveTo(creep, storage);
