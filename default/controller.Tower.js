@@ -35,7 +35,8 @@ function work(tower) {
 		targets = tower.room.find(FIND_STRUCTURES, {
 			filter: (structure) => {
 				return (structure.structureType == STRUCTURE_RAMPART) &&
-					structure.hits < structure.hitsMax;
+					structure.hits < structure.hitsMax &&
+					structure.hits < 100 * 10000;
 			}
 		});
 	}
@@ -62,7 +63,8 @@ function work(tower) {
 		targets = tower.room.find(FIND_STRUCTURES, {
 			filter: (structure) => {
 				return structure.hits < structure.hitsMax &&
-					structure.structureType != STRUCTURE_WALL;
+					structure.structureType != STRUCTURE_WALL &&
+					structure.structureType != STRUCTURE_RAMPART;
 			}
 		});
 	}
