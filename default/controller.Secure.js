@@ -19,7 +19,7 @@ global.controller.Secure = {
 				_.forEach(usernameList, username => {
 					usernameListString += '【' + username + '】';
 				});
-				Game.notify(`发现用户${usernameListString}派CREEPS到【${spawnName}】房间中`);
+				Game.notify(`Time ${Game.time} 发现用户${usernameListString}派CREEPS到【${spawnName}】房间中`);
 			}
 
 			// 查找针对您的 creep 和建筑的所有敌对行动
@@ -82,7 +82,7 @@ global.controller.Secure = {
 			});
 
 			if (attackEvents.length > 0 && attackMy) {
-				Game.notify(`【${spawnName}】房间,正在遭受攻击 ` + textAll);
+				Game.notify(`Time ${Game.time}【${spawnName}】房间,正在遭受攻击 ` + textAll);
 
 				let on = false;
 				if (room.name == globalData.room[0].name && globalData.room[0].AutomaticSecurity) {
@@ -98,17 +98,17 @@ global.controller.Secure = {
 					// 开启安全模式
 					let returnData = room.controller.activateSafeMode();
 					if (returnData == OK) {
-						Game.notify(`【${spawnName}】房间,开启安全模式【成功】`);
+						Game.notify(`Time ${Game.time}【${spawnName}】房间,开启安全模式【成功】`);
 					} else if (returnData == ERR_BUSY) {
-						Game.notify(`【${spawnName}】房间,开启安全模式【失败】,已经有其他房间处于安全模式下了`);
+						Game.notify(`Time ${Game.time}【${spawnName}】房间,开启安全模式【失败】,已经有其他房间处于安全模式下了`);
 					} else if (returnData == ERR_NOT_ENOUGH_RESOURCES) {
-						Game.notify(`【${spawnName}】房间,开启安全模式【失败】,没有足够的可用激活次数`);
+						Game.notify(`Time ${Game.time}【${spawnName}】房间,开启安全模式【失败】,没有足够的可用激活次数`);
 					} else if (returnData == ERR_TIRED) {
 						Game.notify(
-							`【${spawnName}】房间,开启安全模式【失败】,上一个安全模式仍在冷却中，或者控制器正处于 upgradeBlocked 状态，或者控制器的降级计时器已经超过了 50% + 5000 tick 甚至更久`
+							`Time ${Game.time}【${spawnName}】房间,开启安全模式【失败】,上一个安全模式仍在冷却中，或者控制器正处于 upgradeBlocked 状态，或者控制器的降级计时器已经超过了 50% + 5000 tick 甚至更久`
 						);
 					} else {
-						Game.notify(`【${spawnName}】房间,开启安全模式【失败】,未知原因${returnData}`);
+						Game.notify(`Time ${Game.time}【${spawnName}】房间,开启安全模式【失败】,未知原因${returnData}`);
 					}
 				}
 			}

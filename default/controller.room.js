@@ -18,7 +18,7 @@ global.controller.room = {
 						if (target.progress + event.data.amount >= target.progressTotal) {
 							// console.log(JSON.stringify(event))
 							Game.notify(
-								`【${spawnName}】房间,id【${event.data.targetId}】${event.data.structureType} x${event.data.x} y${event.data.y}【建造】【完成】`
+								`Time ${Game.time}【${spawnName}】房间,id【${event.data.targetId}】${event.data.structureType} x${event.data.x} y${event.data.y}【建造】【完成】`
 							);
 						}
 					}
@@ -34,7 +34,7 @@ global.controller.room = {
 					// console.log(JSON.stringify(event))
 					if (event.data.type != 'creep') {
 						Game.notify(
-							`【${spawnName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
+							`Time ${Game.time}【${spawnName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
 						);
 					}
 
