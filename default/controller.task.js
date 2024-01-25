@@ -32,12 +32,50 @@ function assignTask(creep) {
 // 建立添加任务
 function addTask() {
 	_.forEach(Game.rooms, room => {
+		let roomName = room.name;
+		let roomSequence = factory.room.nameGetSequence(roomName);
+		let spawnName = factory.spawn.sequenceGetName(roomSequence);
+
+		// 我方血少的CREEPS
+		const myCreepHitsF = room.find(FIND_MY_CREEPS, {
+			filter: function(object) {
+				return object.hits < object.hitsMax;
+			}
+		});
+
+		// 敌方CREEPS
+		const hostileCreep = room.find(FIND_HOSTILE_CREEPS);
+
+		// 所有掉落的资源
+		const droppedResources = room.find(FIND_DROPPED_RESOURCES);
+
+		// 墓碑
+		const tombstones = room.find(FIND_TOMBSTONES, {
+			filter: (structure) => {
+				return (structure.store.getUsedCapacity() > 0);
+			}
+		});
+
+		// 控制器升级
+
+		// 控制器CONTAINER能量供给运输
 		
+		// 能量源采集
+		
+		// 能量源CONTAINER能量搬运
+
+
 	});
 }
 // 派发任务
 function dispatchTasks() {
+	// 寻找空闲Creep
+	_.forEach(Game.creeps, creep => {
+		let roomName = creep.room.name;
+		let roomSequence = factory.room.nameGetSequence(roomName);
+		let spawnName = factory.spawn.sequenceGetName(roomSequence);
 
+	});
 }
 // 执行任务
 function performTasks() {

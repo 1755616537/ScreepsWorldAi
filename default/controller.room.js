@@ -6,6 +6,11 @@ global.controller.room = {
 			let roomSequence = factory.room.nameGetSequence(room.name);
 			let spawnName = factory.spawn.sequenceGetName(roomSequence);
 
+			// 安全
+			factory.Secure(roomSequence);
+			// 塔
+			factory.Tower(roomSequence);
+
 			let eventLog = room.getEventLog();
 			// 建造完成 邮件提示
 			let buildEvents = _.filter(eventLog, {
@@ -40,17 +45,27 @@ global.controller.room = {
 
 				});
 			}
+
+			// 建筑（自动建造等）
+			factory.Build(roomSequence);
+
+			// 房间显示文本
+			roomVisual(roomSequence);
+
+			// CONTAINER能量统计
+			containerEnergyStat(roomSequence);
 		});
 
-		roomVisual(1);
-
-
+		// 能量源区Container记录管理
 		sourceContainer(1);
+		// 控制器Container记录管理
 		controllerContainer(1);
+		// 采集建造CONTAINER记录管理
 		harvestBuildCONTAINER(1);
-		containerEnergyStat(1);
-
+		
+		// 临时外部房间,升级
 		upgraderOuterRoom(2);
+		// 临时外部房间,建造
 		// builderOuterRoom(2);
 	}
 }
@@ -71,7 +86,7 @@ function roomVisual(roomSequence) {
 
 	// 查看控制器等级
 	const controller_level = factory.spawn.get(roomSequence).room.controller.level;
-	
+
 	room.visual.text('控制器等级:' + controller_level, 1, 1, {
 		align: 'left',
 	});

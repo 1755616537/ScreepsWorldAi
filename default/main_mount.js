@@ -24,6 +24,8 @@ require('factory.Secure')
 require('factory.room')
 // 基地
 require('factory.spawn')
+// 建筑
+require('factory.Build')
 // 能量区
 require('factory.source')
 // 塔
@@ -51,10 +53,6 @@ require('factory.creep.TheHealer')
 require('controller.task')
 // 房间
 require('controller.room')
-// 安全
-require('controller.Secure')
-// 塔
-require('controller.Tower')
 // 爬爬
 require('controller.creep')
 // -------------------------------默认只执行一次的初始化程序
