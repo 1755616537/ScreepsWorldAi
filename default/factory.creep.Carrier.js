@@ -347,6 +347,7 @@ function transfer(creep) {
 	if (targets.length > 0) {
 		let resourceGhodium = false;
 		for (const resourceType in creep.carry) {
+			console.log(resourceType,resourceType == RESOURCE_GHODIUM)
 			if (resourceType == RESOURCE_GHODIUM) {
 				resourceGhodium = true;
 			}
