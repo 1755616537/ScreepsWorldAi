@@ -6,14 +6,14 @@ global.controller.creep = {
 
 		// 清理内存
 		factory.creep.CleanMemory();
-		
+
 		// 生产孵化Creep
 		produceCreep(1);
-		
+
 		// 事件管理
 		eventManagement();
-		
-		
+
+
 	}
 }
 
@@ -117,10 +117,10 @@ function addOccupier(occupiers, controller_level, spawnSequence) {
 }
 
 // 事件管理
-function eventManagement(){
+function eventManagement() {
 	for (let name in Game.creeps) {
 		let creep = Game.creeps[name];
-	
+
 		// 特别行动
 		let SpecialActions = creep.memory.SpecialActions;
 		if (SpecialActions) {
@@ -138,17 +138,17 @@ function eventManagement(){
 			}
 			continue;
 		}
-	
+
 		if (creep.memory.role == globalData.harvest) {
 			factory.creep.Harvest.run(creep);
 		}
 		if (creep.memory.role == globalData.upgrader) {
-			if(!creep.memory.upgraderOuterRoom){
+			if (!creep.memory.upgraderOuterRoom) {
 				factory.creep.Upgrader.run(creep);
 			}
 		}
 		if (creep.memory.role == globalData.builder) {
-			if(!creep.memory.builderOuterRoom){
+			if (!creep.memory.builderOuterRoom) {
 				factory.creep.Builder.run(creep);
 			}
 		}
