@@ -10,8 +10,6 @@ module.exports.loop = function() {
 	// controller.task.run();
 	
 	controller.room.run();
-	controller.Secure.run();
-	controller.Tower.run();
 	controller.creep.run();
 
 	// clog('本次tips使用 CPU 时间总量 ',Game.cpu.getUsed())

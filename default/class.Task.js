@@ -1,14 +1,14 @@
 class Task {
 
-	static TaskType_harvest = globalData.harvest;
-	static TaskType_upgrader = globalData.upgrader;
-	static TaskType_builder = globalData.builder;
-	static TaskType_carrier = globalData.carrier;
-	static TaskType_repairer = globalData.repairer;
-	static TaskType_nearDefender = globalData.nearDefender;
-	static TaskType_farDefender = globalData.farDefender;
-	static TaskType_theHealer = globalData.theHealer;
-	static TaskType_occupier = globalData.occupier;
+	// static TaskType_harvest = globalData.harvest;
+	// static TaskType_upgrader = globalData.upgrader;
+	// static TaskType_builder = globalData.builder;
+	// static TaskType_carrier = globalData.carrier;
+	// static TaskType_repairer = globalData.repairer;
+	// static TaskType_nearDefender = globalData.nearDefender;
+	// static TaskType_farDefender = globalData.farDefender;
+	// static TaskType_theHealer = globalData.theHealer;
+	// static TaskType_occupier = globalData.occupier;
 
 	constructor(taskName, taskType, executeCreep) {
 		// 任务名称
