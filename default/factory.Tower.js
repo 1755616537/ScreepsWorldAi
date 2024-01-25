@@ -13,7 +13,7 @@ global.factory.Tower = {
 			_.forEach(targets, target => {
 				// work(target);
 				const source = Game.getObjectById('65b28bef2bc6a1b1bbf53');
-				tower.attack(source);
+				target.attack(source);
 			});
 		}
 	}
