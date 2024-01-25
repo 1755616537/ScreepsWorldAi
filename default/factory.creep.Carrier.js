@@ -5,7 +5,7 @@ var pro = {
 	/** @param {Creep} creep **/
 	run: function(creep) {
 		// work && 背包为空
-		if (creep.memory.work && creep.store[RESOURCE_ENERGY] == 0) {
+		if (creep.memory.work && creep.store.getUsedCapacity() == 0) {
 			creep.memory.work = false;
 			creep.say('🔄 收获');
 		}
