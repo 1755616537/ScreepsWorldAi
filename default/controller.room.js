@@ -7,9 +7,9 @@ global.controller.room = {
 			let spawnName = factory.spawn.sequenceGetName(roomSequence);
 
 			// 安全
-			factory.Secure(roomSequence);
+			factory.Secure.run(roomSequence);
 			// 塔
-			factory.Tower(roomSequence);
+			factory.Tower.run(roomSequence);
 
 			let eventLog = room.getEventLog();
 			// 建造完成 邮件提示
@@ -47,7 +47,7 @@ global.controller.room = {
 			}
 
 			// 建筑（自动建造等）
-			factory.Build(roomSequence);
+			factory.Build.run(roomSequence);
 
 			// 房间显示文本
 			roomVisual(roomSequence);
