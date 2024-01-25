@@ -78,6 +78,18 @@ global.factory.Secure = {
 				textAll += text;
 			}
 		});
+		// 一个游戏对象被摧毁或是被消灭
+		let objectDestroyedEvents = _.filter(eventLog, {
+			event: EVENT_OBJECT_DESTROYED
+		});
+		if (objectDestroyedEvents.length > 0) {
+			objectDestroyedEvents.forEach(event => {
+				// 事件者ID
+				let objectId = event.objectId;
+				
+				console.log(JSON.stringify(event))
+			});
+		}
 
 		if (attackEvents.length > 0 && attackMy) {
 			Utils.notify(`【${spawnName}】房间,正在遭受攻击 ` + textAll);
