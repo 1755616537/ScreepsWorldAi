@@ -48,6 +48,7 @@ module.exports.loop = function() {
 // .BUG.把自动建CONTAINER允许在路road和可穿透墙rampart上面建
 // .设置限制TOWER维修rampart到1M就不维修
 // .采集者，升级者，会根据区域9*9哪里有CONTAINER或正在建造的CONTAINER坐标上面站着，如果已经站有一个，不做此限制
+// 生产creep时，在memory上记录属于的spawn和room。（一个room可能会有多个spawn）.BUG.把通过spawnName获取roomSequence,通过roomSequence获取spawnName代码更改
 
 // 完成程序:
 // .(废弃(改完出现错误)[此名称是 Game.creeps 对象中指向该 creep 对象的哈希键]).把小兵ID放到memory里面，不在使用小兵名称作为唯一ID值判断，改为小兵ID
