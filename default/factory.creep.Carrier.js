@@ -32,6 +32,23 @@ var pro = {
 					factory.creep.moveTo(creep, target, 'Resource');
 				}
 			} else {
+				// 墓碑
+				target = creep.pos.findClosestByPath(FIND_TOMBSTONES, {
+					filter: (structure) => {
+						return (structure.store.getUsedCapacity() > 0);
+					}
+				});
+				if (target) {
+					for (const resourceType in creep.carry) {
+						if (creep.withdraw(target, resourceType) == ERR_NOT_IN_RANGE) {
+							// 向目标移动
+							factory.creep.moveTo(creep, target, 'Resource');
+							break;
+						}
+					}
+					return;
+				}
+				
 				let source = null;
 				// 能量源区CONTAINER是否1v1运送
 				if (globalData.creepConfigs.carrier.sourceContainer1v1 && Memory.spawn[spawnName].source) {
@@ -195,12 +212,6 @@ var pro = {
 						targets.push(target);
 					}
 					targets = targets.concat(
-						// 所有墓碑
-						creep.room.find(FIND_TOMBSTONES, {
-							filter: (structure) => {
-								return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
-							}
-						}),
 						// 所有废墟
 						creep.room.find(FIND_RUINS, {
 							filter: (structure) => {
