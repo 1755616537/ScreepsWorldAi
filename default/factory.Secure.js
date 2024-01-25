@@ -79,6 +79,8 @@ global.factory.Secure = {
 				textAll += text;
 			}
 		});
+		
+		let objectDestroyedMy = false;
 		// 一个游戏对象被摧毁或是被消灭
 		let objectDestroyedEvents = _.filter(eventLog, {
 			event: EVENT_OBJECT_DESTROYED
@@ -88,13 +90,14 @@ global.factory.Secure = {
 				// 事件者ID
 				let objectId = event.objectId;
 
-				console.log(JSON.stringify(event));
 			});
 		}
-
-		if (attackEvents.length > 0 && attackMy) {
+		
+		if (attackEvents.length > 0 && attackMy){
 			Utils.notify(`【${roomName}】房间,正在遭受攻击 ` + textAll);
+		}
 
+		if (objectDestroyedMy) {
 			let on = false;
 			if (room.name == globalData.room[0].name && globalData.room[0].AutomaticSecurity) {
 				on = true;
@@ -105,7 +108,7 @@ global.factory.Secure = {
 				.AutomaticSecurity) {
 				on = true;
 			}
-			if (on && false) {
+			if (on) {
 				// 开启安全模式
 				let returnData = room.controller.activateSafeMode();
 				if (returnData == OK) {
