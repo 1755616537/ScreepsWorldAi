@@ -22,6 +22,21 @@ function work(tower) {
 		tower.attack(closestHostile);
 		return
 	}
+	
+	// 治疗
+	let closestMYCreep = tower.pos.findClosestByRange(FIND_MY_CREEPS, {
+		filter: function(object) {
+			return object.hits < object.hitsMax;
+		}
+	});
+	
+	closestMYCreep.sort((a, b) => a.hits - b.hits);
+		
+	if (closestMYCreep) {
+		// 治疗
+		tower.heal(closestMYCreep);
+		return;
+	}
 
 	// 维修
 	let targets = tower.room.find(FIND_STRUCTURES, {
@@ -71,20 +86,5 @@ function work(tower) {
 	targets.sort((a, b) => a.hits - b.hits);
 	if (targets.length > 0) {
 		tower.repair(targets[0]);
-	}
-
-	if (targets.length < 1) {
-		// 治疗
-		let closestMYCreep = tower.pos.findClosestByRange(FIND_MY_CREEPS, {
-			filter: function(object) {
-				return object.hits < object.hitsMax;
-			}
-		});
-
-		if (closestMYCreep) {
-			// 治疗
-			tower.heal(closestMYCreep);
-			return;
-		}
 	}
 }
