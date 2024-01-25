@@ -242,9 +242,9 @@ function containerEnergyStat(roomSequence) {
 	}
 	const total = _.sum(targetsStore);
 	if (total < 500) {
-		Game.notify(
-			`【${spawnName}】房间【CONTAINER能量不足500】`
-		);
+		// Game.notify(
+		// 	`【${spawnName}】房间【CONTAINER能量不足500】`
+		// );
 	}
 	Memory.spawn[spawnName].containerEnergyStat = total;
 }
