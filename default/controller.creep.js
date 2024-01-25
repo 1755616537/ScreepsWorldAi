@@ -6,62 +6,14 @@ global.controller.creep = {
 
 		// 清理内存
 		factory.creep.CleanMemory();
-
-		// 单独spawn管理
-		spawn(1);
-		// spawn(2);
-
+		
+		// 生产孵化Creep
+		produceCreep(1);
+		
 		// 事件管理
-		for (let name in Game.creeps) {
-			let creep = Game.creeps[name];
-
-			// 特别行动
-			let SpecialActions = creep.memory.SpecialActions;
-			if (SpecialActions) {
-				// 数据格式
-				// SpecialActions:{
-				// //代号
-				// 	code:'',
-				// //附加信息
-				// 	mgs:''
-				// }
-				switch (SpecialActions.code) {
-					case '':
-						break;
-					default:
-				}
-				continue;
-			}
-
-			if (creep.memory.role == globalData.harvest) {
-				factory.creep.Harvest.run(creep);
-			}
-			if (creep.memory.role == globalData.upgrader) {
-				if(!creep.memory.upgraderOuterRoom){
-					factory.creep.Upgrader.run(creep);
-				}
-			}
-			if (creep.memory.role == globalData.builder) {
-				if(!creep.memory.builderOuterRoom){
-					factory.creep.Builder.run(creep);
-				}
-			}
-			if (creep.memory.role == globalData.carrier) {
-				factory.creep.Carrier.run(creep);
-			}
-			if (creep.memory.role == globalData.repairer) {
-				factory.creep.Repairer.run(creep);
-			}
-			if (creep.memory.role == globalData.nearDefender || creep.memory.role == globalData.farDefender) {
-				factory.creep.Defender.run(creep);
-			}
-			if (creep.memory.role == globalData.theHealer) {
-				factory.creep.TheHealer.run(creep);
-			}
-			if (creep.memory.role == globalData.occupier) {
-				factory.creep.Occupier.run(creep);
-			}
-		}
+		eventManagement();
+		
+		
 	}
 }
 
@@ -164,8 +116,62 @@ function addOccupier(occupiers, controller_level, spawnSequence) {
 	}
 }
 
+// 事件管理
+function eventManagement(){
+	for (let name in Game.creeps) {
+		let creep = Game.creeps[name];
+	
+		// 特别行动
+		let SpecialActions = creep.memory.SpecialActions;
+		if (SpecialActions) {
+			// 数据格式
+			// SpecialActions:{
+			// //代号
+			// 	code:'',
+			// //附加信息
+			// 	mgs:''
+			// }
+			switch (SpecialActions.code) {
+				case '':
+					break;
+				default:
+			}
+			continue;
+		}
+	
+		if (creep.memory.role == globalData.harvest) {
+			factory.creep.Harvest.run(creep);
+		}
+		if (creep.memory.role == globalData.upgrader) {
+			if(!creep.memory.upgraderOuterRoom){
+				factory.creep.Upgrader.run(creep);
+			}
+		}
+		if (creep.memory.role == globalData.builder) {
+			if(!creep.memory.builderOuterRoom){
+				factory.creep.Builder.run(creep);
+			}
+		}
+		if (creep.memory.role == globalData.carrier) {
+			factory.creep.Carrier.run(creep);
+		}
+		if (creep.memory.role == globalData.repairer) {
+			factory.creep.Repairer.run(creep);
+		}
+		if (creep.memory.role == globalData.nearDefender || creep.memory.role == globalData.farDefender) {
+			factory.creep.Defender.run(creep);
+		}
+		if (creep.memory.role == globalData.theHealer) {
+			factory.creep.TheHealer.run(creep);
+		}
+		if (creep.memory.role == globalData.occupier) {
+			factory.creep.Occupier.run(creep);
+		}
+	}
+}
 
-function spawn(spawnSequence = 1) {
+// 生产孵化Creep
+function produceCreep(spawnSequence = 1) {
 	let spawnName = factory.spawn.sequenceGetName(spawnSequence);
 
 	const harvests = factory.creep.Harvest.ALL(spawnSequence);
