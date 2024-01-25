@@ -345,21 +345,26 @@ function transfer(creep) {
 		});
 	}
 	if (targets.length > 0) {
-		// 转移所有资源
-		let storage = targets[0];
+		let resourceGhodium = false;
 		for (const resourceType in creep.carry) {
+			if (resourceType == RESOURCE_GHODIUM) {
+				resourceGhodium = true;
+			}
+		}
+		let storage = factory.spawn.get(roomSequence);
+		if (resourceGhodium) {
 			// 将资源从该 creep 转移至其他对象
-			if (creep.transfer(storage, resourceType) == ERR_NOT_IN_RANGE) {
+			if (creep.transfer(storage, RESOURCE_GHODIUM) == ERR_NOT_IN_RANGE) {
 				// 向目标移动
 				factory.creep.moveTo(creep, storage);
 			}
+			return;
 		}
-
-		// // 将资源从该 creep 转移至其他对象
-		// if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-		// 	// 向目标移动
-		// 	factory.creep.moveTo(creep, targets[0]);
-		// }
+		// 将资源从该 creep 转移至其他对象
+		if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+			// 向目标移动
+			factory.creep.moveTo(creep, targets[0]);
+		}
 	} else {
 		// 储存能量都满了不用搬运能量,先干其他
 		let targets = creep.room.find(FIND_CONSTRUCTION_SITES);
