@@ -345,10 +345,12 @@ function transfer(creep) {
 			}
 			targets = targets2;
 		} else {
-			// 当控制器Container储存能量低于总量30%才运送
-			if (!(targets.store.getFreeCapacity(RESOURCE_ENERGY) > targets.store.getCapacity(
-					RESOURCE_ENERGY) / 3)) {
-				targets = [];
+			if(targets.length==1){
+				// 当控制器Container储存能量低于总量30%才运送
+				if (!(targets.store.getFreeCapacity(RESOURCE_ENERGY) > targets.store.getCapacity(
+						RESOURCE_ENERGY) / 3)) {
+					targets = [];
+				}
 			}
 		}
 	}
