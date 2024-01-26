@@ -33,7 +33,7 @@ function addUpgrader(upgraders, controller_level, spawnSequence) {
 		let returnData;
 		// 房间CONTAINER总能量在2000以下时,只会存在一个升级者
 		if (upgraders.length > 0) {
-			if (Memory.spawn[spawnName].containerEnergyStat > 2000) {
+			if (Memory.spawn[spawnName].containerExtensionStorageEnergyStat > 2000) {
 				returnData = factory.creep.addUpgrader(upgraders, controller_level, spawnSequence);
 			}
 		} else {

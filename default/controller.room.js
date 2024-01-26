@@ -53,8 +53,8 @@ global.controller.room = {
 			// 房间显示文本
 			roomVisual(roomSequence);
 
-			// CONTAINER能量统计
-			containerEnergyStat(roomSequence);
+			// CONTAINER+EXTENSION+STORAGE能量统计
+			containerExtensionStorageEnergyStat(roomSequence);
 		});
 
 		// 能量源区Container记录管理
@@ -243,13 +243,15 @@ function harvestBuildCONTAINER(roomSequence) {
 	}
 }
 
-// CONTAINER能量统计
-function containerEnergyStat(roomSequence) {
+// CONTAINER+EXTENSION+STORAGE能量统计
+function containerExtensionStorageEnergyStat(roomSequence) {
 	let roomName = factory.room.sequenceGetName(roomSequence);
 	let spawnName = factory.spawn.sequenceGetName(roomSequence);
 	let targets = factory.room.get(roomSequence).find(FIND_STRUCTURES, {
 		filter: (structure) => {
-			return (structure.structureType == STRUCTURE_CONTAINER) &&
+			return (structure.structureType == STRUCTURE_CONTAINER ||
+					structure.structureType == STRUCTURE_EXTENSION ||
+					structure.structureType == STRUCTURE_STORAGE) &&
 				structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
 		}
 	});
@@ -259,12 +261,12 @@ function containerEnergyStat(roomSequence) {
 	}
 	const total = _.sum(targetsStore);
 	if (total < 500) {
-		// clog('房间' + roomName,'CONTAINER能量不足500');
-		// Utils.notify(
-		// 	`【${roomName}】房间【CONTAINER能量不足500】`
-		// );
+		clog('房间' + roomName,'CONTAINER+EXTENSION+STORAGE能量不足500');
+		Utils.notify(
+			`【${roomName}】房间【CONTAINER+EXTENSION+STORAGE能量不足500】`
+		);
 	}
-	Memory.spawn[spawnName].containerEnergyStat = total;
+	Memory.spawn[spawnName].containerExtensionStorageEnergyStat = total;
 }
 
 // 临时外部房间,升级
