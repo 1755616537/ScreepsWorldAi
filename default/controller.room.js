@@ -259,8 +259,8 @@ function containerExtensionStorageEnergyStat(roomSequence) {
 	for (var i = 0; i < targets.length; i++) {
 		targetsStore.push(targets[i].store[RESOURCE_ENERGY]);
 	}
-	const total = _.sum(targetsStore);
-	if (total < 500) {
+	let total = _.sum(targetsStore);
+	if (parseInt(total) < 500) {
 		clog('房间' + roomName, 'CONTAINER+EXTENSION+STORAGE能量不足500');
 		Utils.notify(
 			`【${roomName}】房间【CONTAINER+EXTENSION+STORAGE能量不足500】`
