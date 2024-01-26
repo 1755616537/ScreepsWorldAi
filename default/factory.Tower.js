@@ -12,7 +12,7 @@ global.factory.Tower = {
 		if (targets.length) {
 			_.forEach(targets, target => {
 				work(target);
-				
+
 				// const source = Game.getObjectById('65b28bef2bc6bc6a1b1bbf53');
 				// target.attack(source);
 			});
@@ -21,8 +21,19 @@ global.factory.Tower = {
 }
 
 function work(tower) {
-	// 攻击
-	let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+	// 攻击 先攻击治疗
+	let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
+		filter: (structure) => {
+			let on = false;
+			let body = structure.body;
+			for (var i = 0; i < body.length; i++) {
+				body[i].type == HEAL;
+				on = true;
+				break
+			}
+			return on;
+		}
+	});
 	if (closestHostile) {
 		tower.attack(closestHostile);
 		return
