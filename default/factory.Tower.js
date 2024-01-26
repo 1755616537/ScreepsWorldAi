@@ -35,6 +35,9 @@ function work(tower) {
 			return on;
 		}
 	});
+	if (!closestHostile) {
+		closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+	}
 	if (closestHostile) {
 		tower.attack(closestHostile);
 		return
