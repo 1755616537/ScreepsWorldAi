@@ -347,7 +347,7 @@ function transfer(creep) {
 		} else {
 			if(targets.length==1){
 				// 当控制器Container储存能量低于总量30%才运送
-				if (!(targets.store.getFreeCapacity(RESOURCE_ENERGY) > targets.store.getCapacity(
+				if (!(targets[0].store.getFreeCapacity(RESOURCE_ENERGY) > targets[0].store.getCapacity(
 						RESOURCE_ENERGY) / 3)) {
 					targets = [];
 				}
