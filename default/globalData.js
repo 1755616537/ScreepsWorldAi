@@ -102,7 +102,7 @@ global.globalData = {
 		// 运输者
 		'carrier': {
 			bodys: {
-				list: [WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE],
+				list: [WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE],
 				totalEnergyRequired: 200
 			},
 			bodysMinus: {
