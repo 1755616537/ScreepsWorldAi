@@ -39,9 +39,9 @@ module.exports.loop = function() {
 // .外能量源采集
 // .每个STORAGE搭配一个运输者。如果存在STORAGE并且搭配有运输者，其他运输者才可以把能量放到STORAGE
 // .spawn是否停止获取能量，先用于生产
-// .可以选择根据room总能量上限energyCapacityAvailable动态调整配置
+// .可以选择根据room总能量上限energyCapacityAvailable动态调整配置，energyAvailable来判断是否可以生产
 // .TOWER逻辑顺序攻击，维修，治疗，运输者是否1v1运送能量或者1vN运送能量
-// .安全模式，发现敌人安全模式开启，在外creep返回墙内
+// .安全模式，发现敌人安全模式开启，在外creep返回墙内.计算危险区域(Terrain静态地形)，当开启安全模式，creep不得移动到危险区域，除了攻击者除外
 // .矿床Mineral，稀有资源储备Deposit。自动9*9内建CONTAINER(允许在路road上面建)，限制就1个CONTAINER
 // .限制每个能量源就1个CONTAINER
 // .BUG.把自动建CONTAINER允许在路road和可穿透墙rampart上面建
@@ -51,7 +51,8 @@ module.exports.loop = function() {
 // .BUG.在获取roomSequence时判断roomName是否存在配置中，如果不存在抛出异常
 // .多个spawn同时生产creep时，用类型名称+时间+spawn名称+_.uniqueId（harvest_564563_spawn1_100）
 // .任务调派运输资源查看creep的store剩余可储存的数量在判断是否需要多名一起运输
-// 计算危险区域，当开启安全模式，creep不得移动到危险区域，除了攻击者除外
+// .renewCreep增加目标 creep 的剩余生存时间
+// .核弹原爆点FIND_NUKES,邮件提示并且房间文本显示（发射此核弹的房间名launchRoomName+着落倒计时timeToLand）
 
 // 完成程序:
 // .(废弃(改完出现错误)[此名称是 Game.creeps 对象中指向该 creep 对象的哈希键]).把小兵ID放到memory里面，不在使用小兵名称作为唯一ID值判断，改为小兵ID
