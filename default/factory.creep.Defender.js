@@ -51,6 +51,7 @@ function nearDefenderRun(creep) {
 
 function farDefenderRun(creep) {
 	const targets = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 3);
+	console.log('targets',targets)
 	if (targets.length > 0) {
 		// 3 格范围内的所有敌方 creep 和建筑进行攻击
 		// creep.rangedMassAttack();
