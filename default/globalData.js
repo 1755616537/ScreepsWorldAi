@@ -1,31 +1,6 @@
 global.globalData = {
 	// 总输出
 	clog: true,
-	structuresShape: {
-		"spawn": "◎",
-		"extension": "ⓔ",
-		"link": "◈",
-		"road": "•",
-		"constructedWall": "▓",
-		"rampart": "⊙",
-		"storage": "▤",
-		"tower": "🔫",
-		"observer": "👀",
-		"powerSpawn": "❂",
-		"extractor": "☸",
-		"terminal": "✡",
-		"lab": "☢",
-		"container": "□",
-		"nuker": "▲",
-		"factory": "☭"
-	},
-	// 移动
-	Move: {
-		// 工作颜色
-		WorkColor: '#ffaa00',
-		// 获取资源颜色
-		WorkResourceColor: '#ffff00',
-	},
 	username: '1755616537',
 	// 房间
 	room: [{
@@ -228,6 +203,13 @@ global.globalData = {
 			number: 0
 		}
 	},
+	// 移动
+	Move: {
+		// 工作颜色
+		WorkColor: '#ffaa00',
+		// 获取资源颜色
+		WorkResourceColor: '#ffff00',
+	},
 	// 采集者ID
 	harvest: 'harvest',
 	// 升级者ID
@@ -273,5 +255,23 @@ global.globalData = {
 		CLAIM: 600,
 		// 无附加效果，唯一作用是增加 creep 的最大耐久值。可被强化以承受更多伤害。
 		TOUGH: 10,
+	},
+	structuresShape: {
+		"spawn": "◎",
+		"extension": "ⓔ",
+		"link": "◈",
+		"road": "•",
+		"constructedWall": "▓",
+		"rampart": "⊙",
+		"storage": "▤",
+		"tower": "🔫",
+		"observer": "👀",
+		"powerSpawn": "❂",
+		"extractor": "☸",
+		"terminal": "✡",
+		"lab": "☢",
+		"container": "□",
+		"nuker": "▲",
+		"factory": "☭"
 	}
 }
