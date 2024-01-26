@@ -50,6 +50,7 @@ module.exports.loop = function() {
 // 生产creep时，在memory上记录属于的spawn和room。（一个room可能会有多个spawn）.BUG.把通过spawnName获取roomSequence,通过roomSequence获取spawnName代码更改
 // .BUG.在获取roomSequence时判断roomName是否存在配置中，如果不存在抛出异常
 // .多个spawn同时生产creep时，用类型名称+时间+spawn名称+_.uniqueId（harvest_564563_spawn1_100）
+// .任务调派运输资源查看creep的store剩余可储存的数量在判断是否需要多名一起运输
 
 // 完成程序:
 // .(废弃(改完出现错误)[此名称是 Game.creeps 对象中指向该 creep 对象的哈希键]).把小兵ID放到memory里面，不在使用小兵名称作为唯一ID值判断，改为小兵ID
