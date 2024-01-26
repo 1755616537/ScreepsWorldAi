@@ -22,7 +22,7 @@ global.controller.room = {
 					let target = Game.getObjectById(event.data.targetId);
 					if (target && target.progress && target.progressTotal) {
 						if (target.progress + event.data.amount >= target.progressTotal) {
-							clog('房间' + roomName,'建造完成',JSON.stringify(event));
+							clog('房间' + roomName, '建造完成', JSON.stringify(event));
 							Utils.notify(
 								`【${roomName}】房间,id【${event.data.targetId}】${event.data.structureType} x${event.data.x} y${event.data.y}【建造】【完成】`
 							);
@@ -37,7 +37,7 @@ global.controller.room = {
 			});
 			if (objectDestroyedEvents.length > 0) {
 				objectDestroyedEvents.forEach(event => {
-					clog('房间' + roomName,'一个游戏对象被摧毁或是被消灭',JSON.stringify(event));
+					clog('房间' + roomName, '一个游戏对象被摧毁或是被消灭', JSON.stringify(event));
 					if (event.data.type != 'creep') {
 						Utils.notify(
 							`【${roomName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
@@ -63,7 +63,7 @@ global.controller.room = {
 		controllerContainer(1);
 		// 采集建造CONTAINER记录管理
 		harvestBuildCONTAINER(1);
-		
+
 		// 临时外部房间,升级
 		upgraderOuterRoom(2);
 		// 临时外部房间,建造
@@ -261,7 +261,7 @@ function containerExtensionStorageEnergyStat(roomSequence) {
 	}
 	const total = _.sum(targetsStore);
 	if (total < 500) {
-		clog('房间' + roomName,'CONTAINER+EXTENSION+STORAGE能量不足500');
+		clog('房间' + roomName, 'CONTAINER+EXTENSION+STORAGE能量不足500');
 		Utils.notify(
 			`【${roomName}】房间【CONTAINER+EXTENSION+STORAGE能量不足500】`
 		);
