@@ -56,7 +56,10 @@ function farDefenderRun(creep) {
 		// creep.rangedMassAttack();
 
 		// 远程攻击其他 creep 或者建筑
-		creep.rangedAttack(targets[0]);
+		console.log(creep.rangedAttack(targets[0]));
+		if (creep.rangedAttack(targets[0]) == ERR_NOT_IN_RANGE) {
+			factory.creep.moveTo(creep, targets[0]);
+		}
 	}
 
 }
