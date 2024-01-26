@@ -5,7 +5,9 @@ global.globalData = {
 	// 房间
 	room: [{
 			name: 'W47S54',
-			SpawnName: 'Spawn1',
+			Spawn1Name: 'Spawn1',
+			Spawn2Name: '',
+			Spawn3Name: '',
 			// 自动安全(受到攻击自动开启)
 			AutomaticSecurity: true,
 			// 采集者自动分配矿区
@@ -17,7 +19,9 @@ global.globalData = {
 		},
 		{
 			name: 'W48S54',
-			SpawnName: 'Spawn2',
+			Spawn1Name: 'Spawn2',
+			Spawn2Name: '',
+			Spawn3Name: '',
 			AutomaticSecurity: true,
 			AutomaticAssignHarvest: true,
 			AutomaticAssignHarvestCONTAINER: true,
@@ -25,7 +29,9 @@ global.globalData = {
 		},
 		{
 			name: '',
-			SpawnName: 'Spawn3',
+			Spawn1Name: 'Spawn3',
+			Spawn2Name: '',
+			Spawn3Name: '',
 			AutomaticSecurity: true,
 			AutomaticAssignHarvest: true,
 			AutomaticAssignHarvestCONTAINER: true,
