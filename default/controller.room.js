@@ -269,6 +269,7 @@ function containerExtensionStorageEnergyStat(roomSequence) {
 		);
 	}
 	Memory.spawn[spawnName].containerExtensionStorageEnergyStat = total;
+	console.log(Memory.spawn[spawnName].containerExtensionStorageEnergyStat, total)
 }
 
 // 临时外部房间,升级
