@@ -259,7 +259,7 @@ function containerExtensionStorageEnergyStat(roomSequence) {
 	let total = 0;
 	for (var i = 0; i < targets.length; i++) {
 		let energy = targets[i].store[RESOURCE_ENERGY];
-		total += parseInt(energy);
+		total += parseInt(energy ? energy : 0);
 		targetsStore.push(energy);
 	}
 	if (parseInt(total) < 500) {
