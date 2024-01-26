@@ -252,7 +252,7 @@ function containerExtensionStorageEnergyStat(roomSequence) {
 			return (structure.structureType == STRUCTURE_CONTAINER ||
 					structure.structureType == STRUCTURE_EXTENSION ||
 					structure.structureType == STRUCTURE_STORAGE) &&
-				structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+				structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
 		}
 	});
 	let targetsStore = [];
