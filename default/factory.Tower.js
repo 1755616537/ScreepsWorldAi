@@ -27,9 +27,10 @@ function work(tower) {
 			let on = false;
 			let body = structure.body;
 			for (var i = 0; i < body.length; i++) {
-				body[i].type == HEAL;
-				on = true;
-				break
+				if (body[i].type == HEAL) {
+					on = true;
+					break
+				}
 			}
 			return on;
 		}
