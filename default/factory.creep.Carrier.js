@@ -39,7 +39,7 @@ var pro = {
 					}
 				});
 				if (target) {
-					for (const resourceType in target.creep.carry) {
+					for (const resourceType in target.store) {
 						if (creep.withdraw(target, resourceType) == ERR_NOT_IN_RANGE) {
 							// 向目标移动
 							factory.creep.moveTo(creep, target, 'Resource');
