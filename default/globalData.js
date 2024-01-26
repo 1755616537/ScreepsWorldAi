@@ -26,6 +26,7 @@ global.globalData = {
 		// 获取资源颜色
 		WorkResourceColor: '#ffff00',
 	},
+	username: '1755616537',
 	// 房间
 	room: [{
 			name: 'W47S54',

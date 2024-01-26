@@ -17,9 +17,21 @@ let pro = {
 		let spawnName = factory.spawn.sequenceGetName(roomSequence);
 
 		if (creep.memory.work) { // 升级状态，找到控制器并升级 + 可视化
-			if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-				factory.creep.moveTo(creep, creep.room.controller);
+			if (!creep.room.controller.sign) {
+				if (creep.room.controller.sign.username != globalData.username) {
+					// 对控制器签名
+					if (creep.signController(creep.room.controller, "peaceful development.") ==
+						ERR_NOT_IN_RANGE) {
+						factory.creep.moveTo(creep, creep.room.controller);
+					}
+				}
+			} else {
+				// 升级
+				if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+					factory.creep.moveTo(creep, creep.room.controller);
+				}
 			}
+
 		} else { // 采集状态 + 可视化
 			const harvests = factory.creep.Harvest.ALL(roomSequence);
 			if (harvests.length < 1) {
