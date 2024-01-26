@@ -256,10 +256,12 @@ function containerExtensionStorageEnergyStat(roomSequence) {
 		}
 	});
 	let targetsStore = [];
+	let total = 0;
 	for (var i = 0; i < targets.length; i++) {
-		targetsStore.push(targets[i].store[RESOURCE_ENERGY]);
+		let energy = targets[i].store[RESOURCE_ENERGY];
+		total += parseInt(energy);
+		targetsStore.push(energy);
 	}
-	let total = _.sum(targetsStore);
 	if (parseInt(total) < 500) {
 		clog('房间' + roomName, 'CONTAINER+EXTENSION+STORAGE能量' + total + '不足500');
 		Utils.notify(
