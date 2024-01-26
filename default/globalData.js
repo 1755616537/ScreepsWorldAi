@@ -168,7 +168,7 @@ global.globalData = {
 				],
 				totalEnergyRequired: 300
 			},
-			number: 1
+			number: 0
 		},
 		// 治疗者
 		'theHealer': {
