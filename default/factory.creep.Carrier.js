@@ -202,7 +202,8 @@ var pro = {
 					let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
 						filter: (structure) => {
 							// 找出有储存能量的container搬运
-							return (structure.structureType == STRUCTURE_CONTAINER) &&
+							return (structure.structureType == STRUCTURE_CONTAINER ||
+									structure.structureType == STRUCTURE_STORAGE) &&
 								(on ? structure.id != memoryControllerContainer.id : true) &&
 								structure.store.getUsedCapacity(RESOURCE_ENERGY) > 100;
 						}
@@ -345,7 +346,7 @@ function transfer(creep) {
 			}
 			targets = targets2;
 		} else {
-			if(targets.length==1){
+			if (targets.length == 1) {
 				// 当控制器Container储存能量低于总量30%才运送
 				if (!(targets[0].store.getFreeCapacity(RESOURCE_ENERGY) > targets[0].store.getCapacity(
 						RESOURCE_ENERGY) / 3)) {
@@ -359,7 +360,7 @@ function transfer(creep) {
 			filter: (structure) => {
 				// 找出需要储存能量
 				return (structure.structureType == STRUCTURE_STORAGE) &&
-					structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+					structure.store.getFreeCapacity() > 0;
 			}
 		});
 	}
