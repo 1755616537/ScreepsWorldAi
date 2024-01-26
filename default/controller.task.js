@@ -42,6 +42,7 @@ function addTask() {
 				return object.hits < object.hitsMax;
 			}
 		});
+		myCreepHitsF.sort((a, b) => a.hits - b.hits);
 
 		// 敌方CREEPS
 		const hostileCreep = room.find(FIND_HOSTILE_CREEPS);
@@ -55,6 +56,7 @@ function addTask() {
 				return (structure.store.getUsedCapacity() > 0);
 			}
 		});
+		tombstones.sort((a, b) => a.ticksToDecay - b.ticksToDecay);
 
 		// 控制器升级
 		let controller = room.controller;
