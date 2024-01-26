@@ -261,9 +261,9 @@ function containerExtensionStorageEnergyStat(roomSequence) {
 	}
 	let total = _.sum(targetsStore);
 	if (parseInt(total) < 500) {
-		clog('房间' + roomName, 'CONTAINER+EXTENSION+STORAGE能量不足500');
+		clog('房间' + roomName, 'CONTAINER+EXTENSION+STORAGE能量' + total + '不足500');
 		Utils.notify(
-			`【${roomName}】房间【CONTAINER+EXTENSION+STORAGE能量不足500】`
+			`【${roomName}】房间【CONTAINER+EXTENSION+STORAGE能量${total}不足500】`
 		);
 	}
 	Memory.spawn[spawnName].containerExtensionStorageEnergyStat = total;
