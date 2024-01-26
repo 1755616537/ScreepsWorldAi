@@ -52,10 +52,10 @@ global.controller.room = {
 
 			// 房间显示文本
 			roomVisual(roomSequence);
-
-			// CONTAINER+EXTENSION+STORAGE能量统计
-			containerExtensionStorageEnergyStat(roomSequence);
 		});
+		
+		// CONTAINER+EXTENSION+STORAGE能量统计
+		containerExtensionStorageEnergyStat(1);
 
 		// 能量源区Container记录管理
 		sourceContainer(1);
