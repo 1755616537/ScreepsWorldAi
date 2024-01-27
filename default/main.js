@@ -34,9 +34,9 @@ module.exports.loop = function() {
 // .废弃（可能会缺失部件导致程序错误，能量消费不是最优解）.多一种角色管理系统，不区分兵种，先统一分配后固定站岗，缺少了补上，1对1搬运
 // .统一任务调度机制
 // .creep阵型，攻击拉扯
-// .自动铺路，能量源，控制器。方案1：两点最近距离.方案2：走得次数多的地方铺路
+// .自动铺路，能量源，控制器。方案1：两点最近距离（PathFinder.search）.方案2：走得次数多的地方铺路
 // .createConstructionSite自动布局EXTENSION建筑 控制器等级3布局TOWER
-// .外能量源采集
+// .外能量源采集（根据给定的房间名列出所有可用的出口Game.map.describeExits）
 // .每个STORAGE搭配一个运输者。如果存在STORAGE并且搭配有运输者，其他运输者才可以把能量放到STORAGE
 // .spawn是否停止获取能量，先用于生产
 // .可以选择根据room总能量上限energyCapacityAvailable动态调整配置，energyAvailable来判断是否可以生产
