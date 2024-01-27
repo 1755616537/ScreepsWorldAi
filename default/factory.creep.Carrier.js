@@ -368,8 +368,9 @@ function transfer(creep) {
 		let resourceGhodium = false;
 		for (const resourceType in creep.carry) {
 			// console.log(resourceType)
-			if (_.startsWith(resourceType, RESOURCE_GHODIUM)) {
+			if (resourceType != RESOURCE_ENERGY) {
 				resourceGhodium = true;
+				break;
 			}
 		}
 		if (resourceGhodium) {
