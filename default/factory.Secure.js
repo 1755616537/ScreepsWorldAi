@@ -102,7 +102,7 @@ global.factory.Secure = {
 				let attackEventsList = Memory.attackEventsList;
 				for (var i = 0; i < attackEventsList.length; i++) {
 					if (attackEventsList[i].targetId == objectId) {
-						if (time - attackEventsList[i].time <= 5) {
+						if (time - attackEventsList[i].time <= 5 && event.data.type != 'creep') {
 							objectDestroyedMy = true;
 							break;
 						}
