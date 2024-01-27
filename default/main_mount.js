@@ -15,6 +15,7 @@ require("log");
 // -------------------------------工具
 require("utils");
 require('超级移动优化hotfix 0.9.4');
+// require('极致建筑缓存 v1.4.3');
 // -------------------------------工厂模块
 // 任务
 require('factory.task')
