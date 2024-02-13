@@ -437,6 +437,8 @@ function transferControllerContainer(creep) {
 	let roomName = factory.room.sequenceGetName(roomSequence);
 
 	// 控制器旁是否有CONTAINER或在建的CONTAINER
+	if (!creep.room.controller) return false;
+	if (!creep.room.controller.pos) return false;
 	let pos = creep.room.controller.pos;
 	let found = creep.room.lookAtArea(pos.y - 1, pos.x - 1, pos.y + 1, pos.x + 1, true);
 	let found2 = _.filter(found, (f) => f.type == LOOK_CONSTRUCTION_SITES || (f.type == LOOK_STRUCTURES && f
