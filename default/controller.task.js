@@ -64,12 +64,12 @@ function addTask() {
 		// 控制器CONTAINER能量供给运输
 
 		// 能量源采集
-		const sources = creep.room.find(FIND_SOURCES);
+		const sources = room.find(FIND_SOURCES);
 
 		// 能量源CONTAINER能量搬运
 
 		// 矿采集
-		const minerals = creep.room.find(FIND_MINERALS);
+		const minerals = room.find(FIND_MINERALS);
 
 		// 矿CONTAINER资源搬运
 
