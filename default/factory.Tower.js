@@ -71,7 +71,7 @@ function work(tower) {
 			filter: (structure) => {
 				return (structure.structureType == STRUCTURE_RAMPART) &&
 					structure.hits < structure.hitsMax &&
-					structure.hits < 100 * 10000;
+					structure.hits < 100 * 10000 * 10;
 			}
 		});
 	}
