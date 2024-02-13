@@ -7,9 +7,10 @@ require("main_mount")();
 // 主程序入口 每次tips都执行一次
 module.exports.loop = function() {
 	// 任务调度启动
-	// controller.task.run();
-	
+	controller.task.run();
+	// 房间管理
 	controller.room.run();
+	// creep管理
 	controller.creep.run();
 
 	// clog('本次tips使用 CPU 时间总量 ',Game.cpu.getUsed())
