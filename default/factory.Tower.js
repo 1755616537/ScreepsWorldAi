@@ -10,8 +10,25 @@ global.factory.Tower = {
 			}
 		});
 		if (targets.length) {
+			const storages = room.find(FIND_STRUCTURES, {
+				filter: (structure) => {
+					return structure.structureType == STRUCTURE_STORAGE;
+				}
+			});
+			let storageClosestTower;
+			if (storages.length > 0) {
+				storageClosestTower = storages[0].pos.findClosestByRange(FIND_MY_STRUCTURES, {
+					filter: (structure) => {
+						return structure.structureType == STRUCTURE_TOWER;
+					}
+				});
+			}
 			_.forEach(targets, target => {
-				work(target);
+				if (storageClosestTower && storageClosestTower.id == target.id) {
+					work(target, 1);
+				} else {
+					work(target);
+				}
 
 				// const source = Game.getObjectById('65b28bef2bc6bc6a1b1bbf53');
 				// target.attack(source);
@@ -20,7 +37,7 @@ global.factory.Tower = {
 	}
 }
 
-function work(tower) {
+function work(tower, type) {
 	// 攻击 先攻击治疗
 	let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
 		filter: (structure) => {
@@ -71,7 +88,7 @@ function work(tower) {
 			filter: (structure) => {
 				return (structure.structureType == STRUCTURE_RAMPART) &&
 					structure.hits < structure.hitsMax &&
-					structure.hits < 100 * 10000 * 1;
+					(type == 1 ? structure.hits < 100 * 10000 * 10 : structure.hits < 100 * 10000 * 1);
 			}
 		});
 	}
@@ -90,7 +107,7 @@ function work(tower) {
 			filter: (structure) => {
 				return (structure.structureType == STRUCTURE_WALL) &&
 					structure.hits < structure.hitsMax &&
-					structure.hits < 100 * 10000;
+					(type == 1 ? structure.hits < 100 * 10000 * 10 : structure.hits < 100 * 10000 * 1);
 			}
 		});
 	}
