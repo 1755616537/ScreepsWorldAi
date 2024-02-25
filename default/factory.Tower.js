@@ -74,54 +74,59 @@ function work(tower, type) {
 		tower.heal(closestMYCreep[0]);
 		return;
 	}
-
-	// 维修
-	let targets = tower.room.find(FIND_STRUCTURES, {
-		filter: (structure) => {
-			return (structure.structureType == STRUCTURE_CONTAINER) &&
-				structure.hits < structure.hitsMax;
-		}
-	});
-	// 可通行墙壁
-	if (targets.length < 1) {
-		targets = tower.room.find(FIND_STRUCTURES, {
+	
+	if(type == 1){
+		
+	}else{
+		// 维修
+		let targets = tower.room.find(FIND_STRUCTURES, {
 			filter: (structure) => {
-				return (structure.structureType == STRUCTURE_RAMPART) &&
-					structure.hits < structure.hitsMax &&
-					(type == 1 ? structure.hits < 100 * 10000 * 10 : structure.hits < 100 * 10000 * 1);
-			}
-		});
-	}
-	// 路
-	if (targets.length < 1) {
-		targets = tower.room.find(FIND_STRUCTURES, {
-			filter: (structure) => {
-				return (structure.structureType == STRUCTURE_ROAD) &&
+				return (structure.structureType == STRUCTURE_CONTAINER) &&
 					structure.hits < structure.hitsMax;
 			}
 		});
+		// 可通行墙壁
+		if (targets.length < 1) {
+			targets = tower.room.find(FIND_STRUCTURES, {
+				filter: (structure) => {
+					return (structure.structureType == STRUCTURE_RAMPART) &&
+						structure.hits < structure.hitsMax &&
+						structure.hits < 100 * 10000 * 10;
+				}
+			});
+		}
+		// 路
+		if (targets.length < 1) {
+			targets = tower.room.find(FIND_STRUCTURES, {
+				filter: (structure) => {
+					return (structure.structureType == STRUCTURE_ROAD) &&
+						structure.hits < structure.hitsMax;
+				}
+			});
+		}
+		// 墙壁
+		if (targets.length < 1) {
+			targets = tower.room.find(FIND_STRUCTURES, {
+				filter: (structure) => {
+					return (structure.structureType == STRUCTURE_WALL) &&
+						structure.hits < structure.hitsMax &&
+						structure.hits < 100 * 10000 * 10;
+				}
+			});
+		}
+		if (targets.length < 1) {
+			targets = tower.room.find(FIND_STRUCTURES, {
+				filter: (structure) => {
+					return structure.hits < structure.hitsMax &&
+						structure.structureType != STRUCTURE_WALL &&
+						structure.structureType != STRUCTURE_RAMPART;
+				}
+			});
+		}
+		targets.sort((a, b) => a.hits - b.hits);
+		if (targets.length > 0) {
+			tower.repair(targets[0]);
+		}
 	}
-	// 墙壁
-	if (targets.length < 1) {
-		targets = tower.room.find(FIND_STRUCTURES, {
-			filter: (structure) => {
-				return (structure.structureType == STRUCTURE_WALL) &&
-					structure.hits < structure.hitsMax &&
-					(type == 1 ? structure.hits < 100 * 10000 * 10 : structure.hits < 100 * 10000 * 1);
-			}
-		});
-	}
-	if (targets.length < 1) {
-		targets = tower.room.find(FIND_STRUCTURES, {
-			filter: (structure) => {
-				return structure.hits < structure.hitsMax &&
-					structure.structureType != STRUCTURE_WALL &&
-					structure.structureType != STRUCTURE_RAMPART;
-			}
-		});
-	}
-	targets.sort((a, b) => a.hits - b.hits);
-	if (targets.length > 0) {
-		tower.repair(targets[0]);
-	}
+	
 }
