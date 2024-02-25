@@ -54,7 +54,7 @@ module.exports.loop = function() {
 // .任务调派运输资源查看creep的store剩余可储存的数量在判断是否需要多名一起运输
 // .renewCreep增加目标 creep 的剩余生存时间
 // .核弹原爆点FIND_NUKES,邮件提示并且房间文本显示（发射此核弹的房间名launchRoomName+着落倒计时timeToLand）
-// .离STORAGE最近的TOWER，才会消耗能量补充墙壁
+
 
 // 完成程序:
 // .(废弃(改完出现错误)[此名称是 Game.creeps 对象中指向该 creep 对象的哈希键]).把小兵ID放到memory里面，不在使用小兵名称作为唯一ID值判断，改为小兵ID
@@ -71,6 +71,7 @@ module.exports.loop = function() {
 // .Game.notify邮件提示配置开关添加,统一入口使用，限制一分钟内有相同信息不重复发送
 // .在room受到攻击，记录受到攻击对象的id和时间，在摧毁时查询记录是否在固定时间内（5）受到攻击，才开启安全模式
 // .在一分钟内受到攻击，并且我方建筑物被摧毁，才开启控制器安全模式
+// .离STORAGE最近的TOWER，才会消耗能量补充墙壁
 
 
 
