@@ -89,7 +89,7 @@ function work(tower, type) {
 				filter: (structure) => {
 					return (structure.structureType == STRUCTURE_RAMPART) &&
 						structure.hits < structure.hitsMax &&
-						structure.hits < 100 * 10000 * 10;
+						structure.hits < 100 * 10000 * 1;
 				}
 			});
 		}
@@ -108,7 +108,7 @@ function work(tower, type) {
 				filter: (structure) => {
 					return (structure.structureType == STRUCTURE_WALL) &&
 						structure.hits < structure.hitsMax &&
-						structure.hits < 100 * 10000 * 10;
+						structure.hits < 100 * 10000 * 1;
 				}
 			});
 		}
