@@ -31,6 +31,8 @@ require('factory.Build')
 require('factory.source')
 // 塔
 require('factory.Tower')
+// 能量远程传输
+require('factory.Link')
 // 爬爬
 require('factory.creep')
 // 采集
