@@ -22,7 +22,6 @@ global.factory.Tower = {
 						return structure.structureType == STRUCTURE_TOWER;
 					}
 				});
-				console.log('storageClosestTower',storageClosestTower)
 			}
 			_.forEach(targets, target => {
 				if (storageClosestTower && storageClosestTower.id == target.id) {
@@ -75,10 +74,8 @@ function work(tower, type) {
 		tower.heal(closestMYCreep[0]);
 		return;
 	}
-	
-	if(type == 1){
-		
-	}else{
+
+	if (type == 1) {
 		// 维修
 		let targets = tower.room.find(FIND_STRUCTURES, {
 			filter: (structure) => {
@@ -128,6 +125,8 @@ function work(tower, type) {
 		if (targets.length > 0) {
 			tower.repair(targets[0]);
 		}
+	} else {
+		
 	}
-	
+
 }
