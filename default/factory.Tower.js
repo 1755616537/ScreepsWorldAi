@@ -22,6 +22,7 @@ global.factory.Tower = {
 						return structure.structureType == STRUCTURE_TOWER;
 					}
 				});
+				console.log('storageClosestTower',storageClosestTower)
 			}
 			_.forEach(targets, target => {
 				if (storageClosestTower && storageClosestTower.id == target.id) {
