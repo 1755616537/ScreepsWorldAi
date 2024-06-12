@@ -54,7 +54,7 @@ module.exports.loop = function() {
 // .任务调派运输资源查看creep的store剩余可储存的数量在判断是否需要多名一起运输
 // .renewCreep增加目标 creep 的剩余生存时间
 // .核弹原爆点FIND_NUKES,邮件提示并且房间文本显示（发射此核弹的房间名launchRoomName+着落倒计时timeToLand）
-
+// .核弹的爆炸范围是以落点为中心的 5 * 5 的正方形区域。建设防御核弹建筑布局
 
 // 完成程序:
 // .(废弃(改完出现错误)[此名称是 Game.creeps 对象中指向该 creep 对象的哈希键]).把小兵ID放到memory里面，不在使用小兵名称作为唯一ID值判断，改为小兵ID
