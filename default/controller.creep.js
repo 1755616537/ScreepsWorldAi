@@ -18,7 +18,7 @@ global.controller.creep = {
 }
 
 function addHarvest(harvests, controller_level = 4, spawnSequence) {
-	// 生产 采集
+	// 生产 限制 采集
 	if (harvests.length < globalData.creepConfigs.harvest.number) {
 		let returnData = factory.creep.addHarvest(harvests, controller_level, spawnSequence);
 		// clog(returnData);
@@ -27,8 +27,9 @@ function addHarvest(harvests, controller_level = 4, spawnSequence) {
 }
 
 function addUpgrader(upgraders, controller_level, spawnSequence) {
+	// 生产 限制 升级
 	let spawnName = factory.spawn.sequenceGetName(spawnSequence);
-	// 生产 升级
+
 	if (upgraders.length < globalData.creepConfigs.upgrader.number) {
 		let returnData;
 		// 房间CONTAINER总能量在2000以下时,只会存在一个升级者
@@ -46,7 +47,7 @@ function addUpgrader(upgraders, controller_level, spawnSequence) {
 }
 
 function addBuilder(builders, controller_level, spawnSequence) {
-	// 生产 建造 前提控制器2等级
+	// 生产 限制 建造 前提控制器2等级
 	if (builders.length < globalData.creepConfigs.builder.number) { // && controller_level >= 2
 		let returnData = factory.creep.addBuilder(builders, controller_level, spawnSequence)
 		// clog(returnData);
@@ -55,7 +56,7 @@ function addBuilder(builders, controller_level, spawnSequence) {
 }
 
 function addCarrier(carriers, controller_level, spawnSequence) {
-	// 生产 运输
+	// 生产 限制 运输
 	if (carriers.length < globalData.creepConfigs.carrier.number) {
 		// 拥有CONTAINER才生产
 		const builds = factory.spawn.get(spawnSequence).room.find(FIND_STRUCTURES, {
@@ -72,7 +73,7 @@ function addCarrier(carriers, controller_level, spawnSequence) {
 }
 
 function addRepairer(repairers, controller_level, spawnSequence) {
-	// 生产 维修
+	// 生产 限制 维修
 	if (repairers.length < globalData.creepConfigs.repairer.number) {
 		let returnData = factory.creep.addRepairer(repairers, controller_level, spawnSequence);
 		// clog(returnData);
@@ -81,7 +82,7 @@ function addRepairer(repairers, controller_level, spawnSequence) {
 }
 
 function addNearDefender(nearDefenders, controller_level, spawnSequence) {
-	// 生产 防御者-近战
+	// 生产 限制 防御者-近战
 	if (nearDefenders.length < globalData.creepConfigs.nearDefender.number) {
 		let returnData = factory.creep.addNearDefender(nearDefenders, controller_level, spawnSequence);
 		// clog(returnData);
@@ -90,7 +91,7 @@ function addNearDefender(nearDefenders, controller_level, spawnSequence) {
 }
 
 function addFarDefender(farDefenders, controller_level, spawnSequence) {
-	// 生产 防御者-远战
+	// 生产 限制 防御者-远战
 	if (farDefenders.length < globalData.creepConfigs.farDefender.number) {
 		let returnData = factory.creep.addFarDefender(farDefenders, controller_level, spawnSequence);
 		// clog(returnData);
@@ -99,7 +100,7 @@ function addFarDefender(farDefenders, controller_level, spawnSequence) {
 }
 
 function addTheHealer(theHealers, controller_level, spawnSequence) {
-	// 生产 治疗者
+	// 生产 限制 治疗者
 	if (theHealers.length < globalData.creepConfigs.theHealer.number) {
 		let returnData = factory.creep.addTheHealer(theHealers, controller_level, spawnSequence);
 		// clog(returnData);
@@ -108,7 +109,7 @@ function addTheHealer(theHealers, controller_level, spawnSequence) {
 }
 
 function addOccupier(occupiers, controller_level, spawnSequence) {
-	// 生产 占领者
+	// 生产 限制 占领者
 	if (occupiers.length < globalData.creepConfigs.occupier.number) {
 		let returnData = factory.creep.addOccupier(occupiers, controller_level, spawnSequence);
 		// clog(returnData);

@@ -1,3 +1,4 @@
+// 全局数据
 global.globalData = {
 	// 总输出
 	clog: true,

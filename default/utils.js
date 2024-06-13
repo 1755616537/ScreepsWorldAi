@@ -124,6 +124,8 @@ let pro = {
 
 
 	cn: function screepsCN() {
+		// 汉化
+
 		clog("【客户端汉化显示加载】【开始】 Time " + Game.time);
 		console.log(
 			`<script src="https://screeps-cn.gitee.io/screeps-chinese-pack-release/main.js" async defer></script>`
@@ -131,6 +133,10 @@ let pro = {
 		clog("【客户端汉化显示加载】【完成】 Time " + Game.time);
 	},
 	notify(message, onTime = true, groupInterval = 0) {
+		// screeps内置 邮件发送
+		// 带重复,超时60秒,过滤功能
+		// [例子: Utils.notify(`【${roomName}】房间,开启安全模式【成功】`);]
+
 		if (!Memory.notifyList) Memory.notifyList = [];
 		let time = Game.time;
 		let notifyList = Memory.notifyList;
