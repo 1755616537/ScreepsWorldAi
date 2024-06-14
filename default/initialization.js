@@ -21,14 +21,17 @@ global.initialization = {
         }
 
         // 全局数据初始化
-        iniglobalData();
+        _iniglobalData();
 
         let roomName = globalData.rooms[0].name;
-        
+
         iniRoom(roomName);
 
         clog("【初始化】【结束】 Time " + Game.time);
     },
+    iniglobalData: (...e) => {
+        return _iniglobalData(...e);
+    }
 }
 
 function iniRoom(roomName) {
@@ -44,7 +47,7 @@ function iniRoom(roomName) {
 }
 
 // 全局数据初始化
-function iniglobalData() {
+function _iniglobalData() {
     let username = '';
     if (Game.spawns.length > 0) username = Game.spawns[0].owner.username;
     if (username) {
@@ -117,7 +120,7 @@ function iniController(roomName) {
     }
 
     let room = factory.room.nameGet(roomName);
-    let roomSequence=factory.room.nameGetSequence(roomName);
+    let roomSequence = factory.room.nameGetSequence(roomName);
 
     // 自动分配建设控制器区的CONTAINER
     if (globalData.rooms[roomSequence - 1].AutomaticAssignControllerCONTAINER) {
