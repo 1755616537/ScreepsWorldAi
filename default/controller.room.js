@@ -338,7 +338,7 @@ function upgraderOuterRoom(roomName) {
 					return;
 				}
 				if (targets.length < 1) {
-					targets = factory.room.get(1).find(FIND_STRUCTURES, {
+					targets = factory.room.nameGet(roomName).find(FIND_STRUCTURES, {
 						filter: (structure) => {
 							// 找出有储存能量的container搬运
 							return (structure.structureType == STRUCTURE_CONTAINER) &&
@@ -438,7 +438,7 @@ function builderOuterRoom(roomName) {
 					return;
 				}
 				if (targets.length < 1) {
-					targets = factory.room.get(1).find(FIND_STRUCTURES, {
+					targets = factory.room.nameGet(roomName).find(FIND_STRUCTURES, {
 						filter: (structure) => {
 							// 找出有储存能量的container搬运
 							return (structure.structureType == STRUCTURE_CONTAINER) &&

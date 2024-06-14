@@ -54,7 +54,7 @@ global.factory.creep.Occupier = {
 
 		}
 
-		// factory.spawn.get(1).spawnCreep([WORK, CARRY, MOVE, CLAIM],
+		// factory.spawn.nameGet(spawnName).spawnCreep([WORK, CARRY, MOVE, CLAIM],
 		// 	'Occupy1号', {
 		// 		memory: {
 		// 			role: '',
