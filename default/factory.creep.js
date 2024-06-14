@@ -13,7 +13,6 @@
 // defender 	防御者 	驻守指定区域 	房间内是否有入侵者 	攻击入侵者
 
 
-
 // creep 是你的单位, creep 可以移动、采集能量、建造建筑、攻击其他 creep 以及执行其他动作。
 // 每个 creep 都由最多 50 个身体部件构成，身体部件的类型如下：
 // 身体部件 	孵化成本 	每个部件效果
@@ -40,698 +39,731 @@
 
 
 const dataStructure_task = {
-	current: '',
-	previous: '',
-	next: ''
+    current: '',
+    previous: '',
+    next: ''
 }
 const dataStructure_target = {
-	x: null,
-	y: null,
-	// 房间名称
-	roomName: ''
+    x: null,
+    y: null,
+    // 房间名称
+    roomName: ''
 }
 
 global.factory.creep = {
-	moveTo: (creep, target, type = '') => {
-		let visualizePathStyle = {};
-		switch (type) {
-			case 'Resource':
-				visualizePathStyle = {
-					// 填充颜色
-					fill: '',
-					// 线条颜色
-					stroke: globalData.Move.WorkResourceColor,
-					// undefined (实线)，dashed (虚线) 或者 dotted (点线) 
-					lineStyle: 'dashed',
-					// 线条宽度
-					strokeWidth: .1,
-					// 透明度
-					opacity: .5
-				}
-				break;
-			default:
-				visualizePathStyle = {
-					// 填充颜色
-					fill: '',
-					// 线条颜色
-					stroke: globalData.Move.WorkColor,
-					// undefined (实线)，dashed (虚线) 或者 dotted (点线) 
-					lineStyle: 'dashed',
-					// 线条宽度
-					strokeWidth: .1,
-					// 透明度
-					opacity: .5
-				}
-		}
-		creep.moveTo(target, {
-			visualizePathStyle: visualizePathStyle
-		});
-	},
-	CleanMemory: () => {
-		// 清理内存
+    moveTo: (creep, target, type = '') => {
+        let visualizePathStyle = {};
+        switch (type) {
+            case 'Resource':
+                visualizePathStyle = {
+                    // 填充颜色
+                    fill: '',
+                    // 线条颜色
+                    stroke: globalData.Move.WorkResourceColor,
+                    // undefined (实线)，dashed (虚线) 或者 dotted (点线)
+                    lineStyle: 'dashed',
+                    // 线条宽度
+                    strokeWidth: .1,
+                    // 透明度
+                    opacity: .5
+                }
+                break;
+            default:
+                visualizePathStyle = {
+                    // 填充颜色
+                    fill: '',
+                    // 线条颜色
+                    stroke: globalData.Move.WorkColor,
+                    // undefined (实线)，dashed (虚线) 或者 dotted (点线)
+                    lineStyle: 'dashed',
+                    // 线条宽度
+                    strokeWidth: .1,
+                    // 透明度
+                    opacity: .5
+                }
+        }
+        creep.moveTo(target, {
+            visualizePathStyle: visualizePathStyle
+        });
+    },
+    CleanMemory: () => {
+        // 清理内存
 
-		for (let name in Memory.creeps) { // 释放内存
-			if (!Game.creeps[name]) {
-				// 基地序号
-				let spawnSequence = Memory.creeps[name].spawn;
-				let spawnName = factory.spawn.sequenceGetName(spawnSequence);
+        for (let name in Memory.creeps) { // 释放内存
+            if (!Game.creeps[name]) {
+                // 房间名称
+                let roomName = Memory.creeps[name].roomName;
 
-				// 采集者
-				if (Memory.creeps[name].role == globalData.harvest) {
-					// 从能量源区记录删除
-					let harvestSourceID, memorySource, memorySourceList;
-					let on = false;
-					// 如果没有合法记录会不存在harvestSourceID,报错需要捕获
-					try {
-						harvestSourceID = Memory.creeps[name].harvestSourceID;
-						memorySource = Memory.spawn[spawnName].source.list;
-						memorySourceList = memorySource[harvestSourceID].list;
-						on = true;
-					} catch (e) {
-						//TODO handle the exception
-					}
-					// 是否合法记录了
-					if (on && harvestSourceID && memorySource && memorySourceList) {
-						for (let i = 0; i < memorySourceList.length; i++) {
-							if (memorySourceList[i] == name) {
-								memorySource[harvestSourceID].list.splice(i, 1);
-								Memory.spawn[spawnName].source.list = memorySource;
-								break
-							}
-						}
-					}
+                // 采集者
+                if (Memory.creeps[name].role == globalData.harvest) {
+                    // 从能量源区记录删除
+                    let harvestSourceID, memorySource, memorySourceList;
+                    let on = false;
+                    // 如果没有合法记录会不存在harvestSourceID,报错需要捕获
+                    try {
+                        harvestSourceID = Memory.creeps[name].harvestSourceID;
+                        memorySource = Memory.rooms[roomName].source.list;
+                        memorySourceList = memorySource[harvestSourceID].list;
+                        on = true;
+                    } catch (e) {
+                        //TODO handle the exception
+                    }
+                    // 是否合法记录了
+                    if (on && harvestSourceID && memorySource && memorySourceList) {
+                        for (let i = 0; i < memorySourceList.length; i++) {
+                            if (memorySourceList[i] == name) {
+                                memorySource[harvestSourceID].list.splice(i, 1);
+                                Memory.rooms[roomName].source.list = memorySource;
+                                break
+                            }
+                        }
+                    }
 
-					// 从采集建造CONTAINER记录删除
-					let harvestBuildCONTAINERList;
-					on = false;
-					try {
-						if (!Memory.spawn[spawnName].source.harvestBuildCONTAINERList) Memory.spawn[spawnName]
-							.source
-							.harvestBuildCONTAINERList = {};
-						harvestBuildCONTAINERList = Memory.spawn[spawnName].source.harvestBuildCONTAINERList;
-						on = true;
-					} catch (e) {
-						//TODO handle the exception
-					}
+                    // 从采集建造CONTAINER记录删除
+                    let harvestBuildCONTAINERList;
+                    on = false;
+                    try {
+                        if (!Memory.rooms[roomName].source.harvestBuildCONTAINERList) Memory.rooms[roomName]
+                            .source
+                            .harvestBuildCONTAINERList = {};
+                        harvestBuildCONTAINERList = Memory.rooms[roomName].source.harvestBuildCONTAINERList;
+                        on = true;
+                    } catch (e) {
+                        //TODO handle the exception
+                    }
 
-					if (on && _.size(harvestBuildCONTAINERList) > 0) {
-						let on = false;
-						for (i in harvestBuildCONTAINERList) {
-							if (name == i) {
-								on = true;
-								return false;
-							}
-						}
-						if (on) {
-							harvestBuildCONTAINERList[name] = false;
-							harvestBuildCONTAINERList = _.omit(harvestBuildCONTAINERList, name);
+                    if (on && _.size(harvestBuildCONTAINERList) > 0) {
+                        let on = false;
+                        for (i in harvestBuildCONTAINERList) {
+                            if (name == i) {
+                                on = true;
+                                return false;
+                            }
+                        }
+                        if (on) {
+                            harvestBuildCONTAINERList[name] = false;
+                            harvestBuildCONTAINERList = _.omit(harvestBuildCONTAINERList, name);
 
-							Memory.spawn[spawnName].source.harvestBuildCONTAINERList =
-								harvestBuildCONTAINERList;
-						}
-					}
-				}
+                            Memory.rooms[roomName].source.harvestBuildCONTAINERList =
+                                harvestBuildCONTAINERList;
+                        }
+                    }
+                }
 
-				// 运输者
-				if (Memory.creeps[name].role == globalData.carrier) {
-					{
-						// 从能量源区记录删除
-						let TransportationTargetID, memorySource;
-						let on = false;
-						// 如果没有合法记录会不存在harvestSourceID,报错需要捕获
-						try {
-							TransportationTargetID = Memory.creeps[name].TransportationTargetID;
-							memorySource = Memory.spawn[spawnName].source.list;
-							on = true;
-						} catch (e) {
-							//TODO handle the exception
-						}
-						// 是否合法记录了
-						if (on && TransportationTargetID && memorySource) {
-							let on = false;
-							for (let val in memorySource) {
-								let spaceXYList = memorySource[val].spaceXYList;
-								for (let i = 0; i < spaceXYList.length; i++) {
-									let containerID = spaceXYList[i].containerID
-									if (TransportationTargetID == containerID) {
-										let i2 = 0;
-										for (; i2 < spaceXYList[i].list.length; i2++) {
-											if (spaceXYList[i].list[i2] == name) {
-												on = true;
-												break
-											}
-										}
-										if (on) {
-											spaceXYList[i].list.splice(i2, 1);
-											Memory.spawn[spawnName].source.list[val].spaceXYList[i].list =
-												spaceXYList[i].list;
-											break;
-										}
-									}
-								}
-								if (on) break;
-							}
-						}
-					}
+                // 运输者
+                if (Memory.creeps[name].role == globalData.carrier) {
+                    {
+                        // 从能量源区记录删除
+                        let TransportationTargetID, memorySource;
+                        let on = false;
+                        // 如果没有合法记录会不存在harvestSourceID,报错需要捕获
+                        try {
+                            TransportationTargetID = Memory.creeps[name].TransportationTargetID;
+                            memorySource = Memory.rooms[roomName].source.list;
+                            on = true;
+                        } catch (e) {
+                            //TODO handle the exception
+                        }
+                        // 是否合法记录了
+                        if (on && TransportationTargetID && memorySource) {
+                            let on = false;
+                            for (let val in memorySource) {
+                                let spaceXYList = memorySource[val].spaceXYList;
+                                for (let i = 0; i < spaceXYList.length; i++) {
+                                    let containerID = spaceXYList[i].containerID
+                                    if (TransportationTargetID == containerID) {
+                                        let i2 = 0;
+                                        for (; i2 < spaceXYList[i].list.length; i2++) {
+                                            if (spaceXYList[i].list[i2] == name) {
+                                                on = true;
+                                                break
+                                            }
+                                        }
+                                        if (on) {
+                                            spaceXYList[i].list.splice(i2, 1);
+                                            Memory.rooms[roomName].source.list[val].spaceXYList[i].list =
+                                                spaceXYList[i].list;
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (on) break;
+                            }
+                        }
+                    }
 
-					{
-						// 从控制器区记录删除
-						// let TransportationTargetID;
-						let memoryControllerContainerList;
-						on = false;
-						try {
-							// TransportationTargetID = Memory.creeps[name].TransportationTargetID;
-							memoryControllerContainerList = Memory.spawn[spawnName].controller.container.list;
-							on = true;
-						} catch (e) {
-							//TODO handle the exception
-						}
-						// 是否合法记录了
-						if (on && memoryControllerContainerList) {
-							let on = false;
-							let i = 0;
-							for (; i < memoryControllerContainerList.length; i++) {
-								if (memoryControllerContainerList[i] == name) {
-									on = true;
-									break;
-								}
-							}
-							if (on) {
-								memoryControllerContainerList.splice(i, 1);
-								Memory.spawn[spawnName].controller.container.list =
-									memoryControllerContainerList;
-							}
-						}
-					}
-				}
+                    {
+                        // 从控制器区记录删除
+                        // let TransportationTargetID;
+                        let memoryControllerContainerList;
+                        on = false;
+                        try {
+                            // TransportationTargetID = Memory.creeps[name].TransportationTargetID;
+                            memoryControllerContainerList = Memory.rooms[roomName].controller.container.list;
+                            on = true;
+                        } catch (e) {
+                            //TODO handle the exception
+                        }
+                        // 是否合法记录了
+                        if (on && memoryControllerContainerList) {
+                            let on = false;
+                            let i = 0;
+                            for (; i < memoryControllerContainerList.length; i++) {
+                                if (memoryControllerContainerList[i] == name) {
+                                    on = true;
+                                    break;
+                                }
+                            }
+                            if (on) {
+                                memoryControllerContainerList.splice(i, 1);
+                                Memory.rooms[roomName].controller.container.list =
+                                    memoryControllerContainerList;
+                            }
+                        }
+                    }
+                }
 
-				delete Memory.creeps[name];
-				clog('清楚不存在的creep内存:', name);
-			}
-		}
-
+                delete Memory.creeps[name];
+                clog('清楚不存在的creep内存:', name);
+            }
+        }
 
 
-		// {
-		// 	// 能量源区Container
-		// 	// 再次扫描,记录列表里面的creep是否还还活,把已经死亡的去除
-		// 	let TransportationTargetID, memorySource;
-		// 	let on = false;
-		// 	// 如果没有合法记录会不存在harvestSourceID,报错需要捕获
-		// 	try {
-		// 		TransportationTargetID = Memory.creeps[name].TransportationTargetID;
-		// 		memorySource = Memory.spawn[spawnName].source.list;
-		// 		on = true;
-		// 	} catch (e) {
-		// 		//TODO handle the exception
-		// 	}
-		// 	if (on && TransportationTargetID) {
-		// 		for (let val in memorySource) {
-		// 			let spaceXYList = memorySource[val].spaceXYList;
-		// 			for (let i = 0; i < spaceXYList.length; i++) {
-		// 				let containerID = spaceXYList[i].containerID
-		// 				if (TransportationTargetID == containerID) {
-		// 					let i2 = 0;
-		// 					let spaceXYListList2 = [];
-		// 					for (; i2 < spaceXYList[i].list.length; i2++) {
-		// 						for (let name in Memory.creeps) {
-		// 							if (name == spaceXYList[i].list[i2]) {
-		// 								spaceXYListList2.push(name);
-		// 								break;
-		// 							}
-		// 						}
-		// 					}
-		// 					Memory.spawn[spawnName].source.list[val].spaceXYList[i].list = spaceXYListList2;
-		// 				}
-		// 			}
-		// 		}
-		// 	}
-		// }
+        // {
+        // 	// 能量源区Container
+        // 	// 再次扫描,记录列表里面的creep是否还还活,把已经死亡的去除
+        // 	let TransportationTargetID, memorySource;
+        // 	let on = false;
+        // 	// 如果没有合法记录会不存在harvestSourceID,报错需要捕获
+        // 	try {
+        // 		TransportationTargetID = Memory.creeps[name].TransportationTargetID;
+        // 		memorySource = Memory.rooms[roomName].source.list;
+        // 		on = true;
+        // 	} catch (e) {
+        // 		//TODO handle the exception
+        // 	}
+        // 	if (on && TransportationTargetID) {
+        // 		for (let val in memorySource) {
+        // 			let spaceXYList = memorySource[val].spaceXYList;
+        // 			for (let i = 0; i < spaceXYList.length; i++) {
+        // 				let containerID = spaceXYList[i].containerID
+        // 				if (TransportationTargetID == containerID) {
+        // 					let i2 = 0;
+        // 					let spaceXYListList2 = [];
+        // 					for (; i2 < spaceXYList[i].list.length; i2++) {
+        // 						for (let name in Memory.creeps) {
+        // 							if (name == spaceXYList[i].list[i2]) {
+        // 								spaceXYListList2.push(name);
+        // 								break;
+        // 							}
+        // 						}
+        // 					}
+        // 					Memory.rooms[roomName].source.list[val].spaceXYList[i].list = spaceXYListList2;
+        // 				}
+        // 			}
+        // 		}
+        // 	}
+        // }
 
-		// {
-		// 	// 控制器区Container
-		// 	// 再次扫描,记录列表里面的creep是否还还活,把已经死亡的去除
-		// 	let memoryControllerContainerList;
-		// 	let on = false;
-		// 	try {
-		// 		memoryControllerContainerList = Memory.spawn[spawnName].controller.container.list;
-		// 		on = true;
-		// 	} catch (e) {
-		// 		//TODO handle the exception
-		// 	}
-		// 	if (on && memoryControllerContainerList) {
-		// 		let memoryControllerContainerList2 = [];
-		// 		for (var i = 0; i < memoryControllerContainerList.length; i++) {
-		// 			let on = false;
-		// 			for (let name in Memory.creeps) {
-		// 				if (name == memoryControllerContainerList[i]) {
-		// 					on = true;
-		// 					break;
-		// 				}
-		// 			}
-		// 			if (on) {
-		// 				memoryControllerContainerList2.push(memoryControllerContainerList[i]);
-		// 			}
-		// 		}
-		// 		Memory.spawn[spawnName].controller.container.list = memoryControllerContainerList2;
-		// 	}
-		// }
+        // {
+        // 	// 控制器区Container
+        // 	// 再次扫描,记录列表里面的creep是否还还活,把已经死亡的去除
+        // 	let memoryControllerContainerList;
+        // 	let on = false;
+        // 	try {
+        // 		memoryControllerContainerList = Memory.rooms[roomName].controller.container.list;
+        // 		on = true;
+        // 	} catch (e) {
+        // 		//TODO handle the exception
+        // 	}
+        // 	if (on && memoryControllerContainerList) {
+        // 		let memoryControllerContainerList2 = [];
+        // 		for (var i = 0; i < memoryControllerContainerList.length; i++) {
+        // 			let on = false;
+        // 			for (let name in Memory.creeps) {
+        // 				if (name == memoryControllerContainerList[i]) {
+        // 					on = true;
+        // 					break;
+        // 				}
+        // 			}
+        // 			if (on) {
+        // 				memoryControllerContainerList2.push(memoryControllerContainerList[i]);
+        // 			}
+        // 		}
+        // 		Memory.rooms[roomName].controller.container.list = memoryControllerContainerList2;
+        // 	}
+        // }
 
-	},
-	addHarvest: (harvests, controller_level = 4, spawnSequence = 1) => {
-		let bodys;
-		let newName = globalData.harvest + Game.time;
+    },
+    addHarvest: (harvests, controller_level = 4, spawnName) => {
+        let spawnSequence = factory.spawn.nameGetSequence(spawnName);
+        let roomSequence = factory.spawn.sequenceGetRoomSequence(spawnSequence);
+        let roomName = factory.room.sequenceGetName(roomSequence);
+        let bodys;
+        let newName = globalData.harvest + Game.time;
 
-		if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.harvest.bodys
-			.totalEnergyRequired) {
-			bodys = globalData.creepConfigs.harvest.bodys.list;
-		} else {
-			return '房间总能量数量未达到限制，无法生产';
-		}
-		if ( /*Object.keys(Game.creeps).length < 1 ||*/ harvests) {
-			// 当总creep数量小于2时,使用缩减版进行快速发展（注意：当建筑只剩基地时最高能量300）
-			if (harvests.length < 1) {
-				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.harvest
-					.bodysMinus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.harvest.bodysMinus.list;
-				} else {
-					return 'Minus 房间总能量数量未达到限制，无法生产';
-				}
-			}
-			if (harvests.length > 2 && controller_level >= 4) {
-				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.harvest
-					.bodysPlus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.harvest.bodysPlus.list;
-				} else {
-					return 'Plus 房间总能量数量未达到限制，无法生产';
-				}
-			}
-		}
-		let returnData = factory.spawn.get(spawnSequence).spawnCreep(bodys,
-			newName, {
-				memory: {
-					role: globalData.harvest,
-					spawn: spawnSequence
-				}
-			});
-		if (returnData == OK) {
-			Game.creeps[newName].memory.id = Game.creeps[newName].id;
-			clog('生成新的 采集者: ' + newName);
-		}
-		return returnData
-	},
-	addCarrier: (carriers, controller_level = 4, spawnSequence = 1) => {
-		let bodys;
-		let newName = globalData.carrier + Game.time;
-		if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.carrier.bodys
-			.totalEnergyRequired) {
-			bodys = globalData.creepConfigs.carrier.bodys.list;
-		} else {
-			return '房间总能量数量未达到限制，无法生产';
-		}
-		if (carriers) {
-			if (carriers.length < 1) {
-				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.carrier
-					.bodysMinus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.carrier.bodysMinus.list;
-				} else {
-					return 'Minus 房间总能量数量未达到限制，无法生产';
-				}
-			}
-			if (carriers.length > 2 && controller_level >= 4) {
-				if (globalData.creepConfigs.carrier.sourceContainer1v1 && carriers.length >= factory.source
-					.GetContainerLength(spawnSequence) + 1) {
-					if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.carrier
-						.bodysPlus
-						.totalEnergyRequired) {
-						bodys = globalData.creepConfigs.carrier.bodysPlus.list;
-					} else {
-						return 'Plus 房间总能量数量未达到限制，无法生产';
-					}
-				}
-			}
-		}
-		let returnData = factory.spawn.get(spawnSequence).spawnCreep(bodys,
-			newName, {
-				memory: {
-					role: globalData.carrier,
-					task: dataStructure_task,
-					target: dataStructure_target,
-					spawn: spawnSequence
-				}
-			});
-		if (returnData == OK) {
-			Game.creeps[newName].memory.id = Game.creeps[newName].id;
-			clog('生成新的 运输者: ' + newName);
-		}
-		return returnData
-	},
-	addUpgrader: (upgraders, controller_level = 4, spawnSequence = 1) => {
-		let bodys;
-		let newName = globalData.upgrader + Game.time;
-		if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.upgrader.bodys
-			.totalEnergyRequired) {
-			bodys = globalData.creepConfigs.upgrader.bodys.list;
-		} else {
-			return '房间总能量数量未达到限制，无法生产';
-		}
-		if (upgraders) {
-			if (upgraders.length < 1) {
-				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.upgrader
-					.bodysMinus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.upgrader.bodysMinus.list;
-				} else {
-					return 'Minus 房间总能量数量未达到限制，无法生产';
-				}
-			}
-			if (upgraders.length > 2 && controller_level >= 4) {
-				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.upgrader
-					.bodysPlus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.upgrader.bodysPlus.list;
-				} else {
-					return 'Plus 房间总能量数量未达到限制，无法生产';
-				}
-			}
-		}
-		let returnData = factory.spawn.get(spawnSequence).spawnCreep(bodys,
-			newName, {
-				memory: {
-					role: globalData.upgrader,
-					spawn: spawnSequence
-				}
-			});
-		if (returnData == OK) {
-			Game.creeps[newName].memory.id = Game.creeps[newName].id;
-			clog('生成新的 升级者: ' + newName);
-		}
-		return returnData
-	},
-	addBuilder: (builders, controller_level = 4, spawnSequence = 1) => {
-		let bodys;
-		let newName = globalData.builder + Game.time;
-		if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.builder.bodys
-			.totalEnergyRequired) {
-			bodys = globalData.creepConfigs.builder.bodys.list;
-		} else {
-			return '房间总能量数量未达到限制，无法生产';
-		}
-		if (builders) {
-			if (builders.length < 1) {
-				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.builder
-					.bodysMinus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.builder.bodysMinus.list;
-				} else {
-					return 'Minus 房间总能量数量未达到限制，无法生产';
-				}
-			}
-			if (builders.length > 2 && controller_level >= 4) {
-				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.builder
-					.bodysPlus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.builder.bodysPlus.list;
-				} else {
-					return 'Plus 房间总能量数量未达到限制，无法生产';
-				}
-			}
-		}
-		let returnData = factory.spawn.get(spawnSequence).spawnCreep(bodys,
-			newName, {
-				memory: {
-					role: globalData.builder,
-					spawn: spawnSequence
-				}
-			});
-		if (returnData == OK) {
-			Game.creeps[newName].memory.id = Game.creeps[newName].id;
-			clog('生成新的 建造者:' + newName);
-		}
-		return returnData
-	},
-	addRepairer: (repairers, controller_level = 4, spawnSequence = 1) => {
-		let bodys;
-		let newName = globalData.repairer + Game.time;
-		let targets = factory.spawn.get(spawnSequence).room.find(FIND_STRUCTURES, {
-			filter: (structure) => {
-				// 找出需要储存能量
-				return (structure.structureType == STRUCTURE_TOWER) &&
-					structure.store.getUsedCapacity(RESOURCE_ENERGY) > 100;
-			}
-		});
-		if (targets.length > 0 && globalData.creepConfigs.repairer.onTower) {
-			return '存在TOWER能量大于100以上,不需要维修者';
-		}
-		if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.repairer.bodys
-			.totalEnergyRequired) {
-			bodys = globalData.creepConfigs.repairer.bodys.list;
-		} else {
-			return '房间总能量数量未达到限制，无法生产';
-		}
-		if (repairers) {
-			if (repairers.length < 1) {
-				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.repairer
-					.bodysMinus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.repairer.bodysMinus.list;
-				} else {
-					return 'Minus 房间总能量数量未达到限制，无法生产';
-				}
-			}
-			if (repairers.length > 2 && controller_level >= 4) {
-				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.repairer
-					.bodysPlus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.repairer.bodysPlus.list;
-				} else {
-					return 'Plus 房间总能量数量未达到限制，无法生产';
-				}
-			}
-		}
-		let returnData = factory.spawn.get(spawnSequence).spawnCreep(bodys,
-			newName, {
-				memory: {
-					role: globalData.repairer,
-					spawn: spawnSequence
-				}
-			});
-		if (returnData == OK) {
-			Game.creeps[newName].memory.id = Game.creeps[newName].id;
-			clog('生成新的 维修者:' + newName);
-		}
-		return returnData
-	},
-	addNearDefender: (nearDefenders, controller_level = 4, spawnSequence = 1) => {
-		let bodys;
-		let newName = globalData.nearDefender + Game.time;
-		if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.nearDefender.bodys
-			.totalEnergyRequired) {
-			bodys = globalData.creepConfigs.nearDefender.bodys.list;
-		} else {
-			return '房间总能量数量未达到限制，无法生产';
-		}
-		if (nearDefenders) {
-			if (nearDefenders.length < 1) {
-				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.nearDefender
-					.bodysMinus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.nearDefender.bodysMinus.list;
-				} else {
-					return 'Minus 房间总能量数量未达到限制，无法生产';
-				}
-			}
-			if (nearDefenders.length > 2 && controller_level >= 4) {
-				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.nearDefender
-					.bodysPlus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.nearDefender.bodysPlus.list;
-				} else {
-					return 'Plus 房间总能量数量未达到限制，无法生产';
-				}
-			}
-		}
-		let returnData = factory.spawn.get(spawnSequence).spawnCreep(bodys,
-			newName, {
-				memory: {
-					role: globalData.nearDefender,
-					spawn: spawnSequence
-				}
-			});
-		if (returnData == OK) {
-			Game.creeps[newName].memory.id = Game.creeps[newName].id;
-			clog('生成新的 防御者-近战:' + newName);
-		}
-		return returnData
-	},
-	addFarDefender: (farDefenders, controller_level = 4, spawnSequence = 1) => {
-		let bodys;
-		let newName = globalData.farDefender + Game.time;
-		if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.farDefender.bodys
-			.totalEnergyRequired) {
-			bodys = globalData.creepConfigs.farDefender.bodys.list;
-		} else {
-			return '房间总能量数量未达到限制，无法生产';
-		}
-		if (farDefenders) {
-			if (farDefenders.length < 1) {
-				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.farDefender
-					.bodysMinus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.farDefender.bodysMinus.list;
-				} else {
-					return 'Minus 房间总能量数量未达到限制，无法生产';
-				}
-			}
-			if (farDefenders.length > 2 && controller_level >= 4) {
-				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.farDefender
-					.bodysPlus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.farDefender.bodysPlus.list;
-				} else {
-					return 'Plus 房间总能量数量未达到限制，无法生产';
-				}
-			}
-		}
-		let returnData = factory.spawn.get(spawnSequence).spawnCreep(bodys,
-			newName, {
-				memory: {
-					role: globalData.farDefender,
-					spawn: spawnSequence
-				}
-			});
-		if (returnData == OK) {
-			Game.creeps[newName].memory.id = Game.creeps[newName].id;
-			clog('生成新的 防御者-远战:' + newName);
-		}
-		return returnData
-	},
-	addOccupier: (occupiers, controller_level = 4, spawnSequence = 1) => {
-		let bodys;
-		let newName = globalData.occupier + Game.time;
-		if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.occupier.bodys
-			.totalEnergyRequired) {
-			bodys = globalData.creepConfigs.occupier.bodys.list;
-		} else {
-			return '房间总能量数量未达到限制，无法生产';
-		}
-		if (occupiers) {
-			if (occupiers.length < 1) {
-				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.occupier
-					.bodysMinus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.occupier.bodysMinus.list;
-				} else {
-					return 'Minus 房间总能量数量未达到限制，无法生产';
-				}
-			}
-			if (occupiers.length > 2 && controller_level >= 4) {
-				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.occupier
-					.bodysPlus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.occupier.bodysPlus.list;
-				} else {
-					return 'Plus 房间总能量数量未达到限制，无法生产';
-				}
-			}
-		}
-		let returnData = factory.spawn.get(spawnSequence).spawnCreep(bodys,
-			newName, {
-				memory: {
-					role: globalData.occupier,
-					spawn: spawnSequence
-				}
-			});
-		if (returnData == OK) {
-			Game.creeps[newName].memory.id = Game.creeps[newName].id;
-			clog('生成新的 占领者:' + newName);
-		}
-		return returnData
-	},
-	addTheHealer: (theHealers, controller_level = 4, spawnSequence = 1) => {
-		let bodys;
-		let newName = globalData.theHealer + Game.time;
-		if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.theHealer.bodys
-			.totalEnergyRequired) {
-			bodys = globalData.creepConfigs.theHealer.bodys.list;
-		} else {
-			return '房间总能量数量未达到限制，无法生产';
-		}
-		if (theHealers) {
-			if (theHealers.length < 1) {
-				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.theHealer
-					.bodysMinus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.theHealer.bodysMinus.list;
-				} else {
-					return 'Minus 房间总能量数量未达到限制，无法生产';
-				}
-			}
-			if (theHealers.length > 2 && controller_level >= 4) {
-				if (factory.room.get(spawnSequence).energyAvailable >= globalData.creepConfigs.theHealer
-					.bodysPlus
-					.totalEnergyRequired) {
-					bodys = globalData.creepConfigs.theHealer.bodysPlus.list;
-				} else {
-					return 'Plus 房间总能量数量未达到限制，无法生产';
-				}
-			}
-		}
-		let returnData = factory.spawn.get(spawnSequence).spawnCreep(bodys,
-			newName, {
-				memory: {
-					role: globalData.theHealer,
-					spawn: spawnSequence
-				}
-			});
-		if (returnData == OK) {
-			Game.creeps[newName].memory.id = Game.creeps[newName].id;
-			clog('生成新的 治疗者:' + newName);
-		}
-		return returnData
-	},
-	ComponentEnergyCalculation: (creepComponent = []) => {
-		// 部件能量计算
-		let total = 0;
-		for (let i = 0; i < creepComponent.length; i++) {
-			switch (creepComponent[i]) {
-				case MOVE:
-					total += globalData.creepComponentConfigs.MOVE;
-					break;
-				case WORK:
-					total += globalData.creepComponentConfigs.WORK;
-					break;
-				case CARRY:
-					total += globalData.creepComponentConfigs.CARRY;
-					break;
-				case ATTACK:
-					total += globalData.creepComponentConfigs.ATTACK;
-					break;
-				case RANGED_ATTACK:
-					total += globalData.creepComponentConfigs.RANGED_ATTACK;
-					break;
-				case HEAL:
-					total += globalData.creepComponentConfigs.HEAL;
-					break;
-				case CLAIM:
-					total += globalData.creepComponentConfigs.CLAIM;
-					break;
-				case TOUGH:
-					total += globalData.creepComponentConfigs.TOUGH;
-					break;
-				default:
-					Throw.Error('ComponentEnergyCalculation', ' 无效 ', creepComponent[i]);
-			}
-		}
-		return total;
-	}
+        if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.harvest.bodys
+            .totalEnergyRequired) {
+            bodys = globalData.creepConfigs.harvest.bodys.list;
+        } else {
+            return '房间总能量数量未达到限制，无法生产';
+        }
+        if ( /*Object.keys(Game.creeps).length < 1 ||*/ harvests) {
+            // 当总creep数量小于2时,使用缩减版进行快速发展（注意：当建筑只剩基地时最高能量300）
+            if (harvests.length < 1) {
+                if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.harvest
+                    .bodysMinus
+                    .totalEnergyRequired) {
+                    bodys = globalData.creepConfigs.harvest.bodysMinus.list;
+                } else {
+                    return 'Minus 房间总能量数量未达到限制，无法生产';
+                }
+            }
+            if (harvests.length > 2 && controller_level >= 4) {
+                if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.harvest
+                    .bodysPlus
+                    .totalEnergyRequired) {
+                    bodys = globalData.creepConfigs.harvest.bodysPlus.list;
+                } else {
+                    return 'Plus 房间总能量数量未达到限制，无法生产';
+                }
+            }
+        }
+        let returnData = factory.spawn.nameGet(spawnName).spawnCreep(bodys,
+            newName, {
+                memory: {
+                    role: globalData.harvest,
+                    roomName: roomName,
+                    spawnName: spawnName
+                }
+            });
+        if (returnData == OK) {
+            Game.creeps[newName].memory.id = Game.creeps[newName].id;
+            clog('生成新的 采集者: ' + newName);
+        }
+        return returnData
+    },
+    addCarrier: (carriers, controller_level = 4, spawnName) => {
+        let spawnSequence = factory.spawn.nameGetSequence(spawnName);
+        let roomSequence = factory.spawn.sequenceGetRoomSequence(spawnSequence);
+        let roomName = factory.room.sequenceGetName(roomSequence);
+        let bodys;
+        let newName = globalData.carrier + Game.time;
+        if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.carrier.bodys
+            .totalEnergyRequired) {
+            bodys = globalData.creepConfigs.carrier.bodys.list;
+        } else {
+            return '房间总能量数量未达到限制，无法生产';
+        }
+        if (carriers) {
+            if (carriers.length < 1) {
+                if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.carrier
+                    .bodysMinus
+                    .totalEnergyRequired) {
+                    bodys = globalData.creepConfigs.carrier.bodysMinus.list;
+                } else {
+                    return 'Minus 房间总能量数量未达到限制，无法生产';
+                }
+            }
+            if (carriers.length > 2 && controller_level >= 4) {
+                if (globalData.creepConfigs.carrier.sourceContainer1v1 && carriers.length >= factory.source
+                    .GetContainerLength(roomSequence) + 1) {
+                    if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.carrier
+                        .bodysPlus
+                        .totalEnergyRequired) {
+                        bodys = globalData.creepConfigs.carrier.bodysPlus.list;
+                    } else {
+                        return 'Plus 房间总能量数量未达到限制，无法生产';
+                    }
+                }
+            }
+        }
+        let returnData = factory.spawn.nameGet(spawnName).spawnCreep(bodys,
+            newName, {
+                memory: {
+                    role: globalData.carrier,
+                    task: dataStructure_task,
+                    target: dataStructure_target,
+                    roomName: roomName,
+                    spawnName: spawnName
+                }
+            });
+        if (returnData == OK) {
+            Game.creeps[newName].memory.id = Game.creeps[newName].id;
+            clog('生成新的 运输者: ' + newName);
+        }
+        return returnData
+    },
+    addUpgrader: (upgraders, controller_level = 4, spawnName) => {
+        let spawnSequence = factory.spawn.nameGetSequence(spawnName);
+        let roomSequence = factory.spawn.sequenceGetRoomSequence(spawnSequence);
+        let roomName = factory.room.sequenceGetName(roomSequence);
+        let bodys;
+        let newName = globalData.upgrader + Game.time;
+        if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.upgrader.bodys
+            .totalEnergyRequired) {
+            bodys = globalData.creepConfigs.upgrader.bodys.list;
+        } else {
+            return '房间总能量数量未达到限制，无法生产';
+        }
+        if (upgraders) {
+            if (upgraders.length < 1) {
+                if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.upgrader
+                    .bodysMinus
+                    .totalEnergyRequired) {
+                    bodys = globalData.creepConfigs.upgrader.bodysMinus.list;
+                } else {
+                    return 'Minus 房间总能量数量未达到限制，无法生产';
+                }
+            }
+            if (upgraders.length > 2 && controller_level >= 4) {
+                if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.upgrader
+                    .bodysPlus
+                    .totalEnergyRequired) {
+                    bodys = globalData.creepConfigs.upgrader.bodysPlus.list;
+                } else {
+                    return 'Plus 房间总能量数量未达到限制，无法生产';
+                }
+            }
+        }
+        let returnData = factory.spawn.nameGet(spawnName).spawnCreep(bodys,
+            newName, {
+                memory: {
+                    role: globalData.upgrader,
+                    roomName: roomName,
+                    spawnName: spawnName
+                }
+            });
+        if (returnData == OK) {
+            Game.creeps[newName].memory.id = Game.creeps[newName].id;
+            clog('生成新的 升级者: ' + newName);
+        }
+        return returnData
+    },
+    addBuilder: (builders, controller_level = 4, spawnName) => {
+        let spawnSequence = factory.spawn.nameGetSequence(spawnName);
+        let roomSequence = factory.spawn.sequenceGetRoomSequence(spawnSequence);
+        let roomName = factory.room.sequenceGetName(roomSequence);
+        let bodys;
+        let newName = globalData.builder + Game.time;
+        if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.builder.bodys
+            .totalEnergyRequired) {
+            bodys = globalData.creepConfigs.builder.bodys.list;
+        } else {
+            return '房间总能量数量未达到限制，无法生产';
+        }
+        if (builders) {
+            if (builders.length < 1) {
+                if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.builder
+                    .bodysMinus
+                    .totalEnergyRequired) {
+                    bodys = globalData.creepConfigs.builder.bodysMinus.list;
+                } else {
+                    return 'Minus 房间总能量数量未达到限制，无法生产';
+                }
+            }
+            if (builders.length > 2 && controller_level >= 4) {
+                if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.builder
+                    .bodysPlus
+                    .totalEnergyRequired) {
+                    bodys = globalData.creepConfigs.builder.bodysPlus.list;
+                } else {
+                    return 'Plus 房间总能量数量未达到限制，无法生产';
+                }
+            }
+        }
+        let returnData = factory.spawn.nameGet(spawnName).spawnCreep(bodys,
+            newName, {
+                memory: {
+                    role: globalData.builder,
+                    roomName: roomName,
+                }
+            });
+        if (returnData == OK) {
+            Game.creeps[newName].memory.id = Game.creeps[newName].id;
+            clog('生成新的 建造者:' + newName);
+        }
+        return returnData
+    },
+    addRepairer: (repairers, controller_level = 4, spawnName) => {
+        let spawnSequence = factory.spawn.nameGetSequence(spawnName);
+        let roomSequence = factory.spawn.sequenceGetRoomSequence(spawnSequence);
+        let roomName = factory.room.sequenceGetName(roomSequence);
+        let bodys;
+        let newName = globalData.repairer + Game.time;
+        let targets = factory.spawn.get(roomSequence).room.find(FIND_STRUCTURES, {
+            filter: (structure) => {
+                // 找出需要储存能量
+                return (structure.structureType == STRUCTURE_TOWER) &&
+                    structure.store.getUsedCapacity(RESOURCE_ENERGY) > 100;
+            }
+        });
+        if (targets.length > 0 && globalData.creepConfigs.repairer.onTower) {
+            return '存在TOWER能量大于100以上,不需要维修者';
+        }
+        if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.repairer.bodys
+            .totalEnergyRequired) {
+            bodys = globalData.creepConfigs.repairer.bodys.list;
+        } else {
+            return '房间总能量数量未达到限制，无法生产';
+        }
+        if (repairers) {
+            if (repairers.length < 1) {
+                if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.repairer
+                    .bodysMinus
+                    .totalEnergyRequired) {
+                    bodys = globalData.creepConfigs.repairer.bodysMinus.list;
+                } else {
+                    return 'Minus 房间总能量数量未达到限制，无法生产';
+                }
+            }
+            if (repairers.length > 2 && controller_level >= 4) {
+                if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.repairer
+                    .bodysPlus
+                    .totalEnergyRequired) {
+                    bodys = globalData.creepConfigs.repairer.bodysPlus.list;
+                } else {
+                    return 'Plus 房间总能量数量未达到限制，无法生产';
+                }
+            }
+        }
+        let returnData = factory.spawn.nameGet(spawnName).spawnCreep(bodys,
+            newName, {
+                memory: {
+                    role: globalData.repairer,
+                    roomName: roomName,
+                    spawnName: spawnName
+                }
+            });
+        if (returnData == OK) {
+            Game.creeps[newName].memory.id = Game.creeps[newName].id;
+            clog('生成新的 维修者:' + newName);
+        }
+        return returnData
+    },
+    addNearDefender: (nearDefenders, controller_level = 4, spawnName) => {
+        let spawnSequence = factory.spawn.nameGetSequence(spawnName);
+        let roomSequence = factory.spawn.sequenceGetRoomSequence(spawnSequence);
+        let roomName = factory.room.sequenceGetName(roomSequence);
+        let bodys;
+        let newName = globalData.nearDefender + Game.time;
+        if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.nearDefender.bodys
+            .totalEnergyRequired) {
+            bodys = globalData.creepConfigs.nearDefender.bodys.list;
+        } else {
+            return '房间总能量数量未达到限制，无法生产';
+        }
+        if (nearDefenders) {
+            if (nearDefenders.length < 1) {
+                if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.nearDefender
+                    .bodysMinus
+                    .totalEnergyRequired) {
+                    bodys = globalData.creepConfigs.nearDefender.bodysMinus.list;
+                } else {
+                    return 'Minus 房间总能量数量未达到限制，无法生产';
+                }
+            }
+            if (nearDefenders.length > 2 && controller_level >= 4) {
+                if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.nearDefender
+                    .bodysPlus
+                    .totalEnergyRequired) {
+                    bodys = globalData.creepConfigs.nearDefender.bodysPlus.list;
+                } else {
+                    return 'Plus 房间总能量数量未达到限制，无法生产';
+                }
+            }
+        }
+        let returnData = factory.spawn.nameGet(spawnName).spawnCreep(bodys,
+            newName, {
+                memory: {
+                    role: globalData.nearDefender,
+                    roomName: roomName,
+                    spawnName: spawnName
+                }
+            });
+        if (returnData == OK) {
+            Game.creeps[newName].memory.id = Game.creeps[newName].id;
+            clog('生成新的 防御者-近战:' + newName);
+        }
+        return returnData
+    },
+    addFarDefender: (farDefenders, controller_level = 4, spawnName) => {
+        let spawnSequence = factory.spawn.nameGetSequence(spawnName);
+        let roomSequence = factory.spawn.sequenceGetRoomSequence(spawnSequence);
+        let roomName = factory.room.sequenceGetName(roomSequence);
+        let bodys;
+        let newName = globalData.farDefender + Game.time;
+        if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.farDefender.bodys
+            .totalEnergyRequired) {
+            bodys = globalData.creepConfigs.farDefender.bodys.list;
+        } else {
+            return '房间总能量数量未达到限制，无法生产';
+        }
+        if (farDefenders) {
+            if (farDefenders.length < 1) {
+                if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.farDefender
+                    .bodysMinus
+                    .totalEnergyRequired) {
+                    bodys = globalData.creepConfigs.farDefender.bodysMinus.list;
+                } else {
+                    return 'Minus 房间总能量数量未达到限制，无法生产';
+                }
+            }
+            if (farDefenders.length > 2 && controller_level >= 4) {
+                if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.farDefender
+                    .bodysPlus
+                    .totalEnergyRequired) {
+                    bodys = globalData.creepConfigs.farDefender.bodysPlus.list;
+                } else {
+                    return 'Plus 房间总能量数量未达到限制，无法生产';
+                }
+            }
+        }
+        let returnData = factory.spawn.nameGet(spawnName).spawnCreep(bodys,
+            newName, {
+                memory: {
+                    role: globalData.farDefender,
+                    roomName: roomName,
+                    spawnName: spawnName
+                }
+            });
+        if (returnData == OK) {
+            Game.creeps[newName].memory.id = Game.creeps[newName].id;
+            clog('生成新的 防御者-远战:' + newName);
+        }
+        return returnData
+    },
+    addOccupier: (occupiers, controller_level = 4, spawnName) => {
+        let spawnSequence = factory.spawn.nameGetSequence(spawnName);
+        let roomSequence = factory.spawn.sequenceGetRoomSequence(spawnSequence);
+        let roomName = factory.room.sequenceGetName(roomSequence);
+        let bodys;
+        let newName = globalData.occupier + Game.time;
+        if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.occupier.bodys
+            .totalEnergyRequired) {
+            bodys = globalData.creepConfigs.occupier.bodys.list;
+        } else {
+            return '房间总能量数量未达到限制，无法生产';
+        }
+        if (occupiers) {
+            if (occupiers.length < 1) {
+                if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.occupier
+                    .bodysMinus
+                    .totalEnergyRequired) {
+                    bodys = globalData.creepConfigs.occupier.bodysMinus.list;
+                } else {
+                    return 'Minus 房间总能量数量未达到限制，无法生产';
+                }
+            }
+            if (occupiers.length > 2 && controller_level >= 4) {
+                if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.occupier
+                    .bodysPlus
+                    .totalEnergyRequired) {
+                    bodys = globalData.creepConfigs.occupier.bodysPlus.list;
+                } else {
+                    return 'Plus 房间总能量数量未达到限制，无法生产';
+                }
+            }
+        }
+        let returnData = factory.spawn.nameGet(spawnName).spawnCreep(bodys,
+            newName, {
+                memory: {
+                    role: globalData.occupier,
+                    roomName: roomName,
+                    spawnName: spawnName
+                }
+            });
+        if (returnData == OK) {
+            Game.creeps[newName].memory.id = Game.creeps[newName].id;
+            clog('生成新的 占领者:' + newName);
+        }
+        return returnData
+    },
+    addTheHealer: (theHealers, controller_level = 4, spawnName) => {
+        let spawnSequence = factory.spawn.nameGetSequence(spawnName);
+        let roomSequence = factory.spawn.sequenceGetRoomSequence(spawnSequence);
+        let roomName = factory.room.sequenceGetName(roomSequence);
+        let bodys;
+        let newName = globalData.theHealer + Game.time;
+        if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.theHealer.bodys
+            .totalEnergyRequired) {
+            bodys = globalData.creepConfigs.theHealer.bodys.list;
+        } else {
+            return '房间总能量数量未达到限制，无法生产';
+        }
+        if (theHealers) {
+            if (theHealers.length < 1) {
+                if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.theHealer
+                    .bodysMinus
+                    .totalEnergyRequired) {
+                    bodys = globalData.creepConfigs.theHealer.bodysMinus.list;
+                } else {
+                    return 'Minus 房间总能量数量未达到限制，无法生产';
+                }
+            }
+            if (theHealers.length > 2 && controller_level >= 4) {
+                if (factory.room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.theHealer
+                    .bodysPlus
+                    .totalEnergyRequired) {
+                    bodys = globalData.creepConfigs.theHealer.bodysPlus.list;
+                } else {
+                    return 'Plus 房间总能量数量未达到限制，无法生产';
+                }
+            }
+        }
+        let returnData = factory.spawn.nameGet(spawnName).spawnCreep(bodys,
+            newName, {
+                memory: {
+                    role: globalData.theHealer,
+                    roomName: roomName,
+                    spawnName: spawnName
+                }
+            });
+        if (returnData == OK) {
+            Game.creeps[newName].memory.id = Game.creeps[newName].id;
+            clog('生成新的 治疗者:' + newName);
+        }
+        return returnData
+    },
+    ComponentEnergyCalculation: (creepComponent = []) => {
+        // 部件能量计算
+        let total = 0;
+        for (let i = 0; i < creepComponent.length; i++) {
+            switch (creepComponent[i]) {
+                case MOVE:
+                    total += globalData.creepComponentConfigs.MOVE;
+                    break;
+                case WORK:
+                    total += globalData.creepComponentConfigs.WORK;
+                    break;
+                case CARRY:
+                    total += globalData.creepComponentConfigs.CARRY;
+                    break;
+                case ATTACK:
+                    total += globalData.creepComponentConfigs.ATTACK;
+                    break;
+                case RANGED_ATTACK:
+                    total += globalData.creepComponentConfigs.RANGED_ATTACK;
+                    break;
+                case HEAL:
+                    total += globalData.creepComponentConfigs.HEAL;
+                    break;
+                case CLAIM:
+                    total += globalData.creepComponentConfigs.CLAIM;
+                    break;
+                case TOUGH:
+                    total += globalData.creepComponentConfigs.TOUGH;
+                    break;
+                default:
+                    Throw.Error('ComponentEnergyCalculation', ' 无效 ', creepComponent[i]);
+            }
+        }
+        return total;
+    }
 }
 
 // creep 监控状态检查
-Creep.prototype.isHealthy = function() {
-	if (this.ticksToLive <= 10) return false
-	else return true
+Creep.prototype.isHealthy = function () {
+    if (this.ticksToLive <= 10) return false
+    else return true
 }

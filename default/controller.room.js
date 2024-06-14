@@ -2,15 +2,12 @@ global.controller.room = {
 	run: () => {
 
 		_.forEach(Game.rooms, room => {
-			// 房间序号
-			let roomSequence = factory.room.nameGetSequence(room.name);
 			let roomName = room.name;
-			let spawnName = factory.spawn.sequenceGetName(roomSequence);
 
 			// 安全
-			factory.Secure.run(roomSequence);
+			factory.Secure.run(roomName);
 			// 塔
-			factory.Tower.run(roomSequence);
+			factory.Tower.run(roomName);
 
 			let eventLog = room.getEventLog();
 			// 建造完成 邮件提示
@@ -48,45 +45,48 @@ global.controller.room = {
 			}
 
 			// 建筑（自动建造等）
-			factory.Build.run(roomSequence);
+			factory.Build.run(roomName);
 
 			// 房间显示文本
-			roomVisual(roomSequence);
+			roomVisual(roomName);
 		});
+
+		let roomName = globalData.rooms[0].spawns[0].name;
+		let roomName2 = globalData.rooms[1].spawns[0].name;
 		
 		// CONTAINER+EXTENSION+STORAGE能量统计
-		containerExtensionStorageEnergyStat(1);
+		containerExtensionStorageEnergyStat(roomName);
 
 		// 能量源区Container记录管理
-		sourceContainer(1);
+		sourceContainer(roomName);
 		// 控制器Container记录管理
-		controllerContainer(1);
+		controllerContainer(roomName);
 		// 采集建造CONTAINER记录管理
-		harvestBuildCONTAINER(1);
+		harvestBuildCONTAINER(roomName);
 
 		// 临时外部房间,升级
-		upgraderOuterRoom(2);
+		upgraderOuterRoom(roomName2);
 		// 临时外部房间,建造
-		// builderOuterRoom(2);
+		// builderOuterRoom(roomName2);
 	}
 }
 
 // 房间显示文本
-function roomVisual(roomSequence) {
-	let room = factory.room.get(roomSequence);
+function roomVisual(roomName) {
+	let room = factory.room.nameGet(roomName);
 
-	const harvests = factory.creep.Harvest.ALL(roomSequence);
-	const upgraders = factory.creep.Upgrader.ALL(roomSequence);
-	const builders = factory.creep.Builder.ALL(roomSequence);
-	const carriers = factory.creep.Carrier.ALL(roomSequence);
-	const repairers = factory.creep.Repairer.ALL(roomSequence);
-	const nearDefenders = factory.creep.Defender.ALLNearDefender(roomSequence);
-	const farDefenders = factory.creep.Defender.ALLFarDefender(roomSequence);
-	const theHealers = factory.creep.TheHealer.ALL(roomSequence);
-	const occupiers = factory.creep.Occupier.ALL(roomSequence);
+	const harvests = factory.creep.Harvest.ALL(roomName);
+	const upgraders = factory.creep.Upgrader.ALL(roomName);
+	const builders = factory.creep.Builder.ALL(roomName);
+	const carriers = factory.creep.Carrier.ALL(roomName);
+	const repairers = factory.creep.Repairer.ALL(roomName);
+	const nearDefenders = factory.creep.Defender.ALLNearDefender(roomName);
+	const farDefenders = factory.creep.Defender.ALLFarDefender(roomName);
+	const theHealers = factory.creep.TheHealer.ALL(roomName);
+	const occupiers = factory.creep.Occupier.ALL(roomName);
 
 	// 查看控制器等级
-	const controller_level = factory.spawn.get(roomSequence).room.controller.level;
+	const controller_level = room.controller.level;
 
 	room.visual.text('控制器等级:' + controller_level, 1, 1, {
 		align: 'left',
@@ -122,14 +122,12 @@ function roomVisual(roomSequence) {
 }
 
 // 能量源区Container记录管理
-function sourceContainer(roomSequence) {
-	let spawnName = factory.spawn.sequenceGetName(roomSequence);
-
+function sourceContainer(roomName) {
 	let memorySource;
 	let on = false;
 	// 如果没有合法记录会不存在harvestSourceID,报错需要捕获
 	try {
-		memorySource = Memory.spawn[spawnName].source.list;
+		memorySource = Memory.rooms[roomName].source.list;
 		on = true;
 	} catch (e) {
 		//TODO handle the exception
@@ -161,20 +159,18 @@ function sourceContainer(roomSequence) {
 						}
 					}
 				}
-				Memory.spawn[spawnName].source.list[val].spaceXYList[i].list = spaceXYListList2;
+				Memory.rooms[roomName].source.list[val].spaceXYList[i].list = spaceXYListList2;
 			}
 		}
 	}
 }
 
 // 控制器Container记录管理
-function controllerContainer(roomSequence) {
-	let spawnName = factory.spawn.sequenceGetName(roomSequence);
-
+function controllerContainer(roomName) {
 	let memoryControllerContainer;
 	let on = false;
 	try {
-		memoryControllerContainer = Memory.spawn[spawnName].controller.container;
+		memoryControllerContainer = Memory.rooms[roomName].controller.container;
 		on = true;
 	} catch (e) {
 		//TODO handle the exception
@@ -205,21 +201,19 @@ function controllerContainer(roomSequence) {
 					}
 				}
 			}
-			Memory.spawn[spawnName].controller.container.list = memoryControllerContainerList2;
+			Memory.rooms[roomName].controller.container.list = memoryControllerContainerList2;
 		}
 	}
 }
 
 // 采集建造CONTAINER记录管理
-function harvestBuildCONTAINER(roomSequence) {
-	let spawnName = factory.spawn.sequenceGetName(roomSequence);
-
+function harvestBuildCONTAINER(roomName) {
 	let harvestBuildCONTAINERList;
 	let on = false;
 	try {
-		if (!Memory.spawn[spawnName].source.harvestBuildCONTAINERList) Memory.spawn[spawnName].source
+		if (!Memory.rooms[roomName].source.harvestBuildCONTAINERList) Memory.rooms[roomName].source
 			.harvestBuildCONTAINERList = {};
-		harvestBuildCONTAINERList = Memory.spawn[spawnName].source.harvestBuildCONTAINERList;
+		harvestBuildCONTAINERList = Memory.rooms[roomName].source.harvestBuildCONTAINERList;
 		on = true;
 	} catch (e) {
 		//TODO handle the exception
@@ -238,16 +232,14 @@ function harvestBuildCONTAINER(roomSequence) {
 			})
 			if (on) harvestBuildCONTAINERList2[i] = harvestBuildCONTAINERList[i];
 		}
-		Memory.spawn[spawnName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList2;
+		Memory.rooms[roomName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList2;
 
 	}
 }
 
 // CONTAINER+EXTENSION+STORAGE能量统计
-function containerExtensionStorageEnergyStat(roomSequence) {
-	let roomName = factory.room.sequenceGetName(roomSequence);
-	let spawnName = factory.spawn.sequenceGetName(roomSequence);
-	let targets = factory.room.get(roomSequence).find(FIND_STRUCTURES, {
+function containerExtensionStorageEnergyStat(roomName) {
+	let targets = factory.room.nameGet(roomName).find(FIND_STRUCTURES, {
 		filter: (structure) => {
 			return (structure.structureType == STRUCTURE_CONTAINER ||
 					structure.structureType == STRUCTURE_EXTENSION ||
@@ -268,14 +260,12 @@ function containerExtensionStorageEnergyStat(roomSequence) {
 			`【${roomName}】房间【CONTAINER+EXTENSION+STORAGE能量${total}不足500】`
 		);
 	}
-	Memory.spawn[spawnName].containerExtensionStorageEnergyStat = total;
+	Memory.rooms[roomName].containerExtensionStorageEnergyStat = total;
 }
 
 // 临时外部房间,升级
-function upgraderOuterRoom(roomSequence) {
-	let spawnName = factory.spawn.sequenceGetName(roomSequence);
-	let room = factory.room.get(roomSequence);
-
+function upgraderOuterRoom(roomName) {
+	let room = factory.room.nameGet(roomName);
 
 	let creepName = '';
 	const upgraders = factory.creep.Upgrader.ALL(1);
@@ -291,7 +281,7 @@ function upgraderOuterRoom(roomSequence) {
 	if (!creepName) {
 		_.forEach(upgraders, upgrader => {
 			if (!upgrader.memory.upgraderOuterRoom) {
-				upgrader.memory.upgraderOuterRoom = roomSequence;
+				upgrader.memory.upgraderOuterRoom = roomName;
 				creepName = upgrader.name;
 				return false;
 			}
@@ -370,10 +360,8 @@ function upgraderOuterRoom(roomSequence) {
 }
 
 // 临时外部房间,建造
-function builderOuterRoom(roomSequence) {
-	let spawnName = factory.spawn.sequenceGetName(roomSequence);
-	let room = factory.room.get(roomSequence);
-
+function builderOuterRoom(roomName) {
+	let room = factory.room.nameGet(roomName);
 
 	let creepName = '';
 	const builders = factory.creep.Builder.ALL(1);
@@ -389,7 +377,7 @@ function builderOuterRoom(roomSequence) {
 	if (!creepName) {
 		_.forEach(builders, builder => {
 			if (!builder.memory.builderOuterRoom) {
-				builder.memory.builderOuterRoom = roomSequence;
+				builder.memory.builderOuterRoom = roomName;
 				creepName = builder.name;
 				return false;
 			}

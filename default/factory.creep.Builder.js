@@ -1,4 +1,5 @@
-var pro = {
+// 建造
+global.factory.creep.Builder = {
 
 	/** @param {Creep} creep **/
 	run: function(creep) {
@@ -10,10 +11,8 @@ var pro = {
 			creep.memory.work = true; // 变为 work状态
 			creep.say('🚧 建造');
 		}
-		
-		// 房间序号
-		let roomSequence = factory.room.nameGetSequence(creep.room.name);
-		let spawnName = factory.spawn.sequenceGetName(roomSequence);
+
+		let roomName = creep.room.name;
 
 		if (creep.memory.work) { // work状态的时候
 			// 寻找建筑位
@@ -77,7 +76,7 @@ var pro = {
 				}
 			}
 		} else { // 非work状态的时候， 到source旁边并采集
-			const harvests = factory.creep.Harvest.ALL(roomSequence);
+			const harvests = factory.creep.Harvest.ALL(roomName);
 			if (harvests.length < 1) {
 				// 采集死完后,自己去采集
 				let target = creep.pos.findClosestByPath(FIND_SOURCES);
@@ -148,14 +147,12 @@ var pro = {
 	}
 };
 
-global.factory.creep.Builder = pro;
-
-function all(spawn) {
+function all(roomName) {
 	let returnData;
 
-	if (spawn) {
+	if (roomName) {
 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.builder && creep.memory
-			.spawn == spawn));
+			.roomName == roomName));
 	} else {
 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.builder);
 	}

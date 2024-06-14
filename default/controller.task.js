@@ -1,14 +1,21 @@
-// 控制器 任务
+/*
+ 被动指派任务-》小兵完成当前任务来领取新的任务-》优先级计算是否允许领取
+ 主动指派任务给空的小兵-》优先级
+ 优先级，计算距离，小兵类型，小兵属性
+ 建立一个有空小兵的列表，第一次运行初始化程序中，任务中心主动找出所有空闲小兵，然后根据优先级进行指派
+ 任务中心。第一步：建立任务，第二步：派发任务，第三步：执行任务
+*/
 
-// 被动指派任务-》小兵完成当前任务来领取新的任务-》优先级计算是否允许领取
-// 主动指派任务给空的小兵-》优先级
-// 优先级，计算距离，小兵类型，小兵属性
-
-// 挂载 请求任务
+/**
+ * 挂载 请求任务
+ */
 Creep.prototype.requestTask = function() {
 	return assignTask(this);
 }
 
+/**
+ * 控制器 任务
+ */
 global.controller.task = {
 	run: () => {
 
@@ -33,8 +40,16 @@ function assignTask(creep) {
 function addTask() {
 	_.forEach(Game.rooms, room => {
 		let roomName = room.name;
-		let roomSequence = factory.room.nameGetSequence(roomName);
-		let spawnName = factory.spawn.sequenceGetName(roomSequence);
+
+		const harvests = factory.creep.Harvest.ALL(roomName);
+		const upgraders = factory.creep.Upgrader.ALL(roomName);
+		const builders = factory.creep.Builder.ALL(roomName);
+		const carriers = factory.creep.Carrier.ALL(roomName);
+		const repairers = factory.creep.Repairer.ALL(roomName);
+		const nearDefenders = factory.creep.Defender.ALLNearDefender(roomName);
+		const farDefenders = factory.creep.Defender.ALLFarDefender(roomName);
+		const theHealers = factory.creep.TheHealer.ALL(roomName);
+		const occupiers = factory.creep.Occupier.ALL(roomName);
 
 		// 我方血少的CREEPS
 		const myCreepHitsF = room.find(FIND_MY_CREEPS, {
@@ -81,8 +96,6 @@ function dispatchTasks() {
 	// 寻找空闲Creep
 	_.forEach(Game.creeps, creep => {
 		let roomName = creep.room.name;
-		let roomSequence = factory.room.nameGetSequence(roomName);
-		let spawnName = factory.spawn.sequenceGetName(roomSequence);
 
 	});
 }

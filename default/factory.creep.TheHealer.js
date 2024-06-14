@@ -1,3 +1,4 @@
+// 治疗
 global.factory.creep.TheHealer = {
 	run: (creep) => {
 		const target = creep.pos.findClosestByRange(FIND_MY_CREEPS, {
@@ -18,12 +19,12 @@ global.factory.creep.TheHealer = {
 	}
 }
 
-function all(spawn) {
+function all(roomName) {
 	let returnData;
 
-	if (spawn) {
+	if (roomName) {
 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.theHealer && creep.memory
-			.spawn == spawn));
+			.roomName == roomName));
 	} else {
 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.theHealer);
 	}

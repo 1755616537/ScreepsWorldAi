@@ -1,3 +1,4 @@
+// 占领
 global.factory.creep.Occupier = {
 	run: (creep, roomName) => {
 		roomName = 'W48S54';
@@ -88,12 +89,12 @@ global.factory.creep.Occupier = {
 }
 
 
-function all(spawn) {
+function all(roomName) {
 	let returnData;
 
-	if (spawn) {
+	if (roomName) {
 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.occupier && creep.memory
-			.spawn == spawn));
+			.roomName == roomName));
 	} else {
 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.occupier);
 	}

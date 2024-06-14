@@ -1,4 +1,5 @@
-var pro = {
+// 采集
+global.factory.creep.Harvest = {
 
 	/** @param {Creep} creep **/
 	run: function(creep) {
@@ -13,10 +14,8 @@ var pro = {
 			creep.say('🛒 存放');
 		}
 
-		// 房间序号
-		let roomSequence = factory.room.nameGetSequence(creep.room.name);
-		let spawnName = factory.spawn.sequenceGetName(roomSequence);
-		let roomName = factory.room.sequenceGetName(roomSequence);
+		let roomName = creep.room.name;
+		let roomSequence=factory.room.nameGetSequence(roomName);
 
 		// 没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器
 		// 脚下是否有CONTAINER，有就不移动
@@ -34,16 +33,16 @@ var pro = {
 			let source = sources.length > 0 ? sources[0] : null;
 
 			// 自动分配能量源区
-			if (globalData.room[roomSequence - 1].AutomaticAssignHarvest) {
+			if (globalData.rooms[roomSequence - 1].AutomaticAssignHarvest) {
 				// 没有分配到的Source
 
 				// 根据9*9计算能量源区地形分配数量 只计算一次缓存后固定
 				// try {
-				// 	if (!Memory.spawn[spawnName].source.list) {}
+				// 	if (!Memory.rooms[roomName].source.list) {}
 				// } catch (e) {
-				// 	Memory.spawn[spawnName].source.list = {};
+				// 	Memory.rooms[roomName].source.list = {};
 				// }
-				if (!Memory.spawn[spawnName].source ? true : !Memory.spawn[spawnName].source.list) {
+				if (!Memory.rooms[roomName].source ? true : !Memory.rooms[roomName].source.list) {
 
 					// 网上贡献的方法
 					// let zb=creep.room.find(FIND_SOURCES).pos;
@@ -93,7 +92,7 @@ var pro = {
 										})
 
 										// 自动建造对应数量的CONTAINER
-										if (globalData.room[roomSequence - 1].AutomaticAssignHarvestCONTAINER) {
+										if (globalData.rooms[roomSequence - 1].AutomaticAssignHarvestCONTAINER) {
 											let on = true;
 											// 已经存在有建筑了跳过
 											if (found.length) {
@@ -107,7 +106,7 @@ var pro = {
 											}
 											if (on) {
 												// 指定位置创建一个新的 ConstructionSite
-												let returnData = factory.room.get(roomSequence)
+												let returnData = factory.room.nameGet(roomName)
 													.createConstructionSite(x, y, STRUCTURE_CONTAINER);
 												if (returnData == OK) {
 													clog('自动建造对应数量的CONTAINER 房间', roomName, ' x', x, ' y', y,
@@ -141,7 +140,7 @@ var pro = {
 							spaceXYList: spaceXYList
 						};
 					}
-					Memory.spawn[spawnName].source = {
+					Memory.rooms[roomName].source = {
 						list: memorySource,
 						// 允许采集总数
 						total: total
@@ -152,7 +151,7 @@ var pro = {
 					}
 				}
 
-				let memorySource = Memory.spawn[spawnName].source.list;
+				let memorySource = Memory.rooms[roomName].source.list;
 				if (memorySource) {
 					if (!creep.memory.harvestSourceID) {
 						// 找出没有被分配完的能量源区
@@ -172,7 +171,7 @@ var pro = {
 								// 把能量源区ID记录到creep
 								creep.memory.harvestSourceID = val;
 
-								Memory.spawn[spawnName].source.list = memorySource;
+								Memory.rooms[roomName].source.list = memorySource;
 								clog('房间', roomName, ' ', creep.name, '已自动分配给能量源区', val)
 								break;
 							}
@@ -224,9 +223,9 @@ var pro = {
 			let harvestBuildCONTAINERList;
 			let on = false;
 			try {
-				if (!Memory.spawn[spawnName].source.harvestBuildCONTAINERList) Memory.spawn[spawnName].source
+				if (!Memory.rooms[roomName].source.harvestBuildCONTAINERList) Memory.rooms[roomName].source
 					.harvestBuildCONTAINERList = {};
-				harvestBuildCONTAINERList = Memory.spawn[spawnName].source.harvestBuildCONTAINERList;
+				harvestBuildCONTAINERList = Memory.rooms[roomName].source.harvestBuildCONTAINERList;
 				on = true;
 			} catch (e) {
 				//TODO handle the exception
@@ -241,8 +240,8 @@ var pro = {
 					harvestBuildCONTAINERList[creep.name] = false;
 					harvestBuildCONTAINERList = _.omit(harvestBuildCONTAINERList, creep.name);
 				}
-				Memory.spawn[spawnName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList;
-				const harvests = factory.creep.Harvest.ALL(roomSequence);
+				Memory.rooms[roomName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList;
+				const harvests = factory.creep.Harvest.ALL(roomName);
 				if (_.size(harvestBuildCONTAINERList) < harvests.length) {
 					if (harvestBuildCONTAINERList[creep.name]) {
 						// 建造
@@ -256,7 +255,7 @@ var pro = {
 						harvestBuildCONTAINERList[creep.name] = false;
 						harvestBuildCONTAINERList = _.omit(harvestBuildCONTAINERList, creep.name);
 
-						Memory.spawn[spawnName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList;
+						Memory.rooms[roomName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList;
 					}
 				}
 			}
@@ -356,14 +355,12 @@ var pro = {
 	}
 };
 
-global.factory.creep.Harvest = pro;
-
-function all(spawn) {
+function all(roomName) {
 	let returnData;
 
-	if (spawn) {
+	if (roomName) {
 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.harvest && creep.memory
-			.spawn == spawn));
+			.roomName == roomName));
 	} else {
 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.harvest);
 	}

@@ -1,9 +1,6 @@
 global.factory.Secure = {
-	run: (roomSequence) => {
-		let spawnName = factory.spawn.sequenceGetName(roomSequence);
-		let roomName = factory.room.sequenceGetName(roomSequence);
-
-		let room = factory.room.get(roomSequence);
+	run: (roomName) => {
+		let room = factory.room.nameGet(roomName);
 
 		var hostiles = room.find(FIND_HOSTILE_CREEPS);
 		if (hostiles.length > 0) {
@@ -125,12 +122,12 @@ global.factory.Secure = {
 
 		if (objectDestroyedMy) {
 			let on = false;
-			if (room.name == globalData.room[0].name && globalData.room[0].AutomaticSecurity) {
+			if (room.name == globalData.rooms[0].name && globalData.rooms[0].AutomaticSecurity) {
 				on = true;
-			} else if (room.name == globalData.room[1].name && globalData.room[1]
+			} else if (room.name == globalData.rooms[1].name && globalData.rooms[1]
 				.AutomaticSecurity) {
 				on = true;
-			} else if (room.name == globalData.room[2].name && globalData.room[2]
+			} else if (room.name == globalData.rooms[2].name && globalData.rooms[2]
 				.AutomaticSecurity) {
 				on = true;
 			}

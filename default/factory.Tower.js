@@ -1,8 +1,6 @@
 global.factory.Tower = {
-	run: (roomSequence) => {
-		let spawnName = factory.spawn.sequenceGetName(roomSequence);
-
-		let room = factory.room.get(roomSequence);
+	run: (roomName) => {
+		let room = factory.room.nameGet(roomName);
 
 		const targets = room.find(FIND_MY_STRUCTURES, {
 			filter: (structure) => {

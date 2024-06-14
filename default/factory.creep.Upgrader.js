@@ -1,4 +1,5 @@
-let pro = {
+// 升级
+global.factory.creep.Upgrader = {
 
 	/** @param {Creep} creep **/
 	run: function(creep) {
@@ -12,9 +13,7 @@ let pro = {
 			creep.say('⚡ 升级');
 		}
 
-		// 房间序号
-		let roomSequence = factory.room.nameGetSequence(creep.room.name);
-		let spawnName = factory.spawn.sequenceGetName(roomSequence);
+		let roomName = creep.room.name;
 
 		if (creep.memory.work) { // 升级状态，找到控制器并升级 + 可视化
 			if (!creep.room.controller.sign) {
@@ -39,7 +38,7 @@ let pro = {
 			}
 
 		} else { // 采集状态 + 可视化
-			const harvests = factory.creep.Harvest.ALL(roomSequence);
+			const harvests = factory.creep.Harvest.ALL(roomName);
 			if (harvests.length < 1) {
 				// 采集死完后,自己去采集
 				let target = creep.pos.findClosestByPath(FIND_SOURCES);
@@ -55,7 +54,7 @@ let pro = {
 				let memoryControllerContainer;
 				let on = false;
 				try {
-					memoryControllerContainer = Memory.spawn[spawnName].controller.container;
+					memoryControllerContainer = Memory.rooms[roomName].controller.container;
 					on = true;
 				} catch (e) {
 					//TODO handle the exception
@@ -129,14 +128,12 @@ let pro = {
 	}
 };
 
-global.factory.creep.Upgrader = pro;
-
-function all(spawn) {
+function all(roomName) {
 	let returnData;
 
-	if (spawn) {
+	if (roomName) {
 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.upgrader && creep.memory
-			.spawn == spawn));
+			.roomName == roomName));
 	} else {
 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.upgrader);
 	}

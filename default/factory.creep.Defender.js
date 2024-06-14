@@ -1,3 +1,4 @@
+// 近战和远程
 global.factory.creep.Defender = {
 	run: (creep) => {
 		if (creep.memory.role == globalData.nearDefender) {
@@ -14,24 +15,24 @@ global.factory.creep.Defender = {
 	}
 }
 
-function allNearDefender(spawn) {
+function allNearDefender(roomName) {
 	let returnData;
 
-	if (spawn) {
+	if (roomName) {
 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.nearDefender && creep.memory
-			.spawn == spawn));
+			.roomName == roomName));
 	} else {
 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.nearDefender);
 	}
 	return returnData;
 }
 
-function allFarDefender(spawn) {
+function allFarDefender(roomName) {
 	let returnData;
 
-	if (spawn) {
+	if (roomName) {
 		returnData = _.filter(Game.creeps, (creep) => (creep.memory.role == globalData.farDefender && creep.memory
-			.spawn == spawn));
+			.roomName == roomName));
 	} else {
 		returnData = _.filter(Game.creeps, (creep) => creep.memory.role == globalData.farDefender);
 	}
