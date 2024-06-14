@@ -23,8 +23,9 @@ global.initialization = {
         // 全局数据初始化
         iniglobalData();
 
-        iniRoom(1);
-        // iniRoom(2);
+        let roomName = globalData.rooms[0].name;
+        
+        iniRoom(roomName);
 
         clog("【初始化】【结束】 Time " + Game.time);
     },

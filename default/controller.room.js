@@ -51,8 +51,8 @@ global.controller.room = {
 			roomVisual(roomName);
 		});
 
-		let roomName = globalData.rooms[0].spawns[0].name;
-		let roomName2 = globalData.rooms[1].spawns[0].name;
+		let roomName = globalData.rooms[0].name;
+		let roomName2 = globalData.rooms[1].name;
 		
 		// CONTAINER+EXTENSION+STORAGE能量统计
 		containerExtensionStorageEnergyStat(roomName);
