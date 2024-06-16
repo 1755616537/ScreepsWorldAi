@@ -1,5 +1,8 @@
 import {errorMapper} from './modules/errorMapper.js'
 
+import Alliance_run from './Alliance/run.js'
+import Alliance_initialization from './Alliance/initialization.js'
+
 export {iniglobalData}
 
 export default function () {
@@ -26,6 +29,9 @@ export default function () {
 
         // 全局数据初始化
         iniglobalData();
+
+        // 联盟 初始化 入口
+        Alliance_run(Alliance_initialization);
 
         let roomName = globalData.rooms[0].name;
 
