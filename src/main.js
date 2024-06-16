@@ -8,12 +8,12 @@ import controller_task from "./controller/task.js";
 import controller_room from "./controller/room.js";
 import controller_creep from "./controller/creep.js";
 
-import { errorMapper } from './modules/errorMapper.js'
+import {errorMapper} from './modules/errorMapper.js'
 
 export const loop = errorMapper(() => {
-    if (globalData.username == '1755616537') {
+    if (globalData.username == globalData.Alliance[0].username) {
 
-    } else if (globalData.username == 'Stars22') {
+    } else if (globalData.username == globalData.Alliance[1].username) {
 
     }
 

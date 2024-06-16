@@ -210,6 +210,21 @@ global.globalData = {
             number: 0
         }
     },
+    // 联盟信息
+    Alliance: [
+        {
+            username: '1755616537',
+            rooms: [
+                {
+                    name: 'W47S54'
+                }
+            ]
+        },
+        {
+            username: 'Stars22',
+            rooms: []
+        }
+    ],
     // 移动
     Move: {
         // 工作颜色
