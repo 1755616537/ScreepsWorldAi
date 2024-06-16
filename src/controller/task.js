@@ -6,6 +6,17 @@
  任务中心。第一步：建立任务，第二步：派发任务，第三步：执行任务
 */
 
+import factory_task from "../factory/task.js";
+
+import factory_creep_Harvest from "../factory/creep/Harvest.js";
+import factory_creep_Upgrader from "../factory/creep/Upgrader.js";
+import factory_creep_Builder from "../factory/creep/Builder.js";
+import factory_creep_Carrier from "../factory/creep/Carrier.js";
+import factory_creep_Repairer from "../factory/creep/Repairer.js";
+import factory_creep_Defender from "../factory/creep/Defender.js";
+import factory_creep_TheHealer from "../factory/creep/TheHealer.js";
+import factory_creep_Occupier from "../factory/creep/Occupier.js";
+
 /**
  * 挂载 请求任务
  */
@@ -38,15 +49,15 @@ function addTask() {
     _.forEach(Game.rooms, room => {
         let roomName = room.name;
 
-        const harvests = factory.creep.Harvest.ALL(roomName);
-        const upgraders = factory.creep.Upgrader.ALL(roomName);
-        const builders = factory.creep.Builder.ALL(roomName);
-        const carriers = factory.creep.Carrier.ALL(roomName);
-        const repairers = factory.creep.Repairer.ALL(roomName);
-        const nearDefenders = factory.creep.Defender.ALLNearDefender(roomName);
-        const farDefenders = factory.creep.Defender.ALLFarDefender(roomName);
-        const theHealers = factory.creep.TheHealer.ALL(roomName);
-        const occupiers = factory.creep.Occupier.ALL(roomName);
+        const harvests = factory_creep_Harvest.ALL(roomName);
+        const upgraders = factory_creep_Upgrader.ALL(roomName);
+        const builders = factory_creep_Builder.ALL(roomName);
+        const carriers = factory_creep_Carrier.ALL(roomName);
+        const repairers = factory_creep_Repairer.ALL(roomName);
+        const nearDefenders = factory_creep_Defender.ALLNearDefender(roomName);
+        const farDefenders = factory_creep_Defender.ALLFarDefender(roomName);
+        const theHealers = factory_creep_TheHealer.ALL(roomName);
+        const occupiers = factory_creep_Occupier.ALL(roomName);
 
         // 我方血少的CREEPS
         const myCreepHitsF = room.find(FIND_MY_CREEPS, {
@@ -103,7 +114,7 @@ function performTasks() {
     // 正在执行任务队列
     let performList = [];
     try {
-        performList = factory.task.perform.getALL();
+        performList = factory_task.perform.getALL();
     } catch (e) {
         //TODO handle the exception
     }

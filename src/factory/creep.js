@@ -40,6 +40,7 @@
 
 import factory_spawn from "../factory/spawn.js";
 import factory_room from "../factory/room.js";
+
 import factory_source from "../factory/source.js";
 
 export default {
