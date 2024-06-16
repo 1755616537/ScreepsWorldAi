@@ -1,7 +1,7 @@
 // 采集
 export default {
     /** @param {Creep} creep **/
-    run: function(creep) {
+    run: function (creep) {
         // work && 背包为空
         if (creep.memory.work && creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.work = false;
@@ -14,7 +14,7 @@ export default {
         }
 
         let roomName = creep.room.name;
-        let roomSequence=factory.room.nameGetSequence(roomName);
+        let roomSequence = factory.room.nameGetSequence(roomName);
 
         // 没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器
         // 脚下是否有CONTAINER，有就不移动
@@ -123,7 +123,8 @@ export default {
                                                 // ERR_RCL_NOT_ENOUGH	-14	房间控制器级别不足。
                                             }
                                         }
-                                    };
+                                    }
+                                    ;
                                 }
                                 x++;
                             }
@@ -275,7 +276,7 @@ export default {
             let target = null;
             if (targets.length > 0) {
                 // _.find(targets, (val) => creep.pos.getRangeTo(val)<=3)
-                target = function(targets) {
+                target = function (targets) {
                     let val0range;
                     for (let i = 0; i < targets.length; i++) {
                         let val = targets[i];

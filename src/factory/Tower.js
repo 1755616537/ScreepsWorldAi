@@ -60,7 +60,7 @@ function work(tower, type) {
 
     // 治疗
     let closestMYCreep = tower.room.find(FIND_MY_CREEPS, {
-        filter: function(object) {
+        filter: function (object) {
             return object.hits < object.hitsMax;
         }
     });

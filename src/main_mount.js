@@ -18,4 +18,5 @@ import "./utils/超级移动优化hotfix 0.9.4.js";
 // -------------------------------控制器
 // -------------------------------默认只执行一次的初始化程序
 import initialization from "./initialization.js"
+
 initialization();

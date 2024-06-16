@@ -29,7 +29,6 @@ export default function () {
 }
 
 
-
 function addHarvest(harvests, controller_level = 4, spawnName) {
     // 生产 限制 采集
     if (harvests.length < globalData.creepConfigs.harvest.number) {

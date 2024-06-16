@@ -1,8 +1,8 @@
 // 升级
-export default{
+export default {
 
     /** @param {Creep} creep **/
-    run: function(creep) {
+    run: function (creep) {
 
         if (creep.memory.work && creep.store[RESOURCE_ENERGY] == 0) { // 升级状态&&能量不足的时候，变为采集者
             creep.memory.work = false;
@@ -29,7 +29,7 @@ export default{
                         ERR_NOT_IN_RANGE) {
                         factory.creep.moveTo(creep, creep.room.controller);
                     }
-                }else{
+                } else {
                     // 升级
                     if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                         factory.creep.moveTo(creep, creep.room.controller);
@@ -139,7 +139,6 @@ function all(roomName) {
     }
     return returnData;
 }
-
 
 
 // /**

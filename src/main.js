@@ -9,9 +9,9 @@ import controller_room from "./controller/room.js";
 import controller_creep from "./controller/creep.js";
 
 export const loop = errorMapper(() => {
-    if (globalData.username=='1755616537'){
+    if (globalData.username == '1755616537') {
 
-    }else if (globalData.username=='Stars22'){
+    } else if (globalData.username == 'Stars22') {
 
     }
 

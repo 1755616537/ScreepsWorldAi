@@ -2,8 +2,6 @@ import factory_Secure from "../factory/Secure.js";
 import factory_Tower from "../factory/Tower.js";
 
 import factory_initialization from "../initialization.js";
-
-import factory_spawn from "../factory/spawn.js";
 import factory_room from "../factory/room.js";
 
 import factory_creep_Harvest from "../factory/creep/Harvest.js";
@@ -91,7 +89,6 @@ export default function () {
     // 临时外部房间,建造
     // builderOuterRoom(roomName2);
 }
-
 
 
 // 房间显示文本
