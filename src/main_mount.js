@@ -1,0 +1,24 @@
+// -------------------------------初始化
+global.factory = {};
+global.controller = {}
+// -------------------------------全局数据
+import "./globalData.js"
+// -------------------------------构建接口
+// -------------------------------构建函数
+// -------------------------------封装
+// 报错
+import "./utils/Throw.js"
+// 日志
+import "./utils/log.js"
+// -------------------------------工具
+// 工具集
+import "./utils/utils.js";
+import "./utils/超级移动优化hotfix 0.9.4.js";
+// -------------------------------工厂模块
+// -------------------------------控制器
+// -------------------------------默认只执行一次的初始化程序
+import initialization from "./initialization.js"
+export default function () {
+    // 初始化
+    initialization.run();
+}
