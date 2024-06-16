@@ -1,5 +1,6 @@
 // 采集
 export default {
+
     /** @param {Creep} creep **/
     run: function (creep) {
         // work && 背包为空

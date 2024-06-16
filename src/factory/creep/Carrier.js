@@ -96,7 +96,7 @@ export default {
                                 try {
                                     if (spaceXYList[i].list.length < 1) {
                                         memoryContainerListNull = i;
-                                        ok = true;
+                                        on = true;
                                         break;
                                     }
                                 } catch (e) {

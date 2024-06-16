@@ -1,6 +1,8 @@
 // 近战和远程
 export default {
-    run: (creep) => {
+
+    /** @param {Creep} creep **/
+    run: function (creep) {
         if (creep.memory.role == globalData.nearDefender) {
             nearDefenderRun(creep);
         } else if (creep.memory.role == globalData.farDefender) {

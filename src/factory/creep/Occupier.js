@@ -1,6 +1,8 @@
 // 占领
 export default {
-    run: (creep, roomName) => {
+
+    /** @param {Creep} creep **/
+    run: function (creep, roomName) {
         roomName = 'W47S53';
         // 需要拥有CLAIM部件
         // Game.spawns.Spawn1.spawnCreep([WORK, CARRY, MOVE], 'ee1', { memory: {}})

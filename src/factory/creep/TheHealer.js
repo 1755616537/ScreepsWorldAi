@@ -1,6 +1,8 @@
 // 治疗
 export default {
-    run: (creep) => {
+
+    /** @param {Creep} creep **/
+    run: function (creep) {
         const target = creep.pos.findClosestByRange(FIND_MY_CREEPS, {
             filter: function (object) {
                 return object.hits < object.hitsMax;
