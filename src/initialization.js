@@ -1,34 +1,38 @@
+import {errorMapper} from './modules/errorMapper.js'
+
 export {iniglobalData}
 
 export default function () {
-    clog('【挂载拓展】【完成】 Time ' + Game.time)
-    clog("【脚本加载】 Time " + Game.time + " , bucket " + Game.cpu.bucket);
+    return errorMapper(() => {
+        clog('【挂载拓展】【完成】 Time ' + Game.time)
+        clog("【脚本加载】 Time " + Game.time + " , bucket " + Game.cpu.bucket);
 
-    clog("【初始化】【开始】 Time " + Game.time);
+        clog("【初始化】【开始】 Time " + Game.time);
 
-    // 客户端汉化显示
-    // Utils.cn();
-    clog('【提示】: 手动汉化输入【Utils.cn();】');
+        // 客户端汉化显示
+        // Utils.cn();
+        clog('【提示】: 手动汉化输入【Utils.cn();】');
 
-    if (!Memory.rooms) {
-        Memory.rooms = {
-            source: {},
-            controller: {}
+        if (!Memory.rooms) {
+            Memory.rooms = {
+                source: {},
+                controller: {}
+            }
         }
-    }
 
-    for (let name in Game.creeps) {
-        if (!Game.creeps[name].memory.id) Game.creeps[name].memory.id = Game.creeps[name].id;
-    }
+        for (let name in Game.creeps) {
+            if (!Game.creeps[name].memory.id) Game.creeps[name].memory.id = Game.creeps[name].id;
+        }
 
-    // 全局数据初始化
-    iniglobalData();
+        // 全局数据初始化
+        iniglobalData();
 
-    let roomName = globalData.rooms[0].name;
+        let roomName = globalData.rooms[0].name;
 
-    iniRoom(roomName);
+        iniRoom(roomName);
 
-    clog("【初始化】【结束】 Time " + Game.time);
+        clog("【初始化】【结束】 Time " + Game.time);
+    })
 }
 
 function iniRoom(roomName) {
