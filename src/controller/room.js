@@ -17,6 +17,7 @@ import factory_creep_Occupier from "../factory/creep/Occupier.js";
 
 import factory_Build from "../factory/Build.js";
 
+// 控制器 房间
 export default function () {
     _.forEach(Game.rooms, room => {
         let roomName = room.name;

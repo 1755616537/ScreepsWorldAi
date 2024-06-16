@@ -1,9 +1,8 @@
 // 代码中文解释
 /// <reference types="@screepscn/types" />
 
-import main_mount from "./main_mount.js";
 // 拓展总入口 只执行一次
-main_mount();
+import "./main_mount.js";
 
 import controller_task from "./controller/task.js";
 import controller_room from "./controller/room.js";

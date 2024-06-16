@@ -11,6 +11,7 @@ import factory_creep_Defender from "../factory/creep/Defender.js";
 import factory_creep_TheHealer from "../factory/creep/TheHealer.js";
 import factory_creep_Occupier from "../factory/creep/Occupier.js";
 
+// 控制器 creep
 export default function () {
 
     // 遍历所有 creep 并执行上文中拓展的 work 方法

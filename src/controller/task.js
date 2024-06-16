@@ -9,26 +9,23 @@
 /**
  * 挂载 请求任务
  */
-Creep.prototype.requestTask = function() {
+Creep.prototype.requestTask = function () {
     return assignTask(this);
 }
 
 /**
  * 控制器 任务
  */
-export default {
-    run: () => {
+export default function () {
 
-        // 建立任务
-        addTask();
+    // 建立任务
+    addTask();
 
-        // 派发任务
-        // dispatchTasks();
+    // 派发任务
+    // dispatchTasks();
 
-        // 执行任务
-        // performTasks();
-
-    }
+    // 执行任务
+    // performTasks();
 }
 
 // 请求指派任务
@@ -53,7 +50,7 @@ function addTask() {
 
         // 我方血少的CREEPS
         const myCreepHitsF = room.find(FIND_MY_CREEPS, {
-            filter: function(object) {
+            filter: function (object) {
                 return object.hits < object.hitsMax;
             }
         });
@@ -91,6 +88,7 @@ function addTask() {
 
     });
 }
+
 // 派发任务
 function dispatchTasks() {
     // 寻找空闲Creep
@@ -99,6 +97,7 @@ function dispatchTasks() {
 
     });
 }
+
 // 执行任务
 function performTasks() {
     // 正在执行任务队列
