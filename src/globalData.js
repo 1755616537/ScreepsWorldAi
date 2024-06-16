@@ -2,7 +2,7 @@
 global.globalData = {
     // 总输出
     clog: true,
-    // 【不用填写，会自动获取】自己的建筑拥有者姓名
+    // 【不用填写，会自动获取】当前使用代码的用户名
     username: '',
     // 房间
     rooms: [{
@@ -232,6 +232,11 @@ global.globalData = {
         // 获取资源颜色
         WorkResourceColor: '#ffff00',
     },
+
+
+
+    // 以下内容不可更改--------------------------------------------------------------
+
     // 采集者ID
     harvest: 'harvest',
     // 升级者ID
