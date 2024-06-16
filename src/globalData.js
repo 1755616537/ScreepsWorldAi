@@ -217,12 +217,19 @@ global.globalData = {
             rooms: [
                 {
                     name: 'W47S54'
+                },
+                {
+                    name: 'W48S54'
                 }
             ]
         },
         {
             username: 'Stars22',
-            rooms: []
+            rooms: [
+                {
+                    name: 'W49S53'
+                }
+            ]
         }
     ],
     // 移动
@@ -232,7 +239,6 @@ global.globalData = {
         // 获取资源颜色
         WorkResourceColor: '#ffff00',
     },
-
 
 
     // 以下内容不可更改--------------------------------------------------------------
