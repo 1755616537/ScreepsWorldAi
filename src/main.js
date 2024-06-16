@@ -8,6 +8,8 @@ import controller_task from "./controller/task.js";
 import controller_room from "./controller/room.js";
 import controller_creep from "./controller/creep.js";
 
+import { errorMapper } from './modules/errorMapper.js'
+
 export const loop = errorMapper(() => {
     if (globalData.username == '1755616537') {
 
