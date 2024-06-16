@@ -1,7 +1,7 @@
 // 占领
 global.factory.creep.Occupier = {
 	run: (creep, roomName) => {
-		roomName = 'W48S54';
+		roomName = 'W47S53';
 		// 需要拥有CLAIM部件
 		// Game.spawns.Spawn1.spawnCreep([WORK, CARRY, MOVE], 'ee1', { memory: {}})
 		// {
@@ -48,9 +48,10 @@ global.factory.creep.Occupier = {
 
 			// 对控制器签名
 			// if (creep.signController(room.controller, "I'm going to claim this room in a few days.") ==
-			// 	ERR_NOT_IN_RANGE) {
-			// 	factory.creep.moveTo(creep, room.controller);
-			// }
+			if (creep.signController(room.controller, "peaceful development.") ==
+				ERR_NOT_IN_RANGE) {
+				factory.creep.moveTo(creep, room.controller);
+			}
 
 		}
 
