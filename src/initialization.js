@@ -1,6 +1,5 @@
 import {errorMapper} from './modules/errorMapper.js'
 
-import factory_spawn from "./factory/spawn.js";
 import factory_room from "./factory/room.js";
 
 import Alliance_run from './Alliance/run.js'
@@ -34,11 +33,9 @@ export default function () {
         iniglobalData();
 
         // 联盟 初始化 入口
-        Alliance_run(Alliance_initialization);
-
-        let roomName = globalData.rooms[0].name;
-
-        iniRoom(roomName);
+        Alliance_run(Alliance_initialization, this, {
+            iniRoom: iniRoom
+        });
 
         clog("【初始化】【结束】 Time " + Game.time);
     })
