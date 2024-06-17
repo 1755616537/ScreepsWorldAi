@@ -69,7 +69,7 @@ function iniglobalData() {
         globalData.rooms = globalDataAlliance.rooms;
     }
 
-
+    // 把当前全部基地名称获取成数组
     let rooms = {};
     _.forEach(Game.spawns, spawn => {
         let roomName = spawn.room.name;
@@ -79,7 +79,9 @@ function iniglobalData() {
         });
     });
 
+    // 通过房间，把基地名称数组分类
     _.forEach(Game.rooms, room => {
+        let roomName = room.name;
         const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == room.name);
         let globalDataRoom = {};
         if (globalDataRoomIndex == -1) {
