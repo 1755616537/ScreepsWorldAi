@@ -50,7 +50,7 @@ Array.prototype.randomGet = function () {
 };
 
 let base36 = Math.pow(36, 10)
-randomId = () => _.padLeft(Math.ceil(Math.random() * base36).toString(36).toLocaleUpperCase(), 10, "0")
+global.randomId = () => _.padLeft(Math.ceil(Math.random() * base36).toString(36).toLocaleUpperCase(), 10, "0")
 
 let posCodeNumberMap = {};
 let posCodeCharMap = {};

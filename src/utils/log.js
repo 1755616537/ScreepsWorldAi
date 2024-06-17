@@ -1,6 +1,6 @@
-clog = function (...e) {
+global.clog = function (...e) {
     if (globalData.clog) console.log(...e)
 };
-log = function (...e) {
+global.log = function (...e) {
     if (globalData.clog) console.log(JSON.stringify(e))
 };
