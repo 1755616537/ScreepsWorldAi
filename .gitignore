@@ -1,6 +1,4 @@
 /.secret.json
-/package-lock.json
 /额外/The-design-of-OverDom/advanced guide/imgs/
 /额外/The-design-of-OverDom/doc/papers/
 /额外/The-design-of-OverDom/src/
-/node_modules/@rollup/
