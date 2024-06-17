@@ -66,7 +66,7 @@ function iniglobalData() {
     // 从联盟配置里把房间配置取出来
     const globalDataAlliance = _.find(globalData.Alliance, (value) => value.username == username);
     if (globalDataAlliance) {
-        globalData.globalData.rooms = globalDataAlliance.rooms;
+        globalData.rooms = globalDataAlliance.rooms;
     }
 
 
