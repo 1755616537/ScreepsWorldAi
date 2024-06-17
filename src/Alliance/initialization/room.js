@@ -11,7 +11,7 @@ export default [
             // 因为程序更改，临时过度需要
             if (globalData.rooms[0].name == 'W47S54') {
                 _.forEach(Game.creeps, creep => {
-                    if (creep.memory.spawn == 1) {
+                    if (creep.memory.spawn && creep.memory.spawn == 1) {
                         creep.memory.roomName = 'W47S54'
                     }
                 })
