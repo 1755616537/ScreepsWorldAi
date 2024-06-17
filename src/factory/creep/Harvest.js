@@ -1,3 +1,5 @@
+import factory_room from "../../factory/room.js";
+
 import factory_creep from "../../factory/creep.js";
 
 // 采集
@@ -245,7 +247,7 @@ export default {
                     harvestBuildCONTAINERList = _.omit(harvestBuildCONTAINERList, creep.name);
                 }
                 Memory.rooms[roomName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList;
-                const harvests = factory_creep.Harvest.ALL(roomName);
+                const harvests = all(roomName);
                 if (_.size(harvestBuildCONTAINERList) < harvests.length) {
                     if (harvestBuildCONTAINERList[creep.name]) {
                         // 建造
