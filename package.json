@@ -24,6 +24,7 @@
     "rollup-plugin-screeps": "^1.0.1"
   },
   "dependencies": {
+    "@screepscn/types": "^1.0.0",
     "source-map": "^0.6.1"
   }
 }
