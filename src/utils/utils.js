@@ -122,6 +122,34 @@ let pro = {
         return start + Math.floor(Math.random() * range)
     },
 
+    // 去重合并函数
+    uniqueObjects: function (arr) {
+        var uniqueArray = [];
+        arr.forEach(function (obj) {
+            if (!_.find(uniqueArray, function (uniqueObj) {
+                return isEqualObj(obj, uniqueObj);
+            })) {
+                uniqueArray.push(obj);
+            }
+        });
+        return uniqueArray;
+    },
+
+    uniqueObjectsByContent: function (arr) {
+        var uniqueArray = [];
+        var seen = {};
+
+        arr.forEach(function(item) {
+            var stringifiedItem = JSON.stringify(item);
+            if (!seen.hasOwnProperty(stringifiedItem)) {
+                seen[stringifiedItem] = true;
+                uniqueArray.push(item);
+            }
+        });
+
+        return uniqueArray;
+    },
+
 
     cn: function screepsCN() {
         // 汉化
@@ -161,6 +189,10 @@ let pro = {
         }
     }
 };
+
+function isEquivalent(a, b) {
+    return _.isEqual(a, b);
+}
 
 
 global.Utils = pro;
