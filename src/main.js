@@ -11,7 +11,7 @@ import {errorMapper} from './modules/errorMapper.js'
 
 export const loop = errorMapper(() => {
     // 联盟 amin 入口
-    Alliance_run(Alliance_main, this, {});
+    Alliance_run(Alliance_main, undefined, {});
 
     // clog('本次tips使用 CPU 时间总量 ',Game.cpu.getUsed())
 })
