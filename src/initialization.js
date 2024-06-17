@@ -3,7 +3,8 @@ import {errorMapper} from './modules/errorMapper.js'
 import factory_room from "./factory/room.js";
 
 import Alliance_run from './Alliance/run.js'
-import Alliance_initialization from './Alliance/initialization.js'
+import Alliance_initialization_room from './Alliance/initialization/room.js'
+import Alliance_initialization_globalData from './Alliance/initialization/globalData.js'
 
 export {iniglobalData}
 
@@ -32,8 +33,8 @@ export default function () {
         // 全局数据初始化
         iniglobalData();
 
-        // 联盟 初始化 入口
-        Alliance_run(Alliance_initialization, this, {
+        // 联盟 初始化 房间 入口
+        Alliance_run(Alliance_initialization_room, this, {
             iniRoom: iniRoom
         });
 
@@ -55,11 +56,19 @@ function iniRoom(roomName) {
 
 // 全局数据初始化
 function iniglobalData() {
+    // 获取当前使用代码的游戏用户名
     let username = '';
     if (Game.spawns.length > 0) username = Game.spawns[0].owner.username;
     if (username) {
         globalData.username = username;
     }
+
+    // 从联盟配置里把房间配置取出来
+    const globalDataAlliance = _.find(globalData.Alliance, (value) => value.username == username);
+    if (globalDataAlliance) {
+        globalData.globalData.rooms = globalDataAlliance.rooms;
+    }
+
 
     let rooms = {};
     _.forEach(Game.spawns, spawn => {
@@ -71,7 +80,7 @@ function iniglobalData() {
     });
 
     _.forEach(Game.rooms, room => {
-        const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name === room.name);
+        const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == room.name);
         let globalDataRoom = {};
         if (globalDataRoomIndex == -1) {
             globalDataRoom = {
@@ -110,6 +119,8 @@ function iniglobalData() {
 
     });
 
+    // 联盟 初始化 全局数据 入口
+    Alliance_run(Alliance_initialization_globalData, this, {});
 
 }
 
