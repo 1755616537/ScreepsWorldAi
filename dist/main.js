@@ -8,25 +8,42 @@ commonjsGlobal.globalData = {
     clog: true,
     // 【不用填写，会自动获取】当前使用代码的用户名
     username: '',
-    // 房间
-    rooms: [{
-        // 【可以不填写，会自动获取】房间名
-        name: 'W47S54',
-        // 【可以不填写，会自动获取】基地集合
-        spawns: [{
-            // 【可以不填写，会自动获取】基地名称
-            name: 'Spawn1'
-        }],
-        // 【可以不填写，会自动获取】自动安全(受到攻击自动开启)
-        AutomaticSecurity: true,
-        // 【可以不填写，会自动获取】采集者自动分配矿区
-        AutomaticAssignHarvest: true,
-        // 【可以不填写，会自动获取】自动分配建设采集区的CONTAINER
-        AutomaticAssignHarvestCONTAINER: true,
-        // 【可以不填写，会自动获取】自动分配建设控制器区的CONTAINER
-        AutomaticAssignControllerCONTAINER: true
-    }
+    // 联盟信息
+    Alliance: [
+        {
+            username: '1755616537',
+            rooms: [
+                {
+                    name: 'W47S54',
+                    spawns: [{
+                        // 【可以不填写，会自动获取】基地名称
+                        name: 'Spawn1'
+                    }],
+                    // 【可以不填写，会自动获取】自动安全(受到攻击自动开启)
+                    AutomaticSecurity: true,
+                    // 【可以不填写，会自动获取】采集者自动分配矿区
+                    AutomaticAssignHarvest: true,
+                    // 【可以不填写，会自动获取】自动分配建设采集区的CONTAINER
+                    AutomaticAssignHarvestCONTAINER: true,
+                    // 【可以不填写，会自动获取】自动分配建设控制器区的CONTAINER
+                    AutomaticAssignControllerCONTAINER: true
+                },
+                {
+                    name: 'W48S54'
+                }
+            ]
+        },
+        {
+            username: 'Stars22',
+            rooms: [
+                {
+                    name: 'W49S53'
+                }
+            ]
+        }
     ],
+    // 房间 【不用填写，会自动获取】
+    rooms: [],
     // 全部房间配置
     roomsAllAllocation: {
         // 是否开启强制统一房间配置
@@ -214,28 +231,6 @@ commonjsGlobal.globalData = {
             number: 0
         }
     },
-    // 联盟信息
-    Alliance: [
-        {
-            username: '1755616537',
-            rooms: [
-                {
-                    name: 'W47S54'
-                },
-                {
-                    name: 'W48S54'
-                }
-            ]
-        },
-        {
-            username: 'Stars22',
-            rooms: [
-                {
-                    name: 'W49S53'
-                }
-            ]
-        }
-    ],
     // 移动
     Move: {
         // 工作颜色
@@ -5033,14 +5028,24 @@ function Alliance_run (DataArr, _this, objectFun) {
     });
 }
 
-// 联盟 初始化
-var Alliance_initialization = [
+// 联盟 初始化 房间
+var Alliance_initialization_room = [
     {
         name: globalData.Alliance[0].username,
         run: function (_this, objectFun) {
             let roomName = globalData.rooms[0].name;
 
             objectFun.iniRoom(roomName);
+        }
+    }
+];
+
+// 联盟 初始化 全局数据
+var Alliance_initialization_globalData = [
+    {
+        name: globalData.Alliance[0].username,
+        run: function (_this, objectFun) {
+
         }
     }
 ];
@@ -5070,8 +5075,8 @@ function factory_initialization () {
         // 全局数据初始化
         iniglobalData();
 
-        // 联盟 初始化 入口
-        Alliance_run(Alliance_initialization, this, {
+        // 联盟 初始化 房间 入口
+        Alliance_run(Alliance_initialization_room, this, {
             iniRoom: iniRoom
         });
 
@@ -5093,12 +5098,20 @@ function iniRoom(roomName) {
 
 // 全局数据初始化
 function iniglobalData() {
+    // 获取当前使用代码的游戏用户名
     let username = '';
     if (Game.spawns.length > 0) username = Game.spawns[0].owner.username;
     if (username) {
         globalData.username = username;
     }
 
+    // 从联盟配置里把房间配置取出来
+    const globalDataAlliance = _.find(globalData.Alliance, (value) => value.username == username);
+    if (globalDataAlliance) {
+        globalData.rooms = globalDataAlliance.rooms;
+    }
+
+    // 把当前全部基地名称获取成数组
     let rooms = {};
     _.forEach(Game.spawns, spawn => {
         let roomName = spawn.room.name;
@@ -5108,8 +5121,10 @@ function iniglobalData() {
         });
     });
 
+    // 通过房间，把基地名称数组分类
     _.forEach(Game.rooms, room => {
-        const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name === room.name);
+        let roomName = room.name;
+        const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == room.name);
         let globalDataRoom = {};
         if (globalDataRoomIndex == -1) {
             globalDataRoom = {
@@ -5148,6 +5163,8 @@ function iniglobalData() {
 
     });
 
+    // 联盟 初始化 全局数据 入口
+    Alliance_run(Alliance_initialization_globalData, this, {});
 
 }
 
@@ -8645,23 +8662,26 @@ function spawnProduceCreep(spawnName) {
     }
 }
 
+function run_1755616537 (_this, objectFun) {
+    // 任务调度启动
+    controller_task();
+    // 房间管理
+    controller_room();
+    // creep管理
+    controller_creep();
+}
+
 // 联盟 amin
 var Alliance_main = [
     {
         name: globalData.Alliance[0].username,
         run: function (_this, objectFun) {
-            // 任务调度启动
-            controller_task();
-            // 房间管理
-            controller_room();
-            // creep管理
-            controller_creep();
+            run_1755616537();
         }
     },
     {
         name: globalData.Alliance[1].username,
         run: function (_this, objectFun) {
-
         }
     }
 ];
@@ -8673,7 +8693,6 @@ var Alliance_main = [
 const loop = errorMapper(() => {
     // 联盟 amin 入口
     Alliance_run(Alliance_main, undefined, {});
-
     // clog('本次tips使用 CPU 时间总量 ',Game.cpu.getUsed())
 });
 
