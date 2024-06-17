@@ -3,7 +3,7 @@ export default [
     {
         name: globalData.Alliance[0].username,
         run: function (_this, objectFun) {
-            console.log('globalData.rooms', JSON.stringify(globalData.rooms))
+            // console.log('globalData.rooms', JSON.stringify(globalData.rooms))
             let roomName = globalData.rooms[0].name;
 
             objectFun.iniRoom(roomName);

@@ -1,5 +1,7 @@
 import factory_creep from "../../factory/creep.js";
 
+import factory_creep_Harvest from "../../factory/creep/Harvest.js";
+
 // 升级
 export default {
 
@@ -40,7 +42,7 @@ export default {
             }
 
         } else { // 采集状态 + 可视化
-            const harvests = factory_creep.Harvest.ALL(roomName);
+            const harvests = factory_creep_Harvest.ALL(roomName);
             if (harvests.length < 1) {
                 // 采集死完后,自己去采集
                 let target = creep.pos.findClosestByPath(FIND_SOURCES);

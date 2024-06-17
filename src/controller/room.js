@@ -289,7 +289,9 @@ function containerExtensionStorageEnergyStat(roomName) {
         total += parseInt(energy ? energy : 0);
         targetsStore.push(energy);
     }
-    if (parseInt(total) < 500) {
+    // 只有房间中所有 spawn 和 extension 中的可用能量总额大于500,才检测预警
+    let energyAvailable = factory_room.nameGet(roomName).energyAvailable;
+    if (energyAvailable >= 500 && parseInt(total) < 500) {
         clog('房间' + roomName, 'CONTAINER+EXTENSION+STORAGE能量' + total + '不足500');
         Utils.notify(
             `【${roomName}】房间【CONTAINER+EXTENSION+STORAGE能量${total}不足500】`
@@ -303,7 +305,7 @@ function upgraderOuterRoom(roomName) {
     let room = factory_room.nameGet(roomName);
 
     let creepName = '';
-    const upgraders = factory_creep.Upgrader.ALL(1);
+    const upgraders = factory_creep_Upgrader.ALL(1);
     if (upgraders < 1) return;
     // 是否已存在
     _.forEach(upgraders, upgrader => {
@@ -399,7 +401,7 @@ function builderOuterRoom(roomName) {
     let room = factory_room.nameGet(roomName);
 
     let creepName = '';
-    const builders = factory_creep.Builder.ALL(1);
+    const builders = factory_creep_Builder.ALL(1);
     if (builders < 1) return;
     // 是否已存在
     _.forEach(builders, builder => {
