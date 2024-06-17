@@ -15,6 +15,9 @@ import factory_creep_Occupier from "../factory/creep/Occupier.js";
 
 import factory_Build from "../factory/Build.js";
 
+import Alliance_run from '../Alliance/run.js'
+import Alliance_room from '../Alliance/room.js'
+
 // 控制器 房间
 export default function () {
     _.forEach(Game.rooms, room => {
@@ -71,37 +74,23 @@ export default function () {
         roomVisual(roomName);
     });
 
-    if (globalData.rooms[0].name == 'W47S54') {
-        let roomName = globalData.rooms[0].name;
-        let roomName2 = globalData.rooms[1].name;
-
+    // 联盟 初始化 房间 入口
+    Alliance_run(Alliance_room, this, {
         // CONTAINER+EXTENSION+STORAGE能量统计
-        containerExtensionStorageEnergyStat(roomName);
-
+        containerExtensionStorageEnergyStat: containerExtensionStorageEnergyStat,
         // 能量源区Container记录管理
-        sourceContainer(roomName);
+        sourceContainer:sourceContainer,
         // 控制器Container记录管理
-        controllerContainer(roomName);
+        controllerContainer:controllerContainer,
         // 采集建造CONTAINER记录管理
-        harvestBuildCONTAINER(roomName);
+        harvestBuildCONTAINER:harvestBuildCONTAINER,
 
         // 临时外部房间,升级
-        upgraderOuterRoom(roomName2);
+        upgraderOuterRoom:upgraderOuterRoom,
         // 临时外部房间,建造
-        // builderOuterRoom(roomName2);
-    } else {
-        let roomName = globalData.rooms[0].name;
+        builderOuterRoom:builderOuterRoom
+    });
 
-        // CONTAINER+EXTENSION+STORAGE能量统计
-        containerExtensionStorageEnergyStat(roomName);
-
-        // 能量源区Container记录管理
-        sourceContainer(roomName);
-        // 控制器Container记录管理
-        controllerContainer(roomName);
-        // 采集建造CONTAINER记录管理
-        harvestBuildCONTAINER(roomName);
-    }
 
 }
 
