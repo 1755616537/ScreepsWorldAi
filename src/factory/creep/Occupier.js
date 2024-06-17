@@ -1,7 +1,7 @@
-import factory_spawn from "../factory/spawn.js";
-import factory_room from "../factory/room.js";
+import factory_spawn from "../../factory/spawn.js";
+import factory_room from "../../factory/room.js";
 
-import factory_creep from "../factory/creep.js";
+import factory_creep from "../../factory/creep.js";
 
 // 占领
 export default {

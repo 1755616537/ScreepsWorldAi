@@ -1,7 +1,7 @@
 import {errorMapper} from './modules/errorMapper.js'
 
-import factory_spawn from "../factory/spawn.js";
-import factory_room from "../factory/room.js";
+import factory_spawn from "./factory/spawn.js";
+import factory_room from "./factory/room.js";
 
 import Alliance_run from './Alliance/run.js'
 import Alliance_initialization from './Alliance/initialization.js'

@@ -1,4 +1,4 @@
-import factory_creep from "../factory/creep.js";
+import factory_creep from "../../factory/creep.js";
 
 // 治疗
 export default {
