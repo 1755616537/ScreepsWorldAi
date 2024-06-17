@@ -1,24 +1,18 @@
-import controller_task from "../controller/task.js";
-import controller_room from "../controller/room.js";
-import controller_creep from "../controller/creep.js";
+import run_1755616537 from "./run.1755616537.js";
+import run_Stars22 from "./run.Stars22.js";
 
 // 联盟 amin
 export default [
     {
         name: globalData.Alliance[0].username,
         run: function (_this, objectFun) {
-            // 任务调度启动
-            controller_task();
-            // 房间管理
-            controller_room();
-            // creep管理
-            controller_creep();
+            run_1755616537(_this, objectFun);
         }
     },
     {
         name: globalData.Alliance[1].username,
         run: function (_this, objectFun) {
-
+            run_Stars22(_this, objectFun);
         }
     }
 ]
