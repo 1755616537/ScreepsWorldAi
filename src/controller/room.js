@@ -74,7 +74,7 @@ export default function () {
         roomVisual(roomName);
     });
 
-    // 联盟 初始化 房间 入口
+    // 联盟 房间 入口
     Alliance_run(Alliance_room, this, {
         // CONTAINER+EXTENSION+STORAGE能量统计
         containerExtensionStorageEnergyStat: containerExtensionStorageEnergyStat,
