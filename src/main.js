@@ -4,10 +4,6 @@
 // 拓展总入口 只执行一次
 import "./main_mount.js";
 
-import controller_task from "./controller/task.js";
-import controller_room from "./controller/room.js";
-import controller_creep from "./controller/creep.js";
-
 import Alliance_run from './Alliance/run.js'
 import Alliance_main from './Alliance/main.js'
 
@@ -15,14 +11,7 @@ import {errorMapper} from './modules/errorMapper.js'
 
 export const loop = errorMapper(() => {
     // 联盟 amin 入口
-    Alliance_run(Alliance_main);
-
-    // 任务调度启动
-    controller_task();
-    // 房间管理
-    controller_room();
-    // creep管理
-    controller_creep();
+    Alliance_run(Alliance_main, undefined, {});
 
     // clog('本次tips使用 CPU 时间总量 ',Game.cpu.getUsed())
 })

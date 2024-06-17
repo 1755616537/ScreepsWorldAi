@@ -4,25 +4,42 @@ global.globalData = {
     clog: true,
     // 【不用填写，会自动获取】当前使用代码的用户名
     username: '',
-    // 房间
-    rooms: [{
-        // 【可以不填写，会自动获取】房间名
-        name: 'W47S54',
-        // 【可以不填写，会自动获取】基地集合
-        spawns: [{
-            // 【可以不填写，会自动获取】基地名称
-            name: 'Spawn1'
-        }],
-        // 【可以不填写，会自动获取】自动安全(受到攻击自动开启)
-        AutomaticSecurity: true,
-        // 【可以不填写，会自动获取】采集者自动分配矿区
-        AutomaticAssignHarvest: true,
-        // 【可以不填写，会自动获取】自动分配建设采集区的CONTAINER
-        AutomaticAssignHarvestCONTAINER: true,
-        // 【可以不填写，会自动获取】自动分配建设控制器区的CONTAINER
-        AutomaticAssignControllerCONTAINER: true
-    }
+    // 联盟信息
+    Alliance: [
+        {
+            username: '1755616537',
+            rooms: [
+                {
+                    name: 'W47S54',
+                    spawns: [{
+                        // 【可以不填写，会自动获取】基地名称
+                        name: 'Spawn1'
+                    }],
+                    // 【可以不填写，会自动获取】自动安全(受到攻击自动开启)
+                    AutomaticSecurity: true,
+                    // 【可以不填写，会自动获取】采集者自动分配矿区
+                    AutomaticAssignHarvest: true,
+                    // 【可以不填写，会自动获取】自动分配建设采集区的CONTAINER
+                    AutomaticAssignHarvestCONTAINER: true,
+                    // 【可以不填写，会自动获取】自动分配建设控制器区的CONTAINER
+                    AutomaticAssignControllerCONTAINER: true
+                },
+                {
+                    name: 'W48S54'
+                }
+            ]
+        },
+        {
+            username: 'Stars22',
+            rooms: [
+                {
+                    name: 'W49S53'
+                }
+            ]
+        }
     ],
+    // 房间 【不用填写，会自动获取】
+    rooms: [],
     // 全部房间配置
     roomsAllAllocation: {
         // 是否开启强制统一房间配置
@@ -210,28 +227,6 @@ global.globalData = {
             number: 0
         }
     },
-    // 联盟信息
-    Alliance: [
-        {
-            username: '1755616537',
-            rooms: [
-                {
-                    name: 'W47S54'
-                },
-                {
-                    name: 'W48S54'
-                }
-            ]
-        },
-        {
-            username: 'Stars22',
-            rooms: [
-                {
-                    name: 'W49S53'
-                }
-            ]
-        }
-    ],
     // 移动
     Move: {
         // 工作颜色

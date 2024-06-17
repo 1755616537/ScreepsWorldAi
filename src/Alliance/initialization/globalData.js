@@ -1,8 +1,8 @@
-// 联盟 初始化
+// 联盟 初始化 全局数据
 export default [
     {
         name: globalData.Alliance[0].username,
-        run: function () {
+        run: function (_this, objectFun) {
 
         }
     }
