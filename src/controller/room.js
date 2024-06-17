@@ -71,23 +71,38 @@ export default function () {
         roomVisual(roomName);
     });
 
-    let roomName = globalData.rooms[0].name;
-    let roomName2 = globalData.rooms[1].name;
+    if (globalData.rooms[0].name == 'W47S54') {
+        let roomName = globalData.rooms[0].name;
+        let roomName2 = globalData.rooms[1].name;
 
-    // CONTAINER+EXTENSION+STORAGE能量统计
-    containerExtensionStorageEnergyStat(roomName);
+        // CONTAINER+EXTENSION+STORAGE能量统计
+        containerExtensionStorageEnergyStat(roomName);
 
-    // 能量源区Container记录管理
-    sourceContainer(roomName);
-    // 控制器Container记录管理
-    controllerContainer(roomName);
-    // 采集建造CONTAINER记录管理
-    harvestBuildCONTAINER(roomName);
+        // 能量源区Container记录管理
+        sourceContainer(roomName);
+        // 控制器Container记录管理
+        controllerContainer(roomName);
+        // 采集建造CONTAINER记录管理
+        harvestBuildCONTAINER(roomName);
 
-    // 临时外部房间,升级
-    upgraderOuterRoom(roomName2);
-    // 临时外部房间,建造
-    // builderOuterRoom(roomName2);
+        // 临时外部房间,升级
+        upgraderOuterRoom(roomName2);
+        // 临时外部房间,建造
+        // builderOuterRoom(roomName2);
+    } else {
+        let roomName = globalData.rooms[0].name;
+
+        // CONTAINER+EXTENSION+STORAGE能量统计
+        containerExtensionStorageEnergyStat(roomName);
+
+        // 能量源区Container记录管理
+        sourceContainer(roomName);
+        // 控制器Container记录管理
+        controllerContainer(roomName);
+        // 采集建造CONTAINER记录管理
+        harvestBuildCONTAINER(roomName);
+    }
+
 }
 
 
