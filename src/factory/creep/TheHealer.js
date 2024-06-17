@@ -1,3 +1,5 @@
+import factory_creep from "../factory/creep.js";
+
 // 治疗
 export default {
 
@@ -11,7 +13,7 @@ export default {
         if (target) {
             // 治疗
             if (creep.heal(target) == ERR_NOT_IN_RANGE) {
-                factory.creep.moveTo(creep, target);
+                factory_creep.moveTo(creep, target);
             }
         }
 

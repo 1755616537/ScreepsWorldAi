@@ -1,5 +1,8 @@
 import {errorMapper} from './modules/errorMapper.js'
 
+import factory_spawn from "../factory/spawn.js";
+import factory_room from "../factory/room.js";
+
 import Alliance_run from './Alliance/run.js'
 import Alliance_initialization from './Alliance/initialization.js'
 
@@ -126,8 +129,8 @@ function iniController(roomName) {
         Memory.rooms[roomName].controller = {}
     }
 
-    let room = factory.room.nameGet(roomName);
-    let roomSequence = factory.room.nameGetSequence(roomName);
+    let room = factory_room.nameGet(roomName);
+    let roomSequence = factory_room.nameGetSequence(roomName);
 
     // 自动分配建设控制器区的CONTAINER
     if (globalData.rooms[roomSequence - 1].AutomaticAssignControllerCONTAINER) {

@@ -1,3 +1,6 @@
+import factory_spawn from "../factory/spawn.js";
+import factory_room from "../factory/room.js";
+
 export default {
 // 获取全部基地名称数组
     getNameAllArray: () => {
@@ -11,10 +14,10 @@ export default {
         return Game.spawns[name];
     },
     sequenceGet: (sequence) => {
-        return Game.spawns[factory.spawn.sequenceGetName(sequence)];
+        return Game.spawns[factory_spawn.sequenceGetName(sequence)];
     },
     nameGetSequence: (name) => {
-        let spawnNameAllArray = factory.spawn.getNameAllArray();
+        let spawnNameAllArray = factory_spawn.getNameAllArray();
         let sequence = _.indexOf(spawnNameAllArray, name);
         if (sequence == -1) {
             return 1;
@@ -22,7 +25,7 @@ export default {
         return sequence + 1;
     },
     sequenceGetName: (sequence) => {
-        let spawnNameAllArray = factory.spawn.getNameAllArray();
+        let spawnNameAllArray = factory_spawn.getNameAllArray();
         if (sequence > spawnNameAllArray.length || sequence < 1) {
             return spawnNameAllArray[0];
         }
@@ -30,11 +33,11 @@ export default {
     },
     // 基地序号获取房间序号
     sequenceGetRoomSequence: (sequence) => {
-        let roomName = factory.spawn.sequenceGet(sequence).room.name;
-        return factory.room.nameGetSequence(roomName);
+        let roomName = factory_spawn.sequenceGet(sequence).room.name;
+        return factory_room.nameGetSequence(roomName);
     },
     // 基地名称获取房间名称
     nameGetRoomName: (name) => {
-        return factory.spawn.nameGet(name).room.name;
+        return factory_spawn.nameGet(name).room.name;
     }
 }

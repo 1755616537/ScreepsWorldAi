@@ -1,3 +1,8 @@
+import factory_spawn from "../factory/spawn.js";
+import factory_room from "../factory/room.js";
+
+import factory_creep from "../factory/creep.js";
+
 // 运输者
 export default {
 
@@ -26,7 +31,7 @@ export default {
                 // 捡起一个物品 (如捡起一些能量)
                 if (creep.pickup(target) == ERR_NOT_IN_RANGE) {
                     // 向目标移动
-                    factory.creep.moveTo(creep, target, 'Resource');
+                    factory_creep.moveTo(creep, target, 'Resource');
                 }
             } else {
                 // 墓碑
@@ -39,7 +44,7 @@ export default {
                     for (const resourceType in target.store) {
                         if (creep.withdraw(target, resourceType) == ERR_NOT_IN_RANGE) {
                             // 向目标移动
-                            factory.creep.moveTo(creep, target, 'Resource');
+                            factory_creep.moveTo(creep, target, 'Resource');
                             break;
                         }
                     }
@@ -70,7 +75,7 @@ export default {
                                 let found = creep.room.lookForAt(LOOK_CONSTRUCTION_SITES, targetPos);
                                 if (found.length && found[0].structureType != STRUCTURE_CONTAINER) {
                                     // 指定位置创建一个新的 ConstructionSite
-                                    let returnData = factory.room.nameGet(roomName)
+                                    let returnData = factory_room.nameGet(roomName)
                                         .createConstructionSite(x, y, STRUCTURE_CONTAINER);
                                     if (returnData != OK) {
                                         clog('能量源区自动建造对应数量的CONTAINER 房间', roomName, ' x', x, ' y', y,
@@ -226,7 +231,7 @@ export default {
                     // 从建筑(structure)中拿取资源
                     if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         // 向目标移动
-                        factory.creep.moveTo(creep, source, 'Resource');
+                        factory_creep.moveTo(creep, source, 'Resource');
                     }
                 } else {
                     // 找不到可取资源的地方,先去存资源
@@ -379,7 +384,7 @@ function transfer(creep) {
                 for (const resourceType in creep.carry) {
                     if (creep.transfer(storage, resourceType) == ERR_NOT_IN_RANGE) {
                         // 向目标移动
-                        factory.creep.moveTo(creep, storage);
+                        factory_creep.moveTo(creep, storage);
                         break;
                     }
                 }
@@ -389,7 +394,7 @@ function transfer(creep) {
         // 将资源从该 creep 转移至其他对象
         if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             // 向目标移动
-            factory.creep.moveTo(creep, targets[0]);
+            factory_creep.moveTo(creep, targets[0]);
         }
     } else {
         // 储存能量都满了不用搬运能量,先干其他
@@ -397,7 +402,7 @@ function transfer(creep) {
         if (targets.length > 0) {
             // 建造
             if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
-                factory.creep.moveTo(creep, targets[0]);
+                factory_creep.moveTo(creep, targets[0]);
             }
         }
         if (targets.length < 1) {
@@ -408,14 +413,14 @@ function transfer(creep) {
             if (targets.length > 0) {
                 // 维修
                 if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
-                    factory.creep.moveTo(creep, targets[0]);
+                    factory_creep.moveTo(creep, targets[0]);
                 }
             }
         }
         if (targets.length < 1) {
             // 升级
             if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                factory.creep.moveTo(creep, creep.room.controller);
+                factory_creep.moveTo(creep, creep.room.controller);
             }
         }
 
@@ -512,7 +517,7 @@ function transferControllerContainer(creep) {
                 // 将资源从该 creep 转移至其他对象
                 if (creep.transfer(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     // 向目标移动
-                    factory.creep.moveTo(creep, source);
+                    factory_creep.moveTo(creep, source);
                 }
                 return true;
             } else {
@@ -595,7 +600,7 @@ function transferTower(creep) {
                 // 将资源从该 creep 转移至其他对象
                 if (creep.transfer(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     // 向目标移动
-                    factory.creep.moveTo(creep, source);
+                    factory_creep.moveTo(creep, source);
                 }
                 return true;
             } else {

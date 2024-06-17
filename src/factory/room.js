@@ -1,9 +1,12 @@
+import factory_spawn from "../factory/spawn.js";
+import factory_room from "../factory/room.js";
+
 export default {
     nameGet: (name) => {
         return Game.rooms[name];
     },
     sequenceGet: (sequence) => {
-        return Game.rooms[factory.room.sequenceGetName(sequence)];
+        return Game.rooms[factory_room.sequenceGetName(sequence)];
     },
     nameGetSequence: (name) => {
         let sequence = _.findIndex(globalData.rooms, (room) => room.name == name)

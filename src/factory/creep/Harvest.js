@@ -1,3 +1,5 @@
+import factory_creep from "../factory/creep.js";
+
 // 采集
 export default {
 
@@ -15,7 +17,7 @@ export default {
         }
 
         let roomName = creep.room.name;
-        let roomSequence = factory.room.nameGetSequence(roomName);
+        let roomSequence = factory_room.nameGetSequence(roomName);
 
         // 没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器
         // 脚下是否有CONTAINER，有就不移动
@@ -107,7 +109,7 @@ export default {
                                             }
                                             if (on) {
                                                 // 指定位置创建一个新的 ConstructionSite
-                                                let returnData = factory.room.nameGet(roomName)
+                                                let returnData = factory_room.nameGet(roomName)
                                                     .createConstructionSite(x, y, STRUCTURE_CONTAINER);
                                                 if (returnData == OK) {
                                                     clog('自动建造对应数量的CONTAINER 房间', roomName, ' x', x, ' y', y,
@@ -217,7 +219,7 @@ export default {
             if (source) {
                 // 采集能量
                 if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                    factory.creep.moveTo(creep, source, 'Resource');
+                    factory_creep.moveTo(creep, source, 'Resource');
                 }
             }
         } else {
@@ -243,12 +245,12 @@ export default {
                     harvestBuildCONTAINERList = _.omit(harvestBuildCONTAINERList, creep.name);
                 }
                 Memory.rooms[roomName].source.harvestBuildCONTAINERList = harvestBuildCONTAINERList;
-                const harvests = factory.creep.Harvest.ALL(roomName);
+                const harvests = factory_creep.Harvest.ALL(roomName);
                 if (_.size(harvestBuildCONTAINERList) < harvests.length) {
                     if (harvestBuildCONTAINERList[creep.name]) {
                         // 建造
                         if (creep.build(found[0]) == ERR_NOT_IN_RANGE) {
-                            factory.creep.moveTo(creep, found[0]);
+                            factory_creep.moveTo(creep, found[0]);
                         }
                         return
                     }
@@ -320,7 +322,7 @@ export default {
             if (target) {
                 // 将资源从该 creep 转移至其他对象
                 if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    factory.creep.moveTo(creep, target);
+                    factory_creep.moveTo(creep, target);
                 }
             } else {
                 // 储存能量都满了不用搬运能量,先干其他
@@ -328,7 +330,7 @@ export default {
                 if (targets.length > 0) {
                     // 建造
                     if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
-                        factory.creep.moveTo(creep, targets[0]);
+                        factory_creep.moveTo(creep, targets[0]);
                     }
                 }
                 if (targets.length < 1) {
@@ -339,14 +341,14 @@ export default {
                     if (targets.length > 0) {
                         // 维修
                         if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
-                            factory.creep.moveTo(creep, targets[0]);
+                            factory_creep.moveTo(creep, targets[0]);
                         }
                     }
                 }
                 if (targets.length < 1) {
                     // 升级
                     if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                        factory.creep.moveTo(creep, creep.room.controller);
+                        factory_creep.moveTo(creep, creep.room.controller);
                     }
                 }
             }

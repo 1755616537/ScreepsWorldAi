@@ -1,6 +1,9 @@
+import factory_spawn from "../factory/spawn.js";
+import factory_room from "../factory/room.js";
+
 export default {
     run: (roomName) => {
-        let room = factory.room.nameGet(roomName);
+        let room = factory_room.nameGet(roomName);
 
         const targets = room.find(FIND_MY_STRUCTURES, {
             filter: (structure) => {

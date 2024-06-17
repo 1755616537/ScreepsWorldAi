@@ -1,3 +1,8 @@
+import factory_spawn from "../factory/spawn.js";
+import factory_room from "../factory/room.js";
+
+import factory_creep from "../factory/creep.js";
+
 // 占领
 export default {
 
@@ -16,7 +21,7 @@ export default {
         // 	creep.moveTo(room.controller);
         // }
 
-        // factory.creep.Occupy.run(Game.creeps['builder54894683'],'W48S54');
+        // factory_creep.Occupy.run(Game.creeps['builder54894683'],'W48S54');
 
         // 如果指定需要占领房间名称,覆盖原来的
         if (roomName) {
@@ -35,12 +40,12 @@ export default {
 
         // 如果该房间不存在就先往房间走
         if (!room) {
-            factory.creep.moveTo(creep, new RoomPosition(43, 17, roomName));
+            factory_creep.moveTo(creep, new RoomPosition(43, 17, roomName));
         } else {
             // 如果房间存在了就说明已经进入了该房间
             // 移动到房间的控制器并占领
             if (creep.claimController(room.controller) == ERR_NOT_IN_RANGE) {
-                factory.creep.moveTo(creep, room.controller)
+                factory_creep.moveTo(creep, room.controller)
             }
 
             // 预定控制器
@@ -52,12 +57,12 @@ export default {
             // if (creep.signController(room.controller, "I'm going to claim this room in a few days.") ==
             if (creep.signController(room.controller, "peaceful development.") ==
                 ERR_NOT_IN_RANGE) {
-                factory.creep.moveTo(creep, room.controller);
+                factory_creep.moveTo(creep, room.controller);
             }
 
         }
 
-        // factory.spawn.nameGet(spawnName).spawnCreep([WORK, CARRY, MOVE, CLAIM],
+        // factory_spawn.nameGet(spawnName).spawnCreep([WORK, CARRY, MOVE, CLAIM],
         // 	'Occupy1号', {
         // 		memory: {
         // 			role: '',

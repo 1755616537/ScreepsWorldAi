@@ -1,3 +1,5 @@
+import factory_creep from "../factory/creep.js";
+
 // 近战和远程
 export default {
 
@@ -46,7 +48,7 @@ function nearDefenderRun(creep) {
     if (target) {
         // 使用近战攻击
         if (creep.attack(target) == ERR_NOT_IN_RANGE) {
-            factory.creep.moveTo(creep, target);
+            factory_creep.moveTo(creep, target);
         }
     }
 
@@ -57,7 +59,7 @@ function farDefenderRun(creep) {
     if (target) {
         // 远程攻击其他 creep 或者建筑
         if (creep.rangedAttack(target) == ERR_NOT_IN_RANGE) {
-            factory.creep.moveTo(creep, target);
+            factory_creep.moveTo(creep, target);
         }
     }
 
@@ -69,7 +71,7 @@ function farDefenderRun(creep) {
 
     // 	// 远程攻击其他 creep 或者建筑
     // 	if (creep.rangedAttack(targets[0]) == ERR_NOT_IN_RANGE) {
-    // 		factory.creep.moveTo(creep, targets[0]);
+    // 		factory_creep.moveTo(creep, targets[0]);
     // 	}
     // }
 
