@@ -97,10 +97,11 @@ function iniglobalData() {
         // console.log('roomsIndex', roomsIndex)
         // console.log('rooms[roomsIndex]', JSON.stringify(rooms[roomsIndex]))
         if (globalDataRoomIndex == -1) {
-            globalDataRoom = {
-                name: roomName,
-                spawns: rooms[roomsIndex].spawns
-            };
+            // 没有建立基地的房间，不添加进来（原因：Game.rooms是可视房间的数据，不是自己房间的数据，可能会存在别人的房间在里面）
+            // globalDataRoom = {
+            //     name: roomName,
+            //     spawns: rooms[roomsIndex].spawns
+            // };
         } else {
             globalDataRoom = globalData.rooms[globalDataRoomIndex];
             // console.log('globalDataRoom', JSON.stringify(globalDataRoom))
