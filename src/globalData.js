@@ -103,7 +103,7 @@ global.globalData = {
             // 总上限数量
             number: 2,
             // 自动分配数量（开启 AutomaticAssignHarvest可以根据最大支持数量动态更新采集者数量）
-            AutomaticAssignNum: true,
+            AutomaticAssignNum: false,
             // 自动分配根据可用能量容量上限调整bodys
             AutomaticAssignBodysEnergyCapacityAvailable: true,
             // 自动缩减配置,当房间内总容量不足时

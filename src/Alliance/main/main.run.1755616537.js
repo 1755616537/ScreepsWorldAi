@@ -4,7 +4,7 @@ import controller_creep from "../../controller/creep.js";
 
 export default function (_this, objectFun) {
     // 任务调度启动
-    controller_task();
+    //controller_task();
     // 房间管理
     controller_room();
     // creep管理
