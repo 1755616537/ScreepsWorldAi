@@ -1422,7 +1422,7 @@ observers = observers.reduce((temp, id) => {
 Creep.prototype.moveTo = wrapFn(config.changeMoveTo ? betterMoveTo : originMoveTo, 'moveTo');
 // RoomPosition.prototype.findClosestByPath = wrapFn(config.changeFindClostestByPath? betterFindClosestByPath : originFindClosestByPath, 'findClosestByPath');
 // Creep.prototype.flee()和RoomPosition.prototype.findClosestByPath()将在v0.9或v1.0版本加入
-module.exports = {
+export default {
     setChangeMove: function (bool) {
         //Creep.prototype.move = wrapFn(bool? betterMove : originMove, 'move');
         analyzeCPU.move = { sum: 0, calls: 0 };
