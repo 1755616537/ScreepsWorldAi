@@ -5,7 +5,7 @@
 import "./main_mount.js";
 
 import Alliance_run from './Alliance/run.js'
-import Alliance_main from './Alliance/main.js'
+import Alliance_main from './Alliance/main/main.js'
 
 import {errorMapper} from './modules/errorMapper.js'
 

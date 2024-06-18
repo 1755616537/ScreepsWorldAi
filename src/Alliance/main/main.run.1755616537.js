@@ -1,6 +1,6 @@
-import controller_task from "../controller/task.js";
-import controller_room from "../controller/room.js";
-import controller_creep from "../controller/creep.js";
+import controller_task from "../../controller/task.js";
+import controller_room from "../../controller/room.js";
+import controller_creep from "../../controller/creep.js";
 
 export default function (_this, objectFun) {
     // 任务调度启动

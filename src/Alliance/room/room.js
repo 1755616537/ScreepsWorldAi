@@ -1,7 +1,6 @@
-import run_1755616537 from "./run.1755616537.js";
-import run_Stars22 from "./run.Stars22.js";
-
-// 联盟 amin
+import run_1755616537 from "./room.run.1755616537.js";
+import run_Stars22 from "./room.run.Stars22.js";
+// 联盟 房间
 export default [
     {
         name: globalData.Alliance[0].username,
