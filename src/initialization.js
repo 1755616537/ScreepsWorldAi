@@ -142,6 +142,30 @@ function iniglobalData() {
 
     });
 
+    // 把没有拥有的房间去掉，有时候会手动在配置加上房间信息，但实际没有拥有此房间就会报错
+    let delArray = [];
+    _.forEach(globalData.rooms, (value, index) => {
+        // console.log(JSON.stringify(value), index,Game.rooms.length)
+        let on = false;
+        for (const i in Game.rooms) {
+            // console.log('Game.rooms', Game.rooms[i].name, 'value.name', value.name)
+            if (Game.rooms[i].name == value.name) {
+                on = true
+                break
+            }
+        }
+        if (!on) {
+            delArray.push(value.name)
+        }
+    });
+    // console.log('delArray', JSON.stringify(delArray))
+    for (let i = 0; i < delArray.length; i++) {
+        let index = _.findIndex(globalData.rooms, (value) => value.name == delArray[i]);
+        globalData.rooms.splice(index, 1);
+    }
+    // console.log('globalData.rooms', JSON.stringify(globalData.rooms))
+    // console.log('Game.rooms', JSON.stringify(Game.rooms))
+
     // 联盟 初始化 全局数据 入口
     Alliance_run(Alliance_initialization_globalData, this, {});
 
