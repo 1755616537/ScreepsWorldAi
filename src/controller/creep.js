@@ -163,6 +163,46 @@ function eventManagement() {
                     case 'move':
                         factory_creep.moveTo(creep, new RoomPosition(mgs));
                         break;
+                    case globalData.harvest:
+                    {
+                        let roomPosition = new RoomPosition(mgs)
+                        if (creep.harvest(roomPosition) == ERR_NOT_IN_RANGE) {
+                            factory_creep.moveTo(creep, roomPosition);
+                        }
+                    }
+                        break;
+                    case globalData.upgrader:
+                    {
+                        let roomPosition = new RoomPosition(mgs)
+                        if (creep.upgradeController(roomPosition) == ERR_NOT_IN_RANGE) {
+                            factory_creep.moveTo(creep, roomPosition);
+                        }
+                    }
+                        break;
+                    case globalData.builder:
+                    {
+                        let roomPosition = new RoomPosition(mgs)
+                        if (creep.build(roomPosition) == ERR_NOT_IN_RANGE) {
+                            factory_creep.moveTo(creep, roomPosition);
+                        }
+                    }
+                        break;
+                    case globalData.carrier:
+                    {
+                        let roomPosition = new RoomPosition(mgs)
+                        if (creep.withdraw(roomPosition) == ERR_NOT_IN_RANGE) {
+                            factory_creep.moveTo(creep, roomPosition);
+                        }
+                    }
+                        break;
+                    case globalData.repairer:
+                    {
+                        let roomPosition = new RoomPosition(mgs)
+                        if (creep.repair(roomPosition) == ERR_NOT_IN_RANGE) {
+                            factory_creep.moveTo(creep, roomPosition);
+                        }
+                    }
+                        break;
                     default:
                 }
                 continue;
