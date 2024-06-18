@@ -147,15 +147,26 @@ function eventManagement() {
             // SpecialActions:{
             // //代号
             // 	code:'',
-            // //附加信息
-            // 	mgs:''
+            // //附加信息 任何类型，没有指定字符串对象等
+            // 	mgs:
             // }
-            switch (SpecialActions.code) {
-                case '':
-                    break;
-                default:
+            let code;
+            let mgs;
+            try {
+                let code = SpecialActions.code;
+                let mgs = SpecialActions.mgs;
+            } catch (e) {
+
             }
-            continue;
+            if (code) {
+                switch (code) {
+                    case 'move':
+                        factory_creep.moveTo(creep, new RoomPosition(mgs));
+                        break;
+                    default:
+                }
+                continue;
+            }
         }
 
         if (creep.memory.role == globalData.harvest) {
