@@ -158,6 +158,15 @@ function eventManagement() {
             } catch (e) {
 
             }
+            /**
+            Game.creeps['repairer8981'].memory.SpecialActions={
+                code:'move', mgs:{
+                    x:20,
+                    y:2,
+                    roomName:'W2N1'
+                }
+            }
+             */
             if (code) {
                 switch (code) {
                     case 'move':
