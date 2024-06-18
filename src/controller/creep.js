@@ -11,6 +11,9 @@ import factory_creep_Defender from "../factory/creep/Defender.js";
 import factory_creep_TheHealer from "../factory/creep/TheHealer.js";
 import factory_creep_Occupier from "../factory/creep/Occupier.js";
 
+import Alliance_run from '../Alliance/run.js'
+import Alliance_creep from '../Alliance/creep/creep.js'
+
 // 控制器 creep
 export default function () {
 
@@ -20,8 +23,11 @@ export default function () {
     // 清理内存
     factory_creep.CleanMemory();
 
-    // spawn生产孵化Creep
-    spawnProduceCreep(globalData.rooms[0].spawns[0].name);
+    // 联盟 房间 入口
+    Alliance_run(Alliance_creep, this, {
+        // spawn生产孵化Creep
+        spawnProduceCreep: spawnProduceCreep
+    });
 
     // 事件管理
     eventManagement();
