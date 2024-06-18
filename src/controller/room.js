@@ -77,7 +77,7 @@ export default function () {
     // 联盟 房间 入口
     Alliance_run(Alliance_room, this, {
         // CONTAINER+EXTENSION+STORAGE能量统计
-        containerExtensionStorageEnergyStat: containerExtensionStorageEnergyStat,
+        SetContainerExtensionStorageEnergyStat: SetContainerExtensionStorageEnergyStat,
         // 能量源区Container记录管理
         sourceContainer: sourceContainer,
         // 控制器Container记录管理
@@ -262,7 +262,7 @@ function harvestBuildCONTAINER(roomName) {
 }
 
 // CONTAINER+EXTENSION+STORAGE能量统计
-function containerExtensionStorageEnergyStat(roomName) {
+function SetContainerExtensionStorageEnergyStat(roomName) {
     let targets = factory_room.nameGet(roomName).find(FIND_STRUCTURES, {
         filter: (structure) => {
             return (structure.structureType == STRUCTURE_CONTAINER ||

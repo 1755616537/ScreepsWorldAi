@@ -9,7 +9,7 @@ export default [
                 let roomName2 = globalData.rooms[1].name;
 
                 // CONTAINER+EXTENSION+STORAGE能量统计
-                objectFun.containerExtensionStorageEnergyStat(roomName);
+                objectFun.SetContainerExtensionStorageEnergyStat(roomName);
                 // 能量源区Container记录管理
                 objectFun.sourceContainer(roomName);
                 // 控制器Container记录管理
@@ -23,7 +23,7 @@ export default [
                 // objectFun.builderOuterRoom(roomName2);
             } else {
                 // CONTAINER+EXTENSION+STORAGE能量统计
-                objectFun.containerExtensionStorageEnergyStat(roomName);
+                objectFun.SetContainerExtensionStorageEnergyStat(roomName);
 
                 // 能量源区Container记录管理
                 objectFun.sourceContainer(roomName);
