@@ -7,7 +7,7 @@
  下面各种执行任务（塔，爬爬等）
 */
 
-import factory_task from "../factory/task.js";
+import Factory_task from "../factory/task.js";
 
 import factory_creep_Harvest from "../factory/creep/Harvest.js";
 import factory_creep_Upgrader from "../factory/creep/Upgrader.js";
@@ -29,6 +29,8 @@ Creep.prototype.requestTask = function () {
  * 控制器 任务
  */
 export default function () {
+
+    // new Factory_task()
 
     // 建立任务
     addTask();
