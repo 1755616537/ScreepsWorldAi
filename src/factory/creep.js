@@ -377,8 +377,6 @@ export default {
             newName, {
                 memory: {
                     role: globalData.carrier,
-                    task: dataStructure_task,
-                    target: dataStructure_target,
                     roomName: roomName,
                     spawnName: spawnName
                 }

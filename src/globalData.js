@@ -9,23 +9,31 @@ global.globalData = {
         {
             username: '1755616537',
             rooms: [
+                // {
+                //     name: 'W47S54',
+                //     spawns: [{
+                //         // 【可以不填写，会自动获取】基地名称
+                //         name: 'Spawn1'
+                //     }],
+                //     // 【可以不填写，会自动获取】自动安全(受到攻击自动开启)
+                //     AutomaticSecurity: true,
+                //     // 【可以不填写，会自动获取】采集者自动分配矿区
+                //     AutomaticAssignHarvest: true,
+                //     // 【可以不填写，会自动获取】自动分配建设采集区的CONTAINER
+                //     AutomaticAssignHarvestCONTAINER: true,
+                //     // 【可以不填写，会自动获取】自动分配建设控制器区的CONTAINER
+                //     AutomaticAssignControllerCONTAINER: true
+                // },
+                // {
+                //     name: 'W48S54'
+                // },
                 {
-                    name: 'W47S54',
+                    name: 'W7S4',
                     spawns: [{
-                        // 【可以不填写，会自动获取】基地名称
                         name: 'Spawn1'
                     }],
                     // 【可以不填写，会自动获取】自动安全(受到攻击自动开启)
-                    AutomaticSecurity: true,
-                    // 【可以不填写，会自动获取】采集者自动分配矿区
-                    AutomaticAssignHarvest: true,
-                    // 【可以不填写，会自动获取】自动分配建设采集区的CONTAINER
-                    AutomaticAssignHarvestCONTAINER: true,
-                    // 【可以不填写，会自动获取】自动分配建设控制器区的CONTAINER
-                    AutomaticAssignControllerCONTAINER: true
-                },
-                {
-                    name: 'W48S54'
+                    AutomaticSecurity: false,
                 }
             ]
         },
