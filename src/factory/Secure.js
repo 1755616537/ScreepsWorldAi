@@ -1,9 +1,9 @@
-import factory_spawn from "../factory/spawn.js";
 import factory_room from "../factory/room.js";
 
 export default {
     run: (roomName) => {
-        let room = factory_room.nameGet(roomName);
+        let room = factory_room.nameGet(roomName, true);
+        if (!room) return;
 
         var hostiles = room.find(FIND_HOSTILE_CREEPS);
         if (hostiles.length > 0) {

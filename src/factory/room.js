@@ -5,12 +5,33 @@ export default {
     sequenceGetName: sequenceGetName
 }
 
-function nameGet(name) {
+/**
+ * @param name 房间名称
+ * @param my 校验是否自己的房间
+ */
+function nameGet(name, my = false) {
+    if (my) {
+        const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == name);
+        if (globalDataRoomIndex == -1) {
+            return null;
+        }
+    }
     return Game.rooms[name];
 }
 
-function sequenceGet(sequence) {
-    return Game.rooms[sequenceGetName(sequence)];
+/**
+ * @param name 房间名称
+ * @param my 校验是否自己的房间
+ */
+function sequenceGet(sequence, my = false) {
+    let name = sequenceGetName(sequence);
+    if (my) {
+        const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == name);
+        if (globalDataRoomIndex == -1) {
+            return null;
+        }
+    }
+    return Game.rooms[name];
 }
 
 function nameGetSequence(name) {
