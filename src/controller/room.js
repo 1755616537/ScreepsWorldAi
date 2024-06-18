@@ -1,7 +1,7 @@
 import factory_Secure from "../factory/Secure.js";
 import factory_Tower from "../factory/Tower.js";
 
-import factory_initialization from "../initialization.js";
+import factory_initialization, {iniglobalData} from "../initialization.js";
 import factory_room from "../factory/room.js";
 
 import factory_creep_Harvest from "../factory/creep/Harvest.js";
@@ -44,7 +44,7 @@ export default function () {
                         );
                         if (event.data.structureType == STRUCTURE_SPAWN) {
                             // 更新数据
-                            factory_initialization.iniglobalData();
+                            iniglobalData();
                         }
                     }
                 }
@@ -79,16 +79,16 @@ export default function () {
         // CONTAINER+EXTENSION+STORAGE能量统计
         containerExtensionStorageEnergyStat: containerExtensionStorageEnergyStat,
         // 能量源区Container记录管理
-        sourceContainer:sourceContainer,
+        sourceContainer: sourceContainer,
         // 控制器Container记录管理
-        controllerContainer:controllerContainer,
+        controllerContainer: controllerContainer,
         // 采集建造CONTAINER记录管理
-        harvestBuildCONTAINER:harvestBuildCONTAINER,
+        harvestBuildCONTAINER: harvestBuildCONTAINER,
 
         // 临时外部房间,升级
-        upgraderOuterRoom:upgraderOuterRoom,
+        upgraderOuterRoom: upgraderOuterRoom,
         // 临时外部房间,建造
-        builderOuterRoom:builderOuterRoom
+        builderOuterRoom: builderOuterRoom
     });
 
 
