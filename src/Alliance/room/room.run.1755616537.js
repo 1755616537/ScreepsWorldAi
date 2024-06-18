@@ -12,17 +12,17 @@ export default function (_this, objectFun) {
             // 采集建造CONTAINER记录管理
             objectFun.harvestBuildCONTAINER(roomName);
 
-            let roomName2 = globalData.rooms[1].name;
+            let roomName2 = 'W48S54';
             // 临时外部房间,升级
             objectFun.upgraderOuterRoom(roomName2);
             // 临时外部房间,建造
             // objectFun.builderOuterRoom(roomName2);
 
-            let roomName3 = '';
+            let roomName3 = 'W48S52';
             // 临时外部房间,升级
-            objectFun.upgraderOuterRoom(roomName3);
+            // objectFun.upgraderOuterRoom(roomName3);
             // 临时外部房间,建造
-            objectFun.builderOuterRoom(roomName3);
+            // objectFun.builderOuterRoom(roomName3);
             break;
         default:
             // CONTAINER+EXTENSION+STORAGE能量统计
