@@ -22,6 +22,11 @@ import Alliance_room from '../Alliance/room/room.js'
 export default function () {
     _.forEach(Game.rooms, room => {
         let roomName = room.name;
+        // 跳过不是自己的房间
+        const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == roomName);
+        if (globalDataRoomIndex == -1) {
+            return;
+        }
 
         // 安全
         factory_Secure.run(roomName);
