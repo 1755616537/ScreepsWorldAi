@@ -42,6 +42,7 @@ import factory_spawn from "../factory/spawn.js";
 import factory_room from "../factory/room.js";
 
 import factory_source from "../factory/source.js";
+import Throw from "../utils/Throw.js";
 
 export default {
     moveTo: (creep, target, type = '') => {
@@ -718,41 +719,43 @@ export default {
         }
         return returnData
     },
-    ComponentEnergyCalculation: (creepComponent = []) => {
-        // 部件能量计算
-        let total = 0;
-        for (let i = 0; i < creepComponent.length; i++) {
-            switch (creepComponent[i]) {
-                case MOVE:
-                    total += globalData.creepComponentConfigs.MOVE;
-                    break;
-                case WORK:
-                    total += globalData.creepComponentConfigs.WORK;
-                    break;
-                case CARRY:
-                    total += globalData.creepComponentConfigs.CARRY;
-                    break;
-                case ATTACK:
-                    total += globalData.creepComponentConfigs.ATTACK;
-                    break;
-                case RANGED_ATTACK:
-                    total += globalData.creepComponentConfigs.RANGED_ATTACK;
-                    break;
-                case HEAL:
-                    total += globalData.creepComponentConfigs.HEAL;
-                    break;
-                case CLAIM:
-                    total += globalData.creepComponentConfigs.CLAIM;
-                    break;
-                case TOUGH:
-                    total += globalData.creepComponentConfigs.TOUGH;
-                    break;
-                default:
-                    Throw.Error('ComponentEnergyCalculation', ' 无效 ', creepComponent[i]);
-            }
+    ComponentEnergyCalculation: ComponentEnergyCalculation
+}
+
+function ComponentEnergyCalculation(creepComponent = []) {
+    // 部件能量计算
+    let total = 0;
+    for (let i = 0; i < creepComponent.length; i++) {
+        switch (creepComponent[i]) {
+            case MOVE:
+                total += globalData.creepComponentConfigs.MOVE;
+                break;
+            case WORK:
+                total += globalData.creepComponentConfigs.WORK;
+                break;
+            case CARRY:
+                total += globalData.creepComponentConfigs.CARRY;
+                break;
+            case ATTACK:
+                total += globalData.creepComponentConfigs.ATTACK;
+                break;
+            case RANGED_ATTACK:
+                total += globalData.creepComponentConfigs.RANGED_ATTACK;
+                break;
+            case HEAL:
+                total += globalData.creepComponentConfigs.HEAL;
+                break;
+            case CLAIM:
+                total += globalData.creepComponentConfigs.CLAIM;
+                break;
+            case TOUGH:
+                total += globalData.creepComponentConfigs.TOUGH;
+                break;
+            default:
+                Throw.Error('ComponentEnergyCalculation', ' 无效 ', creepComponent[i]);
         }
-        return total;
     }
+    return total;
 }
 
 // creep 监控状态检查
