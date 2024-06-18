@@ -153,19 +153,19 @@ function eventManagement() {
             let code;
             let mgs;
             try {
-                let code = SpecialActions.code;
-                let mgs = SpecialActions.mgs;
+                code = SpecialActions.code;
+                mgs = SpecialActions.mgs;
             } catch (e) {
 
             }
             if (code) {
                 switch (code) {
                     case 'move':
-                        factory_creep.moveTo(creep, new RoomPosition(mgs));
+                        factory_creep.moveTo(creep, new RoomPosition(mgs.x, mgs.y, mgs.roomName));
                         break;
                     case globalData.harvest:
                     {
-                        let roomPosition = new RoomPosition(mgs)
+                        let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
                         if (creep.harvest(roomPosition) == ERR_NOT_IN_RANGE) {
                             factory_creep.moveTo(creep, roomPosition);
                         }
@@ -173,7 +173,7 @@ function eventManagement() {
                         break;
                     case globalData.upgrader:
                     {
-                        let roomPosition = new RoomPosition(mgs)
+                        let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
                         if (creep.upgradeController(roomPosition) == ERR_NOT_IN_RANGE) {
                             factory_creep.moveTo(creep, roomPosition);
                         }
@@ -181,7 +181,7 @@ function eventManagement() {
                         break;
                     case globalData.builder:
                     {
-                        let roomPosition = new RoomPosition(mgs)
+                        let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
                         if (creep.build(roomPosition) == ERR_NOT_IN_RANGE) {
                             factory_creep.moveTo(creep, roomPosition);
                         }
@@ -189,7 +189,7 @@ function eventManagement() {
                         break;
                     case globalData.carrier:
                     {
-                        let roomPosition = new RoomPosition(mgs)
+                        let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
                         if (creep.withdraw(roomPosition) == ERR_NOT_IN_RANGE) {
                             factory_creep.moveTo(creep, roomPosition);
                         }
@@ -197,7 +197,7 @@ function eventManagement() {
                         break;
                     case globalData.repairer:
                     {
-                        let roomPosition = new RoomPosition(mgs)
+                        let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
                         if (creep.repair(roomPosition) == ERR_NOT_IN_RANGE) {
                             factory_creep.moveTo(creep, roomPosition);
                         }
