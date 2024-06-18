@@ -28,7 +28,7 @@ global.globalData = {
                 //     name: 'W48S54'
                 // },
                 {
-                    name: 'W7S4',
+                    name: 'W3S4',
                     spawns: [{
                         name: 'Spawn1'
                     }],
