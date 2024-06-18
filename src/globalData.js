@@ -89,7 +89,9 @@ global.globalData = {
             // 自动分配数量（开启 AutomaticAssignHarvest可以根据最大支持数量动态更新采集者数量）
             AutomaticAssignNum: true,
             // 自动分配根据可用能量容量上限调整bodys
-            AutomaticAssignBodysEnergyCapacityAvailable: true
+            AutomaticAssignBodysEnergyCapacityAvailable: true,
+            // 自动缩减配置,当房间内总容量不足时
+            AutomaticConfigurationDownsizing: true
         },
         // 升级者
         'upgrader': {
@@ -107,7 +109,9 @@ global.globalData = {
                 ],
                 totalEnergyRequired: 300
             },
-            number: 2
+            number: 2,
+            // 自动缩减配置,当房间内总容量不足时
+            AutomaticConfigurationDownsizing: true
         },
         // 建造者
         'builder': {
@@ -123,7 +127,9 @@ global.globalData = {
                 list: [WORK, WORK, WORK, CARRY, MOVE],
                 totalEnergyRequired: 300
             },
-            number: 1
+            number: 1,
+            // 自动缩减配置,当房间内总容量不足时
+            AutomaticConfigurationDownsizing: true
         },
         // 运输者
         'carrier': {
@@ -143,7 +149,9 @@ global.globalData = {
             },
             number: 3,
             // 矿区CONTAINER是否1v1运送
-            sourceContainer1v1: true
+            sourceContainer1v1: true,
+            // 自动缩减配置,当房间内总容量不足时
+            AutomaticConfigurationDownsizing: true
         },
         // 维修者
         'repairer': {
@@ -161,7 +169,9 @@ global.globalData = {
             },
             number: 1,
             // tower创建拥有能量的时候不生成维修者
-            onTower: false
+            onTower: false,
+            // 自动缩减配置,当房间内总容量不足时
+            AutomaticConfigurationDownsizing: true
         },
         // 防御者-近战
         'nearDefender': {
@@ -179,7 +189,9 @@ global.globalData = {
                 ],
                 totalEnergyRequired: 300
             },
-            number: 0
+            number: 0,
+            // 自动缩减配置,当房间内总容量不足时
+            AutomaticConfigurationDownsizing: true
         },
         // 防御者-远战
         'farDefender': {
@@ -200,7 +212,9 @@ global.globalData = {
                 ],
                 totalEnergyRequired: 300
             },
-            number: 0
+            number: 0,
+            // 自动缩减配置,当房间内总容量不足时
+            AutomaticConfigurationDownsizing: true
         },
         // 治疗者
         'theHealer': {
@@ -216,7 +230,9 @@ global.globalData = {
                 list: [MOVE, HEAL, HEAL, HEAL],
                 totalEnergyRequired: 300
             },
-            number: 0
+            number: 0,
+            // 自动缩减配置,当房间内总容量不足时
+            AutomaticConfigurationDownsizing: true
         },
         // 占领者
         'occupier': {
@@ -232,7 +248,9 @@ global.globalData = {
                 list: [MOVE, CLAIM, CLAIM, CLAIM],
                 totalEnergyRequired: 300
             },
-            number: 0
+            number: 0,
+            // 自动缩减配置,当房间内总容量不足时
+            AutomaticConfigurationDownsizing: true
         }
     },
     // 移动

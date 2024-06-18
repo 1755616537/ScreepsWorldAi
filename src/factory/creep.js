@@ -303,10 +303,8 @@ export default {
             return '房间总能量数量未达到限制，无法生产';
         }
         if ( /*Object.keys(Game.creeps).length < 1 ||*/ harvests) {
-            // 能量源区
-            let sources = factory_room.nameGet(roomName).find(FIND_SOURCES);
             // 当总creep数量小于2时,使用缩减版进行快速发展（注意：当建筑只剩基地时最高能量300）
-            if (harvests.length < 1 || harvests.length < sources.length) {
+            if (harvests.length < 1) {
                 if (factory_room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.harvest
                     .bodysMinus
                     .totalEnergyRequired) {
@@ -325,6 +323,22 @@ export default {
                 }
             }
         }
+
+        {
+            // 自动缩减配置
+            let returnData = automaticConfigurationDownsizing(
+                roomName,
+                globalData.creepConfigs.harvest.AutomaticConfigurationDownsizing,
+                bodys,
+                WORK
+            )
+            if (returnData.msg === '成功') {
+                bodys = returnData.bodys;
+            } else {
+                return returnData.msg;
+            }
+        }
+
         let returnData = factory_spawn.nameGet(spawnName).spawnCreep(bodys,
             newName, {
                 memory: {
@@ -374,6 +388,22 @@ export default {
                 }
             }
         }
+
+        {
+            // 自动缩减配置
+            let returnData = automaticConfigurationDownsizing(
+                roomName,
+                globalData.creepConfigs.carrier.AutomaticConfigurationDownsizing,
+                bodys,
+                CARRY
+            )
+            if (returnData.msg === '成功') {
+                bodys = returnData.bodys;
+            } else {
+                return returnData.msg;
+            }
+        }
+
         let returnData = factory_spawn.nameGet(spawnName).spawnCreep(bodys,
             newName, {
                 memory: {
@@ -420,6 +450,22 @@ export default {
                 }
             }
         }
+
+        {
+            // 自动缩减配置
+            let returnData = automaticConfigurationDownsizing(
+                roomName,
+                globalData.creepConfigs.upgrader.AutomaticConfigurationDownsizing,
+                bodys,
+                WORK
+            )
+            if (returnData.msg === '成功') {
+                bodys = returnData.bodys;
+            } else {
+                return returnData.msg;
+            }
+        }
+
         let returnData = factory_spawn.nameGet(spawnName).spawnCreep(bodys,
             newName, {
                 memory: {
@@ -466,6 +512,22 @@ export default {
                 }
             }
         }
+
+        {
+            // 自动缩减配置
+            let returnData = automaticConfigurationDownsizing(
+                roomName,
+                globalData.creepConfigs.builder.AutomaticConfigurationDownsizing,
+                bodys,
+                WORK
+            )
+            if (returnData.msg === '成功') {
+                bodys = returnData.bodys;
+            } else {
+                return returnData.msg;
+            }
+        }
+
         let returnData = factory_spawn.nameGet(spawnName).spawnCreep(bodys,
             newName, {
                 memory: {
@@ -521,6 +583,22 @@ export default {
                 }
             }
         }
+
+        {
+            // 自动缩减配置
+            let returnData = automaticConfigurationDownsizing(
+                roomName,
+                globalData.creepConfigs.repairer.AutomaticConfigurationDownsizing,
+                bodys,
+                WORK
+            )
+            if (returnData.msg === '成功') {
+                bodys = returnData.bodys;
+            } else {
+                return returnData.msg;
+            }
+        }
+
         let returnData = factory_spawn.nameGet(spawnName).spawnCreep(bodys,
             newName, {
                 memory: {
@@ -567,6 +645,23 @@ export default {
                 }
             }
         }
+
+        {
+            // 自动缩减配置
+            let returnData = automaticConfigurationDownsizing(
+                roomName,
+                globalData.creepConfigs.nearDefender.AutomaticConfigurationDownsizing,
+                bodys,
+                TOUGH,
+                [TOUGH, ATTACK]
+            )
+            if (returnData.msg === '成功') {
+                bodys = returnData.bodys;
+            } else {
+                return returnData.msg;
+            }
+        }
+
         let returnData = factory_spawn.nameGet(spawnName).spawnCreep(bodys,
             newName, {
                 memory: {
@@ -613,6 +708,23 @@ export default {
                 }
             }
         }
+
+        {
+            // 自动缩减配置
+            let returnData = automaticConfigurationDownsizing(
+                roomName,
+                globalData.creepConfigs.farDefender.AutomaticConfigurationDownsizing,
+                bodys,
+                TOUGH,
+                [TOUGH, RANGED_ATTACK]
+            )
+            if (returnData.msg === '成功') {
+                bodys = returnData.bodys;
+            } else {
+                return returnData.msg;
+            }
+        }
+
         let returnData = factory_spawn.nameGet(spawnName).spawnCreep(bodys,
             newName, {
                 memory: {
@@ -659,6 +771,22 @@ export default {
                 }
             }
         }
+
+        {
+            // 自动缩减配置
+            let returnData = automaticConfigurationDownsizing(
+                roomName,
+                globalData.creepConfigs.occupier.AutomaticConfigurationDownsizing,
+                bodys,
+                CLAIM
+            )
+            if (returnData.msg === '成功') {
+                bodys = returnData.bodys;
+            } else {
+                return returnData.msg;
+            }
+        }
+
         let returnData = factory_spawn.nameGet(spawnName).spawnCreep(bodys,
             newName, {
                 memory: {
@@ -705,6 +833,22 @@ export default {
                 }
             }
         }
+
+        {
+            // 自动缩减配置
+            let returnData = automaticConfigurationDownsizing(
+                roomName,
+                globalData.creepConfigs.theHealer.AutomaticConfigurationDownsizing,
+                bodys,
+                HEAL
+            )
+            if (returnData.msg === '成功') {
+                bodys = returnData.bodys;
+            } else {
+                return returnData.msg;
+            }
+        }
+
         let returnData = factory_spawn.nameGet(spawnName).spawnCreep(bodys,
             newName, {
                 memory: {
@@ -756,6 +900,51 @@ function ComponentEnergyCalculation(creepComponent = []) {
         }
     }
     return total;
+}
+
+// 自动缩减配置 成功返回数组 失败返回失败字符串
+function automaticConfigurationDownsizing(roomName,
+                                          on,
+                                          bodys,
+                                          OfComponent,
+                                          DelComponentArr = []
+) {
+    // 当房间内的所有 spawn 和 extension 的容量上限 energyCapacity 总额 小于配置，自动缩减配置
+    if (on) {
+        if (DelComponentArr.length < 1) DelComponentArr.push(OfComponent);
+        if (factory_room.nameGet(roomName).energyCapacityAvailable < ComponentEnergyCalculation(bodys)) {
+            // 计算需要缩减多少 做多一百次，避免使用无限循环
+            for (let i = 0; i < 100; i++) {
+                if (ComponentEnergyCalculation(bodys) - factory_room.nameGet(roomName).energyCapacityAvailable <= 0) {
+                    break
+                }
+
+                let on = false;
+                for (let j = 0; j < DelComponentArr.length; j++) {
+                    let index = bodys.indexOf(DelComponentArr[j]);
+                    if (index > -1) {
+                        // 是否只剩最后一个，只剩最后一个不缩减该部件
+                        let lastIndex = bodys.lastIndexOf(DelComponentArr[j]);
+                        if (lastIndex !== -1 && lastIndex !== index) {
+                            bodys.splice(index, 1);
+                            on = true;
+                            break
+                        }
+                    }
+                }
+                if (!on) {
+                    return {
+                        bodys: bodys,
+                        msg: '房间内的所有能量容量上限不足，自动缩减配【失败】，无法生产'
+                    };
+                }
+            }
+        }
+    }
+    return {
+        bodys: bodys,
+        msg: '成功'
+    };
 }
 
 // creep 监控状态检查
