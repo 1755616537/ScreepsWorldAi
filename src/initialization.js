@@ -17,10 +17,7 @@ export default function () {
     clog('【提示】: 手动汉化输入【Utils.cn();】');
 
     if (!Memory.rooms) {
-        Memory.rooms = {
-            source: {},
-            controller: {}
-        }
+        Memory.rooms = {}
     }
 
     for (let name in Game.creeps) {
