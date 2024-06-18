@@ -15,6 +15,9 @@ import factory_creep_Occupier from "../factory/creep/Occupier.js";
 
 import factory_Build from "../factory/Build.js";
 
+import Alliance_run from '../Alliance/run.js'
+import Alliance_room from '../Alliance/room.js'
+
 // 控制器 房间
 export default function () {
     _.forEach(Game.rooms, room => {
@@ -71,23 +74,24 @@ export default function () {
         roomVisual(roomName);
     });
 
-    let roomName = globalData.rooms[0].name;
-    let roomName2 = globalData.rooms[1].name;
+    // 联盟 房间 入口
+    Alliance_run(Alliance_room, this, {
+        // CONTAINER+EXTENSION+STORAGE能量统计
+        containerExtensionStorageEnergyStat: containerExtensionStorageEnergyStat,
+        // 能量源区Container记录管理
+        sourceContainer:sourceContainer,
+        // 控制器Container记录管理
+        controllerContainer:controllerContainer,
+        // 采集建造CONTAINER记录管理
+        harvestBuildCONTAINER:harvestBuildCONTAINER,
 
-    // CONTAINER+EXTENSION+STORAGE能量统计
-    containerExtensionStorageEnergyStat(roomName);
+        // 临时外部房间,升级
+        upgraderOuterRoom:upgraderOuterRoom,
+        // 临时外部房间,建造
+        builderOuterRoom:builderOuterRoom
+    });
 
-    // 能量源区Container记录管理
-    sourceContainer(roomName);
-    // 控制器Container记录管理
-    controllerContainer(roomName);
-    // 采集建造CONTAINER记录管理
-    harvestBuildCONTAINER(roomName);
 
-    // 临时外部房间,升级
-    upgraderOuterRoom(roomName2);
-    // 临时外部房间,建造
-    // builderOuterRoom(roomName2);
 }
 
 
@@ -274,7 +278,9 @@ function containerExtensionStorageEnergyStat(roomName) {
         total += parseInt(energy ? energy : 0);
         targetsStore.push(energy);
     }
-    if (parseInt(total) < 500) {
+    // 只有房间中所有 spawn 和 extension 中的可用能量总额大于500,才检测预警
+    let energyAvailable = factory_room.nameGet(roomName).energyAvailable;
+    if (energyAvailable >= 500 && parseInt(total) < 500) {
         clog('房间' + roomName, 'CONTAINER+EXTENSION+STORAGE能量' + total + '不足500');
         Utils.notify(
             `【${roomName}】房间【CONTAINER+EXTENSION+STORAGE能量${total}不足500】`
@@ -288,7 +294,7 @@ function upgraderOuterRoom(roomName) {
     let room = factory_room.nameGet(roomName);
 
     let creepName = '';
-    const upgraders = factory_creep.Upgrader.ALL(1);
+    const upgraders = factory_creep_Upgrader.ALL(1);
     if (upgraders < 1) return;
     // 是否已存在
     _.forEach(upgraders, upgrader => {
@@ -384,7 +390,7 @@ function builderOuterRoom(roomName) {
     let room = factory_room.nameGet(roomName);
 
     let creepName = '';
-    const builders = factory_creep.Builder.ALL(1);
+    const builders = factory_creep_Builder.ALL(1);
     if (builders < 1) return;
     // 是否已存在
     _.forEach(builders, builder => {

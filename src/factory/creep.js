@@ -302,8 +302,10 @@ export default {
             return '房间总能量数量未达到限制，无法生产';
         }
         if ( /*Object.keys(Game.creeps).length < 1 ||*/ harvests) {
+            // 能量源区
+            let sources = factory_room.nameGet(roomName).find(FIND_SOURCES);
             // 当总creep数量小于2时,使用缩减版进行快速发展（注意：当建筑只剩基地时最高能量300）
-            if (harvests.length < 1) {
+            if (harvests.length < 1 || harvests.length < sources.length) {
                 if (factory_room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.harvest
                     .bodysMinus
                     .totalEnergyRequired) {

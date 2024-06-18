@@ -1,5 +1,3 @@
-import {errorMapper} from './modules/errorMapper.js'
-
 import factory_room from "./factory/room.js";
 
 import Alliance_run from './Alliance/run.js'
@@ -9,37 +7,35 @@ import Alliance_initialization_globalData from './Alliance/initialization/global
 export {iniglobalData}
 
 export default function () {
-    return errorMapper(() => {
-        clog('【挂载拓展】【完成】 Time ' + Game.time)
-        clog("【脚本加载】 Time " + Game.time + " , bucket " + Game.cpu.bucket);
+    clog('【挂载拓展】【完成】 Time ' + Game.time)
+    clog("【脚本加载】 Time " + Game.time + " , bucket " + Game.cpu.bucket);
 
-        clog("【初始化】【开始】 Time " + Game.time);
+    clog("【初始化】【开始】 Time " + Game.time);
 
-        // 客户端汉化显示
-        // Utils.cn();
-        clog('【提示】: 手动汉化输入【Utils.cn();】');
+    // 客户端汉化显示
+    // Utils.cn();
+    clog('【提示】: 手动汉化输入【Utils.cn();】');
 
-        if (!Memory.rooms) {
-            Memory.rooms = {
-                source: {},
-                controller: {}
-            }
+    if (!Memory.rooms) {
+        Memory.rooms = {
+            source: {},
+            controller: {}
         }
+    }
 
-        for (let name in Game.creeps) {
-            if (!Game.creeps[name].memory.id) Game.creeps[name].memory.id = Game.creeps[name].id;
-        }
+    for (let name in Game.creeps) {
+        if (!Game.creeps[name].memory.id) Game.creeps[name].memory.id = Game.creeps[name].id;
+    }
 
-        // 全局数据初始化
-        iniglobalData();
+    // 全局数据初始化
+    iniglobalData();
 
-        // 联盟 初始化 房间 入口
-        Alliance_run(Alliance_initialization_room, this, {
-            iniRoom: iniRoom
-        });
+    // 联盟 初始化 房间 入口
+    Alliance_run(Alliance_initialization_room, this, {
+        iniRoom: iniRoom
+    });
 
-        clog("【初始化】【结束】 Time " + Game.time);
-    })
+    clog("【初始化】【结束】 Time " + Game.time);
 }
 
 function iniRoom(roomName) {
@@ -58,7 +54,13 @@ function iniRoom(roomName) {
 function iniglobalData() {
     // 获取当前使用代码的游戏用户名
     let username = '';
-    if (Game.spawns.length > 0) username = Game.spawns[0].owner.username;
+    for (let key in Game.spawns) {
+        if (Game.spawns.hasOwnProperty(key)) {
+            username = Game.spawns[key].owner.username;
+            break;
+        }
+    }
+    clog('username', username)
     if (username) {
         globalData.username = username;
     }
@@ -68,13 +70,23 @@ function iniglobalData() {
     if (globalDataAlliance) {
         globalData.rooms = globalDataAlliance.rooms;
     }
+    // clog('rooms', JSON.stringify(globalData.rooms))
 
     // 把当前全部基地名称获取成数组
-    let rooms = {};
+    let rooms = [];
     _.forEach(Game.spawns, spawn => {
         let roomName = spawn.room.name;
-        if (!rooms[roomName].spawns) rooms[roomName].spawns = [];
-        rooms[roomName].spawns.push({
+        let roomsIndex = _.findIndex(rooms, (value) => value.name == roomName);
+        if (roomsIndex == -1) {
+            rooms.push({
+                name: roomName,
+                spawns: []
+            });
+            roomsIndex = rooms.length - 1;
+        }
+
+        if (!rooms[roomsIndex].spawns) rooms[roomsIndex].spawns = [];
+        rooms[roomsIndex].spawns.push({
             name: spawn.name
         });
     });
@@ -83,41 +95,50 @@ function iniglobalData() {
     _.forEach(Game.rooms, room => {
         let roomName = room.name;
         const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == room.name);
+        const roomsIndex = _.findIndex(rooms, (value) => value.name == roomName);
         let globalDataRoom = {};
+        // console.log('roomsIndex', roomsIndex)
+        // console.log('rooms[roomsIndex]', JSON.stringify(rooms[roomsIndex]))
         if (globalDataRoomIndex == -1) {
             globalDataRoom = {
-                name: room.name,
-                spawns: rooms[roomName].spawns
+                name: roomName,
+                spawns: rooms[roomsIndex].spawns
             };
         } else {
             globalDataRoom = globalData.rooms[globalDataRoomIndex];
-
+            // console.log('globalDataRoom', JSON.stringify(globalDataRoom))
             // 基地配置
             if (!globalDataRoom.spawns) globalDataRoom.spawns = [];
+            // console.log('spawns1', JSON.stringify(globalDataRoom.spawns))
             let spawns = globalDataRoom.spawns;
             // 合并 过滤已存在
-            spawns = _.unionBy(spawns, rooms[roomName].spawns);
+            // console.log('rooms[roomsIndex].spawns', JSON.stringify(rooms[roomsIndex].spawns))
+            spawns = spawns.concat(rooms[roomsIndex].spawns);
+            // console.log('spawns', JSON.stringify(spawns))
+            spawns = Utils.uniqueObjectsByContent(spawns);
             globalDataRoom.spawns = spawns;
+            // console.log('spawns2', JSON.stringify(spawns))
         }
+
+
         // 房间配置
         if (globalData.roomsAllAllocation.on) {
             // 合并 覆盖
             globalDataRoom = _.merge(globalDataRoom, globalData.roomsAllAllocation.content);
         } else {
+            // console.log('globalDataRoom', JSON.stringify(globalDataRoom))
+            // console.log('roomsAllAllocation', JSON.stringify(globalData.roomsAllAllocation.content))
             // 合并 过滤已存在
-            globalDataRoom = _.mergeWith(globalDataRoom, globalData.roomsAllAllocation.content, function (objValue, srcValue) {
-                // 如果目标对象中已经有这个键，则保留原值
-                if (!_.isUndefined(objValue)) {
-                    return objValue;
-                }
-            });
+            globalDataRoom = Object.assign({}, globalData.roomsAllAllocation.content, globalDataRoom);
+            // console.log('globalDataRoom', JSON.stringify(globalDataRoom))
         }
         if (globalDataRoomIndex == -1) {
             globalData.rooms.push(globalDataRoom);
         } else {
-            globalData.globalData.rooms[globalDataRoomIndex] = globalDataRoom;
+            // console.log('globalDataRoomIndex',globalDataRoomIndex)
+            // console.log('globalData.rooms', JSON.stringify(globalData.rooms))
+            globalData.rooms[globalDataRoomIndex] = globalDataRoom;
         }
-
 
     });
 
