@@ -129,7 +129,6 @@ export default {
                                             }
                                         }
                                     }
-                                    ;
                                 }
                                 x++;
                             }
