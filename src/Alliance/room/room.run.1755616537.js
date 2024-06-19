@@ -23,9 +23,9 @@ export default function (_this, objectFun) {
 
             let roomName3 = 'W48S52';
             // 临时外部房间,升级
-            // objectFun.upgraderOuterRoom(roomName3);
+            objectFun.upgraderOuterRoom(roomName3);
             // 临时外部房间,建造
-            // objectFun.builderOuterRoom(roomName3);
+            objectFun.builderOuterRoom(roomName3);
             break;
         default:
             // CONTAINER+EXTENSION+STORAGE能量统计

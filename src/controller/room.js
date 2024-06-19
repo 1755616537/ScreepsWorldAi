@@ -364,6 +364,17 @@ function upgraderOuterRoom(roomName) {
     }
     let creep = Game.creeps[creepName];
 
+    // 临时添加
+    if (roomName=='W48S52'){
+        if (creep.room.name=='W47S54'){
+            factory_creep.moveTo(creep, new RoomPosition(1, 28, 'W46S54'));
+            return;
+        }else if(creep.room.name=='W46S54'){
+            factory_creep.moveTo(creep, new RoomPosition(48, 34, 'W47S53'));
+            return;
+        }
+    }
+
     if (!room) {
         factory_creep.moveTo(creep, new RoomPosition(43, 17, roomName));
     } else {
@@ -459,6 +470,17 @@ function builderOuterRoom(roomName) {
         })
     }
     let creep = Game.creeps[creepName];
+
+    // 临时添加
+    if (roomName=='W48S52'){
+        if (creep.room.name=='W47S54'){
+            factory_creep.moveTo(creep, new RoomPosition(1, 28, 'W46S54'));
+            return;
+        }else if(creep.room.name=='W46S54'){
+            factory_creep.moveTo(creep, new RoomPosition(48, 34, 'W47S53'));
+            return;
+        }
+    }
 
     if (!room) {
         factory_creep.moveTo(creep, new RoomPosition(43, 17, roomName));
