@@ -2,23 +2,27 @@ import factory_room from "../factory/room.js";
 
 export default {
     run: (roomName) => {
-        let room = factory_room.nameGet(roomName, true);
-        if (!room) return;
+        let room = factory_room.nameGet(roomName);
 
-        var hostiles = room.find(FIND_HOSTILE_CREEPS);
-        if (hostiles.length > 0) {
-            // 统计分别有哪些用户
-            let usernameList = [];
-            _.forEach(hostiles, hostile => {
-                usernameList.push(hostile.owner.username);
-            });
-            // 去重
-            usernameList = _.uniq(usernameList);
-            let usernameListString = '';
-            _.forEach(usernameList, username => {
-                usernameListString += '【' + username + '】';
-            });
-            Utils.notify(`发现用户${usernameListString}派CREEPS到【${roomName}】房间中`);
+        const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == roomName);
+
+        // 跳过不是自己的房间
+        if (globalDataRoomIndex != -1) {
+            var hostiles = room.find(FIND_HOSTILE_CREEPS);
+            if (hostiles.length > 0) {
+                // 统计分别有哪些用户
+                let usernameList = [];
+                _.forEach(hostiles, hostile => {
+                    usernameList.push(hostile.owner.username);
+                });
+                // 去重
+                usernameList = _.uniq(usernameList);
+                let usernameListString = '';
+                _.forEach(usernameList, username => {
+                    usernameListString += '【' + username + '】';
+                });
+                Utils.notify(`发现用户${usernameListString}派CREEPS到【${roomName}】房间中`);
+            }
         }
 
         // 查找针对您的 creep 和建筑的所有敌对行动
@@ -120,37 +124,45 @@ export default {
         }
 
         if (attackEvents.length > 0 && attackMy) {
-            Utils.notify(`【${roomName}】房间,正在遭受攻击 ` + textAll);
+            if (globalDataRoomIndex != -1) {
+                Utils.notify(`【${roomName}】房间,正在遭受攻击 ` + textAll);
+            } else {
+                Utils.notify(`别人【${roomName}】房间,正在遭受攻击 ` + textAll);
+            }
         }
 
-        if (objectDestroyedMy) {
-            let on = false;
-            if (room.name == globalData.rooms[0].name && globalData.rooms[0].AutomaticSecurity) {
-                on = true;
-            } else if (room.name == globalData.rooms[1].name && globalData.rooms[1]
-                .AutomaticSecurity) {
-                on = true;
-            } else if (room.name == globalData.rooms[2].name && globalData.rooms[2]
-                .AutomaticSecurity) {
-                on = true;
-            }
-            if (on) {
-                // 开启安全模式
-                let returnData = room.controller.activateSafeMode();
-                if (returnData == OK) {
-                    Utils.notify(`【${roomName}】房间,开启安全模式【成功】`);
-                } else if (returnData == ERR_BUSY) {
-                    Utils.notify(`【${roomName}】房间,开启安全模式【失败】,已经有其他房间处于安全模式下了`);
-                } else if (returnData == ERR_NOT_ENOUGH_RESOURCES) {
-                    Utils.notify(`【${roomName}】房间,开启安全模式【失败】,没有足够的可用激活次数`);
-                } else if (returnData == ERR_TIRED) {
-                    Utils.notify(
-                        `【${roomName}】房间,开启安全模式【失败】,上一个安全模式仍在冷却中，或者控制器正处于 upgradeBlocked 状态，或者控制器的降级计时器已经超过了 50% + 5000 tick 甚至更久`
-                    );
-                } else {
-                    Utils.notify(`【${roomName}】房间,开启安全模式【失败】,未知原因${returnData}`);
+        // 跳过不是自己的房间
+        if (globalDataRoomIndex != -1) {
+            if (objectDestroyedMy) {
+                let on = false;
+                if (room.name == globalData.rooms[0].name && globalData.rooms[0].AutomaticSecurity) {
+                    on = true;
+                } else if (room.name == globalData.rooms[1].name && globalData.rooms[1]
+                    .AutomaticSecurity) {
+                    on = true;
+                } else if (room.name == globalData.rooms[2].name && globalData.rooms[2]
+                    .AutomaticSecurity) {
+                    on = true;
+                }
+                if (on) {
+                    // 开启安全模式
+                    let returnData = room.controller.activateSafeMode();
+                    if (returnData == OK) {
+                        Utils.notify(`【${roomName}】房间,开启安全模式【成功】`);
+                    } else if (returnData == ERR_BUSY) {
+                        Utils.notify(`【${roomName}】房间,开启安全模式【失败】,已经有其他房间处于安全模式下了`);
+                    } else if (returnData == ERR_NOT_ENOUGH_RESOURCES) {
+                        Utils.notify(`【${roomName}】房间,开启安全模式【失败】,没有足够的可用激活次数`);
+                    } else if (returnData == ERR_TIRED) {
+                        Utils.notify(
+                            `【${roomName}】房间,开启安全模式【失败】,上一个安全模式仍在冷却中，或者控制器正处于 upgradeBlocked 状态，或者控制器的降级计时器已经超过了 50% + 5000 tick 甚至更久`
+                        );
+                    } else {
+                        Utils.notify(`【${roomName}】房间,开启安全模式【失败】,未知原因${returnData}`);
+                    }
                 }
             }
         }
+
     }
 }

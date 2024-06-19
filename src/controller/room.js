@@ -28,11 +28,12 @@ export default function () {
         // 该房间中前一个 tick 发生的事件数组
         let eventLog = room.getEventLog();
 
+        // 安全
+        factory_Secure.run(roomName);
+
         // 跳过不是自己的房间
         const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == roomName);
         if (globalDataRoomIndex != -1) {
-            // 安全
-            factory_Secure.run(roomName);
             // 塔
             factory_Tower.run(roomName);
 
