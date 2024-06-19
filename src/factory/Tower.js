@@ -43,7 +43,7 @@ function work(tower, type) {
     let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
         filter: (structure) => {
             // 白名单过滤
-            for (var i = 0; i < globalData.WhitelistUsername.length; i++) {
+            for (let i = 0; i < globalData.WhitelistUsername.length; i++) {
                 let username = globalData.WhitelistUsername[i];
                 if (structure.owner.username == username) {
                     return false;
@@ -52,7 +52,7 @@ function work(tower, type) {
 
             let on = false;
             let body = structure.body;
-            for (var i = 0; i < body.length; i++) {
+            for (let i = 0; i < body.length; i++) {
                 if (body[i].type == HEAL) {
                     on = true;
                     break
@@ -65,12 +65,13 @@ function work(tower, type) {
         closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
             filter: (structure) => {
                 // 白名单过滤
-                for (var i = 0; i < globalData.WhitelistUsername.length; i++) {
+                for (let i = 0; i < globalData.WhitelistUsername.length; i++) {
                     let username = globalData.WhitelistUsername[i];
                     if (structure.owner.username == username) {
                         return false;
                     }
                 }
+                return true;
             }
         });
     }
