@@ -24,38 +24,40 @@ import Alliance_room from '../Alliance/room/room.js'
 export default function () {
     _.forEach(Game.rooms, room => {
         let roomName = room.name;
+
+        // 该房间中前一个 tick 发生的事件数组
+        let eventLog = room.getEventLog();
+
         // 跳过不是自己的房间
         const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == roomName);
-        if (globalDataRoomIndex == -1) {
-            return;
-        }
+        if (globalDataRoomIndex != -1) {
+            // 安全
+            factory_Secure.run(roomName);
+            // 塔
+            factory_Tower.run(roomName);
 
-        // 安全
-        factory_Secure.run(roomName);
-        // 塔
-        factory_Tower.run(roomName);
 
-        let eventLog = room.getEventLog();
-        // 建造完成 邮件提示
-        let buildEvents = _.filter(eventLog, {
-            event: EVENT_BUILD
-        });
-        if (buildEvents.length > 0) {
-            buildEvents.forEach(event => {
-                let target = Game.getObjectById(event.data.targetId);
-                if (target && target.progress && target.progressTotal) {
-                    if (target.progress + event.data.amount >= target.progressTotal) {
-                        clog('房间' + roomName, '建造完成', JSON.stringify(event));
-                        Utils.notify(
-                            `【${roomName}】房间,id【${event.data.targetId}】${event.data.structureType} x${event.data.x} y${event.data.y}【建造】【完成】`
-                        );
-                        if (event.data.structureType == STRUCTURE_SPAWN) {
-                            // 更新数据
-                            iniglobalData();
+            // 建造完成 邮件提示
+            let buildEvents = _.filter(eventLog, {
+                event: EVENT_BUILD
+            });
+            if (buildEvents.length > 0) {
+                buildEvents.forEach(event => {
+                    let target = Game.getObjectById(event.data.targetId);
+                    if (target && target.progress && target.progressTotal) {
+                        if (target.progress + event.data.amount >= target.progressTotal) {
+                            clog('房间' + roomName, '建造完成', JSON.stringify(event));
+                            Utils.notify(
+                                `【${roomName}】房间,id【${event.data.targetId}】${event.data.structureType} x${event.data.x} y${event.data.y}【建造】【完成】`
+                            );
+                            if (event.data.structureType == STRUCTURE_SPAWN) {
+                                // 更新数据
+                                iniglobalData();
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
         }
 
         // 一个游戏对象被摧毁或是被消灭 邮件提示
@@ -64,18 +66,33 @@ export default function () {
         });
         if (objectDestroyedEvents.length > 0) {
             objectDestroyedEvents.forEach(event => {
-                clog('房间' + roomName, '一个游戏对象被摧毁或是被消灭', JSON.stringify(event));
+                if (globalDataRoomIndex == -1) {
+                    clog('别人房间' + roomName, '一个游戏对象被摧毁或是被消灭', JSON.stringify(event));
+                } else {
+                    clog('房间' + roomName, '一个游戏对象被摧毁或是被消灭', JSON.stringify(event));
+                }
+
                 if (event.data.type != 'creep') {
-                    Utils.notify(
-                        `【${roomName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
-                    );
+                    if (globalDataRoomIndex == -1) {
+                        Utils.notify(
+                            `别人【${roomName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
+                        );
+                    } else {
+                        Utils.notify(
+                            `【${roomName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
+                        );
+                    }
+
                 }
 
             });
         }
 
-        // 建筑（自动建造等）
-        factory_Build.run(roomName);
+        // 跳过不是自己的房间
+        if (globalDataRoomIndex != -1) {
+            // 建筑（自动建造等）
+            factory_Build.run(roomName);
+        }
 
         // 房间显示文本
         roomVisual(roomName);
