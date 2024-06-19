@@ -397,7 +397,7 @@ function builderOuterRoom(roomName) {
     let room = factory_room.nameGet(roomName);
 
     let creepName = '';
-    const builders = factory_creep_Builder.ALL(1);
+    const builders = factory_creep_Builder.ALL(globalData.rooms[0].name);
     if (builders < 1) return;
     // 是否已存在
     _.forEach(builders, builder => {
