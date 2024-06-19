@@ -416,10 +416,10 @@ function upgraderOuterRoom(roomName) {
                     }),
                 );
                 if (targets.length < 1) {
-                    let sources = room.find(FIND_SOURCES);
+                    let sources = creep.pos.findClosestByPath(FIND_SOURCES);
                     // 采集能量
-                    if (creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                        factory_creep.moveTo(creep, sources[0], 'Resource');
+                    if (creep.harvest(sources) == ERR_NOT_IN_RANGE) {
+                        factory_creep.moveTo(creep, sources, 'Resource');
                     }
                     return;
                 }
@@ -527,10 +527,10 @@ function builderOuterRoom(roomName) {
                     }),
                 );
                 if (targets.length < 1) {
-                    let sources = room.find(FIND_SOURCES);
+                    let sources = creep.pos.findClosestByPath(FIND_SOURCES);
                     // 采集能量
-                    if (creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                        factory_creep.moveTo(creep, sources[0], 'Resource');
+                    if (creep.harvest(sources) == ERR_NOT_IN_RANGE) {
+                        factory_creep.moveTo(creep, sources, 'Resource');
                     }
                     return;
                 }
