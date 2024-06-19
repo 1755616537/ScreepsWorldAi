@@ -347,7 +347,7 @@ function upgraderOuterRoom(roomName) {
     if (upgraders < 1) return;
     // 是否已存在
     _.forEach(upgraders, upgrader => {
-        if (upgrader.memory.upgraderOuterRoom) {
+        if (upgrader.memory.upgraderOuterRoom && upgrader.memory.upgraderOuterRoom == roomName) {
             creepName = upgrader.name;
             return false;
         }
@@ -365,11 +365,11 @@ function upgraderOuterRoom(roomName) {
     let creep = Game.creeps[creepName];
 
     // 临时添加
-    if (roomName=='W48S52'){
-        if (creep.room.name=='W47S54'){
+    if (roomName == 'W48S52') {
+        if (creep.room.name == 'W47S54') {
             factory_creep.moveTo(creep, new RoomPosition(1, 28, 'W46S54'));
             return;
-        }else if(creep.room.name=='W46S54'){
+        } else if (creep.room.name == 'W46S54') {
             factory_creep.moveTo(creep, new RoomPosition(48, 34, 'W47S53'));
             return;
         }
@@ -454,7 +454,7 @@ function builderOuterRoom(roomName) {
     if (builders < 1) return;
     // 是否已存在
     _.forEach(builders, builder => {
-        if (builder.memory.builderOuterRoom) {
+        if (builder.memory.builderOuterRoom && builder.memory.builderOuterRoom == roomName) {
             creepName = builder.name;
             return false;
         }
@@ -472,11 +472,11 @@ function builderOuterRoom(roomName) {
     let creep = Game.creeps[creepName];
 
     // 临时添加
-    if (roomName=='W48S52'){
-        if (creep.room.name=='W47S54'){
+    if (roomName == 'W48S52') {
+        if (creep.room.name == 'W47S54') {
             factory_creep.moveTo(creep, new RoomPosition(1, 28, 'W46S54'));
             return;
-        }else if(creep.room.name=='W46S54'){
+        } else if (creep.room.name == 'W46S54') {
             factory_creep.moveTo(creep, new RoomPosition(48, 34, 'W47S53'));
             return;
         }
