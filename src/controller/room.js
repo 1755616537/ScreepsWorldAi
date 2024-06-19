@@ -4,6 +4,8 @@ import factory_Tower from "../factory/Tower.js";
 import factory_initialization, {iniglobalData} from "../initialization.js";
 import factory_room from "../factory/room.js";
 
+import factory_creep from "../factory/creep.js";
+
 import factory_creep_Harvest from "../factory/creep/Harvest.js";
 import factory_creep_Upgrader from "../factory/creep/Upgrader.js";
 import factory_creep_Builder from "../factory/creep/Builder.js";
@@ -299,7 +301,7 @@ function upgraderOuterRoom(roomName) {
     let room = factory_room.nameGet(roomName);
 
     let creepName = '';
-    const upgraders = factory_creep_Upgrader.ALL(1);
+    const upgraders = factory_creep_Upgrader.ALL(globalData.rooms[0].name);
     if (upgraders < 1) return;
     // 是否已存在
     _.forEach(upgraders, upgrader => {
@@ -343,7 +345,7 @@ function upgraderOuterRoom(roomName) {
                 // 捡起一个物品 (如捡起一些能量)
                 if (creep.pickup(targets[0]) == ERR_NOT_IN_RANGE) {
                     // 向目标移动
-                    factory_creepmoveTo(creep, targets[0], 'Resource');
+                    factory_creep.moveTo(creep, targets[0], 'Resource');
                 }
             } else {
                 targets = targets.concat(
