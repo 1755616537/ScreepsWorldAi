@@ -159,53 +159,52 @@ function eventManagement() {
 
             }
             /**
-            Game.creeps['repairer8981'].memory.SpecialActions={
-                code:'move', mgs:{
-                    x:20,
-                    y:2,
-                    roomName:'W2N1'
-                }
-            }
+             Game.creeps['repairer8981'].memory.SpecialActions={
+             code:'move', mgs:{
+             x:20,
+             y:2,
+             roomName:'W2N1'
+             }
+             }
              */
             if (code) {
                 switch (code) {
                     case 'move':
-                        factory_creep.moveTo(creep, new RoomPosition(mgs.x, mgs.y, mgs.roomName));
+                        if (creep.pos.x == mgs.x && creep.pos.y == mgs.y && creep.pos.roomName == mgs.roomName) {
+                            creep.memory.SpecialActions = undefined;
+                        } else {
+                            factory_creep.moveTo(creep, new RoomPosition(mgs.x, mgs.y, mgs.roomName));
+                        }
                         break;
-                    case globalData.harvest:
-                    {
+                    case globalData.harvest: {
                         let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
                         if (creep.harvest(roomPosition) == ERR_NOT_IN_RANGE) {
                             factory_creep.moveTo(creep, roomPosition);
                         }
                     }
                         break;
-                    case globalData.upgrader:
-                    {
+                    case globalData.upgrader: {
                         let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
                         if (creep.upgradeController(roomPosition) == ERR_NOT_IN_RANGE) {
                             factory_creep.moveTo(creep, roomPosition);
                         }
                     }
                         break;
-                    case globalData.builder:
-                    {
+                    case globalData.builder: {
                         let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
                         if (creep.build(roomPosition) == ERR_NOT_IN_RANGE) {
                             factory_creep.moveTo(creep, roomPosition);
                         }
                     }
                         break;
-                    case globalData.carrier:
-                    {
+                    case globalData.carrier: {
                         let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
                         if (creep.withdraw(roomPosition) == ERR_NOT_IN_RANGE) {
                             factory_creep.moveTo(creep, roomPosition);
                         }
                     }
                         break;
-                    case globalData.repairer:
-                    {
+                    case globalData.repairer: {
                         let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
                         if (creep.repair(roomPosition) == ERR_NOT_IN_RANGE) {
                             factory_creep.moveTo(creep, roomPosition);
