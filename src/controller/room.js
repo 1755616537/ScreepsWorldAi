@@ -67,23 +67,45 @@ export default function () {
         });
         if (objectDestroyedEvents.length > 0) {
             objectDestroyedEvents.forEach(event => {
+                // 事件者ID
+                let objectId = event.objectId;
+                let initiate = Game.getObjectById(objectId);
+                let username;
+                if (initiate) {
+                    try {
+                        username = initiate.owner.username;
+                    } catch (e) {
+                        //TODO handle the exception
+                    }
+                }
+
                 if (globalDataRoomIndex == -1) {
-                    clog('别人房间' + roomName, '一个游戏对象被摧毁或是被消灭', JSON.stringify(event));
+                    if (username && username == globalData.username) {
+                        clog('别人房间' + roomName, '一个游戏对象被摧毁或是被消灭', JSON.stringify(event));
+                    }
                 } else {
                     clog('房间' + roomName, '一个游戏对象被摧毁或是被消灭', JSON.stringify(event));
                 }
 
                 if (event.data.type != 'creep') {
                     if (globalDataRoomIndex == -1) {
-                        Utils.notify(
-                            `别人【${roomName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
-                        );
+                        // Utils.notify(
+                        //     `别人【${roomName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
+                        // );
                     } else {
                         Utils.notify(
                             `【${roomName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
                         );
                     }
 
+                } else {
+                    if (globalDataRoomIndex == -1) {
+                        if (username && username == globalData.username) {
+                            Utils.notify(
+                                `别人【${roomName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
+                            );
+                        }
+                    }
                 }
 
             });
