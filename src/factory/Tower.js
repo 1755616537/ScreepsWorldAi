@@ -42,6 +42,14 @@ function work(tower, type) {
     // 攻击 先攻击治疗
     let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
         filter: (structure) => {
+            // 白名单过滤
+            for (var i = 0; i < globalData.WhitelistUsername.length; i++) {
+                let username = globalData.WhitelistUsername[i];
+                if (structure.owner.username == username) {
+                    return false;
+                }
+            }
+
             let on = false;
             let body = structure.body;
             for (var i = 0; i < body.length; i++) {
@@ -54,7 +62,17 @@ function work(tower, type) {
         }
     });
     if (!closestHostile) {
-        closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
+            filter: (structure) => {
+                // 白名单过滤
+                for (var i = 0; i < globalData.WhitelistUsername.length; i++) {
+                    let username = globalData.WhitelistUsername[i];
+                    if (structure.owner.username == username) {
+                        return false;
+                    }
+                }
+            }
+        });
     }
     if (closestHostile) {
         tower.attack(closestHostile);

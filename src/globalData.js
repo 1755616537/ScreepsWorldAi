@@ -4,6 +4,8 @@ global.globalData = {
     clog: true,
     // 【不用填写，会自动获取】当前使用代码的用户名
     username: '',
+    // 白名单用户名(不攻击等)
+    WhitelistUsername: [],
     // 联盟信息
     Alliance: [
         {
