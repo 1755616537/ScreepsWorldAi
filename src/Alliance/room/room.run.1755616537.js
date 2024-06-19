@@ -3,14 +3,17 @@ export default function (_this, objectFun) {
 
     switch (roomName) {
         case 'W47S54':
-            // CONTAINER+EXTENSION+STORAGE能量统计
-            objectFun.SetContainerExtensionStorageEnergyStat(roomName);
-            // 能量源区Container记录管理
-            objectFun.sourceContainer(roomName);
-            // 控制器Container记录管理
-            objectFun.controllerContainer(roomName);
-            // 采集建造CONTAINER记录管理
-            objectFun.harvestBuildCONTAINER(roomName);
+            _.forEach(globalData.rooms, (room) => {
+                let roomName = room.name;
+                // CONTAINER+EXTENSION+STORAGE能量统计
+                objectFun.SetContainerExtensionStorageEnergyStat(roomName);
+                // 能量源区Container记录管理
+                objectFun.sourceContainer(roomName);
+                // 控制器Container记录管理
+                objectFun.controllerContainer(roomName);
+                // 采集建造CONTAINER记录管理
+                objectFun.harvestBuildCONTAINER(roomName);
+            })
 
             let roomName2 = 'W48S54';
             // 临时外部房间,升级
