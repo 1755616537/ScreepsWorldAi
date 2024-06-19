@@ -370,6 +370,9 @@ function upgraderOuterRoom(roomName) {
             factory_creep.moveTo(creep, new RoomPosition(1, 28, 'W46S54'));
             return;
         } else if (creep.room.name == 'W46S54') {
+            factory_creep.moveTo(creep, new RoomPosition(25, 48, 'W46S53'));
+            return;
+        } else if (creep.room.name == 'W46S53') {
             factory_creep.moveTo(creep, new RoomPosition(48, 34, 'W47S53'));
             return;
         }
@@ -477,6 +480,9 @@ function builderOuterRoom(roomName) {
             factory_creep.moveTo(creep, new RoomPosition(1, 28, 'W46S54'));
             return;
         } else if (creep.room.name == 'W46S54') {
+            factory_creep.moveTo(creep, new RoomPosition(25, 48, 'W46S53'));
+            return;
+        } else if (creep.room.name == 'W46S53') {
             factory_creep.moveTo(creep, new RoomPosition(48, 34, 'W47S53'));
             return;
         }
