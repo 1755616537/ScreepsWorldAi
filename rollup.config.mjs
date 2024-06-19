@@ -5,7 +5,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import clear from 'rollup-plugin-clear'
 import screeps from 'rollup-plugin-screeps'
 import copy from 'rollup-plugin-copy'
-import secretConfig from './.secret密码.json' assert { type: 'json' };
+import secretConfig from './.secret.json' assert { type: 'json' };
 import { promises as fs } from 'fs';
 
 let config = secretConfig[process.env.DEST];
