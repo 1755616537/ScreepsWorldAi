@@ -1,4 +1,3 @@
-import factory_spawn from "../../factory/spawn.js";
 import factory_room from "../../factory/room.js";
 
 import factory_creep from "../../factory/creep.js";
@@ -19,8 +18,10 @@ export default {
             creep.say('🛒 存放');
         }
 
-        // 房间序号
+        // 房间名称
         let roomName = creep.room.name;
+
+        const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == roomName);
 
         if (!creep.memory.work) {
             // 所有掉落的资源
@@ -52,8 +53,8 @@ export default {
                 }
 
                 let source = null;
-                // 能量源区CONTAINER是否1v1运送
-                if (globalData.creepConfigs.carrier.sourceContainer1v1 && Memory.rooms[roomName].source) {
+                // 能量源区CONTAINER是否1v1运送 并且是自己的房间
+                if (globalData.creepConfigs.carrier.sourceContainer1v1 && Memory.rooms[roomName].source && globalDataRoomIndex != -1) {
                     let memorySource = Memory.rooms[roomName].source.list;
                     // source周边的空地是否存在CONTAINER
                     for (let val in memorySource) {
@@ -186,7 +187,7 @@ export default {
                     }
                 }
 
-                if (!source) {
+                if (!source && globalDataRoomIndex != -1) {
                     // 所有建筑 去除控制器Container
                     let memoryControllerContainer;
                     let on = false;
@@ -263,8 +264,13 @@ function all(roomName) {
 function transfer(creep) {
     let roomName = creep.room.name;
 
-    // 给控制器CONTAINER,运输能量
-    if (transferControllerContainer(creep)) return;
+    const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == roomName);
+
+    // 自己的房间
+    if (globalDataRoomIndex != -1) {
+        // 给控制器CONTAINER,运输能量
+        if (transferControllerContainer(creep)) return;
+    }
     // 给Tower,运输能量
     // if (transferTower(creep)) return;
 
@@ -305,53 +311,58 @@ function transfer(creep) {
                     structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
             }
         });
-        // 去除能量源区的CONTAINER
-        let targets2 = [];
-        let memorySource = Memory.rooms[roomName].source.list;
-        for (let i = 0; i < targets.length; i++) {
-            let on = false;
-            // 能量源区的CONTAINER
-            for (let val in memorySource) {
-                let spaceXYList = memorySource[val].spaceXYList;
-                for (let i2 = 0; i2 < spaceXYList.length; i2++) {
-                    if (spaceXYList[i2].x == targets[i].pos.x && spaceXYList[i2].y == targets[i].pos.y) {
-                        // targets2.splice(i, 1);
-                        on = true;
-                        break;
-                    }
-                }
-                if (on) break;
-            }
 
-            if (!on) {
-                targets2.push(targets[i]);
-            }
-        }
-        targets = targets2;
-
-        // 如果剩余数量大于1，去除控制器区的CONTAINER
-        if (targets.length > 1) {
+        // 自己的房间
+        if (globalDataRoomIndex != -1) {
+            // 去除能量源区的CONTAINER
             let targets2 = [];
-            let memoryControllerContainer = Memory.rooms[roomName].controller.container;
-            for (var i = 0; i < targets.length; i++) {
-                // 控制器区的CONTAINER
-                if (targets[i].pos.x == memoryControllerContainer.x && targets[i].pos.y == memoryControllerContainer
-                    .y) {
+            let memorySource = Memory.rooms[roomName].source.list;
+            for (let i = 0; i < targets.length; i++) {
+                let on = false;
+                // 能量源区的CONTAINER
+                for (let val in memorySource) {
+                    let spaceXYList = memorySource[val].spaceXYList;
+                    for (let i2 = 0; i2 < spaceXYList.length; i2++) {
+                        if (spaceXYList[i2].x == targets[i].pos.x && spaceXYList[i2].y == targets[i].pos.y) {
+                            // targets2.splice(i, 1);
+                            on = true;
+                            break;
+                        }
+                    }
+                    if (on) break;
+                }
 
-                } else {
+                if (!on) {
                     targets2.push(targets[i]);
                 }
             }
             targets = targets2;
-        } else {
-            if (targets.length == 1) {
-                // 当控制器Container储存能量低于总量30%才运送
-                if (!(targets[0].store.getFreeCapacity(RESOURCE_ENERGY) > targets[0].store.getCapacity(
-                    RESOURCE_ENERGY) / 3)) {
-                    targets = [];
+
+            // 如果剩余数量大于1，去除控制器区的CONTAINER
+            if (targets.length > 1) {
+                let targets2 = [];
+                let memoryControllerContainer = Memory.rooms[roomName].controller.container;
+                for (var i = 0; i < targets.length; i++) {
+                    // 控制器区的CONTAINER
+                    if (targets[i].pos.x == memoryControllerContainer.x && targets[i].pos.y == memoryControllerContainer
+                        .y) {
+
+                    } else {
+                        targets2.push(targets[i]);
+                    }
+                }
+                targets = targets2;
+            } else {
+                if (targets.length == 1) {
+                    // 当控制器Container储存能量低于总量30%才运送
+                    if (!(targets[0].store.getFreeCapacity(RESOURCE_ENERGY) > targets[0].store.getCapacity(
+                        RESOURCE_ENERGY) / 3)) {
+                        targets = [];
+                    }
                 }
             }
         }
+
     }
     if (targets.length < 1) {
         targets = creep.room.find(FIND_STRUCTURES, {
