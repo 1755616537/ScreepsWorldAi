@@ -92,10 +92,11 @@ export default function () {
         if (globalDataRoomIndex != -1) {
             // 建筑（自动建造等）
             factory_Build.run(roomName);
+
+            // 房间显示文本
+            roomVisual(roomName);
         }
 
-        // 房间显示文本
-        roomVisual(roomName);
     });
 
     // 联盟 房间 入口
@@ -121,7 +122,8 @@ export default function () {
 
 // 房间显示文本
 function roomVisual(roomName) {
-    let room = factory_room.nameGet(roomName);
+    let room = factory_room.nameGet(roomName, true);
+    if (!room) return;
 
     const harvests = factory_creep_Harvest.ALL(roomName);
     const upgraders = factory_creep_Upgrader.ALL(roomName);
