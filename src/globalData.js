@@ -127,7 +127,7 @@ global.globalData = {
                 ],
                 totalEnergyRequired: 300
             },
-            number: 2,
+            number: 1,
             // 自动缩减配置,当房间内总容量不足时
             AutomaticConfigurationDownsizing: true
         },
@@ -145,7 +145,7 @@ global.globalData = {
                 list: [WORK, WORK, WORK, CARRY, MOVE],
                 totalEnergyRequired: 300
             },
-            number: 2,
+            number: 1,
             // 自动缩减配置,当房间内总容量不足时
             AutomaticConfigurationDownsizing: true
         },

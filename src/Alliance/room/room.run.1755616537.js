@@ -15,11 +15,11 @@ export default function (_this, objectFun) {
                 objectFun.harvestBuildCONTAINER(roomName);
             })
 
-            let roomName2 = 'W48S54';
-            // 临时外部房间,升级
-            objectFun.upgraderOuterRoom(roomName2);
-            // 临时外部房间,建造
-            objectFun.builderOuterRoom(roomName2);
+            // let roomName2 = 'W48S54';
+            // // 临时外部房间,升级
+            // objectFun.upgraderOuterRoom(roomName2);
+            // // 临时外部房间,建造
+            // objectFun.builderOuterRoom(roomName2);
 
             // let roomName3 = 'W48S52';
             // // 临时外部房间,升级
