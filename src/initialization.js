@@ -87,21 +87,27 @@ function iniglobalData() {
             name: spawn.name
         });
     });
+    // console.log('rooms', JSON.stringify(rooms));
 
     // 通过房间，把基地名称数组分类
     _.forEach(Game.rooms, room => {
         let roomName = room.name;
-        const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == room.name);
+
         const roomsIndex = _.findIndex(rooms, (value) => value.name == roomName);
-        let globalDataRoom = {};
         // console.log('roomsIndex', roomsIndex)
         // console.log('rooms[roomsIndex]', JSON.stringify(rooms[roomsIndex]))
+        // 没有建立基地的房间，不添加进来（原因：Game.rooms是可视房间的数据，不是自己房间的数据，可能会存在别人的房间在里面）
+        if (roomsIndex == -1) {
+            return;
+        }
+        const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == roomName);
+        let globalDataRoom = {};
+        // 是否手动在配置里面配置有
         if (globalDataRoomIndex == -1) {
-            // 没有建立基地的房间，不添加进来（原因：Game.rooms是可视房间的数据，不是自己房间的数据，可能会存在别人的房间在里面）
-            // globalDataRoom = {
-            //     name: roomName,
-            //     spawns: rooms[roomsIndex].spawns
-            // };
+            globalDataRoom = {
+                name: roomName,
+                spawns: rooms[roomsIndex].spawns
+            };
         } else {
             globalDataRoom = globalData.rooms[globalDataRoomIndex];
             // console.log('globalDataRoom', JSON.stringify(globalDataRoom))
@@ -117,6 +123,7 @@ function iniglobalData() {
             globalDataRoom.spawns = spawns;
             // console.log('spawns2', JSON.stringify(spawns))
         }
+        // console.log('globalDataRoom', JSON.stringify(globalDataRoom));
 
 
         // 房间配置
@@ -139,10 +146,12 @@ function iniglobalData() {
         }
 
     });
+    // console.log('globalData.rooms', JSON.stringify(globalData.rooms))
 
     // 把没有拥有的房间去掉，有时候会手动在配置加上房间信息，但实际没有拥有此房间就会报错
     let delArray = [];
     _.forEach(globalData.rooms, (value, index) => {
+        if (!value.name) return;
         // console.log(JSON.stringify(value), index,Game.rooms.length)
         let on = false;
         for (const i in Game.rooms) {
