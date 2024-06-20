@@ -339,7 +339,7 @@ function SetContainerExtensionStorageEnergyStat(roomName) {
 }
 
 // 临时外部房间,升级
-function upgraderOuterRoom(roomName) {
+function upgraderOuterRoom(roomName, pathArray = []) {
     let room = factory_room.nameGet(roomName);
 
     let creepName = '';
@@ -364,16 +364,11 @@ function upgraderOuterRoom(roomName) {
     }
     let creep = Game.creeps[creepName];
 
-    // 临时添加
-    if (roomName == 'W48S52') {
-        if (creep.room.name == 'W47S54') {
-            factory_creep.moveTo(creep, new RoomPosition(1, 28, 'W46S54'));
-            return;
-        } else if (creep.room.name == 'W46S54') {
-            factory_creep.moveTo(creep, new RoomPosition(25, 48, 'W46S53'));
-            return;
-        } else if (creep.room.name == 'W46S53') {
-            factory_creep.moveTo(creep, new RoomPosition(48, 34, 'W47S53'));
+    // 按设定路径移动
+    for (let i = 0; i < pathArray.length; i++) {
+        let path = pathArray[i];
+        if (creep.room.name == path.roomName) {
+            factory_creep.moveTo(creep, path.roomPosition);
             return;
         }
     }
@@ -449,7 +444,7 @@ function upgraderOuterRoom(roomName) {
 }
 
 // 临时外部房间,建造
-function builderOuterRoom(roomName) {
+function builderOuterRoom(roomName, pathArray = []) {
     let room = factory_room.nameGet(roomName);
 
     let creepName = '';
@@ -474,16 +469,11 @@ function builderOuterRoom(roomName) {
     }
     let creep = Game.creeps[creepName];
 
-    // 临时添加
-    if (roomName == 'W48S52') {
-        if (creep.room.name == 'W47S54') {
-            factory_creep.moveTo(creep, new RoomPosition(1, 28, 'W46S54'));
-            return;
-        } else if (creep.room.name == 'W46S54') {
-            factory_creep.moveTo(creep, new RoomPosition(25, 48, 'W46S53'));
-            return;
-        } else if (creep.room.name == 'W46S53') {
-            factory_creep.moveTo(creep, new RoomPosition(48, 34, 'W47S53'));
+    // 按设定路径移动
+    for (let i = 0; i < pathArray.length; i++) {
+        let path = pathArray[i];
+        if (creep.room.name == path.roomName) {
+            factory_creep.moveTo(creep, path.roomPosition);
             return;
         }
     }
