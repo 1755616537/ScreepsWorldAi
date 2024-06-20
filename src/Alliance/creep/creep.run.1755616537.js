@@ -1,7 +1,10 @@
 export default function (_this, objectFun) {
-    objectFun.spawnProduceCreep(globalData.rooms[0].spawns[0].name);
-    return
     _.forEach(globalData.rooms, (room) => {
+        // 临时添加
+        if (room.name != 'W47S54' && room.name != 'W48S52') {
+            return
+        }
+
         objectFun.spawnProduceCreep(room.spawns[0].name);
     })
 }
