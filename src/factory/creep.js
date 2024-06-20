@@ -218,7 +218,7 @@ export default {
                 }
 
                 delete Memory.creeps[name];
-                clog('清楚不存在的creep内存:', name);
+                clog('房间', roomName, '清楚不存在的creep内存:', name);
             }
         }
 
