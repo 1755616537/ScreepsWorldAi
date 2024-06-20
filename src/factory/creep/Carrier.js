@@ -95,6 +95,7 @@ export default {
                     if (!TransportationTarget) {
                         // 找出没有被分配完的CONTAINER
                         let memoryContainerListNull = null;
+                        let memoryContainerListNull_memorySource = null;
                         for (let val in memorySource) {
                             let spaceXYList = memorySource[val].spaceXYList;
                             let on = false;
@@ -102,6 +103,7 @@ export default {
                                 try {
                                     if (spaceXYList[i].list.length < 1) {
                                         memoryContainerListNull = i;
+                                        memoryContainerListNull_memorySource = val;
                                         on = true;
                                         break;
                                     }
@@ -112,7 +114,9 @@ export default {
                             }
                             if (on) break;
                         }
+
                         for (let val in memorySource) {
+                            if (memoryContainerListNull_memorySource != null && val != memoryContainerListNull_memorySource) continue;
                             // 找到空闲CONTAINER，优先分配给没有分配数量的CONTAINER
                             let on = false;
                             let spaceXYList = memorySource[val].spaceXYList;
