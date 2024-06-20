@@ -290,9 +290,7 @@ export default {
 
     },
     addHarvest: (harvests, controller_level = 4, spawnName) => {
-        let spawnSequence = factory_spawn.nameGetSequence(spawnName);
-        let roomSequence = factory_spawn.sequenceGetRoomSequence(spawnSequence);
-        let roomName = factory_room.sequenceGetName(roomSequence);
+        let roomName = factory_spawn.nameGetRoomName(spawnName);
         let bodys;
         let newName = globalData.harvest + Game.time;
 
@@ -354,9 +352,7 @@ export default {
         return returnData
     },
     addCarrier: (carriers, controller_level = 4, spawnName) => {
-        let spawnSequence = factory_spawn.nameGetSequence(spawnName);
-        let roomSequence = factory_spawn.sequenceGetRoomSequence(spawnSequence);
-        let roomName = factory_room.sequenceGetName(roomSequence);
+        let roomName = factory_spawn.nameGetRoomName(spawnName);
         let bodys;
         let newName = globalData.carrier + Game.time;
         if (factory_room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.carrier.bodys
@@ -419,9 +415,7 @@ export default {
         return returnData
     },
     addUpgrader: (upgraders, controller_level = 4, spawnName) => {
-        let spawnSequence = factory_spawn.nameGetSequence(spawnName);
-        let roomSequence = factory_spawn.sequenceGetRoomSequence(spawnSequence);
-        let roomName = factory_room.sequenceGetName(roomSequence);
+        let roomName = factory_spawn.nameGetRoomName(spawnName);
         let bodys;
         let newName = globalData.upgrader + Game.time;
         if (factory_room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.upgrader.bodys
@@ -481,9 +475,7 @@ export default {
         return returnData
     },
     addBuilder: (builders, controller_level = 4, spawnName) => {
-        let spawnSequence = factory_spawn.nameGetSequence(spawnName);
-        let roomSequence = factory_spawn.sequenceGetRoomSequence(spawnSequence);
-        let roomName = factory_room.sequenceGetName(roomSequence);
+        let roomName = factory_spawn.nameGetRoomName(spawnName);
         let bodys;
         let newName = globalData.builder + Game.time;
         if (factory_room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.builder.bodys
@@ -542,9 +534,7 @@ export default {
         return returnData
     },
     addRepairer: (repairers, controller_level = 4, spawnName) => {
-        let spawnSequence = factory_spawn.nameGetSequence(spawnName);
-        let roomSequence = factory_spawn.sequenceGetRoomSequence(spawnSequence);
-        let roomName = factory_room.sequenceGetName(roomSequence);
+        let roomName = factory_spawn.nameGetRoomName(spawnName);
         let bodys;
         let newName = globalData.repairer + Game.time;
         let targets = factory_spawn.nameGet(spawnName).room.find(FIND_STRUCTURES, {
@@ -614,9 +604,7 @@ export default {
         return returnData
     },
     addNearDefender: (nearDefenders, controller_level = 4, spawnName) => {
-        let spawnSequence = factory_spawn.nameGetSequence(spawnName);
-        let roomSequence = factory_spawn.sequenceGetRoomSequence(spawnSequence);
-        let roomName = factory_room.sequenceGetName(roomSequence);
+        let roomName = factory_spawn.nameGetRoomName(spawnName);
         let bodys;
         let newName = globalData.nearDefender + Game.time;
         if (factory_room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.nearDefender.bodys
@@ -677,9 +665,7 @@ export default {
         return returnData
     },
     addFarDefender: (farDefenders, controller_level = 4, spawnName) => {
-        let spawnSequence = factory_spawn.nameGetSequence(spawnName);
-        let roomSequence = factory_spawn.sequenceGetRoomSequence(spawnSequence);
-        let roomName = factory_room.sequenceGetName(roomSequence);
+        let roomName = factory_spawn.nameGetRoomName(spawnName);
         let bodys;
         let newName = globalData.farDefender + Game.time;
         if (factory_room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.farDefender.bodys
@@ -740,9 +726,7 @@ export default {
         return returnData
     },
     addOccupier: (occupiers, controller_level = 4, spawnName) => {
-        let spawnSequence = factory_spawn.nameGetSequence(spawnName);
-        let roomSequence = factory_spawn.sequenceGetRoomSequence(spawnSequence);
-        let roomName = factory_room.sequenceGetName(roomSequence);
+        let roomName = factory_spawn.nameGetRoomName(spawnName);
         let bodys;
         let newName = globalData.occupier + Game.time;
         if (factory_room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.occupier.bodys
@@ -802,9 +786,7 @@ export default {
         return returnData
     },
     addTheHealer: (theHealers, controller_level = 4, spawnName) => {
-        let spawnSequence = factory_spawn.nameGetSequence(spawnName);
-        let roomSequence = factory_spawn.sequenceGetRoomSequence(spawnSequence);
-        let roomName = factory_room.sequenceGetName(roomSequence);
+        let roomName = factory_spawn.nameGetRoomName(spawnName);
         let bodys;
         let newName = globalData.theHealer + Game.time;
         if (factory_room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.theHealer.bodys
