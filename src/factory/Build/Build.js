@@ -1,5 +1,7 @@
+// https://screepers.github.io/screeps-tools/#/building-planner
+
 // 自动建造
-import factory_room from "./room.js";
+import factory_room from "../room.js";
 
 export default {
     run: (roomName) => {

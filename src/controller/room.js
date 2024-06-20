@@ -15,7 +15,7 @@ import factory_creep_Defender from "../factory/creep/Defender.js";
 import factory_creep_TheHealer from "../factory/creep/TheHealer.js";
 import factory_creep_Occupier from "../factory/creep/Occupier.js";
 
-import factory_Build from "../factory/Build.js";
+import factory_Build from "../factory/Build/Build.js";
 
 import Alliance_run from '../Alliance/run.js'
 import Alliance_room from '../Alliance/room/room.js'
