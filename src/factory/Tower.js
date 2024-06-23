@@ -23,6 +23,28 @@ export default {
                         return structure.structureType == STRUCTURE_TOWER;
                     }
                 });
+            } else {
+                let oni = -1;
+                for (let i = 0; i < globalData.rooms.length; i++) {
+                    if (globalData.rooms[i].name == roomName) {
+                        oni = i;
+                        break
+                    }
+                }
+                if (oni != -1) {
+                    const spawns = room.find(FIND_STRUCTURES, {
+                        filter: (structure) => {
+                            return structure.structureType == STRUCTURE_SPAWN;
+                        }
+                    });
+                    if (spawns.length > 0) {
+                        storageClosestTower = spawns[0].pos.findClosestByRange(FIND_MY_STRUCTURES, {
+                            filter: (structure) => {
+                                return structure.structureType == STRUCTURE_TOWER;
+                            }
+                        });
+                    }
+                }
             }
             _.forEach(targets, target => {
                 if (storageClosestTower && storageClosestTower.id == target.id) {
