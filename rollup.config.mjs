@@ -6,6 +6,7 @@ import clear from 'rollup-plugin-clear'
 import screeps from 'rollup-plugin-screeps'
 import copy from 'rollup-plugin-copy'
 import secretConfig from './.secret.json' assert {type: 'json'};
+import { terser } from 'rollup-plugin-terser';
 // TS
 import typescript from 'rollup-plugin-typescript2'
 
@@ -53,6 +54,14 @@ export default {
         commonjs(),
         // 编译 ts
         typescript({tsconfig: "./tsconfig.json"}),
+        // 压缩
+        terser({
+            output:{
+                // 保持格式
+                beautify: true
+            },
+            mangle: true, // 关闭变量重命名，以保持变量名不变
+        }),
         // 执行上传或者复制
         pluginDeploy
     ]
