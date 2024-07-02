@@ -209,6 +209,9 @@ function eventManagement() {
                         }
                         let lookForAt = creep.room.lookForAt(LOOK_CONSTRUCTION_SITES, roomPosition)
                         if (lookForAt.length > 0) {
+                            const lookTo = lookForAt[0].pos.findInRange(FIND_MY_STRUCTURES, 1,
+                                {filter: {structureType: STRUCTURE_CONTROLLER}});
+
                             if (creep.build(lookForAt[0]) == ERR_NOT_IN_RANGE) {
                                 factory_creep.moveTo(creep, lookForAt[0]);
                             }

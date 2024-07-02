@@ -7,7 +7,8 @@ export default {
 
         const targets = room.find(FIND_MY_STRUCTURES, {
             filter: (structure) => {
-                return structure.structureType == STRUCTURE_LINK;
+                return (structure.structureType == STRUCTURE_LINK) &&
+                    structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
             }
         });
 
@@ -27,7 +28,7 @@ export default {
             }
 
             _.forEach(targets, target => {
-                if (storageClosestLink && storageClosestLink.id == target.id) {
+                if (storageClosestLink && storageClosestLink.id != target.id) {
                     // target.transferEnergy(linkTo);
                 }
             });
