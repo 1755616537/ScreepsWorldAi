@@ -377,6 +377,15 @@ function transfer(creep) {
             }
         });
     }
+    if (targets.length < 1) {
+        targets = creep.room.find(FIND_STRUCTURES, {
+            filter: (structure) => {
+                // 找出需要储存能量
+                return (structure.structureType == STRUCTURE_NUKER) &&
+                    structure.store.getFreeCapacity() > 0;
+            }
+        });
+    }
     if (targets.length > 0) {
         let resourceGhodium = false;
         for (const resourceType in creep.carry) {
