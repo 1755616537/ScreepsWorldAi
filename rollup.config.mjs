@@ -5,8 +5,9 @@ import commonjs from '@rollup/plugin-commonjs'
 import clear from 'rollup-plugin-clear'
 import screeps from 'rollup-plugin-screeps'
 import copy from 'rollup-plugin-copy'
-import secretConfig from './.secret.json' assert { type: 'json' };
-import { promises as fs } from 'fs';
+import secretConfig from './.secret.json' assert {type: 'json'};
+// TS
+import typescript from 'rollup-plugin-typescript2'
 
 let config = secretConfig[process.env.DEST];
 if (!process.env.DEST) console.log("未指定目标, 代码将被编译但不会上传")
@@ -34,10 +35,10 @@ const pluginDeploy = config && config.copyPath ?
         verbose: true
     }) :
     // 更新 .map 到 .map.js 并上传
-    screeps({ config, dryRun: !config })
+    screeps({config, dryRun: !config})
 
 export default {
-    input: 'src/main.js',
+    input: 'src/main.ts',
     output: {
         file: 'dist/main.js',
         format: 'cjs',
@@ -45,11 +46,13 @@ export default {
     },
     plugins: [
         // 清除上次编译成果
-        clear({ targets: ["dist"] }),
+        clear({targets: ["dist"]}),
         // 打包依赖
         resolve(),
         // 模块化依赖
         commonjs(),
+        // 编译 ts
+        typescript({tsconfig: "./tsconfig.json"}),
         // 执行上传或者复制
         pluginDeploy
     ]
