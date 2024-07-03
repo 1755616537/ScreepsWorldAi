@@ -27,5 +27,5 @@ async function fetchData() {
 fetchData().then(data => {
     // console.log(data);
     // 可以在这里添加逻辑将data保存为JSON文件
-    require('fs').writeFileSync('data.json', JSON.stringify(data, null, 2));
+    require('fs').writeFileSync('docs_qq_com_DU0d0ZGVRU3didm9R.json', JSON.stringify(data, null, 2));
 });
