@@ -1,3 +1,5 @@
+// 使用说明：https://sokranotes.github.io/posts/Screeps-63layout-tutorial/
+
 /*
 63超级扣位置自动布局 单文件傻瓜版用法
 1 设置4个flag，分别为对应房间的
