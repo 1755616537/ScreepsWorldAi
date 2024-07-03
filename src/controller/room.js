@@ -32,8 +32,7 @@ export default function () {
         factory_Secure.run(roomName);
 
         // 跳过不是自己的房间
-        const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == roomName);
-        if (globalDataRoomIndex != -1) {
+        if (globalData.rooms[roomName]) {
             // 塔
             factory_Tower.run(roomName);
 
@@ -79,7 +78,7 @@ export default function () {
                     }
                 }
 
-                if (globalDataRoomIndex == -1) {
+                if (!globalData.rooms[roomName]) {
                     if (username && username == globalData.username) {
                         clog('别人房间' + roomName, '一个游戏对象被摧毁或是被消灭', JSON.stringify(event));
                     }
@@ -88,7 +87,7 @@ export default function () {
                 }
 
                 if (event.data.type != 'creep') {
-                    if (globalDataRoomIndex == -1) {
+                    if (!globalData.rooms[roomName]) {
                         // Utils.notify(
                         //     `别人【${roomName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
                         // );
@@ -99,7 +98,7 @@ export default function () {
                     }
 
                 } else {
-                    if (globalDataRoomIndex == -1) {
+                    if (!globalData.rooms[roomName]) {
                         if (username && username == globalData.username) {
                             Utils.notify(
                                 `别人【${roomName}】房间,id【${event.objectId}】${event.data.type}【被摧毁或是被消灭】`
@@ -112,7 +111,7 @@ export default function () {
         }
 
         // 跳过不是自己的房间
-        if (globalDataRoomIndex != -1) {
+        if (globalData.rooms[roomName]) {
             // 建筑（自动建造等）
             factory_Build.run(roomName);
 
@@ -343,7 +342,7 @@ function upgraderOuterRoom(roomName, pathArray = []) {
     let room = factory_room.nameGet(roomName);
 
     let creepName = '';
-    const upgraders = factory_creep_Upgrader.ALL(globalData.rooms[0].name);
+    const upgraders = factory_creep_Upgrader.ALL(Object.keys(globalData.rooms)[0]);
     if (upgraders < 1) return;
     // 是否已存在
     _.forEach(upgraders, upgrader => {
@@ -448,7 +447,7 @@ function builderOuterRoom(roomName, pathArray = []) {
     let room = factory_room.nameGet(roomName);
 
     let creepName = '';
-    const builders = factory_creep_Builder.ALL(globalData.rooms[0].name);
+    const builders = factory_creep_Builder.ALL(Object.keys(globalData.rooms)[0]);
     if (builders < 1) return;
     // 是否已存在
     _.forEach(builders, builder => {

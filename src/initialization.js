@@ -63,29 +63,19 @@ function iniglobalData() {
     }
 
     // 从联盟配置里把房间配置取出来
-    const globalDataAlliance = _.find(globalData.Alliance, (value) => value.username == username);
+    const globalDataAlliance = globalData.Alliance[username];
     if (globalDataAlliance) {
         globalData.rooms = globalDataAlliance.rooms;
     }
     // clog('rooms', JSON.stringify(globalData.rooms))
 
-    // 把当前全部基地名称获取成数组
-    let rooms = [];
+    // 把当前全部基地名称获取成对象
+    let rooms = {};
     _.forEach(Game.spawns, spawn => {
         let roomName = spawn.room.name;
-        let roomsIndex = _.findIndex(rooms, (value) => value.name == roomName);
-        if (roomsIndex == -1) {
-            rooms.push({
-                name: roomName,
-                spawns: []
-            });
-            roomsIndex = rooms.length - 1;
-        }
-
-        if (!rooms[roomsIndex].spawns) rooms[roomsIndex].spawns = [];
-        rooms[roomsIndex].spawns.push({
-            name: spawn.name
-        });
+        if (!rooms[roomName]) rooms[roomName] = {};
+        if (!rooms[roomName].spawns) rooms[roomName].spawns = {};
+        if (!rooms[roomName].spawns[spawn.name]) rooms[roomName].spawns[spawn.name] = {};
     });
     // console.log('rooms', JSON.stringify(rooms));
 
@@ -93,84 +83,62 @@ function iniglobalData() {
     _.forEach(Game.rooms, room => {
         let roomName = room.name;
 
-        const roomsIndex = _.findIndex(rooms, (value) => value.name == roomName);
         // console.log('roomsIndex', roomsIndex)
         // console.log('rooms[roomsIndex]', JSON.stringify(rooms[roomsIndex]))
         // 没有建立基地的房间，不添加进来（原因：Game.rooms是可视房间的数据，不是自己房间的数据，可能会存在别人的房间在里面）
-        if (roomsIndex == -1) {
+        if (!rooms[roomName]) {
             return;
         }
-        const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == roomName);
         let globalDataRoom = {};
         // 是否手动在配置里面配置有
-        if (globalDataRoomIndex == -1) {
-            globalDataRoom = {
-                name: roomName,
-                spawns: rooms[roomsIndex].spawns
-            };
+        if (!globalData.rooms[roomName]) {
+            globalDataRoom.spawns = rooms[roomName].spawns;
         } else {
-            globalDataRoom = globalData.rooms[globalDataRoomIndex];
-            // console.log('globalDataRoom', JSON.stringify(globalDataRoom))
-            // 基地配置
-            if (!globalDataRoom.spawns) globalDataRoom.spawns = [];
-            // console.log('spawns1', JSON.stringify(globalDataRoom.spawns))
-            let spawns = globalDataRoom.spawns;
-            // 合并 过滤已存在
-            // console.log('rooms[roomsIndex].spawns', JSON.stringify(rooms[roomsIndex].spawns))
-            spawns = spawns.concat(rooms[roomsIndex].spawns);
-            // console.log('spawns', JSON.stringify(spawns))
-            spawns = Utils.uniqueObjectsByContent(spawns);
-            globalDataRoom.spawns = spawns;
-            // console.log('spawns2', JSON.stringify(spawns))
-        }
-        // console.log('globalDataRoom', JSON.stringify(globalDataRoom));
+            globalDataRoom = globalData.rooms[roomName];
 
+            if (!globalDataRoom.spawns) {
+                globalDataRoom.spawns = rooms[roomName].spawns;
+            } else {
+                // 合并 基地配置
+                Utils.mergeWithoutOverride(globalDataRoom.spawns, rooms[roomName].spawns);
+            }
+        }
+        // console.log('globalDataRoom.spawns', JSON.stringify(globalDataRoom.spawns));
 
         // 房间配置
         if (globalData.roomsAllAllocation.on) {
             // 合并 覆盖
             globalDataRoom = _.merge(globalDataRoom, globalData.roomsAllAllocation.content);
         } else {
-            // console.log('globalDataRoom', JSON.stringify(globalDataRoom))
-            // console.log('roomsAllAllocation', JSON.stringify(globalData.roomsAllAllocation.content))
             // 合并 过滤已存在
-            globalDataRoom = Object.assign({}, globalData.roomsAllAllocation.content, globalDataRoom);
-            // console.log('globalDataRoom', JSON.stringify(globalDataRoom))
+            Utils.mergeWithoutOverride(globalDataRoom, globalData.roomsAllAllocation.content)
         }
-        if (globalDataRoomIndex == -1) {
-            globalData.rooms.push(globalDataRoom);
-        } else {
-            // console.log('globalDataRoomIndex',globalDataRoomIndex)
-            // console.log('globalData.rooms', JSON.stringify(globalData.rooms))
-            globalData.rooms[globalDataRoomIndex] = globalDataRoom;
-        }
-
+        globalData.rooms[roomName] = globalDataRoom;
     });
-    // console.log('globalData.rooms', JSON.stringify(globalData.rooms))
+    console.log('globalData.rooms', JSON.stringify(globalData.rooms))
 
     // 把没有拥有的房间去掉，有时候会手动在配置加上房间信息，但实际没有拥有此房间就会报错
     let delArray = [];
     _.forEach(globalData.rooms, (value, index) => {
-        if (!value.name) return;
-        // console.log(JSON.stringify(value), index,Game.rooms.length)
+        // console.log(JSON.stringify(value), index)
         let on = false;
         for (const i in Game.rooms) {
             // console.log('Game.rooms', Game.rooms[i].name, 'value.name', value.name)
-            if (Game.rooms[i].name == value.name) {
+            if (Game.rooms[i].name == index) {
                 on = true
                 break
             }
         }
         if (!on) {
-            delArray.push(value.name)
+            delArray.push(index)
         }
     });
-    // console.log('delArray', JSON.stringify(delArray))
+    clog('删除手动配置的房间', JSON.stringify(delArray))
     for (let i = 0; i < delArray.length; i++) {
-        let index = _.findIndex(globalData.rooms, (value) => value.name == delArray[i]);
-        globalData.rooms.splice(index, 1);
+        let roomName = delArray[i];
+        delete globalData.rooms[roomName];
     }
-    // console.log('globalData.rooms', JSON.stringify(globalData.rooms))
+    console.log('globalData.rooms', JSON.stringify(globalData.rooms))
     // console.log('Game.rooms', JSON.stringify(Game.rooms))
 
     // 联盟 初始化 全局数据 入口
@@ -192,10 +160,9 @@ function iniController(roomName) {
     }
 
     let room = factory_room.nameGet(roomName);
-    let roomSequence = factory_room.nameGetSequence(roomName);
 
     // 自动分配建设控制器区的CONTAINER
-    if (globalData.rooms[roomSequence - 1].AutomaticAssignControllerCONTAINER) {
+    if (globalData.rooms[roomName].AutomaticAssignControllerCONTAINER) {
         // 9*9范围自动生成CONTAINER
         let pos = room.controller.pos;
         let found = room.lookAtArea(pos.y - 1, pos.x - 1, pos.y + 1,

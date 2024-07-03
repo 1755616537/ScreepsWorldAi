@@ -21,8 +21,6 @@ export default {
         // 房间名称
         let roomName = creep.room.name;
 
-        const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == roomName);
-
         if (!creep.memory.work) {
             // 所有掉落的资源
             let target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
@@ -54,7 +52,7 @@ export default {
 
                 let source = null;
                 // 能量源区CONTAINER是否1v1运送 并且是自己的房间
-                if (globalData.creepConfigs.carrier.sourceContainer1v1 && Memory.rooms[roomName].source && globalDataRoomIndex != -1) {
+                if (globalData.creepConfigs.carrier.sourceContainer1v1 && Memory.rooms[roomName].source && globalData.rooms[roomName]) {
                     let memorySource = Memory.rooms[roomName].source.list;
                     // source周边的空地是否存在CONTAINER
                     for (let val in memorySource) {
@@ -191,7 +189,7 @@ export default {
                     }
                 }
 
-                if (!source && globalDataRoomIndex != -1) {
+                if (!source && globalData.rooms[roomName]) {
                     // 所有建筑 去除控制器Container
                     let memoryControllerContainer;
                     let on = false;
@@ -268,10 +266,8 @@ function all(roomName) {
 function transfer(creep) {
     let roomName = creep.room.name;
 
-    const globalDataRoomIndex = _.findIndex(globalData.rooms, (value) => value.name == roomName);
-
     // 自己的房间
-    if (globalDataRoomIndex != -1) {
+    if (globalData.rooms[roomName]) {
         // 给控制器CONTAINER,运输能量
         if (transferControllerContainer(creep)) return;
     }
@@ -317,7 +313,7 @@ function transfer(creep) {
         });
 
         // 自己的房间
-        if (globalDataRoomIndex != -1) {
+        if (globalData.rooms[roomName]) {
             // 去除能量源区的CONTAINER
             let targets2 = [];
             let memorySource = Memory.rooms[roomName].source.list;

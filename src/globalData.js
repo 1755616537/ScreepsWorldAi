@@ -7,16 +7,15 @@ global.globalData = {
     // 白名单用户名(不攻击等)
     WhitelistUsername: [],
     // 联盟信息
-    Alliance: [
-        {
-            username: '1755616537',
-            rooms: [
-                {
-                    name: 'W47S54',
-                    spawns: [{
+    Alliance: {
+        // 游戏用户名称
+        '1755616537': {
+            rooms: {
+                'W47S54': {
+                    spawns: {
                         // 【可以不填写，会自动获取】基地名称
-                        name: 'Spawn1'
-                    }],
+                        'Spawn1': {}
+                    },
                     // 【可以不填写，会自动获取】自动安全(受到攻击自动开启)
                     AutomaticSecurity: true,
                     // 【可以不填写，会自动获取】采集者自动分配矿区
@@ -26,46 +25,24 @@ global.globalData = {
                     // 【可以不填写，会自动获取】自动分配建设控制器区的CONTAINER
                     AutomaticAssignControllerCONTAINER: true
                 },
-                {
-                    name: 'W48S54'
-                },
-                {
-                    name: 'E19S9',
-                    spawns: [{
-                        name: 'Spawn1'
-                    }],
+                'E19S9': {
                     // 【可以不填写，会自动获取】自动安全(受到攻击自动开启)
                     AutomaticSecurity: false,
                 },
-                {
-                    name: 'E19S92',
-                    spawns: [{
-                        name: 'Spawn1'
-                    }],
+                'E19S92': {
                     // 【可以不填写，会自动获取】自动安全(受到攻击自动开启)
                     AutomaticSecurity: false,
                 },
-                {
-                    name: 'W2N2',
-                    spawns: [{
-                        name: 'Spawn1'
-                    }],
+                'W2N2': {
                     // 【可以不填写，会自动获取】自动安全(受到攻击自动开启)
                     AutomaticSecurity: false,
                 }
-            ]
+            }
         },
-        {
-            username: 'Stars22',
-            rooms: [
-                {
-                    name: 'W49S53'
-                }
-            ]
-        }
-    ],
+        'Stars22': {}
+    },
     // 房间 【不用填写，会自动获取】
-    rooms: [],
+    rooms: {},
     // 全部房间配置
     roomsAllAllocation: {
         // 是否开启强制统一房间配置

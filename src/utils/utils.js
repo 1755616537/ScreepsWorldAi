@@ -139,7 +139,7 @@ let pro = {
         var uniqueArray = [];
         var seen = {};
 
-        arr.forEach(function(item) {
+        arr.forEach(function (item) {
             var stringifiedItem = JSON.stringify(item);
             if (!seen.hasOwnProperty(stringifiedItem)) {
                 seen[stringifiedItem] = true;
@@ -148,6 +148,15 @@ let pro = {
         });
 
         return uniqueArray;
+    },
+
+    // 合并对象，新对象的属性不会覆盖旧对象中已有的属性
+    mergeWithoutOverride: function (target, source) {
+        Object.keys(source).forEach(key => {
+            if (!target.hasOwnProperty(key)) {
+                target[key] = source[key];
+            }
+        });
     },
 
 

@@ -86,7 +86,6 @@ function addCarrier(carriers, controller_level, spawnName) {
             // clog(returnData);
             return returnData;
         }
-        ;
     }
 }
 

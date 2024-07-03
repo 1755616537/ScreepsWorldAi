@@ -19,7 +19,6 @@ export default {
         }
 
         let roomName = creep.room.name;
-        let roomSequence = factory_room.nameGetSequence(roomName);
 
         // 没带carry部件或者满了，再采集能量会自动掉脚下，如果脚下有容器就会自动进容器
         // 脚下是否有CONTAINER，有就不移动
@@ -37,7 +36,7 @@ export default {
             let source = sources.length > 0 ? sources[0] : null;
 
             // 自动分配能量源区
-            if (globalData.rooms[roomSequence - 1].AutomaticAssignHarvest) {
+            if (globalData.rooms[roomName].AutomaticAssignHarvest) {
                 // 没有分配到的Source
 
                 // 根据9*9计算能量源区地形分配数量 只计算一次缓存后固定
@@ -97,7 +96,7 @@ export default {
                                         })
 
                                         // 自动建造对应数量的CONTAINER
-                                        if (globalData.rooms[roomSequence - 1].AutomaticAssignHarvestCONTAINER) {
+                                        if (globalData.rooms[roomName].AutomaticAssignHarvestCONTAINER) {
                                             let on = true;
                                             // 已经存在有建筑了跳过
                                             if (found.length) {

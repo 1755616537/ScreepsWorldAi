@@ -1,20 +1,20 @@
 export default function (_this, objectFun) {
-    let roomName = globalData.rooms[0].name;
+    _.forEach(globalData.rooms, (room, roomName) => {
+        // CONTAINER+EXTENSION+STORAGE能量统计
+        objectFun.SetContainerExtensionStorageEnergyStat(roomName);
+        // 能量源区Container记录管理
+        objectFun.sourceContainer(roomName);
+        // 控制器Container记录管理
+        objectFun.controllerContainer(roomName);
+        // 采集建造CONTAINER记录管理
+        objectFun.harvestBuildCONTAINER(roomName);
+    })
+
+    const roomName = Object.keys(globalData.rooms)[0];
+    console.log('房间名称', roomName)
 
     switch (roomName) {
         case 'W47S54':
-            _.forEach(globalData.rooms, (room) => {
-                let roomName = room.name;
-                // CONTAINER+EXTENSION+STORAGE能量统计
-                objectFun.SetContainerExtensionStorageEnergyStat(roomName);
-                // 能量源区Container记录管理
-                objectFun.sourceContainer(roomName);
-                // 控制器Container记录管理
-                objectFun.controllerContainer(roomName);
-                // 采集建造CONTAINER记录管理
-                objectFun.harvestBuildCONTAINER(roomName);
-            })
-
             // let roomName2 = 'W48S54';
             // // 临时外部房间,升级
             // objectFun.upgraderOuterRoom(roomName2);
@@ -56,14 +56,6 @@ export default function (_this, objectFun) {
             //     ]);
             break;
         default:
-            // CONTAINER+EXTENSION+STORAGE能量统计
-            objectFun.SetContainerExtensionStorageEnergyStat(roomName);
 
-            // 能量源区Container记录管理
-            objectFun.sourceContainer(roomName);
-            // 控制器Container记录管理
-            objectFun.controllerContainer(roomName);
-            // 采集建造CONTAINER记录管理
-            objectFun.harvestBuildCONTAINER(roomName);
     }
 }
