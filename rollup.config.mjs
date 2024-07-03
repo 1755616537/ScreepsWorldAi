@@ -9,6 +9,8 @@ import secretConfig from './.secret.json' assert {type: 'json'};
 import { terser } from 'rollup-plugin-terser';
 // TS
 import typescript from 'rollup-plugin-typescript2'
+// json
+import json from '@rollup/plugin-json'
 
 let config = secretConfig[process.env.DEST];
 if (!process.env.DEST) console.log("未指定目标, 代码将被编译但不会上传")
@@ -48,6 +50,8 @@ export default {
     plugins: [
         // 清除上次编译成果
         clear({targets: ["dist"]}),
+        // 使用 json 插件
+        json(),
         // 打包依赖
         resolve(),
         // 模块化依赖
