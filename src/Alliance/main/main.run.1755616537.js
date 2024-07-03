@@ -3,6 +3,11 @@ import controller_room from "../../controller/room.js";
 import controller_creep from "../../controller/creep.js";
 
 export default function (_this, objectFun) {
+    if (Game.cpu.bucket === 10000) {//如果CPU到了一万点，则换成pixel
+        Game.cpu.generatePixel();
+        clog('cpu.bucket.兑换成功');
+    }
+
     // 任务调度启动
     //controller_task();
     // 房间管理
