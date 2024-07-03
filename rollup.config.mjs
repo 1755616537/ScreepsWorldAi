@@ -53,13 +53,13 @@ export default {
         // 清除上次编译成果
         clear({targets: ["dist"]}),
         // 在打包前执行脚本
-        exec({
-            cmd: 'node fetchData.js', // 调用 fetchData.js 脚本
-            stdout: true, // 控制台输出执行结果
-            stderr: true, // 包含错误输出
-            cwd: process.cwd(), // 当前工作目录
-            async: true, // 异步执行
-        }),
+        // exec({
+        //     cmd: 'node fetchData.js', // 调用 fetchData.js 脚本
+        //     stdout: true, // 控制台输出执行结果
+        //     stderr: true, // 包含错误输出
+        //     cwd: process.cwd(), // 当前工作目录
+        //     async: true, // 异步执行
+        // }),
         // 使用 json 插件
         json(),
         // 打包依赖
