@@ -373,7 +373,7 @@ export default {
             }
             if (carriers.length > 2 && controller_level >= 4) {
                 if (globalData.creepConfigs.carrier.sourceContainer1v1 && carriers.length >= factory_source
-                    .GetContainerLength(roomSequence) + 1) {
+                    .GetContainerLength(roomName) + 1) {
                     if (factory_room.nameGet(roomName).energyAvailable >= globalData.creepConfigs.carrier
                         .bodysPlus
                         .totalEnergyRequired) {
