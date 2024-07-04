@@ -147,19 +147,19 @@ function eventManagement() {
             // //代号
             // 	code:'',
             // //附加信息 任何类型，没有指定字符串对象等
-            // 	mgs:
+            // 	msg:
             // }
             let code;
-            let mgs;
+            let msg;
             try {
                 code = SpecialActions.code;
-                mgs = SpecialActions.mgs;
+                msg = SpecialActions.msg;
             } catch (e) {
 
             }
             /**
              Game.creeps['repairer8981'].memory.SpecialActions={
-             code:'move', mgs:{
+             code:'move', msg:{
              x:20,
              y:2,
              roomName:'W2N1'
@@ -169,15 +169,15 @@ function eventManagement() {
             if (code) {
                 switch (code) {
                     case 'move':
-                        if (creep.pos.x == mgs.x && creep.pos.y == mgs.y && creep.pos.roomName == mgs.roomName) {
+                        if (creep.pos.x == msg.x && creep.pos.y == msg.y && creep.pos.roomName == msg.roomName) {
                             creep.memory.SpecialActions = undefined;
                             break;
                         }
-                        new factory_creep.Creep(creep).moveTo(new RoomPosition(mgs.x, mgs.y, mgs.roomName));
+                        new factory_creep.Creep(creep).moveTo(new RoomPosition(msg.x, msg.y, msg.roomName));
                         break;
                     case globalData.harvest: {
-                        let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
-                        if (creep.room.name != mgs.roomName) {
+                        let roomPosition = new RoomPosition(msg.x, msg.y, msg.roomName)
+                        if (creep.room.name != msg.roomName) {
                             new factory_creep.Creep(creep).moveTo(roomPosition);
                             break
                         }
@@ -190,8 +190,8 @@ function eventManagement() {
                     }
                         break;
                     case globalData.upgrader: {
-                        let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
-                        if (creep.room.name != mgs.roomName) {
+                        let roomPosition = new RoomPosition(msg.x, msg.y, msg.roomName)
+                        if (creep.room.name != msg.roomName) {
                             new factory_creep.Creep(creep).moveTo(roomPosition);
                             break
                         }
@@ -201,8 +201,8 @@ function eventManagement() {
                     }
                         break;
                     case globalData.builder: {
-                        let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
-                        if (creep.room.name != mgs.roomName) {
+                        let roomPosition = new RoomPosition(msg.x, msg.y, msg.roomName)
+                        if (creep.room.name != msg.roomName) {
                             new factory_creep.Creep(creep).moveTo(roomPosition);
                             break
                         }
@@ -218,8 +218,8 @@ function eventManagement() {
                     }
                         break;
                     case globalData.carrier: {
-                        let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
-                        if (creep.room.name != mgs.roomName) {
+                        let roomPosition = new RoomPosition(msg.x, msg.y, msg.roomName)
+                        if (creep.room.name != msg.roomName) {
                             new factory_creep.Creep(creep).moveTo(roomPosition);
                             break
                         }
@@ -236,8 +236,8 @@ function eventManagement() {
                     }
                         break;
                     case globalData.carrier + '2': {
-                        let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
-                        if (creep.room.name != mgs.roomName) {
+                        let roomPosition = new RoomPosition(msg.x, msg.y, msg.roomName)
+                        if (creep.room.name != msg.roomName) {
                             new factory_creep.Creep(creep).moveTo(roomPosition);
                             break
                         }
@@ -255,8 +255,8 @@ function eventManagement() {
                     }
                         break;
                     case globalData.repairer: {
-                        let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
-                        if (creep.room.name != mgs.roomName) {
+                        let roomPosition = new RoomPosition(msg.x, msg.y, msg.roomName)
+                        if (creep.room.name != msg.roomName) {
                             new factory_creep.Creep(creep).moveTo(roomPosition);
                             break
                         }
