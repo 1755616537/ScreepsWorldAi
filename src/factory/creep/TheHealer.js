@@ -13,7 +13,7 @@ export default {
         if (target) {
             // 治疗
             if (creep.heal(target) == ERR_NOT_IN_RANGE) {
-                factory_creep.moveTo(creep, target);
+                new factory_creep.Creep(creep).moveTo(target);
             }
         }
 

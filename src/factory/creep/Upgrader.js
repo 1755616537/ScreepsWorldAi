@@ -24,19 +24,19 @@ export default {
                 // 对控制器签名
                 if (creep.signController(creep.room.controller, "peaceful development.") ==
                     ERR_NOT_IN_RANGE) {
-                    factory_creep.moveTo(creep, creep.room.controller);
+                    new factory_creep.Creep(creep).moveTo(creep.room.controller);
                 }
             } else {
                 if (creep.room.controller.sign.username != globalData.username) {
                     // 对控制器签名
                     if (creep.signController(creep.room.controller, "peaceful development.") ==
                         ERR_NOT_IN_RANGE) {
-                        factory_creep.moveTo(creep, creep.room.controller);
+                        new factory_creep.Creep(creep).moveTo(creep.room.controller);
                     }
                 } else {
                     // 升级
                     if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                        factory_creep.moveTo(creep, creep.room.controller);
+                        new factory_creep.Creep(creep).moveTo(creep.room.controller);
                     }
                 }
             }
@@ -49,7 +49,7 @@ export default {
                 if (target) {
                     if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
                         // 向目标移动
-                        factory_creep.moveTo(creep, target, 'Resource');
+                        new factory_creep.Creep(creep).moveTo(target, 'Resource');
                     }
                 }
             } else {
@@ -111,7 +111,7 @@ export default {
                     if (target) {
                         if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
                             // 向目标移动
-                            factory_creep.moveTo(creep, target, 'Resource');
+                            new factory_creep.Creep(creep).moveTo(target, 'Resource');
                         }
                         return
                     }
@@ -121,7 +121,7 @@ export default {
                     // 从建筑(structure)中拿取资源
                     if (creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         // 向目标移动
-                        factory_creep.moveTo(creep, target, 'Resource');
+                        new factory_creep.Creep(creep).moveTo(target, 'Resource');
                     }
                 }
             }

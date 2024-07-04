@@ -44,8 +44,35 @@ import factory_room from "../factory/room.js";
 import factory_source from "../factory/source.js";
 import Throw from "../utils/Throw.js";
 
-export default {
-    moveTo: (creep, target, type = '') => {
+class _creep {
+    constructor(creep) {
+        this.creep = creep
+    }
+
+    moveTo = function (firstArg, secondArg, opts) {
+        let toPos, ops = {}, type;
+
+        if (typeof firstArg == 'object') {
+            toPos = firstArg.pos || firstArg;
+            if (typeof secondArg == 'string') {
+                type = secondArg;
+            } else {
+                ops = secondArg || {};
+            }
+        } else {
+            toPos = {x: firstArg, y: secondArg, roomName: this.room.name};
+            if (typeof opts == 'string') {
+                type = opts;
+            } else {
+                ops = opts || {};
+            }
+        }
+
+        // 已经抵达目的地
+        if (this.creep.x == toPos.x && this.creep.y == toPos.y && this.creep.roomName == toPos.roomName) {
+            return this;
+        }
+
         let visualizePathStyle = {};
         switch (type) {
             case 'Resource':
@@ -76,10 +103,22 @@ export default {
                     opacity: .5
                 }
         }
-        creep.moveTo(target, {
-            visualizePathStyle: visualizePathStyle
-        });
-    },
+
+        // 合并 覆盖
+        ops.visualizePathStyle = _.merge(ops.visualizePathStyle, visualizePathStyle);
+
+        if (typeof firstArg == 'object') {
+            this.creep.moveTo(firstArg, ops);
+        } else {
+            this.creep.moveTo(firstArg, secondArg, ops);
+        }
+
+        return this
+    }
+}
+
+export default {
+    Creep: _creep,
     CleanMemory: () => {
         // 清理内存
 

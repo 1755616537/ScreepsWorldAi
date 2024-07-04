@@ -219,7 +219,7 @@ export default {
             if (source) {
                 // 采集能量
                 if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                    factory_creep.moveTo(creep, source, 'Resource');
+                    new factory_creep.Creep(creep).moveTo(source, 'Resource');
                 }
             }
         } else {
@@ -250,7 +250,7 @@ export default {
                     if (harvestBuildCONTAINERList[creep.name]) {
                         // 建造
                         if (creep.build(found[0]) == ERR_NOT_IN_RANGE) {
-                            factory_creep.moveTo(creep, found[0]);
+                            new factory_creep.Creep(creep).moveTo(found[0]);
                         }
                         return
                     }
@@ -322,7 +322,7 @@ export default {
             if (target) {
                 // 将资源从该 creep 转移至其他对象
                 if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    factory_creep.moveTo(creep, target);
+                    new factory_creep.Creep(creep).moveTo(target);
                 }
             } else {
                 // 储存能量都满了不用搬运能量,先干其他
@@ -330,7 +330,7 @@ export default {
                 if (targets.length > 0) {
                     // 建造
                     if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
-                        factory_creep.moveTo(creep, targets[0]);
+                        new factory_creep.Creep(creep).moveTo(targets[0]);
                     }
                 }
                 if (targets.length < 1) {
@@ -341,14 +341,14 @@ export default {
                     if (targets.length > 0) {
                         // 维修
                         if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
-                            factory_creep.moveTo(creep, targets[0]);
+                            new factory_creep.Creep(creep).moveTo(targets[0]);
                         }
                     }
                 }
                 if (targets.length < 1) {
                     // 升级
                     if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                        factory_creep.moveTo(creep, creep.room.controller);
+                        new factory_creep.Creep(creep).moveTo(creep.room.controller);
                     }
                 }
             }

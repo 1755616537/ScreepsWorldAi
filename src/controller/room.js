@@ -367,13 +367,13 @@ function upgraderOuterRoom(roomName, pathArray = []) {
     for (let i = 0; i < pathArray.length; i++) {
         let path = pathArray[i];
         if (creep.room.name == path.roomName) {
-            factory_creep.moveTo(creep, path.roomPosition);
+            new factory_creep.Creep(creep).moveTo(path.roomPosition);
             return;
         }
     }
 
     if (!room) {
-        factory_creep.moveTo(creep, new RoomPosition(43, 17, roomName));
+        new factory_creep.Creep(creep).moveTo(new RoomPosition(43, 17, roomName));
     } else {
         if (creep.memory.work && creep.store[RESOURCE_ENERGY] == 0) { // 升级状态&&能量不足的时候，变为采集者
             creep.memory.work = false;
@@ -386,7 +386,7 @@ function upgraderOuterRoom(roomName, pathArray = []) {
 
         if (creep.memory.work) { // 升级状态，找到控制器并升级 + 可视化
             if (creep.upgradeController(room.controller) == ERR_NOT_IN_RANGE) {
-                factory_creep.moveTo(creep, room.controller);
+                new factory_creep.Creep(creep).moveTo(room.controller);
             }
         } else {
             // 掉落的资源
@@ -395,7 +395,7 @@ function upgraderOuterRoom(roomName, pathArray = []) {
                 // 捡起一个物品 (如捡起一些能量)
                 if (creep.pickup(targets[0]) == ERR_NOT_IN_RANGE) {
                     // 向目标移动
-                    factory_creep.moveTo(creep, targets[0], 'Resource');
+                    new factory_creep.Creep(creep).moveTo(targets[0], 'Resource');
                 }
             } else {
                 targets = targets.concat(
@@ -416,7 +416,7 @@ function upgraderOuterRoom(roomName, pathArray = []) {
                     let sources = creep.pos.findClosestByPath(FIND_SOURCES);
                     // 采集能量
                     if (creep.harvest(sources) == ERR_NOT_IN_RANGE) {
-                        factory_creep.moveTo(creep, sources, 'Resource');
+                        new factory_creep.Creep(creep).moveTo(sources, 'Resource');
                     }
                     return;
                 }
@@ -433,7 +433,7 @@ function upgraderOuterRoom(roomName, pathArray = []) {
                     // 从建筑(structure)中拿取资源
                     if (creep.withdraw(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         // 向目标移动
-                        factory_creep.moveTo(creep, targets[0], 'Resource');
+                        new factory_creep.Creep(creep).moveTo(targets[0], 'Resource');
                     }
                 }
             }
@@ -472,13 +472,13 @@ function builderOuterRoom(roomName, pathArray = []) {
     for (let i = 0; i < pathArray.length; i++) {
         let path = pathArray[i];
         if (creep.room.name == path.roomName) {
-            factory_creep.moveTo(creep, path.roomPosition);
+            new factory_creep.Creep(creep).moveTo(path.roomPosition);
             return;
         }
     }
 
     if (!room) {
-        factory_creep.moveTo(creep, new RoomPosition(43, 17, roomName));
+        new factory_creep.Creep(creep).moveTo(new RoomPosition(43, 17, roomName));
     } else {
         if (creep.memory.work && creep.store[RESOURCE_ENERGY] == 0) { // work && 背包为空
             creep.memory.work = false; // 变为 非work状态
@@ -494,7 +494,7 @@ function builderOuterRoom(roomName, pathArray = []) {
             if (targets.length > 0) {
                 // 建造
                 if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
-                    factory_creep.moveTo(creep, targets[0]);
+                    new factory_creep.Creep(creep).moveTo(targets[0]);
                 }
             }
         } else {
@@ -504,7 +504,7 @@ function builderOuterRoom(roomName, pathArray = []) {
                 // 捡起一个物品 (如捡起一些能量)
                 if (creep.pickup(targets[0]) == ERR_NOT_IN_RANGE) {
                     // 向目标移动
-                    factory_creep.moveTo(creep, targets[0], 'Resource');
+                    new factory_creep.Creep(creep).moveTo(targets[0], 'Resource');
                 }
             } else {
                 targets = targets.concat(
@@ -525,7 +525,7 @@ function builderOuterRoom(roomName, pathArray = []) {
                     let sources = creep.pos.findClosestByPath(FIND_SOURCES);
                     // 采集能量
                     if (creep.harvest(sources) == ERR_NOT_IN_RANGE) {
-                        factory_creep.moveTo(creep, sources, 'Resource');
+                        new factory_creep.Creep(creep).moveTo(sources, 'Resource');
                     }
                     return;
                 }
@@ -542,7 +542,7 @@ function builderOuterRoom(roomName, pathArray = []) {
                     // 从建筑(structure)中拿取资源
                     if (creep.withdraw(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         // 向目标移动
-                        factory_creep.moveTo(creep, targets[0], 'Resource');
+                        new factory_creep.Creep(creep).moveTo(targets[0], 'Resource');
                     }
                 }
             }

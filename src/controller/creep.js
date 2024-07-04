@@ -173,18 +173,18 @@ function eventManagement() {
                             creep.memory.SpecialActions = undefined;
                             break;
                         }
-                        factory_creep.moveTo(creep, new RoomPosition(mgs.x, mgs.y, mgs.roomName));
+                        new factory_creep.Creep(creep).moveTo(new RoomPosition(mgs.x, mgs.y, mgs.roomName));
                         break;
                     case globalData.harvest: {
                         let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
                         if (creep.room.name != mgs.roomName) {
-                            factory_creep.moveTo(creep, roomPosition);
+                            new factory_creep.Creep(creep).moveTo(roomPosition);
                             break
                         }
                         let lookForAt = creep.room.lookForAt(LOOK_MINERALS, roomPosition)
                         if (lookForAt.length > 0) {
                             if (creep.harvest(lookForAt[0]) == ERR_NOT_IN_RANGE) {
-                                factory_creep.moveTo(creep, lookForAt[0]);
+                                new factory_creep.Creep(creep).moveTo(lookForAt[0]);
                             }
                         }
                     }
@@ -192,18 +192,18 @@ function eventManagement() {
                     case globalData.upgrader: {
                         let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
                         if (creep.room.name != mgs.roomName) {
-                            factory_creep.moveTo(creep, roomPosition);
+                            new factory_creep.Creep(creep).moveTo(roomPosition);
                             break
                         }
                         if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                            factory_creep.moveTo(creep, creep.room.controller);
+                            new factory_creep.Creep(creep).moveTo(creep.room.controller);
                         }
                     }
                         break;
                     case globalData.builder: {
                         let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
                         if (creep.room.name != mgs.roomName) {
-                            factory_creep.moveTo(creep, roomPosition);
+                            new factory_creep.Creep(creep).moveTo(roomPosition);
                             break
                         }
                         let lookForAt = creep.room.lookForAt(LOOK_CONSTRUCTION_SITES, roomPosition)
@@ -212,7 +212,7 @@ function eventManagement() {
                                 {filter: {structureType: STRUCTURE_CONTROLLER}});
 
                             if (creep.build(lookForAt[0]) == ERR_NOT_IN_RANGE) {
-                                factory_creep.moveTo(creep, lookForAt[0]);
+                                new factory_creep.Creep(creep).moveTo(lookForAt[0]);
                             }
                         }
                     }
@@ -220,7 +220,7 @@ function eventManagement() {
                     case globalData.carrier: {
                         let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
                         if (creep.room.name != mgs.roomName) {
-                            factory_creep.moveTo(creep, roomPosition);
+                            new factory_creep.Creep(creep).moveTo(roomPosition);
                             break
                         }
                         let lookForAt = creep.room.lookForAt(LOOK_RESOURCES, roomPosition)
@@ -228,7 +228,7 @@ function eventManagement() {
                             for (const resourceType in lookForAt[0].store) {
                                 if (creep.withdraw(lookForAt[0], resourceType) == ERR_NOT_IN_RANGE) {
                                     // 向目标移动
-                                    factory_creep.moveTo(creep, lookForAt[0]);
+                                    new factory_creep.Creep(creep).moveTo(lookForAt[0]);
                                     break;
                                 }
                             }
@@ -238,7 +238,7 @@ function eventManagement() {
                     case globalData.carrier + '2': {
                         let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
                         if (creep.room.name != mgs.roomName) {
-                            factory_creep.moveTo(creep, roomPosition);
+                            new factory_creep.Creep(creep).moveTo(roomPosition);
                             break
                         }
                         let lookForAt = creep.room.lookForAt(LOOK_RESOURCES, roomPosition)
@@ -247,7 +247,7 @@ function eventManagement() {
                                 if (resourceType != RESOURCE_ENERGY) continue;
                                 if (creep.withdraw(lookForAt[0], resourceType) == ERR_NOT_IN_RANGE) {
                                     // 向目标移动
-                                    factory_creep.moveTo(creep, lookForAt[0]);
+                                    new factory_creep.Creep(creep).moveTo(lookForAt[0]);
                                     break;
                                 }
                             }
@@ -257,13 +257,13 @@ function eventManagement() {
                     case globalData.repairer: {
                         let roomPosition = new RoomPosition(mgs.x, mgs.y, mgs.roomName)
                         if (creep.room.name != mgs.roomName) {
-                            factory_creep.moveTo(creep, roomPosition);
+                            new factory_creep.Creep(creep).moveTo(roomPosition);
                             break
                         }
                         let lookForAt = creep.room.lookForAt(LOOK_STRUCTURES, roomPosition)
                         if (lookForAt.length > 0) {
                             if (creep.repair(lookForAt[0]) == ERR_NOT_IN_RANGE) {
-                                factory_creep.moveTo(creep, lookForAt[0]);
+                                new factory_creep.Creep(creep).moveTo(lookForAt[0]);
                             }
                         }
                     }
