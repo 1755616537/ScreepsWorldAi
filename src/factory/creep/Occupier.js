@@ -39,8 +39,7 @@ export default {
         let room = Game.rooms[roomName];
 
         // 如果该房间不存在就先往房间走
-        if (!room) {
-            factory_creep.moveTo(creep, new RoomPosition(43, 17, roomName));
+        if (!room || creep.room.name != roomName) {
             new factory_creep.Creep(creep).moveTo(new RoomPosition(43, 17, roomName));
         } else {
             // 如果房间存在了就说明已经进入了该房间
