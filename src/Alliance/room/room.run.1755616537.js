@@ -11,7 +11,7 @@ export default function (_this, objectFun) {
     })
 
     const roomName = Object.keys(globalData.rooms)[0];
-    console.log('房间名称', roomName)
+    // console.log('房间名称', roomName)
 
     switch (roomName) {
         case 'W47S54':
@@ -54,6 +54,13 @@ export default function (_this, objectFun) {
             //             roomPosition: new RoomPosition(48, 34, 'W47S53')
             //         }
             //     ]);
+            break;
+        case 'W2N2':
+            let roomName2 = 'W2N1';
+            // 临时外部房间,升级
+            // objectFun.upgraderOuterRoom(roomName2);
+            // 临时外部房间,建造
+            objectFun.builderOuterRoom(roomName2);
             break;
         default:
 

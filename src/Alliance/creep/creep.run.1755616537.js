@@ -6,7 +6,7 @@ export default function (_this, objectFun) {
         }
 
         const key = Object.keys(room.spawns)[0];
-        console.log('基地名称', key)
+        // console.log('基地名称', key)
         objectFun.spawnProduceCreep(key);
     })
 }
