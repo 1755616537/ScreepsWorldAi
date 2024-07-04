@@ -46,10 +46,31 @@ import Throw from "../utils/Throw.js";
 
 class _creep {
     constructor(creep) {
-        this.creep = creep
+        // 是否允许通过执行下一个函数
+        this._end = false;
+
+        this.creep = creep;
     }
 
-    moveTo = function (firstArg, secondArg, opts) {
+    // 检测之前的函数是否成功通过
+    _return_ini() {
+        if (this._end) {
+            return true;
+        } else {
+            this._end = true;
+            return false;
+        }
+    }
+
+    // 允许通过执行下一个函数
+    _return_success() {
+        this._end = false;
+        return true;
+    }
+
+    moveTo(firstArg, secondArg, opts) {
+        if (this._return_ini()) return this;
+
         let toPos, ops = {}, type;
 
         if (typeof firstArg == 'object') {
@@ -70,7 +91,7 @@ class _creep {
 
         // 已经抵达目的地
         if (this.creep.x == toPos.x && this.creep.y == toPos.y && this.creep.roomName == toPos.roomName) {
-            return this;
+            if (this._return_success()) return this;
         }
 
         let visualizePathStyle = {};
@@ -105,7 +126,7 @@ class _creep {
         }
 
         // 合并 覆盖
-        ops.visualizePathStyle = _.merge(ops.visualizePathStyle, visualizePathStyle);
+        ops.visualizePathStyle = _.merge(ops.visualizePathStyle || {}, visualizePathStyle);
 
         if (typeof firstArg == 'object') {
             this.creep.moveTo(firstArg, ops);
@@ -113,7 +134,12 @@ class _creep {
             this.creep.moveTo(firstArg, secondArg, ops);
         }
 
-        return this
+        return this;
+    }
+
+    // 部件能量计算
+    ComponentEnergyCalculation() {
+        return componentEnergyCalculation(this.creep.body);
     }
 }
 
@@ -884,14 +910,15 @@ export default {
         }
         return returnData
     },
-    ComponentEnergyCalculation: ComponentEnergyCalculation
+    ComponentEnergyCalculation: componentEnergyCalculation
 }
 
-function ComponentEnergyCalculation(creepComponent = []) {
-    // 部件能量计算
+// 部件能量计算
+function componentEnergyCalculation(creepComponents = []) {
     let total = 0;
-    for (let i = 0; i < creepComponent.length; i++) {
-        switch (creepComponent[i]) {
+    for (let i = 0; i < creepComponents.length; i++) {
+        let creepComponent = creepComponents[i]
+        switch (creepComponent) {
             case MOVE:
                 total += globalData.creepComponentConfigs.MOVE;
                 break;
@@ -917,7 +944,7 @@ function ComponentEnergyCalculation(creepComponent = []) {
                 total += globalData.creepComponentConfigs.TOUGH;
                 break;
             default:
-                Throw.Error('ComponentEnergyCalculation', ' 无效 ', creepComponent[i]);
+                Throw.Error('ComponentEnergyCalculation', ' 无效 ', creepComponent);
         }
     }
     return total;
@@ -933,10 +960,10 @@ function automaticConfigurationDownsizing(roomName,
     // 当房间内的所有 spawn 和 extension 的容量上限 energyCapacity 总额 小于配置，自动缩减配置
     if (on) {
         if (DelComponentArr.length < 1) DelComponentArr.push(OfComponent);
-        if (factory_room.nameGet(roomName).energyCapacityAvailable < ComponentEnergyCalculation(bodys)) {
+        if (factory_room.nameGet(roomName).energyCapacityAvailable < componentEnergyCalculation(bodys)) {
             // 计算需要缩减多少 做多一百次，避免使用无限循环
             for (let i = 0; i < 100; i++) {
-                if (ComponentEnergyCalculation(bodys) - factory_room.nameGet(roomName).energyCapacityAvailable <= 0) {
+                if (componentEnergyCalculation(bodys) - factory_room.nameGet(roomName).energyCapacityAvailable <= 0) {
                     break
                 }
 
