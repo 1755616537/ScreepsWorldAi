@@ -56,35 +56,21 @@ function work(tower, type) {
     let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
         filter: (structure) => {
             // 白名单过滤
-            for (let i = 0; i < globalData.WhitelistUsername.length; i++) {
-                let username = globalData.WhitelistUsername[i];
-                if (structure.owner.username == username) {
-                    return false;
-                }
+            {
+                let index = _.findIndex(globalData.WhitelistUsername, username => username == structure.owner.username);
+                if (index != -1) return false;
             }
 
-            let on = false;
-            let body = structure.body;
-            for (let i = 0; i < body.length; i++) {
-                if (body[i].type == HEAL) {
-                    on = true;
-                    break
-                }
-            }
-            return on;
+            let index = _.findIndex(structure.body, body => body.type == HEAL);
+            return index != -1;
         }
     });
     if (!closestHostile) {
         closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
             filter: (structure) => {
                 // 白名单过滤
-                for (let i = 0; i < globalData.WhitelistUsername.length; i++) {
-                    let username = globalData.WhitelistUsername[i];
-                    if (structure.owner.username == username) {
-                        return false;
-                    }
-                }
-                return true;
+                let index = _.findIndex(globalData.WhitelistUsername, username => username == structure.owner.username);
+                return index == -1;
             }
         });
     }
