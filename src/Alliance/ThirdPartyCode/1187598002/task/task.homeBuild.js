@@ -1,4 +1,4 @@
-var roleHomeBuilder = require('../role/role.homeBuilder'); //载入爬爬模块-基地基地建设
+var roleHomeBuilder = require('../role/role.homeBuilder.js'); //载入爬爬模块-基地基地建设
 var taskHomeBuild = {
     /**
     * 基地建设 - 任务模块

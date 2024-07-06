@@ -3,8 +3,8 @@
 
 //import { systemInitialize } from './system/system.initialize' //初始化 - 系统模块
 
-import { systemInitialize } from '../../1187598002/system/system.initialize.js' //初始化 - 系统模块
-import { systemArtificialTask } from '../../1187598002/system/system.artificialTask.js' //人工任务队列-系统模块
+import { systemInitialize } from './system/system.initialize.js' //初始化 - 系统模块
+import { systemArtificialTask } from './system/system.artificialTask.js' //人工任务队列-系统模块
 
 //孵化器名
 global.spawnName = {

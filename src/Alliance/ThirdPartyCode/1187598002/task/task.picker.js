@@ -1,4 +1,4 @@
-var rolePicker = require('../role/role.picker'); //载入爬爬模块-拾荒
+var rolePicker = require('../role/role.picker.js'); //载入爬爬模块-拾荒
 var taskPicker = {
     /**
     * 捡起地上能量(拾荒者) - 任务模块

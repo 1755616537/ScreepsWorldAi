@@ -1,5 +1,5 @@
 // 拓展总入口 只执行一次
-import "main_mount";
+import "./main_mount.js";
 // 入口
 export default function () {
     // 任务调度启动

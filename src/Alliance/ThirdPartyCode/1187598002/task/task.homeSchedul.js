@@ -1,4 +1,4 @@
-var roleHomeCarrier = require('../role/role.homeCarrier'); //载入爬爬模块-基地运输
+var roleHomeCarrier = require('../role/role.homeCarrier.js'); //载入爬爬模块-基地运输
 var taskHomeSchedul = {
     /**
     * 基地能量调度 - 任务模块

@@ -3,7 +3,7 @@
  * 其键为角色名（role），其值为对应角色的逻辑生成函数
  */
 const roles = {
-    upgrader: require('role.upgrader.js')
+    upgrader: require('./role.upgrader.js')
 }
 
 // 添加 work 方法
