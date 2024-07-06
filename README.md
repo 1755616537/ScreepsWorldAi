@@ -116,12 +116,16 @@ Utils.cn();
 [tsconfig.json](./tsconfig.json)：配置文件【typescript】<br>
 
 ## 其他说明
+游戏介绍<br>
+https://screeps-cn.github.io/introduction.html<br>
 中文API<br>
 https://screeps-cn.github.io/api/#<br>
 英文API<br>
 https://docs.screeps.com/api/#<br>
 lodash<br>
 https://www.lodashjs.com/<br>
+hoho大佬的简书的 Screep 中文教程目录<br>
+https://www.jianshu.com/p/5431cb7f42d3<br>
 
 * 缓存的种类
 > 1. 持久化存储：游戏的Memory对象，只有这个地方能实现真正可靠的长时间存储。
