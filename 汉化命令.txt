@@ -1,0 +1,1 @@
+`<script src="https://screeps-cn.gitee.io/screeps-chinese-pack-release/main.js" async defer></script>` 
