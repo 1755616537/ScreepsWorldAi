@@ -1,7 +1,8 @@
 # ScreepsWorldAi
-ScreepsWorld
+ScreepsWorld游戏代码
 
 # 说明
+initialization中会占用Memory.rooms。避免冲突，导致程序无法运行。
 
 ## 文件结构
 [Alliance](./src/Alliance)：联盟相关  
