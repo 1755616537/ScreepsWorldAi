@@ -2,65 +2,66 @@
 global.factory = {};
 global.controller = {}
 // -------------------------------全局数据
-require('globalData');
+import 'globalData';
 // -------------------------------构建接口
-// require("interface")
+// import "interface"
 // -------------------------------构建函数
-require("class.Task");
+import "class.Task";
 // -------------------------------封装
 // 报错
-require("Throw");
+import "Throw";
 // 日志
-require("log");
+import "log";
 // -------------------------------工具
-require("utils");
-require('超级移动优化hotfix 0.9.4');
-// require('极致建筑缓存 v1.4.3');
+import "utils";
+import '../utils/超级移动优化hotfix 0.9.4';
+// import '../utils/极致建筑缓存 v1.4.3' ;
 // -------------------------------工厂模块
 // 任务
-require('factory.task')
+import 'factory.task'
 // 安全
-require('factory.Secure')
+import 'factory.Secure'
 // 房间
-require('factory.room')
+import 'factory.room'
 // 基地
-require('factory.spawn')
+import 'factory.spawn'
 // 建筑
-require('factory.Build')
+import 'factory.Build'
 // 能量区
-require('factory.source')
+import 'factory.source'
 // 塔
-require('factory.Tower')
+import 'factory.Tower'
 // 能量远程传输
-require('factory.Link')
+import 'factory.Link'
 // 爬爬
-require('factory.creep')
+import 'factory.creep'
 // 采集
-require('factory.creep.Harvest')
+import 'factory.creep.Harvest'
 // 升级
-require('factory.creep.Upgrader')
+import 'factory.creep.Upgrader'
 // 建造
-require('factory.creep.Builder')
+import 'factory.creep.Builder'
 // 运输
-require('factory.creep.Carrier')
+import 'factory.creep.Carrier'
 // 维修
-require('factory.creep.Repairer')
+import 'factory.creep.Repairer'
 // 攻击-防御
-require('factory.creep.Defender')
+import 'factory.creep.Defender'
 // 占领
-require('factory.creep.Occupier')
+import 'factory.creep.Occupier'
 // 治疗
-require('factory.creep.TheHealer')
+import 'factory.creep.TheHealer'
 // -------------------------------控制器
 // 任务
-require('controller.task')
+import 'controller.task'
 // 房间
-require('controller.room')
+import 'controller.room'
 // 爬爬
-require('controller.creep')
+import 'controller.creep'
 // -------------------------------默认只执行一次的初始化程序
-require('initialization')
-module.exports = function() {
-	// 初始化
-	initialization.run();
+import initialization from 'initialization'
+
+module.exports = function () {
+    // 初始化
+    initialization.run;
 }

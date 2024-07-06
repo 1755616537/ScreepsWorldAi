@@ -1,3 +1,4 @@
+/**
 // 代码中文解释
 /// <reference types="@screepscn/types" />
 
@@ -77,5 +78,6 @@ module.exports.loop = function() {
 // .在一分钟内受到攻击，并且我方建筑物被摧毁，才开启控制器安全模式
 // .离STORAGE最近的TOWER，才会消耗能量补充墙壁
 
+ */
 
 
