@@ -36,6 +36,13 @@ creep.memory.XXX类型找不到定义[index.d.ts](./src/index.d.ts)
 [main_mount](./src/main_mount.js)：拓展总入口（只执行一次） <br>
 [initialization](./src/initialization.js)：初始化入口（只执行一次）
 
+## ./src/Alliance 文件结构
+[ThirdPartyCode](./src/Alliance/ThirdPartyCode)：联盟第三方代码<br>
+[main](./src/Alliance/main)：main入口<br>
+[initialization](./src/Alliance/initialization)：初始化入口<br>
+[room](./src/Alliance/room)：room控制器入口<br>
+[creep](./src/Alliance/creep)：creep控制器入口<br>
+
 ## ./ 文件结构
 [.secret.json](./.secret.json)：配置文件【编译后处理】<br>
 [fetchData.js](./fetchData.js)：配置文件【编译后依赖下载数据文件】<br>
