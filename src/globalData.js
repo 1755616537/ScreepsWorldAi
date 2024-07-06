@@ -63,7 +63,7 @@ global.globalData = {
     // 角色配置
     creepConfigs: {
         // 采集者
-        'harvest': {
+        harvest: {
             // 普通版（6*WORK已经是1对1能量源300秒采集3000的极限，多了会浪费,5*WORK勉强剩余450多能量）
             bodys: {
                 list: [WORK, WORK, WORK, WORK, WORK, CARRY, MOVE],
@@ -90,7 +90,7 @@ global.globalData = {
             AutomaticConfigurationDownsizing: true
         },
         // 升级者
-        'upgrader': {
+        upgrader: {
             bodys: {
                 list: [WORK, WORK, WORK, WORK, CARRY, MOVE],
                 totalEnergyRequired: 200
@@ -110,7 +110,7 @@ global.globalData = {
             AutomaticConfigurationDownsizing: true
         },
         // 建造者
-        'builder': {
+        builder: {
             bodys: {
                 list: [WORK, WORK, CARRY, MOVE],
                 totalEnergyRequired: 200
@@ -128,7 +128,7 @@ global.globalData = {
             AutomaticConfigurationDownsizing: true
         },
         // 运输者
-        'carrier': {
+        carrier: {
             bodys: {
                 list: [WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE],
                 totalEnergyRequired: 200
@@ -150,7 +150,7 @@ global.globalData = {
             AutomaticConfigurationDownsizing: true
         },
         // 维修者
-        'repairer': {
+        repairer: {
             bodys: {
                 list: [WORK, WORK, CARRY, MOVE],
                 totalEnergyRequired: 200
@@ -170,7 +170,7 @@ global.globalData = {
             AutomaticConfigurationDownsizing: true
         },
         // 防御者-近战
-        'nearDefender': {
+        nearDefender: {
             bodys: {
                 list: [MOVE, ATTACK, ATTACK, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH],
                 totalEnergyRequired: 200
@@ -190,7 +190,7 @@ global.globalData = {
             AutomaticConfigurationDownsizing: true
         },
         // 防御者-远战
-        'farDefender': {
+        farDefender: {
             bodys: {
                 list: [MOVE, RANGED_ATTACK, RANGED_ATTACK, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH,
                     TOUGH, TOUGH
@@ -213,7 +213,7 @@ global.globalData = {
             AutomaticConfigurationDownsizing: true
         },
         // 治疗者
-        'theHealer': {
+        theHealer: {
             bodys: {
                 list: [MOVE, HEAL, HEAL],
                 totalEnergyRequired: 200
@@ -231,7 +231,7 @@ global.globalData = {
             AutomaticConfigurationDownsizing: true
         },
         // 占领者
-        'occupier': {
+        occupier: {
             bodys: {
                 list: [MOVE, CLAIM, CLAIM],
                 totalEnergyRequired: 200
