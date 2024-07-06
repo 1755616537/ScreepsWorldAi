@@ -4,8 +4,20 @@ ScreepsWorld游戏代码
 <br>
 
 ## 说明
-* 必要数据：
-> 1. 执行初始化（[initialization](./src/Alliance/initialization)）会占用（[Memory.rooms]()）。避免冲突，导致程序无法运行。<br>
+* 必要（数据、函数）：（避免冲突，导致程序无法正常运行）
+> 1. 保留（[Memory.rooms]()）房间数据。执行初始化（[initialization](./src/Alliance/initialization)）会占用<br>
+> 2. 保留（[global.globalData]()）全局变量
+> 2. 保留（[global.Factory_]()）工厂
+> 3. 保留（[global.Controller_]()）控制器
+> 4. 保留（[global.Task_]()）任务
+> 5. 保留（[global.ChainedFun_]()）链式Function
+> 6. 保留（[global.clog]()）输出信息
+> 7. 保留（[global.log]()）输出信息
+> 8. 保留（[global.Utils]()）工具
+> 9. 保留（[global.RES_COLOR_MAP]()）资源显示 helper_roomResource
+> 10. 保留（[global.RES_TREE]()）资源显示 helper_roomResource
+> 11. 保留（[global.roomResSvg]()）资源显示 helper_roomResource
+> 12. 保留（[global.roomResEcharts]()）资源显示 helper_roomResource
 * 提示
 > 1. 全局变量：
      初始化（[globalData.js](./src/globalData.js)）

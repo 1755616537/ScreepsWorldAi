@@ -1,6 +1,6 @@
 // -------------------------------初始化
-global.factory_ = {};
-global.controller_ = {};
+global.Factory_ = {};
+global.Controller_ = {};
 global.Task_ = {
     creeps: {}
 };
