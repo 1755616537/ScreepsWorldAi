@@ -2,13 +2,17 @@
 ScreepsWorld游戏代码
 
 # 说明
+<span style="color:red;">必要数据：</span>
 initialization中会占用Memory.rooms。避免冲突，导致程序无法运行。<br>
+<span style="color: yellow;">提示1.</span>
 全局变量：
 初始化[globalData.js](./src/globalData.js)
 定义类型[GlobalData.ts](./src/globals/GlobalData.ts)
 <br>
+<span style="color: yellow;">提示2.</span>
 global.XXX类型找不到定义[globals.d.ts](./src/globals.d.ts)
 <br>
+<span style="color: yellow;">提示3.</span>
 creep.memory.XXX类型找不到定义[index.d.ts](./src/index.d.ts)
 
 ### 构建项目
