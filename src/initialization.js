@@ -144,12 +144,15 @@ function iniglobalData() {
     // console.log('Game.rooms', JSON.stringify(Game.rooms))
 
     // 去重复 合并 白名单 联盟用户
-    const allianceIndices = Object.keys(globalData.Alliance);
+    let allianceIndices = Object.keys(globalData.Alliance);
     globalData.WhitelistUsername = [...new Set([...globalData.WhitelistUsername, ...allianceIndices])];
 
     // 去重复 合并 白名单 外部json文件
     globalData.WhitelistUsername = _.uniq(globalData.WhitelistUsername.concat(docs_qq_com_WhitelistUsername));
     console.log('白名单', JSON.stringify(globalData.WhitelistUsername))
+
+    // 去重复 合并 白名单 联盟用户 (房间防护)
+    globalData.RoomProtectionWhitelistUsername = [...new Set([...globalData.RoomProtectionWhitelistUsername, ...allianceIndices])];
 
     // 联盟 初始化 全局数据 入口
     Alliance_run(Alliance_initialization_globalData, this, {});

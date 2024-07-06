@@ -4,7 +4,9 @@ interface GlobalData {
     clog: boolean;
     // 【不用填写，会自动获取】当前使用代码的用户名
     username: string;
-    // 白名单用户名(不攻击等)
+    // 白名单用户名(房间防护)(Alliance联盟中的用户名称会自动添加到白名单中)
+    RoomProtectionWhitelistUsername: string[];
+    // 白名单用户名(不攻击等)(Alliance联盟中的用户名称会自动添加到白名单中)
     WhitelistUsername: string[];
     // 联盟信息
     Alliance: {
