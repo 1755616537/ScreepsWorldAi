@@ -12,9 +12,7 @@ ScreepsWorld游戏代码
 1. >全局变量：
 初始化[globalData.js](./src/globalData.js)
 定义类型[GlobalData.ts](./src/globals/GlobalData.ts)
-<br>
 2. >global.XXX类型找不到定义[globals.d.ts](./src/globals.d.ts)
-<br>
 3. >creep.memory.XXX类型找不到定义[index.d.ts](./src/index.d.ts)
 
 ## 构建项目
