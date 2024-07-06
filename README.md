@@ -56,7 +56,7 @@ ScreepsWorld游戏代码
 [modules](./src/modules)：错误捕捉 <br>
 [utils](./src/utils)：工具（第三方模块 或 公共代码） <br>
 [额外](./额外)：杂类（设计模式，说明，等） <br>
-[globals](./globals)：定义global.XXX的数据类型 <br>
+[globals](./globals)：定义（[global.XXX]()）的数据类型 <br>
 [globalData](./src/globalData.js)：全局数据 <br>
 [main](./src/main.js)：主程序入口 <br>
 [main_mount](./src/main_mount.js)：拓展总入口（只执行一次） <br>
