@@ -25,6 +25,17 @@ ScreepsWorld游戏代码<br>
 > 2. （[global.XXX]()）类型找不到，定义文件（[globals.d.ts](./src/globals.d.ts)）
 > 3. （[creep.memory.XXX]()）类型找不到，定义文件（[index.d.ts](./src/index.d.ts)）
 
+* 汉化（控制器输入）
+
+方法1:
+```
+`<script src="https://screeps-cn.gitee.io/screeps-chinese-pack-release/main.js" async defer></script>`
+```
+方法2:
+```
+Utils.cn();
+```
+
 <br>
 
 ## 构建项目
@@ -42,20 +53,37 @@ ScreepsWorld游戏代码<br>
 复制（[Tocken例子.secret.json](./额外/Tocken例子.secret.json)）改名（[.secret.json](./.secret.json)），
 配置内容修改成，游戏中的Tocken（[main.token]()），本地游戏代码目录路径（[local.copyPath]()）。
 
-* 例子:
+* 例子1:
 ```
 {
-	"main": {
-		"token": "{{游戏API token}}",
-		"protocol": "https",
-		"hostname": "screeps.com",
-		"port": 443,
-		"path": "/",
-		"branch": "default"
-	},
-	"local": {
-		"copyPath": "C:/Users/{{管理员名}}/AppData/Local/Screeps/scripts/screeps.com/default"
-	}
+  "main": {
+    "token": "{{游戏API token}}",
+    "protocol": "https",
+    "hostname": "screeps.com",
+    "port": 443,
+    "path": "/",
+    "branch": "default"
+  },
+  "local": {
+    "copyPath": "C:/Users/{{管理员名}}/AppData/Local/Screeps/scripts/screeps.com/default"
+  }
+}
+```
+* 例子2:
+```
+{
+  "main": {
+    "email": "{{游戏邮箱}}",
+    "password": "{{游戏密码}}",
+    "protocol": "https",
+    "hostname": "screeps.com",
+    "port": 443,
+    "path": "/",
+    "branch": "default"
+  },
+  "local": {
+    "copyPath": "C:/Users/{{管理员名}}/AppData/Local/Screeps/scripts/screeps.com/default"
+  }
 }
 ```
 
