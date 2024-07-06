@@ -1,3 +1,5 @@
+import docs_qq_com_WhitelistUsername from '../docs_qq_com_DU0d0ZGVRU3didm9R.json';
+
 import factory_room from "./factory/room.js";
 
 import Alliance_run from './Alliance/run.js'
@@ -140,6 +142,14 @@ function iniglobalData() {
     }
     console.log('globalData.rooms', JSON.stringify(globalData.rooms))
     // console.log('Game.rooms', JSON.stringify(Game.rooms))
+
+    // 去重复 合并 白名单 联盟用户
+    const allianceIndices = Object.keys(globalData.Alliance);
+    globalData.WhitelistUsername = [...new Set([...globalData.WhitelistUsername, ...allianceIndices])];
+
+    // 去重复 合并 白名单 外部json文件
+    globalData.WhitelistUsername = _.uniq(globalData.WhitelistUsername.concat(docs_qq_com_WhitelistUsername));
+    console.log('白名单', JSON.stringify(globalData.WhitelistUsername))
 
     // 联盟 初始化 全局数据 入口
     Alliance_run(Alliance_initialization_globalData, this, {});
