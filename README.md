@@ -1,11 +1,9 @@
 # ScreepsWorldAi
-***
 ScreepsWorld游戏代码
 
 <br>
 
 ## 说明
-***
 * 必要数据：
 > 1. 执行初始化（[initialization](./src/Alliance/initialization)）会占用（[Memory.rooms]()）。避免冲突，导致程序无法运行。<br>
 * 提示
@@ -18,7 +16,6 @@ ScreepsWorld游戏代码
 <br>
 
 ## 构建项目
-***
 > `npm run build`
 编译最终文件<br>
 > `npm run push`&nbsp;&nbsp;
@@ -52,8 +49,7 @@ ScreepsWorld游戏代码
 
 <br>
 
-## ./src 文件结构
-***
+## [./src](./src) 文件结构
 [Alliance](./src/Alliance)：联盟相关<br>
 [controller](./src/controller)：控制器 <br>
 [factory](./src/factory)：工厂（模块） <br>
@@ -66,16 +62,14 @@ ScreepsWorld游戏代码
 [main_mount](./src/main_mount.js)：拓展总入口（只执行一次） <br>
 [initialization](./src/initialization.js)：初始化入口（只执行一次）<br>
 
-## ./src/Alliance 文件结构
-***
+## [./src/Alliance](./src/Alliance) 文件结构
 [ThirdPartyCode](./src/Alliance/ThirdPartyCode)：联盟第三方代码<br>
 [main](./src/Alliance/main)：main入口<br>
 [initialization](./src/Alliance/initialization)：初始化入口<br>
 [room](./src/Alliance/room)：room控制器入口<br>
 [creep](./src/Alliance/creep)：creep控制器入口<br>
 
-## ./ 文件结构
-***
+## [./](./) 文件结构
 [.secret.json](./.secret.json)：配置文件【编译后处理】<br>
 [fetchData.js](./fetchData.js)：配置文件【编译后依赖下载数据文件】<br>
 [rollup.config.mjs](./rollup.config.mjs)：配置文件【rollup】<br>
