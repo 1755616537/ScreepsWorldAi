@@ -3,7 +3,7 @@ ScreepsWorld游戏代码
 
 # 说明
 <span style="color:red;">必要数据：</span>
-initialization中会占用Memory.rooms。避免冲突，导致程序无法运行。<br>
+执行初始化initialization会占用Memory.rooms。避免冲突，导致程序无法运行。<br>
 <span style="color: yellow;">提示1.</span>
 全局变量：
 初始化[globalData.js](./src/globalData.js)
@@ -19,9 +19,9 @@ creep.memory.XXX类型找不到定义[index.d.ts](./src/index.d.ts)
 `npm run build`
 编译最终文件<br>
 `npm run push`&nbsp;&nbsp;
-编译最终文件并根据（.secret.json）上传到服务器。（适合线上服务器）<br>
+编译最终文件并根据（[.secret.json](./.secret.json)）上传到服务器。（适合线上服务器）<br>
 `npm run local`
-编译最终文件并根据（.secret.json）复制到指定目录。（适合本地服务器）<br>
+编译最终文件并根据（[.secret.json](./.secret.json)）复制到指定目录。（适合本地服务器）<br>
 
 ## ./src 文件结构
 [Alliance](./src/Alliance)：联盟相关<br>
