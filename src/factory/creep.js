@@ -46,31 +46,10 @@ import Throw from "../utils/Throw.js";
 
 class _creep {
     constructor(creep) {
-        // 是否允许通过执行下一个函数
-        this._end = false;
-
         this.creep = creep;
     }
 
-    // 检测之前的函数是否成功通过
-    _return_ini() {
-        if (this._end) {
-            return true;
-        } else {
-            this._end = true;
-            return false;
-        }
-    }
-
-    // 允许通过执行下一个函数
-    _return_success() {
-        this._end = false;
-        return true;
-    }
-
     moveTo(firstArg, secondArg, opts) {
-        if (this._return_ini()) return this;
-
         let toPos, ops = {}, type;
 
         if (typeof firstArg == 'object') {
@@ -91,7 +70,7 @@ class _creep {
 
         // 已经抵达目的地
         if (this.creep.x == toPos.x && this.creep.y == toPos.y && this.creep.roomName == toPos.roomName) {
-            if (this._return_success()) return this;
+            return true;
         }
 
         let visualizePathStyle = {};
@@ -133,12 +112,10 @@ class _creep {
         } else {
             this.creep.moveTo(firstArg, secondArg, ops);
         }
-
-        return this;
     }
 
-    // 部件能量计算
-    ComponentEnergyCalculation() {
+    // 统计部件能量
+    calculateComponentEnergy() {
         return componentEnergyCalculation(this.creep.body);
     }
 }

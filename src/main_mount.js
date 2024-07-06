@@ -1,6 +1,12 @@
 // -------------------------------初始化
-global.factory = {};
-global.controller = {}
+global.factory_ = {};
+global.controller_ = {};
+global.Task_ = {
+    creeps: {}
+};
+global.ChainedFun_ = {
+    logList: {}
+};
 // -------------------------------全局数据
 import "./globalData.js"
 // -------------------------------构建接口
