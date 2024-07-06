@@ -1,0 +1,161 @@
+[
+  {
+    "AutomaticSecurity": true,
+    "AutomaticAssignHarvest": true,
+    "AutomaticAssignHarvestCONTAINER": true,
+    "AutomaticAssignControllerCONTAINER": true,
+    "name": "W47S54",
+    "spawns": [
+      {
+        "name": "Spawn1"
+      }
+    ]
+  },
+  {
+    "AutomaticSecurity": true,
+    "AutomaticAssignHarvest": true,
+    "AutomaticAssignHarvestCONTAINER": true,
+    "AutomaticAssignControllerCONTAINER": true,
+    "name": "W48S54",
+    "spawns": [
+      {
+        "name": "Spawn2"
+      }
+    ]
+  }
+]
+
+globalData.creepConfigs.farDefender.number=1
+globalData.creepConfigs.occupier.number=1
+
+globalData.creepConfigs.farDefender.bodysMinus.list=[
+  MOVE,
+  MOVE,
+  MOVE,
+  MOVE,
+  MOVE,
+  MOVE,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH
+]
+
+globalData.creepConfigs.farDefender.bodys.list=[
+  MOVE,
+  MOVE,
+  MOVE,
+  MOVE,
+  MOVE,
+  MOVE,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  RANGED_ATTACK,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH,
+  TOUGH
+]
+
+Game.creeps[
+  'occupier59401384'
+].memory.SpecialActions={
+  code: 'move',
+  mgs: {
+    x: 1,
+    y: 28,
+    roomName: 'W46S54'
+  }
+}
+
+Game.creeps[
+  'occupier59401384'
+].memory.SpecialActions={
+  code: 'carrier2',
+  mgs: {
+    x: 48,
+    y: 34,
+    roomName: 'W47S53'
+  }
+}
+
+Game.creeps['occupier42502'].memory.SpecialActions={
+  code:'move',
+  msg:{
+    x:19,
+    y:1,
+    roomName:'W2N1'
+  }
+}
+
+Game.creeps['occupier42502'].memory.occupyRoomName='W2N1'
+
+shard3
+W48S52
+W46S53
+
+https://docs.qq.com/sheet/DU0d0ZGVRU3didm9R?tab=BB08J2
+
+
+
+globalData.rooms {
+"W2N2": {
+"AutomaticSecurity": true, "AutomaticAssignHarvest": true, "AutomaticAssignHarvestCONTAINER": true, "AutomaticAssignControllerCONTAINER": true, "spawns": {"Spawn1": {}}}
+}
+
+globalData.rooms {
+"W47S54": {"spawns": {"Spawn1": {}}, "AutomaticSecurity": true, "AutomaticAssignHarvest": true, "AutomaticAssignHarvestCONTAINER": true, "AutomaticAssignControllerCONTAINER": true}, "E19S9": {"AutomaticSecurity": false},"E19S92": {"AutomaticSecurity": false}, "W2N2":{"AutomaticSecurity": true, "AutomaticAssignHarvest": true, "AutomaticAssignHarvestCONTAINER": true, "AutomaticAssignControllerCONTAINER": true, "spawns": {"Spawn1": {
+}
+}
+}
+}
+
