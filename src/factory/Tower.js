@@ -56,10 +56,8 @@ function work(tower, type) {
     let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
         filter: (structure) => {
             // 白名单过滤
-            {
-                let index = _.findIndex(globalData.RoomProtectionWhitelistUsername, username => username == structure.owner.username);
-                if (index != -1) return false;
-            }
+            let on = globalData.RoomProtectionWhitelistUsername.includes(structure.owner.username);
+            if (on) return false;
 
             let index = _.findIndex(structure.body, body => body.type == HEAL);
             return index != -1;
@@ -69,8 +67,7 @@ function work(tower, type) {
         closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
             filter: (structure) => {
                 // 白名单过滤
-                let index = _.findIndex(globalData.RoomProtectionWhitelistUsername, username => username == structure.owner.username);
-                return index == -1;
+                return !globalData.RoomProtectionWhitelistUsername.includes(structure.owner.username);
             }
         });
     }
