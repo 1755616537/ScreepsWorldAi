@@ -1,4 +1,5 @@
 // https://www.jianshu.com/p/13e2cbcb60ab
+"use strict";
 
 import clear from 'rollup-plugin-clear'
 import resolve from '@rollup/plugin-node-resolve'
@@ -14,24 +15,26 @@ import json from '@rollup/plugin-json'
 // 执行外部脚本
 import exec from 'rollup-plugin-exec'
 
-let config = secretConfig[process.env.DEST];
-if (!process.env.DEST) console.log("未指定目标, 代码将被编译但不会上传")
-else if (!config) {
+let cfg;
+const dest = process.env.DEST;
+if (!dest) {
+    console.log("未指定目标, 代码将被编译但不会上传");
+} else if ((cfg = secretConfig[dest]) == null) {
     throw new Error("无效目标，请检查 secret.json 中是否包含对应配置");
 }
 
 // 根据指定的配置决定是上传还是复制到文件夹
-const pluginDeploy = config && config.copyPath ?
+const pluginDeploy = cfg && cfg.copyPath ?
     // 复制到指定路径
     copy({
         targets: [
             {
                 src: 'dist/main.js',
-                dest: config.copyPath
+                dest: cfg.copyPath
             },
             {
                 src: 'dist/main.js.map',
-                dest: config.copyPath,
+                dest: cfg.copyPath,
                 rename: name => name + '.map.js',
                 transform: (contents) => `module.exports = ${contents.toString()};`
             }
@@ -40,7 +43,7 @@ const pluginDeploy = config && config.copyPath ?
         verbose: true
     }) :
     // 更新 .map 到 .map.js 并上传
-    screeps({config, dryRun: !config})
+    screeps({config: cfg, dryRun: cfg == null})
 
 const preamble =
     "/**\n" +
