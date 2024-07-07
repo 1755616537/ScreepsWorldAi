@@ -13,7 +13,7 @@
     "module": "esnext",
 //    lib 配置项指定了编译过程中要包含的类型声明文件。"esnext" 表示你的项目将使用 ESNext 标准的库定义
     "lib": ["esnext","es6", "DOM"],
-    "types": ["reflect-metadata"],
+    "types": ["node", "lodash","reflect-metadata"],
 //    开启严格的类型检查模式，这包括了其他一些 strict 相关的子选项，如 noImplicitAny, noImplicitThis, alwaysStrict 等，以确保更安全和更一致的类型检查
 //    "strict": true,
 //    启用实验性的装饰器支持。装饰器是 ECMAScript 提案的一部分，用于修改类的行为或元数据
