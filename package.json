@@ -31,6 +31,7 @@
     "@screepscn/types": "^1.0.0",
     "axios": "^1.7.2",
     "cheerio": "^1.0.0-rc.12",
+    "reflect-metadata": "^0.2.2",
     "rollup-plugin-terser": "^7.0.2",
     "source-map": "^0.6.1",
     "typescript-ioc": "^3.2.2"
