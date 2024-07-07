@@ -1,14 +1,14 @@
 // https://www.jianshu.com/p/13e2cbcb60ab
 
+import clear from 'rollup-plugin-clear'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import clear from 'rollup-plugin-clear'
-import screeps from 'rollup-plugin-screeps'
-import copy from 'rollup-plugin-copy'
-import secretConfig from './.secret.json' assert {type: 'json'};
-import { terser } from 'rollup-plugin-terser';
 // TS
 import typescript from 'rollup-plugin-typescript2'
+import screeps from 'rollup-plugin-screeps'
+import { terser } from 'rollup-plugin-terser';
+import copy from 'rollup-plugin-copy'
+import secretConfig from './.secret.json' assert {type: 'json'};
 // json
 import json from '@rollup/plugin-json'
 // 执行外部脚本
@@ -42,13 +42,35 @@ const pluginDeploy = config && config.copyPath ?
     // 更新 .map 到 .map.js 并上传
     screeps({config, dryRun: !config})
 
+const preamble =
+    "/**\n" +
+    "  * screeps v1.0.0\n" +
+    "  * (c) 2023 GGG\n" +
+    "  * @license GPL-3.0\n" +
+    "  */";
+
 export default {
     input: 'src/main.ts',
-    output: {
-        file: 'dist/main.js',
-        format: 'cjs',
-        sourcemap: true
-    },
+    output: [
+        {
+            file: "dist/main.js",
+            format: "cjs",
+            sourcemap: true
+        },
+        {
+            file: "dist/main.min.js",
+            format: "cjs",
+            plugins: [
+                terser({
+                    ecma: 2016,
+                    format: {
+                        preamble
+                    }
+                }),
+            ],
+            sourcemap: true
+        }
+    ],
     plugins: [
         // 清除上次编译成果
         clear({targets: ["dist"]}),
