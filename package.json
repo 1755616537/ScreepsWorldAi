@@ -6,6 +6,9 @@
   "main": "index.js",
   "scripts": {
     "push": "rollup -cw --environment DEST:main",
+    "push-pserver": "rollup -c --environment DEST:pserver",
+    "push-season": "rollup -c --environment DEST:season",
+    "push-sim": "rollup -c --environment DEST:sim",
     "local": "rollup -cw --environment DEST:local",
     "build": "rollup -cw",
     "test": "echo \"Error: no test specified\" && exit 1"
