@@ -11,7 +11,14 @@
     "push-sim": "rollup -c --environment DEST:sim",
     "local": "rollup -cw --environment DEST:local",
     "build": "rollup -cw",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint \"src/**/*.ts\"",
+    "test": "npm run test-unit",
+    "test-unit": "mocha test/unit/**/*.ts",
+    "test-integration": "echo 'See docs/in-depth/testing.md for instructions on enabling integration tests'",
+    "watch-main": "rollup -cw --environment DEST:main",
+    "watch-pserver": "rollup -cw --environment DEST:pserver",
+    "watch-season": "rollup -cw --environment DEST:season",
+    "watch-sim": "rollup -cw --environment DEST:sim"
   },
   "keywords": [],
   "author": "",
