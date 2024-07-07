@@ -1,3 +1,4 @@
+import {Inject} from "typescript-ioc";
 import ChainedFun from "../../utils/chainedFun.js";
 
 // 初始化的时候》把定义好的任务json数据化》任务中心根据json数据执行任务

@@ -7,9 +7,9 @@ import "./main_mount.js";
 import Alliance_run from './Alliance/run.js'
 import Alliance_main from './Alliance/main/main.js'
 
-import {errorMapper} from './modules/errorMapper.js'
+import {ErrorMapper} from "./Alliance/ThirdPartyCode/screeps-typescript-starter-master/src/utils/ErrorMapper";
 
-export const loop = errorMapper(() => {
+export const loop = ErrorMapper.wrapLoop(() => {
     // 联盟 amin 入口
     Alliance_run(Alliance_main, undefined, {});
     // clog('本次tips使用 CPU 时间总量 ',Game.cpu.getUsed())
