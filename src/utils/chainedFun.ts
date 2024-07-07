@@ -45,7 +45,6 @@ class ChainedFun {
         if (this.logList[this.logListName]){
             if (this.logList[this.logListName] == this._index_) {
                 this.logList[this.logListName] = undefined;
-                return this;
             }
         }
     }

@@ -5,4 +5,8 @@ interface CreepMemory {
     role: string
 }
 
+interface Memory {
+    id: any
+}
+
 type Optional<T> = T | undefined;
