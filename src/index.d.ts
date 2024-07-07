@@ -4,3 +4,5 @@ interface CreepMemory {
      */
     role: string
 }
+
+type Optional<T> = T | undefined;
