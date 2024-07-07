@@ -21,7 +21,7 @@
 //    当使用装饰器时，此选项会在输出的 JavaScript 文件中添加必要的元数据，以便运行时可以访问到装饰器的信息
     "emitDecoratorMetadata": true,
 //    确保每个函数都有返回语句。如果一个函数没有显式返回值，TypeScript 将会发出警告或错误
-    "noImplicitReturns": true,
+//    "noImplicitReturns": true,
 //    禁止隐式的 any 类型。当 TypeScript 无法推断出类型时，它默认为 any 类型，这个选项会阻止这种行为并要求显式类型声明
 //    "noImplicitAny": true,
 //    在非严格模式下，this 关键字可能具有隐式的 any 类型。这个选项确保 this 总是有明确的类型
@@ -34,7 +34,9 @@
     "noUncheckedIndexedAccess": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "src/Alliance/ThirdPartyCode/my-screeps-ai-master",
+    "src/Alliance/ThirdPartyCode/screeps-typescript-starter-master"
   ],
   "include": [
     "src/**/*.ts"
