@@ -1,4 +1,4 @@
-import { FACTORY_STATE, factoryTopTargets, factoryBlacklist, FACTORY_LOCK_AMOUNT, factoryEnergyLimit, commodityMax } from 'setting'
+import { FACTORY_STATE, factoryTopTargets, factoryBlacklist, FACTORY_LOCK_AMOUNT, factoryEnergyLimit, commodityMax } from '../../../setting'
 
 /**
  * Factory 原型拓展

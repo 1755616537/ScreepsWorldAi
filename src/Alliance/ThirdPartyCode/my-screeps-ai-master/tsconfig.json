@@ -3,15 +3,16 @@
         "target": "es2017",
         "moduleResolution": "Node", 
         "outDir": "dist/",
-        "baseUrl": "./src/",
+        "baseUrl": "src",
         "sourceMap": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true
     },
     "include": [
         "src/**/*.ts",
         "screeps.d.ts",
     ],
     "exclude": [
-        "node_modules"
+        "node_modules",
     ]
 }

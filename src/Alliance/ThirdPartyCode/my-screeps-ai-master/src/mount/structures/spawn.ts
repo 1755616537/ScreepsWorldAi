@@ -1,5 +1,5 @@
-import { ROOM_TRANSFER_TASK, creepDefaultMemory, bodyConfigs, importantRoles } from 'setting'
-import roles from 'role'
+import { ROOM_TRANSFER_TASK, creepDefaultMemory, bodyConfigs, importantRoles } from '../../setting'
+import roles from '../../role'
 
 /**
  * Spawn 原型拓展

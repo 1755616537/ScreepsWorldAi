@@ -1,4 +1,4 @@
-import { MAX_UPGRADER_NUM, MAX_HARVESTER_NUM, UPGRADE_WITH_TERMINAL, UPGRADE_WITH_STORAGE } from 'setting'
+import { MAX_UPGRADER_NUM, MAX_HARVESTER_NUM, UPGRADE_WITH_TERMINAL, UPGRADE_WITH_STORAGE } from '../../setting'
 import { creepApi } from '../creepController'
 
 // 在 Function 原型上挂载 setNextPlan 方法来完成 creep 发布的职责链

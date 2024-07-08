@@ -1,4 +1,4 @@
-import { minerHervesteLimit, ROOM_TRANSFER_TASK } from 'setting'
+import { minerHervesteLimit, ROOM_TRANSFER_TASK } from '../setting'
 import { getRoomTransferTask, transferTaskOperations } from './advanced'
 
 /**

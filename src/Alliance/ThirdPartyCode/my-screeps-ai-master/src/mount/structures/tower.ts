@@ -1,6 +1,6 @@
-import { creepApi } from "modules/creepController"
-import { repairSetting, ROOM_TRANSFER_TASK } from "setting"
-import { whiteListFilter } from "utils"
+import { creepApi } from "../../modules/creepController"
+import { repairSetting, ROOM_TRANSFER_TASK } from "../../setting"
+import { whiteListFilter } from "../../utils"
 
 // Tower 原型拓展
 export default class TowerExtension extends StructureTower {

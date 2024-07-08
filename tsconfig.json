@@ -31,12 +31,11 @@
 //    允许编译器处理 .js 文件，通常用于与现有 JavaScript 代码库一起工作
     "allowJs": true,
 //    禁止对未定义索引的类型进行无检查的访问。例如，尝试访问数组或对象的不存在的索引时，TypeScript 将发出警告
-    "noUncheckedIndexedAccess": true
+//    "noUncheckedIndexedAccess": true
   },
   "exclude": [
     "node_modules",
-    "src/Alliance/ThirdPartyCode/my-screeps-ai-master",
-    "src/Alliance/ThirdPartyCode/screeps-typescript-starter-master"
+    "./src/Alliance/ThirdPartyCode/my-screeps-ai-master/node_modules"
   ],
   "include": [
     "src/**/*.ts"

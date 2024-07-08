@@ -1,5 +1,5 @@
-import { structureWithMemory } from "setting"
-import { assignPrototype } from "utils"
+import { structureWithMemory } from "../../setting"
+import { assignPrototype } from "../../utils"
 import ControllerExtension from './controller'
 import SpawnExtension from './spawn'
 import TowerExtension from './tower'

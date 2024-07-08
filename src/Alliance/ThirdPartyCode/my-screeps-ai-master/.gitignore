@@ -1,0 +1,12 @@
+node_modules/
+
+dist/
+
+.secret.json
+
+.tscache/
+
+*.tmp.txt
+
+src/config.ts
+src/config.creep.ts

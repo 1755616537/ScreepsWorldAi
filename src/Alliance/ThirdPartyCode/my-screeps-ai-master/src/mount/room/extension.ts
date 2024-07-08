@@ -6,11 +6,11 @@
  */
 
 import RoomShortcut from './shortcut'
-import { creepApi } from 'modules/creepController'
-import { ROOM_TRANSFER_TASK, BOOST_RESOURCE, ENERGY_SHARE_LIMIT } from 'setting'
-import { setBaseCenter, confirmBasePos, findBaseCenterPos } from 'modules/autoPlanning/planBasePos'
-import { planLayout, clearStructure } from 'modules/autoPlanning/planBaseLayout'
-import { createRoomLink, log } from 'utils'
+import { creepApi } from '../../modules/creepController'
+import { ROOM_TRANSFER_TASK, BOOST_RESOURCE, ENERGY_SHARE_LIMIT } from '../../setting'
+import { setBaseCenter, confirmBasePos, findBaseCenterPos } from '../../modules/autoPlanning/planBasePos'
+import { planLayout, clearStructure } from '../../modules/autoPlanning/planBaseLayout'
+import { createRoomLink, log } from '../../utils'
 
 export default class RoomExtension extends RoomShortcut {
     /**

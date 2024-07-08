@@ -1,7 +1,7 @@
-import { DEPOSIT_MAX_COOLDOWN, observerInterval } from 'setting'
-import { creepApi } from 'modules/creepController'
-import { colorful } from 'utils'
-import { createHelp } from 'modules/help'
+import { DEPOSIT_MAX_COOLDOWN, observerInterval } from '../../setting'
+import { creepApi } from '../../modules/creepController'
+import { colorful } from '../../utils'
+import { createHelp } from '../../modules/help'
 
 /**
  * Observer 拓展

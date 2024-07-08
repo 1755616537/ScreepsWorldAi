@@ -4,12 +4,12 @@
  * 本文件包含了 Room 中用于控制台交互的方法
  */
 
-import { createHelp } from "modules/help"
-import { DEFAULT_FLAG_NAME, labTarget, LAB_STATE } from "setting"
-import { getName, createElement, colorful } from "utils"
-import { setBaseCenter } from "modules/autoPlanning/planBasePos"
+import { createHelp } from "../../modules/help"
+import { DEFAULT_FLAG_NAME, labTarget, LAB_STATE } from "../../setting"
+import { getName, createElement, colorful } from "../../utils"
+import { setBaseCenter } from "../../modules/autoPlanning/planBasePos"
 import RoomExtension from "./extension"
-import { planLayout } from "modules/autoPlanning/planBaseLayout"
+import { planLayout } from "../../modules/autoPlanning/planBaseLayout"
 
 export default class RoomConsole extends RoomExtension {
     /**

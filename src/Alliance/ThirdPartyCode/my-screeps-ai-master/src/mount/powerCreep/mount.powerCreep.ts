@@ -1,5 +1,7 @@
-import { maxOps } from 'setting'
-import { log } from 'utils'
+// @ts-nocheck
+
+import { maxOps } from '../../setting'
+import { log } from '../../utils'
 
 /**
  * PowerCreep 原型拓展

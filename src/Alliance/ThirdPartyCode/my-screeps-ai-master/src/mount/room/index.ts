@@ -2,7 +2,7 @@ import Shortcut from './shortcut'
 import Extension from './extension'
 import Console from './console'
 import CreepControl from './creepControl'
-import { assignPrototype } from 'utils'
+import { assignPrototype } from '../../utils'
 
 // 定义好挂载顺序
 const plugins = [ Shortcut, Extension, Console, CreepControl ]

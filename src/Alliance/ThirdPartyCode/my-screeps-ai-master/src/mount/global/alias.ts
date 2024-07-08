@@ -1,6 +1,6 @@
-import { colorful, clearFlag, createRoomLink, createConst, createLink } from 'utils'
-import { factoryTopTargets } from 'setting'
-import { createHelp } from 'modules/help'
+import { colorful, clearFlag, createRoomLink, createConst, createLink } from '../../utils'
+import { factoryTopTargets } from '../../setting'
+import { createHelp } from '../../modules/help'
 
 /**
  * 全局拓展的别名

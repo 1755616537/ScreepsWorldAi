@@ -3,7 +3,7 @@
  * 负责放置房间中的建筑点位
  */
 
-import { baseLayout } from 'setting'
+import { baseLayout } from '../../setting'
 import { releaseCreep } from './planCreep'
 
 /**

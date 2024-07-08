@@ -1,4 +1,4 @@
-import { assignPrototype } from "utils"
+import { assignPrototype } from "../../utils"
 import CreepExtension from "./extension"
 
 /**

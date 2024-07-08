@@ -1,4 +1,4 @@
-import { ENERGY_SHARE_LIMIT } from "setting"
+import { ENERGY_SHARE_LIMIT } from "../../setting"
 
 /**
  * Storage 拓展

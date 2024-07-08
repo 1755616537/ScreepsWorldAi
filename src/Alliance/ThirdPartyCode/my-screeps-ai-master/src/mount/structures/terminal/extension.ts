@@ -1,4 +1,5 @@
-import { DEAL_RATIO, terminalModes, terminalChannels } from 'setting'
+// @ts-nocheck
+import { DEAL_RATIO, terminalModes, terminalChannels } from '../../../setting'
 
 /**
  * Terminal 原型拓展

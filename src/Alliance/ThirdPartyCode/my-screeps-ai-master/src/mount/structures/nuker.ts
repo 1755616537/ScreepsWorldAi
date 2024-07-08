@@ -1,4 +1,4 @@
-import { ROOM_TRANSFER_TASK } from "setting"
+import { ROOM_TRANSFER_TASK } from "../../setting"
 
 // nuker 拓展
 export default class NukerExtension extends StructureNuker {

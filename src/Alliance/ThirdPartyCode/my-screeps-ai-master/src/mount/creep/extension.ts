@@ -1,6 +1,8 @@
-import { getOppositeDirection, assignPrototype } from 'utils'
-import { repairSetting, minWallHits } from 'setting'
-import roles from 'role'
+// @ts-nocheck
+
+import { getOppositeDirection, assignPrototype } from '../../utils'
+import { repairSetting, minWallHits } from '../../setting'
+import roles from '../../role'
 
 // creep 原型拓展
 export default class CreepExtension extends Creep {

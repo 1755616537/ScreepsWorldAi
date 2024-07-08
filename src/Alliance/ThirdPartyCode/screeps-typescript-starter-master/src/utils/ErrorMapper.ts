@@ -1,5 +1,4 @@
 import { SourceMapConsumer } from "source-map";
-import _ from "lodash";
 
 export class ErrorMapper {
   // Cache consumer

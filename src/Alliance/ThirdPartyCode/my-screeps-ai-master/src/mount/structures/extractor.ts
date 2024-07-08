@@ -1,5 +1,5 @@
-import { minerHervesteLimit } from "setting"
-import { creepApi } from "modules/creepController"
+import { minerHervesteLimit } from "../../setting"
+import { creepApi } from "../../modules/creepController"
 
 /**
  * Extractor 拓展

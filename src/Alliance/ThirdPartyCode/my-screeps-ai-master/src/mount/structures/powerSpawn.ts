@@ -1,6 +1,6 @@
-import { powerSettings, ROOM_TRANSFER_TASK } from 'setting'
-import { colorful } from 'utils'
-import { createHelp } from 'modules/help'
+import { powerSettings, ROOM_TRANSFER_TASK } from '../../setting'
+import { colorful } from '../../utils'
+import { createHelp } from '../../modules/help'
 
 /**
  * PowerSpawn 拓展
