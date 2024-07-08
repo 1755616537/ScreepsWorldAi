@@ -39,6 +39,6 @@
     "src/Alliance/ThirdPartyCode/screeps-typescript-starter-master"
   ],
   "include": [
-    "src/**/*.ts"
+    "./src/**/*.ts"
   ]
 }
