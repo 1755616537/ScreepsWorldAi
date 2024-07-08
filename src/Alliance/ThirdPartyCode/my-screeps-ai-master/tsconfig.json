@@ -8,8 +8,8 @@
         "allowSyntheticDefaultImports": true
     },
     "include": [
-        "./src/**/*.ts",
-        "screeps.d.ts"
+        "src/**/*.ts",
+        "screeps.d.ts",
     ],
     "exclude": [
         "node_modules"
