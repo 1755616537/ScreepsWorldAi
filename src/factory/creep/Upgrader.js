@@ -1,5 +1,7 @@
 import factory_creep from "../../factory/creep.js";
 
+import factory_room from "../../factory/room.js";
+
 import factory_creep_Harvest from "../../factory/creep/Harvest.js";
 
 // 升级
@@ -170,3 +172,113 @@ function all(roomName) {
 //         return creep.store[RESOURCE_ENERGY] <= 0
 //     }
 // })
+
+
+/**
+ * 临时外部房间,升级
+ * @param roomName
+ * @param pathArray
+ */
+export function upgraderOuterRoom(roomName, pathArray = []) {
+    let room = factory_room.nameGet(roomName);
+
+    let creepName = '';
+    const upgraders = all(Object.keys(globalData.rooms)[0]);
+    if (upgraders < 1) return;
+    // 是否已存在
+    _.forEach(upgraders, upgrader => {
+        if (upgrader.memory.upgraderOuterRoom && upgrader.memory.upgraderOuterRoom == roomName) {
+            creepName = upgrader.name;
+            return false;
+        }
+    })
+    // 找新的
+    if (!creepName) {
+        _.forEach(upgraders, upgrader => {
+            if (!upgrader.memory.upgraderOuterRoom) {
+                upgrader.memory.upgraderOuterRoom = roomName;
+                creepName = upgrader.name;
+                return false;
+            }
+        })
+    }
+    let creep = Game.creeps[creepName];
+
+    // 按设定路径移动
+    for (let i = 0; i < pathArray.length; i++) {
+        let path = pathArray[i];
+        if (creep.room.name == path.roomName) {
+            new factory_creep.Creep(creep).moveTo(path.roomPosition);
+            return;
+        }
+    }
+
+    if (!room) {
+        new factory_creep.Creep(creep).moveTo(new RoomPosition(43, 17, roomName));
+    } else {
+        if (creep.memory.work && creep.store[RESOURCE_ENERGY] == 0) { // 升级状态&&能量不足的时候，变为采集者
+            creep.memory.work = false;
+            creep.say('🔄 采集');
+        }
+        if (!creep.memory.work && creep.store.getFreeCapacity() == 0) { // 非升级状态&&能量满的时候，变为升级状态
+            creep.memory.work = true;
+            creep.say('⚡ 升级');
+        }
+
+        if (creep.memory.work) { // 升级状态，找到控制器并升级 + 可视化
+            if (creep.upgradeController(room.controller) == ERR_NOT_IN_RANGE) {
+                new factory_creep.Creep(creep).moveTo(room.controller);
+            }
+        } else {
+            // 掉落的资源
+            let targets = room.find(FIND_DROPPED_RESOURCES);
+            if (targets.length > 0) {
+                // 捡起一个物品 (如捡起一些能量)
+                if (creep.pickup(targets[0]) == ERR_NOT_IN_RANGE) {
+                    // 向目标移动
+                    new factory_creep.Creep(creep).moveTo(targets[0], 'Resource');
+                }
+            } else {
+                targets = targets.concat(
+                    // 所有墓碑
+                    room.find(FIND_TOMBSTONES, {
+                        filter: (structure) => {
+                            return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
+                        }
+                    }),
+                    // 所有废墟
+                    room.find(FIND_RUINS, {
+                        filter: (structure) => {
+                            return (structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0);
+                        }
+                    }),
+                );
+                if (targets.length < 1) {
+                    let sources = creep.pos.findClosestByPath(FIND_SOURCES);
+                    // 采集能量
+                    if (creep.harvest(sources) == ERR_NOT_IN_RANGE) {
+                        new factory_creep.Creep(creep).moveTo(sources, 'Resource');
+                    }
+                    return;
+                }
+                if (targets.length < 1) {
+                    targets = factory_room.nameGet(roomName).find(FIND_STRUCTURES, {
+                        filter: (structure) => {
+                            // 找出有储存能量的container搬运
+                            return (structure.structureType == STRUCTURE_CONTAINER) &&
+                                structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+                        }
+                    });
+                }
+                if (targets.length > 0) {
+                    // 从建筑(structure)中拿取资源
+                    if (creep.withdraw(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        // 向目标移动
+                        new factory_creep.Creep(creep).moveTo(targets[0], 'Resource');
+                    }
+                }
+            }
+
+        }
+    }
+}
