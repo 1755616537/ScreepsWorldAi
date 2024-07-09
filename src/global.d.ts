@@ -9,20 +9,18 @@ declare global {
     var Task_: any;
     var ChainedFun_: any;
 
-    interface Memory {
-        uuid: number;
-        log: any;
-    }
-
-    interface CreepMemory {
-        role: string;
-    }
-
     namespace NodeJS {
         interface Global {
             log: any;
         }
     }
 
+}
+
+declare module NodeJS {
+    // 全局对象
+    interface Global {
+
+    }
 }
 // export {};

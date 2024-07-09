@@ -7,6 +7,14 @@ interface CreepMemory {
 
 interface Memory {
     id: any
+    uuid: number;
+    log: any;
+}
+
+interface CreepMemory {
+    role: string;
 }
 
 type Optional<T> = T | undefined;
+
+
