@@ -2,7 +2,7 @@ import factory_creep from "../../factory/creep.js";
 
 import factory_room from "../../factory/room.js";
 
-import factory_creep_Harvest from "../../factory/creep/Harvest.js";
+import factory_creep_Harvest from "@/factory/creeps/Harvest.js";
 
 // 升级
 export default {

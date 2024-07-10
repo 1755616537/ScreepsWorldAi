@@ -9,14 +9,14 @@
 
 import Factory_task from "../factory/task.js";
 
-import factory_creep_Harvest from "../factory/creep/Harvest.js";
-import factory_creep_Upgrader from "../factory/creep/Upgrader.js";
-import factory_creep_Builder from "../factory/creep/Builder.js";
-import factory_creep_Carrier from "../factory/creep/Carrier.js";
-import factory_creep_Repairer from "../factory/creep/Repairer.js";
-import factory_creep_Defender from "../factory/creep/Defender.js";
-import factory_creep_TheHealer from "../factory/creep/TheHealer.js";
-import factory_creep_Occupier from "../factory/creep/Occupier.js";
+import factory_creep_Harvest from "@/factory/creeps/Harvest.js";
+import factory_creep_Upgrader from "@/factory/creeps/Upgrader.js";
+import factory_creep_Builder from "@/factory/creeps/Builder.js";
+import factory_creep_Carrier from "@/factory/creeps/Carrier.js";
+import factory_creep_Repairer from "@/factory/creeps/Repairer.js";
+import factory_creep_Defender from "@/factory/creeps/Defender.js";
+import factory_creep_TheHealer from "@/factory/creeps/TheHealer.js";
+import factory_creep_Occupier from "@/factory/creeps/Occupier.js";
 
 /**
  * 挂载 请求任务
