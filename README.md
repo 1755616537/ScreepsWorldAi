@@ -108,7 +108,6 @@ Utils.cn();
 [Alliance](./src/Alliance)：联盟相关<br>
 [controller](./src/controller)：控制器 <br>
 [factory](./src/factory)：工厂（模块） <br>
-[modules](./src/modules)：错误捕捉 <br>
 [utils](./src/utils)：工具（第三方模块 或 公共代码） <br>
 [global](./src/global)：定义（[global.XXX]()）的数据类型 <br>
 [globalData](./src/globalData.js)：全局数据 <br>
