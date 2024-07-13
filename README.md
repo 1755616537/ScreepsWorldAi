@@ -21,7 +21,7 @@ ScreepsWorld游戏代码<br>
 * 提示
 > 1. 全局变量：
      初始化（[globalData.js](./src/globalData.js)）
-     定义类型（[GlobalData.ts](src/global/GlobalData.ts)）
+     定义类型（[GlobalData.ts](src/types/interfaces/global/GlobalData.ts)）
 > 2. （[global.XXX]()）类型找不到，定义文件（[global.d.ts](./src/global.d.ts)）
 > 3. （[creep.memory.XXX]()）类型找不到，定义文件（[index.d.ts](./src/index.d.ts)）
  
@@ -107,11 +107,11 @@ Utils.cn();
 ## [./src](./src) 文件结构
 [Alliance](./src/Alliance)：联盟相关<br>
 [controller](./src/controller)：控制器 <br>
-[factory](./src/factory)：工厂（模块） <br>
+[modules](./src/modules)：工厂（模块） <br>
 [utils](./src/utils)：工具（第三方模块 或 公共代码） <br>
-[global](./src/global)：定义（[global.XXX]()）的数据类型 <br>
+[global](src/types/interfaces/global)：定义（[global.XXX]()）的数据类型 <br>
 [globalData](./src/globalData.js)：全局数据 <br>
-[main](./src/main.js)：主程序入口 <br>
+[main](./src/main.ts)：主程序入口 <br>
 [main_mount](./src/main_mount.js)：拓展总入口（只执行一次） <br>
 [initialization](./src/initialization.js)：初始化入口（只执行一次）<br>
 

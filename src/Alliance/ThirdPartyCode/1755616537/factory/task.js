@@ -1,4 +1,4 @@
-import Throw from "../utils/Throw.js";
+import Throw from "../../../../utils/Throw.js";
 
 class Aask {
     constructor() {

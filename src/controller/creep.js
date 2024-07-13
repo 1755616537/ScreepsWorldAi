@@ -1,15 +1,15 @@
-import factory_creep from "../factory/creep.js";
-import factory_spawn from "../factory/spawn.js";
-import factory_room from "../factory/room.js";
+import factory_creep from "../Alliance/ThirdPartyCode/1755616537/factory/creep.js";
+import factory_spawn from "../Alliance/ThirdPartyCode/1755616537/factory/spawn.js";
+import factory_room from "../Alliance/ThirdPartyCode/1755616537/factory/room.js";
 
-import factory_creep_Harvest from "@/factory/creeps/Harvest.js";
-import factory_creep_Upgrader from "@/factory/creeps/Upgrader.js";
-import factory_creep_Builder from "@/factory/creeps/Builder.js";
-import factory_creep_Carrier from "@/factory/creeps/Carrier.js";
-import factory_creep_Repairer from "@/factory/creeps/Repairer.js";
-import factory_creep_Defender from "@/factory/creeps/Defender.js";
-import factory_creep_TheHealer from "@/factory/creeps/TheHealer.js";
-import factory_creep_Occupier from "@/factory/creeps/Occupier.js";
+import factory_creep_Harvest from "../Alliance/ThirdPartyCode/1755616537/factory/creeps/Harvest.js";
+import factory_creep_Upgrader from "../Alliance/ThirdPartyCode/1755616537/factory/creeps/Upgrader.js";
+import factory_creep_Builder from "../Alliance/ThirdPartyCode/1755616537/factory/creeps/Builder.js";
+import factory_creep_Carrier from "../Alliance/ThirdPartyCode/1755616537/factory/creeps/Carrier.js";
+import factory_creep_Repairer from "../Alliance/ThirdPartyCode/1755616537/factory/creeps/Repairer.js";
+import factory_creep_Defender from "../Alliance/ThirdPartyCode/1755616537/factory/creeps/Defender.js";
+import factory_creep_TheHealer from "../Alliance/ThirdPartyCode/1755616537/factory/creeps/TheHealer.js";
+import factory_creep_Occupier from "../Alliance/ThirdPartyCode/1755616537/factory/creeps/Occupier.js";
 
 import Alliance_run from '../Alliance/run.js'
 import Alliance_creep from '../Alliance/creep/creep.js'

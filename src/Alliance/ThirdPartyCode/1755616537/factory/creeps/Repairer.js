@@ -1,6 +1,6 @@
 import factory_creep from "../../factory/creep.js";
 
-import factory_creep_Harvest from "@/factory/creeps/Harvest.js";
+import factory_creep_Harvest from "../../factory/creeps/Harvest.js";
 
 // 维修者
 export default {

@@ -42,7 +42,7 @@ import factory_spawn from "../factory/spawn.js";
 import factory_room from "../factory/room.js";
 
 import factory_source from "../factory/source.js";
-import Throw from "../utils/Throw.js";
+import Throw from "../../../../utils/Throw.js";
 
 class _creep {
     constructor(creep) {

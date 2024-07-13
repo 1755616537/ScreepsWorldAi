@@ -1,6 +1,6 @@
 import docs_qq_com_WhitelistUsername from '../docs_qq_com_DU0d0ZGVRU3didm9R.json';
 
-import factory_room from "./factory/room.js";
+import factory_room from "./Alliance/ThirdPartyCode/1755616537/factory/room.js";
 
 import Alliance_run from './Alliance/run.js'
 import Alliance_initialization_room from './Alliance/initialization/room.js'
