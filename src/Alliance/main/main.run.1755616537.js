@@ -1,6 +1,6 @@
-import controller_task from "../../controller/task.js";
-import controller_room from "../../controller/room.js";
-import controller_creep from "../../controller/creep.js";
+import controller_task from "../../controllers/task.js";
+import controller_room from "../../controllers/room.js";
+import controller_creep from "../../controllers/creep.js";
 
 export default function (_this, objectFun) {
     if (Game.cpu.bucket === 10000) {//如果CPU到了一万点，则换成pixel

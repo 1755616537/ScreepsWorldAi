@@ -106,7 +106,7 @@ Utils.cn();
 
 ## [./src](./src) 文件结构
 [Alliance](./src/Alliance)：联盟相关<br>
-[controller](./src/controller)：控制器 <br>
+[controller](./src/controllers)：控制器 <br>
 [modules](./src/modules)：工厂（模块） <br>
 [utils](./src/utils)：工具（第三方模块 或 公共代码） <br>
 [global](src/types/interfaces/global)：定义（[global.XXX]()）的数据类型 <br>
