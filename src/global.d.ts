@@ -15,6 +15,10 @@ declare global {
         }
     }
 
+    var globalThis: {
+
+    }
+
 }
 
 declare module NodeJS {
