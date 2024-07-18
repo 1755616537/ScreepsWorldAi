@@ -1,6 +1,3 @@
-import factory_spawn from "../../factory/spawn.js";
-import factory_room from "../../factory/room.js";
-
 import factory_creep from "../../factory/creep.js";
 
 // 占领
@@ -8,7 +5,47 @@ export default {
 
     /** @param {Creep} creep **/
     run: function (creep, roomName) {
-        roomName = 'W48S52';
+        let pathArray = [
+            {
+                roomName: 'W47S54',
+                roomPosition: new RoomPosition(1, 28, 'W46S54')
+            },
+            {
+                roomName: 'W46S54',
+                roomPosition: new RoomPosition(1, 36, 'W45S54')
+            },
+            {
+                roomName: 'W45S54',
+                roomPosition: new RoomPosition(18, 1, 'W45S55')
+            },
+            {
+                roomName: 'E25N25',
+                roomPosition: new RoomPosition(3, 1, 'E25N24')
+            },
+            {
+                roomName: 'E25N24',
+                roomPosition: new RoomPosition(9, 1, 'E25N23')
+            }
+        ]
+        // 按设定路径移动
+        for (let i = 0; i < pathArray.length; i++) {
+            let path = pathArray[i];
+            if (creep.room.name == path.roomName) {
+                new factory_creep.Creep(creep).moveTo(path.roomPosition);
+                return;
+            }
+        }
+
+        if (creep.room.name=='W45S55'){
+            let pos=new RoomPosition(31, 7, 'W45S55')
+            if (creep.pos.isEqualTo(pos)){
+                new factory_creep.Creep(creep).moveTo(pos);
+                return;
+            }
+        }
+
+
+        roomName = 'E25N23';
         // 需要拥有CLAIM部件
         // Game.spawns.Spawn1.spawnCreep([WORK, CARRY, MOVE], 'ee1', { memory: {}})
         // {
