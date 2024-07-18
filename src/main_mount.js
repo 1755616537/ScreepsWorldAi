@@ -1,3 +1,5 @@
+import factory_creep from "./Alliance/ThirdPartyCode/1755616537/factory/creep";
+
 // -------------------------------初始化
 global.Factory_ = {};
 global.Controller_ = {};
@@ -24,6 +26,7 @@ import "./utils/极致建筑缓存 v1.4.3.js";
 // 资源显示
 import "./utils/helper_roomResource.js";
 // -------------------------------工厂模块
+global.Factory_.creep = factory_creep;
 // -------------------------------控制器
 // -------------------------------默认只执行一次的初始化程序
 import initialization from "./initialization.js"
