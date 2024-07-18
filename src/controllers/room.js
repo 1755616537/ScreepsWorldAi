@@ -78,10 +78,10 @@ export default function () {
 
                 if (!globalData.rooms[roomName]) {
                     if (username && username == globalData.username) {
-                        clog('别人房间' + roomName, '一个游戏对象被摧毁或是被消灭', JSON.stringify(event));
+                        clog('别人房间', roomName, '一个游戏对象被摧毁或是被消灭', JSON.stringify(event));
                     }
                 } else {
-                    clog('房间' + roomName, '一个游戏对象被摧毁或是被消灭', JSON.stringify(event));
+                    clog('房间', roomName, '一个游戏对象被摧毁或是被消灭', JSON.stringify(event));
                 }
 
                 if (event.data.type != 'creep') {

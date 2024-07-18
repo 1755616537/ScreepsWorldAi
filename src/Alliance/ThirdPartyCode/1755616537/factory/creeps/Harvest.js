@@ -176,7 +176,7 @@ export default {
                                 creep.memory.harvestSourceID = val;
 
                                 Memory.rooms[roomName].source.list = memorySource;
-                                clog('房间', roomName, ' ', creep.name, '已自动分配给能量源区', val)
+                                clog('房间', roomName, creep.name, '已自动分配给能量源区', val)
                                 break;
                             }
                         }

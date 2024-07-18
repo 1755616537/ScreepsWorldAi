@@ -133,7 +133,7 @@ export default {
 
                                     Memory.rooms[roomName].source.list[val].spaceXYList = spaceXYList;
                                     on = true;
-                                    clog('房间', roomName, ' ', creep.name, '已自动分配给能量源区', val, "Container",
+                                    clog('房间', roomName, creep.name, '已自动分配给能量源区', val, "Container",
                                         spaceXYList[i].containerID)
                                     break;
                                 }
