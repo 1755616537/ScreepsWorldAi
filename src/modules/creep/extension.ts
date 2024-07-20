@@ -1,4 +1,4 @@
-import roles from "./../../Alliance/ThirdPartyCode/my-screeps-ai-master/src/role";
+import roles from "../roles";
 
 export default class CreepExtension extends Creep {
     // 工作

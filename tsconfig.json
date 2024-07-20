@@ -40,7 +40,8 @@
   },
   "exclude": [
     "node_modules",
-    "./src/Alliance/ThirdPartyCode/my-screeps-ai-master/node_modules"
+    "./src/Alliance/ThirdPartyCode/my-screeps-ai-master/node_modules",
+    "./src/Alliance/ThirdPartyCode/my-screeps-ai-master"
   ],
   "include": [
     "src/**/*.ts"
