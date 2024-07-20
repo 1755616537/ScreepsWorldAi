@@ -7,10 +7,12 @@
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@/*": ["./src/*"],
-      "types/*": ["./src/types/*"],
-      "modules/*": ["./src/modules/*"],
-      "ThirdPartyCode/*": ["./src/Alliance/ThirdPartyCode/*"]
+//      "@/*": ["./src/*"],
+//      "@types/*": ["./src/types/*"],
+//      "@modules/*": ["./src/modules/*"],
+//      "@Alliance/*": ["./src/Alliance/*"],
+//      "@utils/*": ["./src/utils/*"],
+//      "@ThirdPartyCode/*": ["./src/Alliance/ThirdPartyCode/*"]
     },
 //    这个选项指定了模块解析策略。"esnext" 表示使用 ES2015+ 的模块系统，它允许你使用 import 和 export 语法
     "module": "esnext",

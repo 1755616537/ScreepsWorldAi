@@ -40,8 +40,8 @@ global.globalData = {
                     // 【可以不填写，会自动获取】自动安全(受到攻击自动开启)
                     AutomaticSecurity: false,
                 },
-                'W59S44':{},
-                'W35S42':{}
+                'W59S44': {},
+                'W35S42': {}
             }
         },
         'Stars22': {}
@@ -127,7 +127,7 @@ global.globalData = {
                 list: [WORK, WORK, WORK, CARRY, MOVE],
                 totalEnergyRequired: 300
             },
-            number: 0,
+            number: 1,
             // 自动缩减配置,当房间内总容量不足时
             AutomaticConfigurationDownsizing: true
         },
@@ -167,7 +167,7 @@ global.globalData = {
                 list: [WORK, WORK, WORK, CARRY, MOVE],
                 totalEnergyRequired: 300
             },
-            number: 0,
+            number: 1,
             // tower创建拥有能量的时候不生成维修者
             onTower: false,
             // 自动缩减配置,当房间内总容量不足时
@@ -263,6 +263,8 @@ global.globalData = {
 
 
     // 以下内容不可更改--------------------------------------------------------------
+
+    creeps: {},
 
     // 采集者ID
     harvest: 'harvest',

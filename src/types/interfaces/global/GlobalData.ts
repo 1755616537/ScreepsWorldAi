@@ -59,6 +59,7 @@ interface GlobalData {
         // 获取资源颜色
         WorkResourceColor: string;
     };
+    creeps: object;
     readonly harvest: string;
     readonly upgrader: string;
     readonly builder: string;
@@ -118,11 +119,13 @@ interface HarvesterConfig extends BaseCreepConfig {
     // 自动分配根据可用能量容量上限调整bodys
     AutomaticAssignBodysEnergyCapacityAvailable?: boolean;
 }
+
 // 定义扩展特定于角色的配置 运输
 interface CarrierConfig extends BaseCreepConfig {
     // 矿区CONTAINER是否1v1运送
     sourceContainer1v1?: boolean;
 }
+
 // 定义扩展特定于角色的配置 维修
 interface RepairerConfig extends BaseCreepConfig {
     // tower创建拥有能量的时候不生成维修者

@@ -21,7 +21,7 @@ export default function (_this, objectFun) {
             // // 临时外部房间,建造
             // objectFun.builderOuterRoom(roomName2);
 
-            // let roomName3 = 'W48S52';
+            // let roomName3 = 'E25N23';
             // // 临时外部房间,升级
             // objectFun.upgraderOuterRoom(roomName3,
             //     [
@@ -47,11 +47,31 @@ export default function (_this, objectFun) {
             //         },
             //         {
             //             roomName: 'W46S54',
-            //             roomPosition: new RoomPosition(25, 48, 'W46S53')
+            //             roomPosition: new RoomPosition(17, 27, 'W46S54')
             //         },
             //         {
-            //             roomName: 'W46S53',
-            //             roomPosition: new RoomPosition(48, 34, 'W47S53')
+            //             roomName: 'W46S54',
+            //             roomPosition: new RoomPosition(1, 21, 'W45S54')
+            //         },
+            //         {
+            //             roomName: 'W45S54',
+            //             roomPosition: new RoomPosition(18, 1, 'W45S55')
+            //         },
+            //         {
+            //             roomName: 'W45S55',
+            //             roomPosition: new RoomPosition(31, 7, 'W45S55')
+            //         },
+            //         {
+            //             roomName: 'E25N25',
+            //             roomPosition: new RoomPosition(3, 1, 'E25N24')
+            //         },
+            //         {
+            //             roomName: 'E25N24',
+            //             roomPosition: new RoomPosition(18, 1, 'E25N23')
+            //         },
+            //         {
+            //             roomName: 'E25N23',
+            //             roomPosition: new RoomPosition(39, 27, 'E25N23')
             //         }
             //     ]);
             break;
