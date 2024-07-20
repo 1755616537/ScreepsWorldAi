@@ -207,6 +207,21 @@ export function upgraderOuterRoom(roomName, pathArray = []) {
     // 按设定路径移动
     for (let i = 0; i < pathArray.length; i++) {
         let path = pathArray[i];
+        // 一次性移动
+        if (path.roomName == path.roomPosition.roomName) {
+            if (!creep.memory.pathList) creep.memory.pathList = [];
+            let findIndex = _.findIndex(creep.memory.pathList, (a) => a == path.roomName)
+            if (findIndex == -1) {
+                if (!creep.pos.isEqualTo(path.roomPosition)) {
+                    new factory_creep.Creep(creep).moveTo(path.roomPosition);
+                    return;
+                } else {
+                    creep.memory.pathList.push(path.roomName);
+                }
+            }
+            continue
+        }
+        // 按顺序移动
         if (creep.room.name == path.roomName) {
             new factory_creep.Creep(creep).moveTo(path.roomPosition);
             return;
