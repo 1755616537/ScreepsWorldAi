@@ -271,6 +271,9 @@ function transfer(creep) {
         // 给控制器CONTAINER,运输能量
         if (transferControllerContainer(creep)) return;
     }
+
+    let targets=[];
+
     // 给Tower,运输能量
     // if (transferTower(creep)) return;
 
@@ -285,14 +288,37 @@ function transfer(creep) {
     // if (targets.length < 1) {
 
     // }
-    let targets = creep.room.find(FIND_STRUCTURES, {
-        filter: (structure) => {
-            // 找出需要储存能量
-            return (structure.structureType == STRUCTURE_EXTENSION ||
-                    structure.structureType == STRUCTURE_SPAWN) &&
-                structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+
+    {
+        let storageClosestTower;
+        const spawns = creep.room.find(FIND_STRUCTURES, {
+            filter: (structure) => {
+                return structure.structureType == STRUCTURE_SPAWN;
+            }
+        });
+        if (spawns.length > 0) {
+            storageClosestTower = spawns[0].pos.findClosestByRange(FIND_MY_STRUCTURES, {
+                filter: (structure) => {
+                    return structure.structureType == STRUCTURE_TOWER;
+                }
+            });
         }
-    });
+        if (storageClosestTower &&
+            storageClosestTower.store.getFreeCapacity(RESOURCE_ENERGY) > storageClosestTower.store.getCapacity(RESOURCE_ENERGY) / 3){
+            targets.push(storageClosestTower);
+        }
+    }
+
+    if (targets.length < 1) {
+        targets = creep.room.find(FIND_STRUCTURES, {
+            filter: (structure) => {
+                // 找出需要储存能量
+                return (structure.structureType == STRUCTURE_EXTENSION ||
+                        structure.structureType == STRUCTURE_SPAWN) &&
+                    structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+            }
+        });
+    }
     if (targets.length < 1) {
         targets = creep.room.find(FIND_STRUCTURES, {
             filter: (structure) => {
