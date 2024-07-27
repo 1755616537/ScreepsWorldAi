@@ -21,7 +21,7 @@ import "./utils/log.js"
 // -------------------------------工具
 // 工具集
 import "./utils/utils.js";
-import "./utils/超级移动优化hotfix 0.9.4.js";
+// import "./utils/超级移动优化hotfix 0.9.4.js";
 // import "./utils/极致建筑缓存 v1.4.3.js";
 // 资源显示
 // import "./utils/helper_roomResource.js";

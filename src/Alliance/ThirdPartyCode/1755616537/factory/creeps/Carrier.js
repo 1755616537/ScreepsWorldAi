@@ -26,6 +26,7 @@ export default {
             let target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
             // const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
             // if(target)
+            if (target && target.resourceType !== RESOURCE_ENERGY) target = null;
             if (target) {
                 // 捡起一个物品 (如捡起一些能量)
                 if (creep.pickup(target) == ERR_NOT_IN_RANGE) {
@@ -34,21 +35,21 @@ export default {
                 }
             } else {
                 // 墓碑
-                target = creep.pos.findClosestByPath(FIND_TOMBSTONES, {
-                    filter: (structure) => {
-                        return (structure.store.getUsedCapacity() > 0);
-                    }
-                });
-                if (target) {
-                    for (const resourceType in target.store) {
-                        if (creep.withdraw(target, resourceType) == ERR_NOT_IN_RANGE) {
-                            // 向目标移动
-                            new factory_creep.Creep(creep).moveTo(target, 'Resource');
-                            break;
-                        }
-                    }
-                    return;
-                }
+                // target = creep.pos.findClosestByPath(FIND_TOMBSTONES, {
+                //     filter: (structure) => {
+                //         return (structure.store.getUsedCapacity() > 0);
+                //     }
+                // });
+                // if (target) {
+                //     for (const resourceType in target.store) {
+                //         if (creep.withdraw(target, resourceType) == ERR_NOT_IN_RANGE) {
+                //             // 向目标移动
+                //             new factory_creep.Creep(creep).moveTo(target, 'Resource');
+                //             break;
+                //         }
+                //     }
+                //     return;
+                // }
 
                 let source = null;
                 // 能量源区CONTAINER是否1v1运送 并且是自己的房间
