@@ -44,6 +44,27 @@ Utils.cn();
 <br>
 
 ## 构建项目
+
+[//]: # (编译脚本的用法: `BASH ./build.sh -h`)
+
+[//]: # ()
+[//]: # (>)
+
+[//]: # (> Usage: ./build.sh -o [linux|windows|darwin|freebsd] -a [386|amd64] <br />)
+
+[//]: # (>        ./build.sh -h for help.)
+
+[//]: # (>)
+
+[//]: # ()
+[//]: # (示例:)
+
+[//]: # (```)
+
+[//]: # (BASH ./build.sh -a amd64 -o windows)
+
+[//]: # (```)
+
 > `npm run build`
 编译最终文件<br>
 
@@ -104,31 +125,82 @@ Utils.cn();
 
 <br>
 
-## [./src](./src) 文件结构
-[Alliance](./src/Alliance)：联盟相关<br>
-[controller](./src/controllers)：控制器 <br>
-[modules](./src/modules)：工厂（模块） <br>
-[utils](./src/utils)：工具（第三方模块 或 公共代码） <br>
-[global](src/types/interfaces/global)：定义（[global.XXX]()）的数据类型 <br>
-[globalData](./src/globalData.js)：全局数据 <br>
-[main](./src/main.ts)：主程序入口 <br>
-[main_mount](./src/main_mount.js)：拓展总入口（只执行一次） <br>
-[initialization](./src/initialization.js)：初始化入口（只执行一次）<br>
+## 数据目录格式
 
-## [./src/Alliance](./src/Alliance) 文件结构
-[ThirdPartyCode](./src/Alliance/ThirdPartyCode)：联盟第三方代码<br>
-[main](./src/Alliance/main)：main入口<br>
-[initialization](./src/Alliance/initialization)：初始化入口<br>
-[room](./src/Alliance/room)：room控制器入口<br>
-[creep](./src/Alliance/creep)：creep控制器入口<br>
+数据目录结构及对应文件的含义说明:
 
-## [./](./) 文件结构
-[.secret.json](./.secret.json)：配置文件【编译后处理】<br>
-[fetchData.js](./fetchData.js)：配置文件【编译后依赖下载数据文件】<br>
-[rollup.config.mjs](./rollup.config.mjs)：配置文件【rollup】<br>
-[tsconfig.json](./tsconfig.json)：配置文件【typescript】<br>
-[others](./others)：杂类（设计模式，图片，等） <br>
-[docs](./docs)：文档，说明 <br>
+```
+./src
+├── Alliance             #联盟相关
+│   ├── creep                # creep控制器入口
+│   ├── initialization       # 初始化入口
+│   ├── main                 # main入口
+│   ├── room                 # room控制器入口
+│   ├── ThirdPartyCode       # 联盟第三方代码
+│   └── run.js               # 入口控制程序
+├── controller           # 控制器
+├── modules              # 工厂（模块）
+├── utils                # 工具（第三方模块 或 公共代码）
+├── global               # 定义（[global.XXX]()）的数据类型
+├── globalData           # 全局数据
+├── main                 # 主程序入口
+├── main_mount           # 拓展总入口（只执行一次）
+├── initialization       # 初始化入口（只执行一次）
+├── .secret.json         # 配置文件【编译后处理】
+├── fetchData.js         # 配置文件【编译后依赖下载数据文件】
+├── rollup.config.mjs    # 配置文件【rollup】
+├── tsconfig.json        # 配置文件【typescript】
+├── others               # 杂类（设计模式，图片，等）
+└── docs                 # 文档，说明
+```
+
+[//]: # (## [./src]&#40;./src&#41; 文件结构)
+
+[//]: # ([Alliance]&#40;./src/Alliance&#41;：联盟相关<br>)
+
+[//]: # ([controller]&#40;./src/controllers&#41;：控制器 <br>)
+
+[//]: # ([modules]&#40;./src/modules&#41;：工厂（模块） <br>)
+
+[//]: # ([utils]&#40;./src/utils&#41;：工具（第三方模块 或 公共代码） <br>)
+
+[//]: # ([global]&#40;src/types/interfaces/global&#41;：定义（[global.XXX]&#40;&#41;）的数据类型 <br>)
+
+[//]: # ([globalData]&#40;./src/globalData.js&#41;：全局数据 <br>)
+
+[//]: # ([main]&#40;./src/main.ts&#41;：主程序入口 <br>)
+
+[//]: # ([main_mount]&#40;./src/main_mount.js&#41;：拓展总入口（只执行一次） <br>)
+
+[//]: # ([initialization]&#40;./src/initialization.js&#41;：初始化入口（只执行一次）<br>)
+
+[//]: # ()
+[//]: # (## [./src/Alliance]&#40;./src/Alliance&#41; 文件结构)
+
+[//]: # ([ThirdPartyCode]&#40;./src/Alliance/ThirdPartyCode&#41;：联盟第三方代码<br>)
+
+[//]: # ([main]&#40;./src/Alliance/main&#41;：main入口<br>)
+
+[//]: # ([initialization]&#40;./src/Alliance/initialization&#41;：初始化入口<br>)
+
+[//]: # ([room]&#40;./src/Alliance/room&#41;：room控制器入口<br>)
+
+[//]: # ([creep]&#40;./src/Alliance/creep&#41;：creep控制器入口<br>)
+
+[//]: # ()
+[//]: # (## [./]&#40;./&#41; 文件结构)
+
+[//]: # ([.secret.json]&#40;./.secret.json&#41;：配置文件【编译后处理】<br>)
+
+[//]: # ([fetchData.js]&#40;./fetchData.js&#41;：配置文件【编译后依赖下载数据文件】<br>)
+
+[//]: # ([rollup.config.mjs]&#40;./rollup.config.mjs&#41;：配置文件【rollup】<br>)
+
+[//]: # ([tsconfig.json]&#40;./tsconfig.json&#41;：配置文件【typescript】<br>)
+
+[//]: # ([others]&#40;./others&#41;：杂类（设计模式，图片，等） <br>)
+
+[//]: # ([docs]&#40;./docs&#41;：文档，说明 <br>)
 
 ## 其他说明
 游戏介绍<br>
