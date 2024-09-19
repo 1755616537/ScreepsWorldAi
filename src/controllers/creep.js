@@ -17,6 +17,18 @@ import Alliance_creep from '../Alliance/creep/creep.js'
 // 控制器 creep
 export default function () {
 
+    if (!globalData.creeps) globalData.creeps = {};
+    // Object.values(Game.creeps).forEach(creep => {
+    //     let findIndex = _.findIndex(globalData.creeps, globalDataCreep => creep.name == globalDataCreep.name);
+    //     if (findIndex == -1) {
+    //         globalData.creeps[creep.name] = {
+    //             name: creep.name
+    //         };
+    //     } else {
+    //         delete globalData.creeps[creep.name];
+    //     }
+    // })
+
     // 遍历所有 creep 并执行上文中拓展的 work 方法
     // Object.values(Game.creeps).forEach(creep => creep.work())
 
