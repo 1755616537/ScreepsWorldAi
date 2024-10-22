@@ -266,6 +266,56 @@ function eventManagement() {
                         }
                     }
                         break;
+                    case globalData.carrier + '3': {
+                        let roomPosition = new RoomPosition(msg.x, msg.y, msg.roomName)
+                        if (creep.room.name != msg.roomName) {
+                            new factory_creep.Creep(creep).moveTo(roomPosition);
+                            break
+                        }
+
+                        // work && 背包为空
+                        if (creep.memory.work && creep.store.getUsedCapacity() == 0) {
+                            creep.memory.work = false;
+                            creep.say('🔄 收获');
+                        }
+                        // 非work状态 && 背包满(空余为0)
+                        if (!creep.memory.work && creep.store.getFreeCapacity() == 0) {
+                            creep.memory.work = true;
+                            creep.say('🛒 存放');
+                        }
+
+
+                        if (!creep.memory.work) {
+                            let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+                                filter: (structure) => {
+                                    // 找出有储存能量的container搬运
+                                    return (structure.structureType == STRUCTURE_CONTAINER ||
+                                            structure.structureType == STRUCTURE_STORAGE) &&
+                                        structure.store.getUsedCapacity(RESOURCE_ENERGY) > 100;
+                                }
+                            })
+                            if (target){
+                                // 从建筑(structure)中拿取资源
+                                if (creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                                    // 向目标移动
+                                    new factory_creep.Creep(creep).moveTo(target, 'Resource');
+                                }
+                            }
+                        }else {
+                            let lookForAt = creep.room.lookForAt(LOOK_STRUCTURES, roomPosition)
+                            if (lookForAt.length > 0) {
+                                // 将资源从该 creep 转移至其他对象
+                                for (const resourceType in creep.carry) {
+                                    if (creep.transfer(lookForAt[0], resourceType) == ERR_NOT_IN_RANGE) {
+                                        // 向目标移动
+                                        new factory_creep.Creep(creep).moveTo(lookForAt[0]);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                        break;
                     case globalData.repairer: {
                         let roomPosition = new RoomPosition(msg.x, msg.y, msg.roomName)
                         if (creep.room.name != msg.roomName) {
