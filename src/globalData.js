@@ -47,7 +47,49 @@ global.globalData = {
         'Stars22': {}
     },
     // 房间 【不用填写，会自动获取】
-    rooms: {},
+    rooms: {
+        // 默认是添加
+        // spawns: {spawns.name:{}}
+
+        // roomsAllAllocation.content里面
+
+        // creeps：{creep.id:{}}
+
+        // objectData:{
+        // 基地
+        // spawns,
+        // 小型储存
+        // extensions,
+        // 塔
+        // towers,
+        // 中型储存
+        // containers,
+        // 传输站
+        // links,
+        // 开关门
+        // ramparts,
+        // 熔炉
+        // labs,
+        // 观察
+        // observers,
+        // 核弹
+        // nukers,
+        // 终端
+        // terminals,
+        // 生成贸易
+        // factorys,
+        // 超级基地
+        // powerSpawns,
+        // 路
+        // roads,
+        // 墙
+        // walls,
+        // 挖矿
+        // extractors
+        // }
+
+        // 的内容
+    },
     // 全部房间配置
     roomsAllAllocation: {
         // 是否开启强制统一房间配置

@@ -42,6 +42,9 @@ function iniRoom(roomName) {
         Memory.rooms[roomName] = {}
     }
 
+    // 房间对象初始化（建筑，爬爬，矿，能量源）
+    iniRoomObject(roomName);
+
     // 能量源区块初始化
     iniSource(roomName);
 
@@ -156,6 +159,144 @@ function iniglobalData() {
 
     // 联盟 初始化 全局数据 入口
     Alliance_run(Alliance_initialization_globalData, this, {});
+
+}
+
+// 房间对象初始化（建筑，爬爬，矿，能量源）
+function iniRoomObject(roomName) {
+    let room = factory_room.nameGet(roomName);
+
+    let creeps = {}
+    for (let name in Game.creeps) {
+        let creep = Game.creeps[name]
+        if (creep.memory.roomName == roomName) {
+            creeps[creep.id]=creep
+        }
+    }
+    globalData.rooms[roomName].creeps=creeps
+
+    // 基地
+    let spawns = room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return structure.structureType == STRUCTURE_SPAWN;
+        }
+    });
+
+    // 小型储存
+    let extensions = room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return structure.structureType == STRUCTURE_EXTENSION;
+        }
+    });
+
+    // 塔
+    let towers = room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return structure.structureType == STRUCTURE_TOWER;
+        }
+    });
+
+    // 中型储存
+    let containers = room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return structure.structureType == STRUCTURE_CONTAINER;
+        }
+    });
+
+    // 传输站
+    let links = room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return structure.structureType == STRUCTURE_LINK;
+        }
+    });
+
+    // 开关门
+    let ramparts = room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return structure.structureType == STRUCTURE_RAMPART;
+        }
+    });
+
+    // 熔炉
+    let labs = room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return structure.structureType == STRUCTURE_LAB;
+        }
+    });
+
+    // 观察
+    let observers = room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return structure.structureType == STRUCTURE_OBSERVER;
+        }
+    });
+
+    // 核弹
+    let nukers = room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return structure.structureType == STRUCTURE_NUKER;
+        }
+    });
+
+    // 终端
+    let terminals = room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return structure.structureType == STRUCTURE_TERMINAL;
+        }
+    });
+
+    // 生成贸易
+    let factorys = room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return structure.structureType == STRUCTURE_FACTORY;
+        }
+    });
+
+    // 超级基地
+    let powerSpawns = room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return structure.structureType == STRUCTURE_POWER_SPAWN;
+        }
+    });
+
+    // 路
+    let roads = room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return structure.structureType == STRUCTURE_ROAD;
+        }
+    });
+
+    // 墙
+    let walls = room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return structure.structureType == STRUCTURE_WALL;
+        }
+    });
+
+    // 挖矿
+    let extractors = room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return structure.structureType == STRUCTURE_EXTRACTOR;
+        }
+    });
+
+    globalData.rooms[roomName].objectData = {
+    spawns,
+    extensions,
+    towers,
+    containers,
+    links,
+    ramparts,
+    labs,
+    observers,
+    nukers,
+    terminals,
+    factorys,
+    powerSpawns,
+    roads,
+    walls,
+    extractors
+    }
 
 }
 
