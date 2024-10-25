@@ -74,6 +74,16 @@ export default function (_this, objectFun) {
             //             roomPosition: new RoomPosition(39, 27, 'E25N23')
             //         }
             //     ]);
+
+            // 终端发送资源
+            // try {
+            //     if (Game.rooms['W47S54'].terminal.store.getUsedCapacity() >=10000*10){
+            //         Game.rooms['W47S54'].terminal.send(RESOURCE_ENERGY, 10000*10, 'W49S54');
+            //     }
+            // }catch (e) {
+            //
+            // }
+
             break;
         case 'W2N2':
             let roomName2 = 'W2N1';
