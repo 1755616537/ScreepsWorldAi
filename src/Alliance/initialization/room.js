@@ -7,12 +7,19 @@ export default [
                 objectFun.iniRoom(roomName);
             })
 
-            // 临时命令执行
-            // 搬运能量('harvester1', 25, 25, 'W48S54')
-            // 终端发送能量('W48S54', 'W49S54', 100000)
+            临时命令执行()
         }
     }
 ]
+
+function 临时命令执行(){
+    try {
+        // 搬运能量('harvester1', 25, 25, 'W48S54')
+        // 终端发送能量('W48S54', 'W49S54', 100000)
+    }catch (e) {
+
+    }
+}
 
 
 function 搬运能量(爬爬名,需要搬运的建筑x坐标,需要搬运的建筑y坐标,需要搬运的房间名){
